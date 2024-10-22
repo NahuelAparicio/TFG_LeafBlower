@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private Enums.GameState _state;
     private bool _isPaused;
+    public bool IsPaused => _isPaused;
 
     private void Awake()
     {

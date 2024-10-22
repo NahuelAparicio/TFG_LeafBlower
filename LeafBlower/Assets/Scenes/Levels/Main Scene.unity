@@ -1012,7 +1012,7 @@ Animator:
   m_GameObject: {fileID: 591916015}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8728728fe661f6e46a32a59e72d3e4d4, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 483d03498bb17af42940c230d25c999f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1291,10 +1291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eb1c920d7e8d049bb906f74e9d4165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 8
   _maxAirSpeed: 2
   _dashForce: 0
-  _jumpForce: 15
+  _jumpForce: 7
 --- !u!114 &826123464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,8 +1307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84410ccb4751074dad65fbffc24e672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animations: {fileID: 591916017}
   _interactable: {fileID: 40452594}
   _checkGround: {fileID: 1190834490}
+  _currentCharacterState: 0
   isInteracting: 0
   isStuned: 0
 --- !u!54 &826123465
@@ -2658,7 +2660,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534585615}
-  m_LocalRotation: {x: 0.10134003, y: -0.00000000427945, z: 4.359238e-10, w: 0.9948519}
+  m_LocalRotation: {x: 0.10134003, y: 0.00000000427945, z: -4.359238e-10, w: 0.9948519}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

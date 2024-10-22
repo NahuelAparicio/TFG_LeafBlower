@@ -11,6 +11,8 @@ public class PlayerInputs : MonoBehaviour
         _player = GetComponent<PlayerController>();
         _actions = new PlayerInputsActions();
         _actions.Player.Enable();
+        _actions.Player.Move.performed += Move_performed;
+        _actions.Player.Move.canceled += Move_canceled;
         _actions.Player.Interact.performed += Interact_performed;
         _actions.Player.Dash.performed += Dash_performed;
         _actions.Player.Jump.performed += Jump_performed;
@@ -18,6 +20,19 @@ public class PlayerInputs : MonoBehaviour
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
+
+    public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.125f;
+
+    private void Move_performed(InputAction.CallbackContext context)
+    {
+        if(!_player.isStuned)
+            _player.ChangeCharacterState(Enums.CharacterState.Moving);
+    }
+    private void Move_canceled(InputAction.CallbackContext context)
+    {
+        if (!_player.isStuned)
+            _player.ChangeCharacterState(Enums.CharacterState.Idle);
+    }
 
     private void Interact_performed(InputAction.CallbackContext context)
     {
@@ -42,8 +57,11 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnDestroy()
     {
+        _actions.Player.Move.performed -= Move_performed;
+        _actions.Player.Move.canceled -= Move_canceled;
         _actions.Player.Interact.performed -= Interact_performed;
         _actions.Player.Dash.performed -= Dash_performed;
+        _actions.Player.Jump.performed -= Jump_performed;
         _actions.Player.Pause.performed -= Pause_performed;
 
         _actions.Player.Disable();
