@@ -6,7 +6,6 @@ public class BlowerInputs : MonoBehaviour
     private BlowerController _blower;
     private BlowerInputsActions _actions;
 
-
     private void Awake()
     {
         _blower = GetComponent<BlowerController>();

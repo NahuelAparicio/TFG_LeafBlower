@@ -335,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 59759937}
   - component: {fileID: 59759938}
+  - component: {fileID: 59759939}
   m_Layer: 8
   m_Name: AttachPoint
   m_TagString: Untagged
@@ -378,6 +379,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.25, y: 0.25, z: 0.25}
   m_Center: {x: 0, y: 0, z: -0.1}
+--- !u!114 &59759939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59759936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6120f9c218af58a4692d74432b749184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isObjectAttached: 0
 --- !u!1 &63762256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1475,8 @@ GameObject:
   - component: {fileID: 748170274}
   - component: {fileID: 748170273}
   - component: {fileID: 748170272}
+  - component: {fileID: 748170277}
+  - component: {fileID: 748170276}
   m_Layer: 3
   m_Name: Sphere
   m_TagString: Movable
@@ -1491,7 +1507,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748170270}
   serializedVersion: 4
-  m_Mass: 50
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1581,6 +1597,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748170270}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &748170276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748170270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &748170277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748170270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729ad5c7d2eeea242a4c06aec59cacdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &773153495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,6 +3175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f9a4c43e7ddd48ab783b8d7049fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distanceToAttach: 0
 --- !u!1 &1577512867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,6 +3400,8 @@ GameObject:
   - component: {fileID: 1699340722}
   - component: {fileID: 1699340721}
   - component: {fileID: 1699340720}
+  - component: {fileID: 1699340725}
+  - component: {fileID: 1699340724}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Movable
@@ -3389,7 +3432,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699340718}
   serializedVersion: 4
-  m_Mass: 50
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3479,6 +3522,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699340718}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1699340724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699340718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db058a2a702e7147ba3296e29aa62c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1699340725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699340718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729ad5c7d2eeea242a4c06aec59cacdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732514920
 GameObject:
   m_ObjectHideFlags: 0

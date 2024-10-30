@@ -25,7 +25,9 @@ public class ShootableObject : MonoBehaviour, IAspirable, IShooteable
     {
         if(_isAttached)
         {
-            _rb.AddForce(direction * force, ForceMode.Impulse);
+            _isAttached = false;
+            _rb.isKinematic = false;
+            _rb.AddForce(direction * (force * 20), ForceMode.Impulse);
         }
     }
 
@@ -34,5 +36,8 @@ public class ShootableObject : MonoBehaviour, IAspirable, IShooteable
         _isAttached = true;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+        _rb.isKinematic = true;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 }
