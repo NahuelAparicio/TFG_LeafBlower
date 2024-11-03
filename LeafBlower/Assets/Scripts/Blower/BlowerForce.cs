@@ -22,10 +22,10 @@ public class BlowerForce : MonoBehaviour
             return;
         }
 
-        if (_blower.Inputs.IsBlowingInputPressed() && _blower.Stats.stamina.Value > 0)
-        {
-            Vector3 directionToBlow = other.gameObject.transform.position - transform.position;
-            blowable.OnBlowableInteracts(CalculateForceByDistance(other.gameObject), directionToBlow.normalized);
+        if (_blower.IsBlowing())
+        {            
+            Vector3 forceDir = _blower.DirectionFromFirePointNormalized(other.gameObject.transform.position) * _blower.Stats.blowForce.Value;
+            blowable.OnBlowableInteracts(forceDir, other.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
         }
     }
 

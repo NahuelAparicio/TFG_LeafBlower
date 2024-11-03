@@ -2,30 +2,38 @@ using UnityEngine;
 
 public class AspirerForce : MonoBehaviour
 {
+    #region Variables
     private BlowerController _blower;
     private Collider _collider;
+
+    private bool _isObjectAttached;
+    private (GameObject, IShooteable) _attachedObject;
+
+    [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
+    #endregion
+    #region Properties
     public Collider Collider => _collider;
-    private GameObject _attachedObject;
-    private Transform _pointToAttach;
-    [SerializeField] private float _distanceToAttach;
+    public bool ObjectAttached => _isObjectAttached;
+    #endregion
 
     private void Awake()
     {
         _blower = transform.parent.GetComponent<BlowerController>();
-        _pointToAttach = transform.GetChild(0).transform;
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
     }
 
     private void Update()
     {
-        if(_attachedObject != null)
+        if(_isObjectAttached)
         {
-            if(_blower.Inputs.IsBlowingInputPressed() && _blower.Stats.stamina.Value > 0)
+            if(_blower.IsShooting())
             {
                 //Vector3 dirToShoot = objectAttacher.AttachedGo.transform.position - objectAttacher.transform.position;
                 //Player Direction
-                _attachedObject.GetComponent<IShooteable>()?.OnShoot(_blower.Stats.blowForce.Value, transform.forward);
+                Vector3 forceDir = _blower.Stats.aspireForce.Value * _blower.FirePoint.forward;
+                _attachedObject.Item2.OnShoot(forceDir);
+                DetachObject();
             }
         }
     }
@@ -34,30 +42,56 @@ public class AspirerForce : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         IAspirable aspirable = other.GetComponent<IAspirable>();
+
         if(aspirable == null)
         {
             return;
         }
 
-        if (!_blower.Inputs.IsBlowingInputPressed() && _blower.Inputs.IsAspiringInputPressed() && _blower.Stats.stamina.Value > 0)
+        IShooteable shooteable = other.GetComponent<IShooteable>();
+
+
+        if (_blower.IsAspirating())
         {
-            //Aspire from object to attchPoint
-            float distance = Vector3.Distance(_pointToAttach.position, other.transform.position);
-            if(distance <= _distanceToAttach)
+            //If true -> and attacheable true attach, and stop doing aspire force
+            Vector3 pos = other.GetComponent<Collider>().ClosestPointOnBounds(_blower.FirePoint.position);
+            if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
             {
-                _attachedObject = other.gameObject;
-                
+                if(shooteable != null)
+                {
+                    AttachObject(other.gameObject, shooteable);
+                }
+                else
+                {
+                    //No force applied just gravity, Should lerp? Deceleration?
+                    //other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
             }
-            Vector3 directionToAspire = _pointToAttach.position - other.transform.position;
-            aspirable.OnAspiratableInteracts(_blower.Stats.aspireForce.Value, directionToAspire.normalized);
+            else
+            {
+                Vector3 forceDir = _blower.DirectionToFirePointNormalized(other.transform.position) * _blower.Stats.aspireForce.Value;
+                aspirable.OnAspiratableInteracts(forceDir);
+            }
         }
     }
 
     public void EnableCollider() => _collider.enabled = true;
     public void DisableCollider() => _collider.enabled = false;
 
+    public void AttachObject(GameObject obj, IShooteable shooteable)
+    {
+        _attachedObject.Item1 = obj;
+        _attachedObject.Item2 = shooteable;
+        obj.GetComponent<IAttacheable>().Attach(_blower.FirePoint, _blower.FirePoint.position, false);
+        _isObjectAttached = true;
+    }
+
     public void DetachObject()
     {
-        _attachedObject = null;
+        _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
+
+        _attachedObject.Item1 = null;
+        _attachedObject.Item2 = null;
+        _isObjectAttached = false;
     }
 }
