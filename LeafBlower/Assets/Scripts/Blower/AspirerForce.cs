@@ -8,7 +8,8 @@ public class AspirerForce : MonoBehaviour
 
     private bool _isObjectAttached;
     private (GameObject, IShooteable) _attachedObject;
-
+    private float _timePressed = 0f;
+    [SerializeField]private float _maxTimeToShoot;
     [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
     #endregion
     #region Properties
@@ -25,19 +26,36 @@ public class AspirerForce : MonoBehaviour
 
     private void Update()
     {
-        if(_isObjectAttached)
+        if (!_isObjectAttached) return;
+
+        if(_blower.IsShooting())
         {
-            if(_blower.IsShooting())
+            _timePressed += Time.deltaTime;
+            _blower.Hud.UpdateShootBarForce(_timePressed, _maxTimeToShoot);
+            if(_timePressed >= _maxTimeToShoot)
             {
-                //Vector3 dirToShoot = objectAttacher.AttachedGo.transform.position - objectAttacher.transform.position;
-                //Player Direction
-                Vector3 forceDir = _blower.Stats.aspireForce.Value * _blower.FirePoint.forward;
-                _attachedObject.Item2.OnShoot(forceDir);
-                DetachObject();
+                _timePressed = _maxTimeToShoot;
+                ShootAction();
+            }
+        }
+        else
+        {
+            if(_timePressed != 0)
+            {
+                ShootAction();
             }
         }
     }
 
+    private void ShootAction()
+    {
+        float force = (_blower.Stats.aspireForce.Value * _timePressed) / _maxTimeToShoot;
+        Vector3 forceDir = force * _blower.FirePoint.forward;
+        _attachedObject.Item2.OnShoot(forceDir);
+        DetachObject();
+        _timePressed = 0;
+        _blower.Hud.ResetShootBarForce();
+    }
 
     private void OnTriggerStay(Collider other)
     {

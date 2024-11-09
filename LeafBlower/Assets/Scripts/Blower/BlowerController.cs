@@ -8,22 +8,25 @@ public class BlowerController : MonoBehaviour
     private BlowerStats _stats;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private PlayerController _player;
-    [SerializeField] private BlowerForce _blowerForce;
-    [SerializeField] private AspirerForce _aspirerForce;
+    [SerializeField] private BlowerForce _blower;
+    [SerializeField] private AspirerForce _aspirer;
+    [SerializeField] private BlowerHUD _hud;
     #endregion
     #region Properties
     public PlayerController Player => _player;
     public BlowerStats Stats => _stats;
     public BlowerInputs Inputs => _inputs;
-    public BlowerForce BlowerForce => _blowerForce;
-    public AspirerForce AspirerForce => _aspirerForce;
+    public BlowerForce Blower => _blower;
+    public AspirerForce Aspirer => _aspirer;
     public Transform FirePoint => _firePoint;
+    public BlowerHUD Hud => _hud;
     #endregion
 
     private void Awake()
     {
         _inputs = GetComponent<BlowerInputs>();
         _stats = GetComponent<BlowerStats>();
+        _hud = GetComponent<BlowerHUD>();
     }
 
     // Returns if Blow function is being used, while check if can be used
@@ -33,10 +36,10 @@ public class BlowerController : MonoBehaviour
     public bool IsAspirating() => CanUseLeafBlower() && _inputs.IsAspiringInputPressed() && !_inputs.IsBlowingInputPressed();
 
     //Returns if the whole machine (Leaf Blower) can be used
-    public bool CanUseLeafBlower() => _stats.HasStamina() && !_aspirerForce.ObjectAttached;
+    public bool CanUseLeafBlower() => _stats.HasStamina() && !_aspirer.ObjectAttached;
 
     //Returns if the object attached is being shoot
-    public bool IsShooting() => _aspirerForce.ObjectAttached && _inputs.IsBlowingInputPressed() && _stats.HasStamina();
+    public bool IsShooting() => _aspirer.ObjectAttached && _inputs.IsBlowingInputPressed();
 
     public Vector3 GetPlayerDirection() => _player.Inputs.GetMoveDirection();
 

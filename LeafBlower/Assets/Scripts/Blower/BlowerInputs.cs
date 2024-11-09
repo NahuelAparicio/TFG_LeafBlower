@@ -22,21 +22,21 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
-        _blower.BlowerForce.EnableCollider();
+        _blower.Blower.EnableCollider();
     }
     private void Blow_canceled(InputAction.CallbackContext context)
     {
-        _blower.BlowerForce.DisableCollider();
+        _blower.Blower.DisableCollider();
     }
 
     private void Aspire_performed(InputAction.CallbackContext context)
     {
-        _blower.AspirerForce.EnableCollider();
+        _blower.Aspirer.EnableCollider();
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
-        _blower.AspirerForce.DisableCollider();
+        _blower.Aspirer.DisableCollider();
     }
 
     private void OnDestroy()
