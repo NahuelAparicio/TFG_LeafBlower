@@ -9,8 +9,8 @@ public class AspirableObject : MonoBehaviour, IAspirable
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void OnAspiratableInteracts(float force, Vector3 direction)
+    public void OnAspiratableInteracts(Vector3 force)
     {
-        _rb.AddForce(direction * force, ForceMode.Impulse);
+        _rb.AddForce(force, ForceMode.Impulse);
     }
 }

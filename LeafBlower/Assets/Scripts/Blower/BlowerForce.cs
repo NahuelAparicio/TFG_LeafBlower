@@ -15,24 +15,24 @@ public class BlowerForce : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag != "Movable")
-            return;
-        if (_blower.Inputs.IsBlowingInputPressed() && _blower.Stats.stamina.Value > 0)
-        {
-            IBlowable isBlowable = other.GetComponent<IBlowable>();
-            if (isBlowable != null)
-            {
-                Vector3 directionToBlow = other.gameObject.transform.position - transform.position;
-                other.GetComponent<IBlowable>().OnBlowableInteracts(CalculateForceByDistance(other.gameObject), directionToBlow.normalized);
-            }
+        IBlowable blowable = other.GetComponent<IBlowable>();
 
+        if(blowable == null)
+        {
+            return;
+        }
+
+        if (_blower.IsBlowing())
+        {            
+            Vector3 forceDir = _blower.DirectionFromFirePointNormalized(other.gameObject.transform.position) * _blower.Stats.blowForce.Value;
+            blowable.OnBlowableInteracts(forceDir, other.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
         }
     }
 
     private float CalculateForceByDistance(GameObject go)
     {
         float distance = Vector3.Distance(go.transform.position, transform.position);
-        return distance * _blower.Stats.blowForce.Value;
+        return _blower.Stats.blowForce.Value;
     }
 
     public void EnableCollider() => _collider.enabled = true;
