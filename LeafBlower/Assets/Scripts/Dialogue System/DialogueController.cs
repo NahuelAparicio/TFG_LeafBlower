@@ -13,6 +13,11 @@ public class DialogueController : MonoBehaviour
     private List<string> _currentDialogue = new List<string>();
     private int _indexDialogue = 0;
 
+    [SerializeField] private int _maxCharsPerDialogue = 50;
+
+    public event System.Action DialogueStated;
+    public event System.Action DialogueEnded;
+
     private void Awake()
     {
         _dialogueHolder = transform.GetChild(0).gameObject;
@@ -20,34 +25,44 @@ public class DialogueController : MonoBehaviour
         _actions = new PlayerInputsActions();
         _actions.Dialogue.Enable();
         _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
+        HideDialogueBox();
     }
 
-    void Update()
-    {
-        
-    }
-    //Given a list of messages (dialogues in order)
-    //It will show the dialogues in screen i guess
-    public void ShowMessage(List<string> messages)
+    public void StartDialogue(List<string> messages)
     {
         _currentDialogue.AddRange(messages);
+        _dialogueHolder.SetActive(true);
+        ShowMessage(_currentDialogue[0]);
+        DialogueStated?.Invoke();
     }
 
-    //Shows a singles text message, if its to long it will be divided in differen "dialogue boxes"
-    public void ShowMessage(string message)
+    //Given a list of messages (dialogues in order)
+    //It will show the dialogues in screen i guess
+    private void ShowMessage(string text)
     {
-        _currentDialogue.Add(message);
+        _dialogueText.text = text;
+    }
 
-        _dialogueHolder.SetActive(true);
-        _dialogueText.text = message;
+    // Temporal, Fade/Effect should be added to image and text (?)
+    private void HideDialogueBox()
+    {
+        _indexDialogue = 0;
+        _currentDialogue.Clear();
+        _dialogueHolder.SetActive(false);
+        _dialogueText.text = "";
+        DialogueEnded?.Invoke();
     }
 
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
-        if(_currentDialogue.Count > 0)
+        if(_currentDialogue.Count - 1 > _indexDialogue)
         {
             _indexDialogue++;
             ShowMessage(_currentDialogue[_indexDialogue]);
+        }
+        else
+        {
+            HideDialogueBox();
         }
     }
 }
