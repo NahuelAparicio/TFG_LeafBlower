@@ -1,68 +1,71 @@
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueController : MonoBehaviour
 {
-    [SerializeField] private GameObject _dialogueHolder;
-    [SerializeField] private TextMeshProUGUI _dialogueText;
+    private TypingHandler _typeHandler;
 
-    private PlayerInputsActions _actions;
+    [SerializeField] internal GameObject _dialogueHolder;
 
     private List<string> _currentDialogue = new List<string>();
     private int _indexDialogue = 0;
 
-    [SerializeField] private int _maxCharsPerDialogue = 50;
-
+    private PlayerInputsActions _actions;
     public event System.Action DialogueStated;
     public event System.Action DialogueEnded;
 
     private void Awake()
     {
+        _typeHandler = GetComponent<TypingHandler>();
         _dialogueHolder = transform.GetChild(0).gameObject;
-        _dialogueText = _dialogueHolder.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        _actions = new PlayerInputsActions();
-        _actions.Dialogue.Enable();
-        _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
+        EnableInputs(); 
         HideDialogueBox();
     }
 
-    public void StartDialogue(List<string> messages)
+    public void StartDialogue(List<string> messages, Enums.DialogueTypingType t)
     {
+        _typeHandler.SetTypingType(t);
+
         _currentDialogue.AddRange(messages);
         _dialogueHolder.SetActive(true);
-        ShowMessage(_currentDialogue[0]);
-        DialogueStated?.Invoke();
-    }
+        _typeHandler.ShowMessage(_currentDialogue[0]);
 
-    //Given a list of messages (dialogues in order)
-    //It will show the dialogues in screen i guess
-    private void ShowMessage(string text)
-    {
-        _dialogueText.text = text;
+        DialogueStated?.Invoke();
     }
 
     // Temporal, Fade/Effect should be added to image and text (?)
     private void HideDialogueBox()
     {
+        _typeHandler.ResetTypingType();
+        _typeHandler.ResetText();
         _indexDialogue = 0;
         _currentDialogue.Clear();
         _dialogueHolder.SetActive(false);
-        _dialogueText.text = "";
+
         DialogueEnded?.Invoke();
     }
 
+    #region Enable and Handle Inputs
+    private void EnableInputs()
+    {
+        _actions = new PlayerInputsActions();
+        _actions.Dialogue.Enable();
+        _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
+    }
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
-        if(_currentDialogue.Count - 1 > _indexDialogue)
+        if (_currentDialogue.Count - 1 > _indexDialogue)
         {
             _indexDialogue++;
-            ShowMessage(_currentDialogue[_indexDialogue]);
+            _typeHandler.ShowMessage(_currentDialogue[_indexDialogue]);
         }
         else
         {
             HideDialogueBox();
         }
     }
+    #endregion
+
 }
