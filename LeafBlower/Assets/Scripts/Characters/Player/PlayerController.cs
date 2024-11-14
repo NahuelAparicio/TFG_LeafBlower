@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement _movement;
     private PlayerStats _stats;
     private PlayerInputs _inputs;
+    private DialogueController _dialogueController;
     [SerializeField] private PlayerAnimations _animations;
     [SerializeField] private PlayerInteractable _interactable;
     [SerializeField] private CheckCollisions _checkCollisions;
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public bool isInteracting, isStuned;
 
     public CapsuleCollider playerCollider;
+
+    private bool _isTalking;
+    public bool IsTalking => _isTalking;
+
     private void Awake()
     {
         isStuned = false;
@@ -30,7 +35,9 @@ public class PlayerController : MonoBehaviour
         _stats = GetComponent<PlayerStats>();
         _inputs = GetComponent<PlayerInputs>();
         _rb = GetComponent<Rigidbody>();
-
+        _dialogueController = FindObjectOfType<DialogueController>();
+        _dialogueController.DialogueStarted += OnDialogueStarted;
+        _dialogueController.DialogueEnded += OnDialogueEnded;
     }
 
     void Update()
@@ -46,7 +53,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(!isStuned)
+        if(!_isTalking)
             _movement.HandleAllMovement();
     }
 
@@ -67,5 +74,14 @@ public class PlayerController : MonoBehaviour
             return;
         }
         _currentCharacterState = newState;
+    }
+
+    private void OnDialogueStarted() => _isTalking = true;
+    private void OnDialogueEnded() => _isTalking = false;
+
+    private void OnDestroy()
+    {
+        _dialogueController.DialogueStarted -= OnDialogueStarted;
+        _dialogueController.DialogueEnded -= OnDialogueEnded;
     }
 }

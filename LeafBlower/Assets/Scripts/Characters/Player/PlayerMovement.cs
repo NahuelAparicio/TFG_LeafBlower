@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 15f;
     public float rotationAirSpeed = 6f;
     public bool isJumping = false;
+    public int groundDrag = 3;
+    public int airDrag = 0;
 
     private void Awake()
     {
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleAirMovement()
     {
-        SetRigidbodyDrag(0);
+        SetRigidbodyDrag(airDrag);
         //Checks if there is a wall in players directions if it's ProjectOnPlane movement feel
         _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
         _moveDirection.y = 0;
@@ -62,12 +64,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetDirection = Vector3.zero;
         targetDirection = GetDirectionNormalized();
         targetDirection.y = 0;
-        //if (targetDirection != Vector3.zero)
-        //{
-        //    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        //    Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
-        //    transform.rotation = playerRotation;
-        //}
         if(targetDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
@@ -76,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleMovement()
     {
-        SetRigidbodyDrag(3);
+        SetRigidbodyDrag(groundDrag);
 
         ClampSpeed(_player.Stats.MaxSpeed);
         _player.Rigidbody.AddForce(GetTargetVelocity(), ForceMode.VelocityChange);
@@ -167,10 +163,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SetRigidbodyDrag(float _drag)
     {
-        if(_player.Rigidbody.drag != _drag)
-        {
-            _player.Rigidbody.drag = _drag;
-        }
+        if (_player.Rigidbody.drag == _drag) return;
+
+        _player.Rigidbody.drag = _drag;
     }
     private void ApplyAdditiveGravity(float g) => _player.Rigidbody.AddForce(Vector3.up * g, ForceMode.Acceleration);
 
