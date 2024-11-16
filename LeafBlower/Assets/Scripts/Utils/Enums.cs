@@ -12,7 +12,7 @@ public class Enums
     public enum CharacterNames
     {
         None = 0,
-        MalePlayer,
-        FemalePlayer
+        Kayan,
+        Noseque
     }
 }

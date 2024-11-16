@@ -16,7 +16,7 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Interact.performed += Interact_performed;
         _actions.Player.Dash.performed += Dash_performed;
         _actions.Player.Jump.performed += Jump_performed;
-        _actions.Player.Pause.performed += Pause_performed;
+        _actions.Player.Pause.performed += Pause_performed;        
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
@@ -35,10 +35,9 @@ public class PlayerInputs : MonoBehaviour
             _player.Movement.DisableMovement();
         }
     }
-
     private void Interact_performed(InputAction.CallbackContext context)
     {
-        if(_player.Interactable.canInteract)
+        if(_player.Interactable.canInteract && !_player.IsTalking)
             _player.Interactable.InteractPerformed();
     }
     private void Jump_performed(InputAction.CallbackContext context)
