@@ -6,7 +6,7 @@ public class Enums
     public enum NPCMovements { InPlace, MoveAround, MoveSequence }
     public enum ModifierType { Flat, PercentualToBase }
 
-
+    public enum BlowType { RealisticBlow, PuzzleBlow, DirectionalBlow }
     public enum DialogueTypingType { NoEffect, TypingMachine }
 
     public enum CharacterNames
