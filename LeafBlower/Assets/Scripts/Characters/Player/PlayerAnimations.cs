@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
@@ -5,6 +6,8 @@ public class PlayerAnimations : MonoBehaviour
     private PlayerController _player;
     private Animator _animator;
     public Animator Animator => _animator;
+
+    public float decreaseLerpDuration, sprintLerpDuration;
 
     private void Awake()
     {
@@ -22,7 +25,22 @@ public class PlayerAnimations : MonoBehaviour
     {
         if(_player.Inputs.IsMovingJoystick())
         {
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Stats.WalkSpeed));
+            if(_player.Movement.isSprinting)
+            {
+                if (_animator.GetFloat(Constants.ANIM_VAR_JOYDIR) == 2) return;
+
+                float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+                float targetValue = 2f;
+                float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / sprintLerpDuration);
+                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
+            }
+            else
+            {
+                float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+                float targetValue = Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Movement.moveSpeed);
+                float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / decreaseLerpDuration);
+                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
+            }
         }
     }
 
@@ -31,7 +49,9 @@ public class PlayerAnimations : MonoBehaviour
         //If there is more than one idle animation, Second Blend Tree
         if(!_player.Inputs.IsMovingJoystick())
         {
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 0f);
+            float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+            float newValue = Mathf.Lerp(currentValue, 0, Time.deltaTime / decreaseLerpDuration);
+            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
         }
     }
 

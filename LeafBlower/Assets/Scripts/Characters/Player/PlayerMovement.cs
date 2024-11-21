@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 directionMove = _moveDirection * moveSpeed;
 
-       // ClampSpeed(_player.Stats.MaxWalkSpeed);
         _player.Rigidbody.AddForce(directionMove, ForceMode.Acceleration);
 
         HandleRotation(rotationAirSpeed);
@@ -92,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SetRigidbodyDrag(groundDrag);
 
-        ClampSpeed(_player.Stats.WalkSpeed);
+        ClampSpeed(moveSpeed);
 
         _player.Rigidbody.AddForce(GetTargetVelocity(), ForceMode.VelocityChange);
 
@@ -176,9 +175,10 @@ public class PlayerMovement : MonoBehaviour
     public void DisableMovement()
     {
         _player.ChangeCharacterState(Enums.CharacterState.Idle);
-        _moveDirection = Vector3.zero;
-        _player.Rigidbody.velocity = Vector3.zero;
-        _player.Rigidbody.angularVelocity = Vector3.zero;
+        _player.Movement.isSprinting = false;
+        //_moveDirection = Vector3.zero;
+        //_player.Rigidbody.velocity = Vector3.zero;
+        //_player.Rigidbody.angularVelocity = Vector3.zero;
     }
     private void SetRigidbodyDrag(float _drag)
     {
@@ -204,6 +204,7 @@ public class PlayerMovement : MonoBehaviour
                 // Project the movement direction onto the slope to avoid moving upwards
                 targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * moveSpeed;
 
+                _player.Movement.isSprinting = false;
                 // Apply additional downward gravity to make the player slide
                 ApplyAdditiveGravity(_gravity * 50);
             }
@@ -255,7 +256,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveSpeed = _desiredVelocity;
-        keepMomentum = false;
     }
 
     private void StateHandler()
@@ -264,6 +264,11 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeMoveState(Enums.CharacterMoveState.Running);
             _desiredVelocity = _player.Stats.RunSpeed;
+        }
+        else if(_player.CheckCollisions.IsGrounded && _player.CurrentCharacterState == Enums.CharacterState.Idle)
+        {
+            ChangeMoveState(Enums.CharacterMoveState.None);
+            _desiredVelocity = 0;
         }
         else if(_player.CheckCollisions.IsGrounded)
         {
@@ -287,25 +292,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (desiredMoveSpeedHasChanged)
         {
-            if (_desiredVelocity > _lastDesiredVelocity)  
-            {
-                keepMomentum = true;  
-            }
-            else
-            {
-                keepMomentum = false;  
-            }
+            //if (_desiredVelocity > _lastDesiredVelocity)  
+            //{
+            //    keepMomentum = true;  
+            //}
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
 
-            if (keepMomentum)
-            {
-                StopAllCoroutines();
-                StartCoroutine(SmoothlyLerpMoveSpeed());
-            }
-            else
-            {
-                StopAllCoroutines();
-                moveSpeed = _desiredVelocity;
-            }
+            //if (keepMomentum)
+            //{
+            //    StopAllCoroutines();
+            //    StartCoroutine(SmoothlyLerpMoveSpeed());
+            //}
+            //else
+            //{
+            //    StopAllCoroutines();
+            //    moveSpeed = _desiredVelocity;
+            //}
         }
         _lastDesiredVelocity = _desiredVelocity;
     }

@@ -27,12 +27,12 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
-        _player.Movement.isSprinting = true;
+        _player.Movement.isSprinting = !_player.Movement.isSprinting;
     }
 
     private void Sprint_canceled(InputAction.CallbackContext context)
     {
-        _player.Movement.isSprinting = false;
+        //_player.Movement.isSprinting = false;
     }
 
     private void Move_performed(InputAction.CallbackContext context)

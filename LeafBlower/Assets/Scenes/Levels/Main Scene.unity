@@ -2625,7 +2625,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885278138}
-  m_LocalRotation: {x: 0.25815597, y: -0.000000016623146, z: 0.0000000044419304, w: 0.96610326}
+  m_LocalRotation: {x: 0.25815597, y: 0.000000016623137, z: -0.0000000044419286, w: 0.96610326}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5689,6 +5689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1733d242cedbf6f4a8f5c8254e2b5051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decreaseLerpDuration: 0.3
+  sprintLerpDuration: 0.25
 --- !u!4 &1705553745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 14b022e50ecd23a4595f7e046d23067e,
@@ -5754,8 +5756,8 @@ MonoBehaviour:
   _velocityToStartFallAnimation: 0.5
   _offsetPlayerSlopesThreshold: 0
   _groundSnapThreshold: 0.5
-  rotationSpeed: 8
-  rotationAirSpeed: 4
+  rotationSpeed: 6
+  rotationAirSpeed: 3
   isJumping: 0
   groundDrag: 3
   airDrag: 0
@@ -5763,7 +5765,7 @@ MonoBehaviour:
   moveSpeed: 0
   moveState: 0
   keepMomentum: 0
-  speedChangeFactor: 3
+  speedChangeFactor: 5
   lastState: 0
 --- !u!114 &1705553752
 MonoBehaviour:
@@ -5778,11 +5780,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed:
-    baseValue: 0
+    baseValue: 2.5
     _reCalculate: 1
     modifiers: []
   _runSpeed:
-    baseValue: 0
+    baseValue: 3.5
     _reCalculate: 1
     modifiers: []
   _dashForce:
@@ -6756,7 +6758,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988399743}
-  m_LocalRotation: {x: 0.27564004, y: 0.000000016539826, z: -0.000000004742768, w: 0.961261}
+  m_LocalRotation: {x: 0.27564004, y: -0.000000016539822, z: 0.000000004742767, w: 0.961261}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7144,7 +7146,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061268590}
-  m_LocalRotation: {x: 0.27564, y: 0.000000033079647, z: -0.000000009485535, w: 0.9612609}
+  m_LocalRotation: {x: 0.27564, y: -0.000000033079644, z: 0.000000009485534, w: 0.9612609}
   m_LocalPosition: {x: -6.3, y: 9.166, z: -19.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
