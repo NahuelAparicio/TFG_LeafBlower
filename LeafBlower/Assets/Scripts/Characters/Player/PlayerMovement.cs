@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -20,9 +21,22 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement:")]
     public float rotationSpeed = 15f;
     public float rotationAirSpeed = 6f;
+
     public bool isJumping = false;
     public int groundDrag = 3;
     public int airDrag = 0;
+
+    public bool isSprinting;
+
+    public float moveSpeed;
+    public Enums.CharacterMoveState moveState;
+
+    // -- Momentum Stats -- //
+    private float _desiredVelocity;
+    private float _lastDesiredVelocity;
+    public bool keepMomentum;
+    public float speedChangeFactor;
+    public Enums.CharacterMoveState lastState;
 
     private void Awake()
     {
@@ -34,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         _player.CheckCollisions.UpdateTerrainSlopeAngle();
 
         HandleFallingAndLanding();
+
+        StateHandler();
 
         if(!_player.CheckCollisions.IsGrounded)
         {
@@ -53,11 +69,13 @@ public class PlayerMovement : MonoBehaviour
         //Checks if there is a wall in players directions if it's ProjectOnPlane movement feel
         _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
         _moveDirection.y = 0;
-        Vector3 directionMove = _moveDirection * _player.Stats.AirAcceleration;
-        ClampSpeed(_player.Stats.MaxSpeed);
+
+        Vector3 directionMove = _moveDirection * moveSpeed;
+
+       // ClampSpeed(_player.Stats.MaxWalkSpeed);
         _player.Rigidbody.AddForce(directionMove, ForceMode.Acceleration);
 
-        HandleRotation(rotationSpeed);
+        HandleRotation(rotationAirSpeed);
     }
     private void HandleRotation(float speed)
     {
@@ -74,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
     {
         SetRigidbodyDrag(groundDrag);
 
-        ClampSpeed(_player.Stats.MaxSpeed);
+        ClampSpeed(_player.Stats.WalkSpeed);
+
         _player.Rigidbody.AddForce(GetTargetVelocity(), ForceMode.VelocityChange);
 
         HandleRotation(rotationSpeed);
@@ -106,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         // -- Anchors Player to the Ground if is not falling -- //&& _player.Inputs.IsMovingJoystick()
-        if (_player.CheckCollisions.IsGrounded && !isJumping )
+        if (_player.CheckCollisions.IsGrounded && !isJumping)
         {
             float distanceToGround = transform.position.y - slopeHit.point.y;
 
@@ -183,20 +202,20 @@ public class PlayerMovement : MonoBehaviour
             if (_player.CheckCollisions.IsOnMaxSlopeAngle())
             {
                 // Project the movement direction onto the slope to avoid moving upwards
-                targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * _player.Stats.Acceleration;
+                targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * moveSpeed;
 
                 // Apply additional downward gravity to make the player slide
                 ApplyAdditiveGravity(_gravity * 50);
             }
             else
             {
-                targetVelocity = slopeDirection * _player.Stats.Acceleration;
+                targetVelocity = slopeDirection * moveSpeed;
             }
         }
         else
         {
             _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
-            targetVelocity = _moveDirection * _player.Stats.Acceleration;
+            targetVelocity = _moveDirection * moveSpeed;
         }
 
         if (_moveDirection.magnitude == 0 && !isJumping && !_player.Inputs.IsMovingJoystick())
@@ -209,6 +228,96 @@ public class PlayerMovement : MonoBehaviour
     }
     private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetMoveDirection().x;
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;
-    private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
+    //private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
 
+    private IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        float t = 0;
+        float difference = Mathf.Abs(_desiredVelocity - moveSpeed);
+        float startValue;
+        if (_player.Rigidbody.velocity.magnitude > _desiredVelocity)
+        {
+            startValue = moveSpeed;
+        }
+        else
+        {
+            startValue = _player.Rigidbody.velocity.magnitude;
+        }
+
+        float boostFactor = speedChangeFactor;
+
+        while (t < difference)
+        {
+            moveSpeed = Mathf.Lerp(startValue, _desiredVelocity, t / difference);
+            t += Time.deltaTime * boostFactor;
+
+            yield return null;
+        }
+
+        moveSpeed = _desiredVelocity;
+        keepMomentum = false;
+    }
+
+    private void StateHandler()
+    {
+        if(_player.CheckCollisions.IsGrounded && isSprinting && _player.CurrentCharacterState != Enums.CharacterState.Idle)
+        {
+            ChangeMoveState(Enums.CharacterMoveState.Running);
+            _desiredVelocity = _player.Stats.RunSpeed;
+        }
+        else if(_player.CheckCollisions.IsGrounded)
+        {
+            ChangeMoveState(Enums.CharacterMoveState.Walking);
+            _desiredVelocity = _player.Stats.WalkSpeed;
+        }
+        else
+        {
+            ChangeMoveState(Enums.CharacterMoveState.Air);
+            if(lastState == Enums.CharacterMoveState.Walking)
+            {
+                _desiredVelocity = _player.Stats.WalkSpeed;
+            }
+            else if(lastState == Enums.CharacterMoveState.Running)
+            {
+                _desiredVelocity = _player.Stats.RunSpeed;
+            }
+        }
+
+        bool desiredMoveSpeedHasChanged = _desiredVelocity != _lastDesiredVelocity;
+
+        if (desiredMoveSpeedHasChanged)
+        {
+            if (_desiredVelocity > _lastDesiredVelocity)  
+            {
+                keepMomentum = true;  
+            }
+            else
+            {
+                keepMomentum = false;  
+            }
+
+            if (keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                StopAllCoroutines();
+                moveSpeed = _desiredVelocity;
+            }
+        }
+        _lastDesiredVelocity = _desiredVelocity;
+    }
+    private void ChangeMoveState(Enums.CharacterMoveState newState)
+    {
+        if (moveState == newState)
+        {
+            return;
+        }
+
+        lastState = moveState;
+
+        moveState = newState;
+    }
 }

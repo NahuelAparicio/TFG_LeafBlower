@@ -8,7 +8,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private void Awake()
     {
-        _player = transform.parent.GetComponent<PlayerController>();
+        _player = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
     }
 
@@ -22,7 +22,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         if(_player.Inputs.IsMovingJoystick())
         {
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Stats.MaxSpeed));
+            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Stats.WalkSpeed));
         }
     }
 

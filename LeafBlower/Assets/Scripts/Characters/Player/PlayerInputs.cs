@@ -16,12 +16,24 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Interact.performed += Interact_performed;
         _actions.Player.Dash.performed += Dash_performed;
         _actions.Player.Jump.performed += Jump_performed;
-        _actions.Player.Pause.performed += Pause_performed;        
+        _actions.Player.Pause.performed += Pause_performed;
+        _actions.Player.Sprint.performed += Sprint_performed;
+        _actions.Player.Sprint.canceled += Sprint_canceled;
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
 
     public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.125f;
+
+    private void Sprint_performed(InputAction.CallbackContext context)
+    {
+        _player.Movement.isSprinting = true;
+    }
+
+    private void Sprint_canceled(InputAction.CallbackContext context)
+    {
+        _player.Movement.isSprinting = false;
+    }
 
     private void Move_performed(InputAction.CallbackContext context)
     {
@@ -67,7 +79,8 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Dash.performed -= Dash_performed;
         _actions.Player.Jump.performed -= Jump_performed;
         _actions.Player.Pause.performed -= Pause_performed;
-
+        _actions.Player.Sprint.performed -= Sprint_performed;
+        _actions.Player.Sprint.canceled -= Sprint_canceled;
         _actions.Player.Disable();
     }
 
