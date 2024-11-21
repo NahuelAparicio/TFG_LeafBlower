@@ -25,21 +25,32 @@ public class PlayerAnimations : MonoBehaviour
     {
         if(_player.Inputs.IsMovingJoystick())
         {
+            float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
             if(_player.Movement.isSprinting)
             {
                 if (_animator.GetFloat(Constants.ANIM_VAR_JOYDIR) == 2) return;
 
-                float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
-                float targetValue = 2f;
-                float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / sprintLerpDuration);
-                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
+                if(currentValue < 1.95f)
+                {
+                    LerpJoyDir(currentValue, 2f, sprintLerpDuration);
+                }
+                else
+                {
+                    _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 2f);
+                }
             }
             else
             {
-                float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+                if( currentValue > 0.95f && currentValue < 1.05f)
+                {
+                    _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 1f);
+                    return;
+                }
                 float targetValue = Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Movement.moveSpeed);
-                float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / decreaseLerpDuration);
-                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
+                if(!float.IsNaN(targetValue))
+                {
+                    LerpJoyDir(currentValue, targetValue, decreaseLerpDuration);                    
+                }
             }
         }
     }
@@ -50,13 +61,31 @@ public class PlayerAnimations : MonoBehaviour
         if(!_player.Inputs.IsMovingJoystick())
         {
             float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
-            float newValue = Mathf.Lerp(currentValue, 0, Time.deltaTime / decreaseLerpDuration);
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
+
+            if (currentValue > 0.05f)
+            {
+                LerpJoyDir(currentValue, 0, decreaseLerpDuration);
+            }
+            else
+            {
+                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 0);
+            }
         }
     }
 
     internal void HandleJumpAnimations()
     {
         PlayTargetAnimation(Constants.ANIM_JUMP, true);
+    }
+
+    private void LerpJoyDir(float currentValue, float targetValue, float duration)
+    {
+        if(Mathf.Approximately(duration, targetValue))
+        {
+            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, targetValue);
+            return;
+        }
+        float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / duration);
+        _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
     }
 }

@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement:")]
     public float rotationSpeed = 15f;
     public float rotationAirSpeed = 6f;
+    public float airAccelerationExtra;
 
     public bool isJumping = false;
     public int groundDrag = 3;
@@ -70,7 +71,9 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
         _moveDirection.y = 0;
 
-        Vector3 directionMove = _moveDirection * moveSpeed;
+        Vector3 directionMove = _moveDirection * (moveSpeed + airAccelerationExtra);
+
+       // ClampSpeed(moveSpeed);
 
         _player.Rigidbody.AddForce(directionMove, ForceMode.Acceleration);
 
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
             _player.Rigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime));
         }
     }
+
     private void HandleMovement()
     {
         SetRigidbodyDrag(groundDrag);
@@ -96,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
         _player.Rigidbody.AddForce(GetTargetVelocity(), ForceMode.VelocityChange);
 
         HandleRotation(rotationSpeed);
-
     }
     private void HandleFallingAndLanding()
     {
@@ -256,6 +259,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveSpeed = _desiredVelocity;
+        if(moveSpeed == 0)
+        {
+            _moveDirection = Vector3.zero;
+            _player.Rigidbody.velocity = Vector3.zero;
+            _player.Rigidbody.angularVelocity = Vector3.zero;
+        }
     }
 
     private void StateHandler()
