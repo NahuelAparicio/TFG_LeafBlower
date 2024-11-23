@@ -19,9 +19,12 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Pause.performed += Pause_performed;
         _actions.Player.Sprint.performed += Sprint_performed;
         _actions.Player.Sprint.canceled += Sprint_canceled;
+
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
+
+    public Vector2 GetAimMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse (?)
 
     public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.125f;
 

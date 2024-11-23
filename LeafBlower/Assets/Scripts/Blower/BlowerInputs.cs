@@ -5,7 +5,7 @@ public class BlowerInputs : MonoBehaviour
 {
     private BlowerController _blower;
     private BlowerInputsActions _actions;
-
+    
     private void Awake()
     {
         _blower = GetComponent<BlowerController>();
@@ -18,7 +18,6 @@ public class BlowerInputs : MonoBehaviour
     }
     public bool IsBlowingInputPressed() => _actions.Blower.Blow.IsPressed();
     public bool IsAspiringInputPressed() => _actions.Blower.Aspire.IsPressed();
-    public Vector2 GetBlowerMoveDirection() => _actions.Blower.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse Scroll
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
