@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
@@ -6,9 +7,11 @@ public class PlayerAnimations : MonoBehaviour
     private Animator _animator;
     public Animator Animator => _animator;
 
+    public float decreaseLerpDuration, sprintLerpDuration;
+
     private void Awake()
     {
-        _player = transform.parent.GetComponent<PlayerController>();
+        _player = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
     }
 
@@ -22,7 +25,33 @@ public class PlayerAnimations : MonoBehaviour
     {
         if(_player.Inputs.IsMovingJoystick())
         {
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Stats.MaxSpeed));
+            float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+            if(_player.Movement.isSprinting)
+            {
+                if (_animator.GetFloat(Constants.ANIM_VAR_JOYDIR) == 2) return;
+
+                if(currentValue < 1.95f)
+                {
+                    LerpJoyDir(currentValue, 2f, sprintLerpDuration);
+                }
+                else
+                {
+                    _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 2f);
+                }
+            }
+            else
+            {
+                if( currentValue > 0.95f && currentValue < 1.05f)
+                {
+                    _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 1f);
+                    return;
+                }
+                float targetValue = Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Movement.moveSpeed);
+                if(!float.IsNaN(targetValue))
+                {
+                    LerpJoyDir(currentValue, targetValue, decreaseLerpDuration);                    
+                }
+            }
         }
     }
 
@@ -31,12 +60,32 @@ public class PlayerAnimations : MonoBehaviour
         //If there is more than one idle animation, Second Blend Tree
         if(!_player.Inputs.IsMovingJoystick())
         {
-            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 0f);
+            float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
+
+            if (currentValue > 0.05f)
+            {
+                LerpJoyDir(currentValue, 0, decreaseLerpDuration);
+            }
+            else
+            {
+                _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 0);
+            }
         }
     }
 
     internal void HandleJumpAnimations()
     {
         PlayTargetAnimation(Constants.ANIM_JUMP, true);
+    }
+
+    private void LerpJoyDir(float currentValue, float targetValue, float duration)
+    {
+        if(Mathf.Approximately(duration, targetValue))
+        {
+            _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, targetValue);
+            return;
+        }
+        float newValue = Mathf.Lerp(currentValue, targetValue, Time.deltaTime / duration);
+        _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, newValue);
     }
 }
