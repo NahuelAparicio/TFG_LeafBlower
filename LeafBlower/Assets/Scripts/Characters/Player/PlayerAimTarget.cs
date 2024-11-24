@@ -24,7 +24,6 @@ public class PlayerAimTarget : MonoBehaviour
     private void MoveTarget()
     {
         Vector2 aimDirection = _player.Inputs.GetAimMoveDirection();
-        Debug.Log("Aim Direction: " + aimDirection);
         Vector3 newPos = targetToAim.localPosition;
 
         newPos.x += aimDirection.x * movementSpeed * Time.deltaTime;
