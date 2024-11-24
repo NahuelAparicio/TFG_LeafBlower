@@ -4,24 +4,21 @@ public class AspirerForce : MonoBehaviour
 {
     #region Variables
     private BlowerController _blower;
-    private Collider _collider;
 
     private bool _isObjectAttached;
     private (GameObject, IShooteable) _attachedObject;
-    private float _timePressed = 0f;
-    [SerializeField]private float _maxTimeToShoot;
+   // private float _timePressed = 0f;
+   // [SerializeField]private float _maxTimeToShoot;
     [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
+
     #endregion
     #region Properties
-    public Collider Collider => _collider;
     public bool ObjectAttached => _isObjectAttached;
     #endregion
 
     private void Awake()
     {
         _blower = transform.parent.GetComponent<BlowerController>();
-        _collider = GetComponent<Collider>();
-        _collider.enabled = false;
     }
 
     private void Update()
@@ -30,57 +27,67 @@ public class AspirerForce : MonoBehaviour
 
         if(_blower.IsShooting())
         {
-            _timePressed += Time.deltaTime;
-            _blower.Hud.UpdateShootBarForce(_timePressed, _maxTimeToShoot);
-            if(_timePressed >= _maxTimeToShoot)
-            {
-                _timePressed = _maxTimeToShoot;
-                ShootAction();
-            }
+            ShootAction();
+            //_timePressed += Time.deltaTime;
+            //_blower.Hud.UpdateShootBarForce(_timePressed, _maxTimeToShoot);
+            //if(_timePressed >= _maxTimeToShoot)
+            //{
+            //    _timePressed = _maxTimeToShoot;
+            //    ShootAction();
+            //}
         }
         else
         {
-            if(_timePressed != 0)
-            {
-                ShootAction();
-            }
+            //if(_timePressed != 0)
+            //{
+            //    ShootAction();
+            //}
         }
     }
 
     private void ShootAction()
     {
-        float force = (_blower.Stats.aspireForce.Value * _timePressed) / _maxTimeToShoot;
-        Vector3 forceDir = force * _blower.FirePoint.forward;
+        //float force = (_blower.Stats.aspireForce.Value * _timePressed) / _maxTimeToShoot;
+        Vector3 forceDir = _blower.Stats.aspireForce.Value * _blower.FirePoint.forward;
         _attachedObject.Item2.OnShoot(forceDir);
         DetachObject();
-        _timePressed = 0;
-        _blower.Hud.ResetShootBarForce();
+        //_timePressed = 0;
+        //_blower.Hud.ResetShootBarForce();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        var outlineable = other.GetComponent<IOutlineable>();
+        if (_blower.IsAspirating() || outlineable == null) return;
+        outlineable.EnableOutline();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        IAspirable aspirable = other.GetComponent<IAspirable>();
+        var aspirable = other.GetComponent<IAspirable>();
 
-        if(aspirable == null)
-        {
-            return;
-        }
+        if(aspirable == null) return;
 
-        IShooteable shooteable = other.GetComponent<IShooteable>();
-
+        var shooteable = other.GetComponent<IShooteable>();
 
         if (_blower.IsAspirating())
         {
+            if(_isObjectAttached)
+            {
+                return;
+            }
+
             //If true -> and attacheable true attach, and stop doing aspire force
             Vector3 pos = other.GetComponent<Collider>().ClosestPointOnBounds(_blower.FirePoint.position);
             if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
             {
                 if(shooteable != null)
                 {
-                    AttachObject(other.gameObject, shooteable);
+                    if(!other.GetComponent<ShootableObject>().IsAttached)
+                        AttachObject(other.gameObject, shooteable);
                 }
                 else
                 {
+                    other.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     //No force applied just gravity, Should lerp? Deceleration?
                     //other.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
@@ -91,10 +98,23 @@ public class AspirerForce : MonoBehaviour
                 aspirable.OnAspiratableInteracts(forceDir);
             }
         }
+        else
+        {
+            if (shooteable != null)
+                if (other.GetComponent<ShootableObject>().IsAttached)
+                    DetachObject();
+           // if(shooteable != null)
+                //if(other.GetComponent<ShootableObject>().IsAttached)
+                   // DetachObject();
+        }
     }
 
-    public void EnableCollider() => _collider.enabled = true;
-    public void DisableCollider() => _collider.enabled = false;
+    private void OnTriggerExit(Collider other)
+    {
+        var outlineable = other.GetComponent<IOutlineable>();
+        if (_blower.IsAspirating() || outlineable == null) return;
+        outlineable.DisableOutline();
+    }
 
     public void AttachObject(GameObject obj, IShooteable shooteable)
     {
@@ -107,7 +127,6 @@ public class AspirerForce : MonoBehaviour
     public void DetachObject()
     {
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
-
         _attachedObject.Item1 = null;
         _attachedObject.Item2 = null;
         _isObjectAttached = false;

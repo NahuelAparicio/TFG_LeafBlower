@@ -1,12 +1,15 @@
 public class Enums
 {
+    #region States
     public enum GameState { Menu, Playing, PauseMenu, Exit }
     public enum CharacterState { Idle, Moving, Interacting }
     public enum CharacterMoveState { None, Walking, Running, Air }
     public enum QuestState { Locked, Unlocked, InProgress, Completed, Canceled }
+    #endregion
+
+
     public enum NPCMovements { InPlace, MoveAround, MoveSequence }
     public enum ModifierType { Flat, PercentualToBase }
-
     public enum BlowType { RealisticBlow, PuzzleBlow, DirectionalBlow }
     public enum DialogueTypingType { NoEffect, TypingMachine }
 
@@ -16,4 +19,6 @@ public class Enums
         Kayan,
         Noseque
     }
+
+    public enum ObjectWeight { None, Leaf, Low, Medium, Heavy, SuperHeavy }
 }

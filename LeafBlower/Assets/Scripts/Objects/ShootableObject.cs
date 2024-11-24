@@ -1,21 +1,23 @@
 using UnityEngine;
 
-public class ShootableObject : MonoBehaviour, IAspirable, IShooteable, IAttacheable
+public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 {
     private bool _isAttached;
-    private Rigidbody _rb;
     public bool IsAttached => _isAttached;
 
+    public float timeToEnableAspirating = 0.5f;
+    private bool _hasBeenShoot = false;
 
-    private void Awake()
+    internal override void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        base.Awake();
         _isAttached = false;
+        _hasBeenShoot = false;
     }
 
     public void OnAspiratableInteracts(Vector3 force)
     {
-        if(!_isAttached)
+        if(!_isAttached && !_hasBeenShoot)
         {
             _rb.AddForce(force, ForceMode.Impulse);
         }
@@ -25,8 +27,10 @@ public class ShootableObject : MonoBehaviour, IAspirable, IShooteable, IAttachea
     {
         if(_isAttached)
         {
+            _hasBeenShoot = true;
             Detach();
             _rb.AddForce(force * 10, ForceMode.Impulse);
+            Invoke(nameof(ResetAspiratable), timeToEnableAspirating);
         }
     }
 
@@ -47,4 +51,6 @@ public class ShootableObject : MonoBehaviour, IAspirable, IShooteable, IAttachea
         _isAttached = false;
         _rb.isKinematic = false;
     }
+
+    private void ResetAspiratable() => _hasBeenShoot = false;
 }

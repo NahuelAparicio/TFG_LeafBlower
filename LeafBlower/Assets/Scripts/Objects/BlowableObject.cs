@@ -1,9 +1,19 @@
 using UnityEngine;
 
-public class BlowableObject : MonoBehaviour, IBlowable
+public class BlowableObject : Object, IBlowable
 {
-    private Rigidbody _rb;
     [SerializeField] private Enums.BlowType _type;
+
+    internal override void Awake()
+    {
+        base.Awake();
+
+        if(_type == Enums.BlowType.PuzzleBlow)
+        {
+            _rb.constraints = RigidbodyConstraints.FreezeRotationZ;
+        }
+    }
+
     public void OnBlowableInteracts(Vector3 force, Vector3 point)
     {
         switch (_type)
@@ -20,8 +30,5 @@ public class BlowableObject : MonoBehaviour, IBlowable
                 break;
         }
     }
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
+
 }

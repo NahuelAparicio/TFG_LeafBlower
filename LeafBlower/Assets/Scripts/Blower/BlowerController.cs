@@ -1,16 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlowerController : MonoBehaviour
 {
-    // en X de 90 a -40º
     #region Variables
     private BlowerInputs _inputs;
     private BlowerStats _stats;
+    private StaminaHandler _handler;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private PlayerController _player;
     [SerializeField] private BlowerForce _blower;
     [SerializeField] private AspirerForce _aspirer;
     [SerializeField] private BlowerHUD _hud;
+
+    private bool _wasInteracting;
+    private float _currentTime;
+    public bool canUseLeafBlower;
+
     #endregion
     #region Properties
     public PlayerController Player => _player;
@@ -20,23 +26,51 @@ public class BlowerController : MonoBehaviour
     public AspirerForce Aspirer => _aspirer;
     public Transform FirePoint => _firePoint;
     public BlowerHUD Hud => _hud;
+    public StaminaHandler Handler => _handler;
     #endregion
 
     private void Awake()
     {
+        _handler = GetComponent<StaminaHandler>();
         _inputs = GetComponent<BlowerInputs>();
         _stats = GetComponent<BlowerStats>();
         _hud = GetComponent<BlowerHUD>();
     }
 
+    private void Update()
+    {
+        bool isBlowingAspiring = IsBlowing() || IsAspirating();
+
+        if(isBlowingAspiring && _aspirer.ObjectAttached)
+        {
+            _handler.ConsumeStaminaOverTime();
+        }
+        else
+        {
+            _currentTime += Time.deltaTime;
+            if(_wasInteracting)
+            {
+                _handler.StopConsumingStamina();
+                _currentTime = 0;
+            }
+            if (_currentTime >= _handler.timeToStartRecovering)
+            {
+                _handler.RecoverStaminaOverTime();
+                
+            }
+        }
+
+        _wasInteracting = isBlowingAspiring;
+    }
+
     // Returns if Blow function is being used, while check if can be used
-    public bool IsBlowing() => CanUseLeafBlower() && _inputs.IsBlowingInputPressed();
+    public bool IsBlowing() => CanUseLeafBlower() && _inputs.IsBlowingInputPressed() && !_inputs.IsAspiringInputPressed();
 
     // Returns if Aspire function is being used, while checks if can be used
     public bool IsAspirating() => CanUseLeafBlower() && _inputs.IsAspiringInputPressed() && !_inputs.IsBlowingInputPressed();
 
     //Returns if the whole machine (Leaf Blower) can be used
-    public bool CanUseLeafBlower() => _stats.HasStamina() && !_aspirer.ObjectAttached;
+    public bool CanUseLeafBlower() => _handler.HasStamina() && canUseLeafBlower;
 
     //Returns if the object attached is being shoot
     public bool IsShooting() => _aspirer.ObjectAttached && _inputs.IsBlowingInputPressed();
@@ -47,4 +81,6 @@ public class BlowerController : MonoBehaviour
 
     public Vector3 DirectionToFirePointNormalized(Vector3 position) => (_firePoint.position - position).normalized;
     public Vector3 DirectionFromFirePointNormalized(Vector3 position) => (position - _firePoint.position).normalized;
+
+    public void ResetStaminaCurrentTime() => _currentTime = 0;
 }
