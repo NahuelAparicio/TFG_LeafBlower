@@ -16,6 +16,7 @@ public class BlowerController : MonoBehaviour
     private bool _wasInteracting;
     private float _currentTime;
     public bool canUseLeafBlower;
+    public bool isHovering;
 
     #endregion
     #region Properties
@@ -35,13 +36,14 @@ public class BlowerController : MonoBehaviour
         _inputs = GetComponent<BlowerInputs>();
         _stats = GetComponent<BlowerStats>();
         _hud = GetComponent<BlowerHUD>();
+        isHovering = false;
     }
 
     private void Update()
     {
-        bool isBlowingAspiring = IsBlowing() || IsAspirating();
-
-        if(isBlowingAspiring && _aspirer.ObjectAttached)
+        bool isBlowingAspiringHovering = IsBlowing() || IsAspirating() || isHovering;
+        //&& _aspirer.ObjectAttached
+        if (isBlowingAspiringHovering )
         {
             _handler.ConsumeStaminaOverTime();
         }
@@ -60,14 +62,14 @@ public class BlowerController : MonoBehaviour
             }
         }
 
-        _wasInteracting = isBlowingAspiring;
+        _wasInteracting = isBlowingAspiringHovering;
     }
 
     // Returns if Blow function is being used, while check if can be used
     public bool IsBlowing() => CanUseLeafBlower() && _inputs.IsBlowingInputPressed() && !_inputs.IsAspiringInputPressed();
 
     // Returns if Aspire function is being used, while checks if can be used
-    public bool IsAspirating() => CanUseLeafBlower() && _inputs.IsAspiringInputPressed() && !_inputs.IsBlowingInputPressed();
+    public bool IsAspirating() => CanUseLeafBlower() && _inputs.IsAspiringInputPressed() && !_inputs.IsBlowingInputPressed() && !isHovering;
 
     //Returns if the whole machine (Leaf Blower) can be used
     public bool CanUseLeafBlower() => _handler.HasStamina() && canUseLeafBlower;

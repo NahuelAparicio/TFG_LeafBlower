@@ -1,11 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerController _player;
-    private Vector3 _moveDirection;
+    public List<MovementEntry> movements;
 
     [Header("Falling Stats:")]
     [SerializeField] private float _gravity = -20f;
@@ -29,19 +32,19 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isSprinting;
 
-    public float moveSpeed;
-    public Enums.CharacterMoveState moveState;
+    private MovementStateHandler _stateHandler;
+    private Vector3 _moveDirection;
+    public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
 
-    // -- Momentum Stats -- //
-    private float _desiredVelocity;
-    private float _lastDesiredVelocity;
-    public bool keepMomentum;
-    public float speedChangeFactor;
-    public Enums.CharacterMoveState lastState;
+    private float _moveSpeed;
+    public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
+
+
 
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
+        _stateHandler = GetComponent<MovementStateHandler>();
     }          
 
     public void HandleAllMovement()
@@ -50,11 +53,21 @@ public class PlayerMovement : MonoBehaviour
 
         HandleFallingAndLanding();
 
-        StateHandler();
+        //StateHandler();
+        _stateHandler.HandleState();
 
         if(!_player.CheckCollisions.IsGrounded)
         {
             HandleAirMovement();
+        }
+        else
+        {
+            if (isHovering)
+            {
+                isHovering = false;
+                _player.BlowerController.isHovering = isHovering;
+            }
+                
         }
 
         if(_player.isInteracting || isJumping ||!_player.CheckCollisions.IsGrounded)
@@ -71,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
         _moveDirection.y = 0;
 
-        Vector3 directionMove = _moveDirection * (moveSpeed + airAccelerationExtra);
+        Vector3 directionMove = _moveDirection * (_moveSpeed + airAccelerationExtra);
 
        // ClampSpeed(moveSpeed);
 
@@ -95,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SetRigidbodyDrag(groundDrag);
 
-        ClampSpeed(moveSpeed);
+        ClampSpeed(_moveSpeed);
 
         _player.Rigidbody.AddForce(GetTargetVelocity(), ForceMode.VelocityChange);
 
@@ -103,24 +116,17 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleFallingAndLanding()
     {
-        if (_player.CheckCollisions.IsGrounded)
+        if (!_player.CheckCollisions.IsGrounded)
         {
-            if(_player.CheckCollisions.OnSlope())
+            if (!isHovering)
             {
-                _player.Rigidbody.useGravity = _player.CheckCollisions.IsOnMaxSlopeAngle();
-            }            
+                ApplyAdditiveGravity(_gravity);
+            }
             else
             {
-                _player.Rigidbody.useGravity = true;
+                HandleHover();
             }
-        }
-        else
-        {
-            if (!_player.Rigidbody.useGravity)
-            {
-                _player.Rigidbody.useGravity = true;
-            }
-            ApplyAdditiveGravity(_gravity);
+
             if (!_player.isInteracting && Mathf.Abs(_player.Rigidbody.velocity.y) > _velocityToStartFallAnimation)
             {
                 _player.Animations.PlayTargetAnimation(Constants.ANIM_FALLING, true);
@@ -152,17 +158,67 @@ public class PlayerMovement : MonoBehaviour
     }
     public void HandleJumping()
     {
-        if(!_player.CheckCollisions.IsGrounded)
+        if(isJumping || !_player.CheckCollisions.IsGrounded) return;
+
+        _player.Animations.HandleJumpAnimations();
+
+        MakeMovement(Enums.Movements.Jump, transform.up * _player.Stats.JumpForce);
+    }
+
+    public void HandleDash() => MakeMovement(Enums.Movements.Dash, transform.forward * _player.Stats.DashForce);
+
+    public bool isHovering = false;
+    public float desiredHoverHeight;
+    public float hoverDamping;
+    [Header("This > DesiredHoverHeight :")]public float hoverRaycastDistance;
+    public void ToggleHover()
+    {
+        isHovering = !isHovering;
+        _player.BlowerController.isHovering = isHovering;
+        if(isHovering)
         {
+            _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
+        }
+    }
+    public void HandleHover()
+    {
+       // _player.BlowerController.IsBlowing() &&
+        if(!_player.BlowerController.Handler.HasStamina())
+        {
+            isHovering = false;
             return;
         }
-        _player.Animations.HandleJumpAnimations();
-        _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
-        _player.Rigidbody.AddForce(transform.up * _player.Stats.JumpForce, ForceMode.Impulse);
-    }
-    public void HandleDash()
-    {
+        if (isHovering)
+        {            
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, hoverRaycastDistance, LayerMask.GetMask("Ground")))
+            {
+                #region HoverAllTheTime (Up & Down)
+                //float currentHeight = transform.position.y - hit.point.y;
+                //float heightDifference = desiredHoverHeight - currentHeight;
 
+                //float adjustedForce = _player.Stats.HoverForce - Mathf.Abs(Physics.gravity.y); 
+                //adjustedForce += heightDifference * hoverDamping;
+                //_player.Rigidbody.AddForce(Vector3.up * adjustedForce, ForceMode.Acceleration);
+                #endregion
+
+                float currentHeight = transform.position.y - hit.point.y;
+                float heightDifference = desiredHoverHeight - currentHeight;
+
+                if (heightDifference > 0)
+                {
+                    float adjustedForce = _player.Stats.HoverForce - Mathf.Abs(Physics.gravity.y);
+
+                    adjustedForce += heightDifference * hoverDamping;
+
+                    _player.Rigidbody.AddForce(Vector3.up * adjustedForce, ForceMode.Acceleration);
+                }
+            }
+            if (_player.Rigidbody.velocity.y > 0.5f || _player.Rigidbody.velocity.y < -0.5f)
+            {
+                _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, _player.Rigidbody.velocity.y * 0.95f, _player.Rigidbody.velocity.z);
+            }
+        }
     }
 
     private void ClampSpeed(float speedToClamp)
@@ -205,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
             if (_player.CheckCollisions.IsOnMaxSlopeAngle())
             {
                 // Project the movement direction onto the slope to avoid moving upwards
-                targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * moveSpeed;
+                targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * _moveSpeed;
 
                 _player.Movement.isSprinting = false;
                 // Apply additional downward gravity to make the player slide
@@ -213,13 +269,13 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                targetVelocity = slopeDirection * moveSpeed;
+                targetVelocity = slopeDirection * _moveSpeed;
             }
         }
         else
         {
             _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
-            targetVelocity = _moveDirection * moveSpeed;
+            targetVelocity = _moveDirection * _moveSpeed;
         }
 
         if (_moveDirection.magnitude == 0 && !isJumping && !_player.Inputs.IsMovingJoystick())
@@ -234,102 +290,112 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;
     //private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
 
-    private IEnumerator SmoothlyLerpMoveSpeed()
+    //private IEnumerator SmoothlyLerpMoveSpeed()
+    //{
+    //    float t = 0;
+    //    float difference = Mathf.Abs(_desiredVelocity - _moveSpeed);
+    //    float startValue;
+    //    if (_player.Rigidbody.velocity.magnitude > _desiredVelocity)
+    //    {
+    //        startValue = _moveSpeed;
+    //    }
+    //    else
+    //    {
+    //        startValue = _player.Rigidbody.velocity.magnitude;
+    //    }
+
+    //    float boostFactor = speedChangeFactor;
+
+    //    while (t < difference)
+    //    {
+    //        _moveSpeed = Mathf.Lerp(startValue, _desiredVelocity, t / difference);
+    //        t += Time.deltaTime * boostFactor;
+
+    //        yield return null;
+    //    }
+
+    //    _moveSpeed = _desiredVelocity;
+    //    if(_moveSpeed == 0)
+    //    {
+    //        _moveDirection = Vector3.zero;
+    //        _player.Rigidbody.velocity = Vector3.zero;
+    //        _player.Rigidbody.angularVelocity = Vector3.zero;
+    //    }
+    //}
+    //private void StateHandler()
+    //{
+    //    if(_player.CheckCollisions.IsGrounded && isSprinting && _player.CurrentCharacterState != Enums.CharacterState.Idle)
+    //    {
+    //        ChangeMoveState(Enums.CharacterMoveState.Running);
+    //        _desiredVelocity = _player.Stats.RunSpeed;
+    //    }
+    //    else if(_player.CheckCollisions.IsGrounded && _player.CurrentCharacterState == Enums.CharacterState.Idle)
+    //    {
+    //        ChangeMoveState(Enums.CharacterMoveState.None);
+    //        _desiredVelocity = 0;
+    //    }
+    //    else if(_player.CheckCollisions.IsGrounded)
+    //    {
+    //        ChangeMoveState(Enums.CharacterMoveState.Walking);
+    //        _desiredVelocity = _player.Stats.WalkSpeed;
+    //    }
+    //    else
+    //    {
+    //        ChangeMoveState(Enums.CharacterMoveState.Air);
+    //        if(lastState == Enums.CharacterMoveState.Walking)
+    //        {
+    //            _desiredVelocity = _player.Stats.WalkSpeed;
+    //        }
+    //        else if(lastState == Enums.CharacterMoveState.Running)
+    //        {
+    //            _desiredVelocity = _player.Stats.RunSpeed;
+    //        }
+    //    }
+
+    //    bool desiredMoveSpeedHasChanged = _desiredVelocity != _lastDesiredVelocity;
+
+    //    if (desiredMoveSpeedHasChanged)
+    //    {
+    //        //if (_desiredVelocity > _lastDesiredVelocity)  
+    //        //{
+    //        //    keepMomentum = true;  
+    //        //}
+    //        StopAllCoroutines();
+    //        StartCoroutine(SmoothlyLerpMoveSpeed());
+
+    //        //if (keepMomentum)
+    //        //{
+    //        //    StopAllCoroutines();
+    //        //    StartCoroutine(SmoothlyLerpMoveSpeed());
+    //        //}
+    //        //else
+    //        //{
+    //        //    StopAllCoroutines();
+    //        //    moveSpeed = _desiredVelocity;
+    //        //}
+    //    }
+    //    _lastDesiredVelocity = _desiredVelocity;
+    //}
+    //private void ChangeMoveState(Enums.CharacterMoveState newState)
+    //{
+    //    if (moveState == newState)
+    //    {
+    //        return;
+    //    }
+
+    //    lastState = moveState;
+
+    //    moveState = newState;
+    //}
+    
+    public void MakeMovement(Enums.Movements move, Vector3 forceDir)
     {
-        float t = 0;
-        float difference = Mathf.Abs(_desiredVelocity - moveSpeed);
-        float startValue;
-        if (_player.Rigidbody.velocity.magnitude > _desiredVelocity)
+        foreach (var movement in movements)
         {
-            startValue = moveSpeed;
-        }
-        else
-        {
-            startValue = _player.Rigidbody.velocity.magnitude;
-        }
-
-        float boostFactor = speedChangeFactor;
-
-        while (t < difference)
-        {
-            moveSpeed = Mathf.Lerp(startValue, _desiredVelocity, t / difference);
-            t += Time.deltaTime * boostFactor;
-
-            yield return null;
-        }
-
-        moveSpeed = _desiredVelocity;
-        if(moveSpeed == 0)
-        {
-            _moveDirection = Vector3.zero;
-            _player.Rigidbody.velocity = Vector3.zero;
-            _player.Rigidbody.angularVelocity = Vector3.zero;
-        }
-    }
-
-    private void StateHandler()
-    {
-        if(_player.CheckCollisions.IsGrounded && isSprinting && _player.CurrentCharacterState != Enums.CharacterState.Idle)
-        {
-            ChangeMoveState(Enums.CharacterMoveState.Running);
-            _desiredVelocity = _player.Stats.RunSpeed;
-        }
-        else if(_player.CheckCollisions.IsGrounded && _player.CurrentCharacterState == Enums.CharacterState.Idle)
-        {
-            ChangeMoveState(Enums.CharacterMoveState.None);
-            _desiredVelocity = 0;
-        }
-        else if(_player.CheckCollisions.IsGrounded)
-        {
-            ChangeMoveState(Enums.CharacterMoveState.Walking);
-            _desiredVelocity = _player.Stats.WalkSpeed;
-        }
-        else
-        {
-            ChangeMoveState(Enums.CharacterMoveState.Air);
-            if(lastState == Enums.CharacterMoveState.Walking)
+            if(movement.type == move)
             {
-                _desiredVelocity = _player.Stats.WalkSpeed;
-            }
-            else if(lastState == Enums.CharacterMoveState.Running)
-            {
-                _desiredVelocity = _player.Stats.RunSpeed;
+                movement.movement.ExecuteMovement(_player.Rigidbody, forceDir);
             }
         }
-
-        bool desiredMoveSpeedHasChanged = _desiredVelocity != _lastDesiredVelocity;
-
-        if (desiredMoveSpeedHasChanged)
-        {
-            //if (_desiredVelocity > _lastDesiredVelocity)  
-            //{
-            //    keepMomentum = true;  
-            //}
-            StopAllCoroutines();
-            StartCoroutine(SmoothlyLerpMoveSpeed());
-
-            //if (keepMomentum)
-            //{
-            //    StopAllCoroutines();
-            //    StartCoroutine(SmoothlyLerpMoveSpeed());
-            //}
-            //else
-            //{
-            //    StopAllCoroutines();
-            //    moveSpeed = _desiredVelocity;
-            //}
-        }
-        _lastDesiredVelocity = _desiredVelocity;
-    }
-    private void ChangeMoveState(Enums.CharacterMoveState newState)
-    {
-        if (moveState == newState)
-        {
-            return;
-        }
-
-        lastState = moveState;
-
-        moveState = newState;
     }
 }

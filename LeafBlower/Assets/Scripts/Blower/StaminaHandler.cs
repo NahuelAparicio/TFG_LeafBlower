@@ -22,6 +22,10 @@ public class StaminaHandler : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+    private void Start()
+    {
         _blowerController = GetComponent<BlowerController>();
         _currentStamina = _blowerController.Stats.maxStamina.Value;
         _blowerController.Hud.ResetStaminaBar();
@@ -88,6 +92,7 @@ public class StaminaHandler : MonoBehaviour
         if (_currentStamina <= 0)
         {
             DisableLeafBlower();
+            _blowerController.isHovering = false;
         }
     }
 
@@ -106,6 +111,6 @@ public class StaminaHandler : MonoBehaviour
         {
             _currentStamina = _blowerController.Stats.maxStamina.Value;
         }
-            isRecoveringStamina = false;
+        isRecoveringStamina = false;
     }
 }

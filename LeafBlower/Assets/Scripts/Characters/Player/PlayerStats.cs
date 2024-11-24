@@ -15,8 +15,13 @@ public class PlayerStats : MonoBehaviour
     //[SerializeField] private float _airAcceleration;
     //public float AirAcceleration => _airAcceleration;  
 
+    [Header("Forces Stats:")]
+
     [SerializeField] private Stat _dashForce;
     public float DashForce => _dashForce.Value;
+
+    [SerializeField] private Stat _hoverForce;
+    public float HoverForce => _hoverForce.Value;
 
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
