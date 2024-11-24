@@ -2,31 +2,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
     private PlayerMovement _movement;
     private PlayerStats _stats;
     private PlayerInputs _inputs;
     private DialogueController _dialogueController;
+
+    [SerializeField] private BlowerController _blowerController;
     [SerializeField] private PlayerAnimations _animations;
     [SerializeField] private PlayerInteractable _interactable;
     [SerializeField] private CheckCollisions _checkCollisions;
     [SerializeField] private Enums.CharacterState _currentCharacterState = Enums.CharacterState.Idle;
-    private Rigidbody _rb;
 
+    private Rigidbody _rb;
+    public bool isInteracting, isStuned;
+    public CapsuleCollider playerCollider;
+    private bool _isTalking;
+    #endregion
+
+    #region Propierties
     public Enums.CharacterState CurrentCharacterState { get => _currentCharacterState; set => _currentCharacterState = value; }
     public PlayerMovement Movement => _movement;
+    public BlowerController BlowerController => _blowerController;
     public PlayerInputs Inputs => _inputs;
     public PlayerStats Stats => _stats;
     public PlayerAnimations Animations => _animations;
     public PlayerInteractable Interactable => _interactable;
     public CheckCollisions CheckCollisions => _checkCollisions;
     public Rigidbody Rigidbody => _rb;
-
-    public bool isInteracting, isStuned;
-
-    public CapsuleCollider playerCollider;
-
-    private bool _isTalking;
     public bool IsTalking => _isTalking;
+    #endregion
 
     private void Awake()
     {

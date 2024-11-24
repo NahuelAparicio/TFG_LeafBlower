@@ -46,7 +46,7 @@ public class PlayerAnimations : MonoBehaviour
                     _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 1f);
                     return;
                 }
-                float targetValue = Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Movement.moveSpeed);
+                float targetValue = Mathf.Clamp01(_player.Rigidbody.velocity.magnitude / _player.Movement.MoveSpeed);
                 if(!float.IsNaN(targetValue))
                 {
                     LerpJoyDir(currentValue, targetValue, decreaseLerpDuration);                    

@@ -7,7 +7,7 @@ public class Enums
     public enum QuestState { Locked, Unlocked, InProgress, Completed, Canceled }
     #endregion
 
-
+    public enum Movements { Dash, Jump }
     public enum NPCMovements { InPlace, MoveAround, MoveSequence }
     public enum ModifierType { Flat, PercentualToBase }
     public enum BlowType { RealisticBlow, PuzzleBlow, DirectionalBlow }
