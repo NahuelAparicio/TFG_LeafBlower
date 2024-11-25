@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashMovement", menuName = "Movements/Dash")]
 public class DashHandler : MovementBehavior
 {
-    public override void ExecuteMovement(Rigidbody rb, Vector3 forceDir)
+    public override void ExecuteMovement(Rigidbody rb, float force)
     {
-        rb.AddForce(forceDir, ForceMode.Impulse);
+        rb.AddForce(rb.transform.forward * force, ForceMode.Impulse);
     }
 }

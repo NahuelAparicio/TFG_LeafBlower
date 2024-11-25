@@ -62,7 +62,7 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        _player.Movement.HandleJumping();
+        _player.Movement.Jump();
     }
 
     private void Hover_performed(InputAction.CallbackContext context)
@@ -84,7 +84,7 @@ public class PlayerInputs : MonoBehaviour
         {
             if (_player.CheckCollisions.IsGrounded) return;
             
-            _player.Movement.HandleDash(); // If jump + Blow HandleDash()
+            _player.Movement.Dash(); // If jump + Blow HandleDash()
         }
         lastClickTimeL2 = _currentTime;
     }
