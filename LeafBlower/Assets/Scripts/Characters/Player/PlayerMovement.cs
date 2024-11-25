@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement:")]
     public float rotationSpeed = 15f;
     public float rotationAirSpeed = 6f;
-    public float airAccelerationExtra;
 
     public bool isJumping = false;
     public bool isHovering = false;
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         _player = GetComponent<PlayerController>();
         _stateHandler = GetComponent<MovementStateHandler>();
         _gravityHandler = GetComponent<CustomGravityHandler>();
-    }          
+    }
 
     public void HandleAllMovement()
     {
@@ -49,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
         _stateHandler.HandleState();
 
-        if(_player.CheckCollisions.IsGrounded)
+        if (_player.CheckCollisions.IsGrounded)
         {
             HandleGroundBehavior();
         }
@@ -101,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetDirection = Vector3.zero;
         targetDirection = GetDirectionNormalized();
         targetDirection.y = 0;
-        if(targetDirection != Vector3.zero)
+        if (targetDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             _player.Rigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime));
@@ -132,16 +131,22 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
-        if(isJumping || !_player.CheckCollisions.IsGrounded) return;
+        if (isJumping || !_player.CheckCollisions.IsGrounded) return;
 
         _player.Animations.HandleJumpAnimations();
 
-        MakeMovement(Enums.Movements.Jump,  _player.Stats.JumpForce);
+        MakeMovement(Enums.Movements.Jump, _player.Stats.JumpForce);
     }
 
-    public void Dash() => MakeMovement(Enums.Movements.Dash,  _player.Stats.DashForce);
+    public void Dash() 
+    {
+        if (_player.CheckCollisions.IsGrounded) return;
+        MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
+    }
+
     public void ToggleHover()
     {
+        if (_player.CheckCollisions.IsGrounded) return;
         isHovering = !isHovering;
         _player.BlowerController.isHovering = isHovering;
         if(isHovering)
@@ -221,9 +226,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
         _moveDirection.y = 0;
-        Vector3 directionMove = _moveDirection * (_moveSpeed + airAccelerationExtra);
-
-        return directionMove;
+        return _moveDirection * _moveSpeed;
     }
     private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetMoveDirection().x;
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;

@@ -68,25 +68,33 @@ public class PlayerInputs : MonoBehaviour
     private void Hover_performed(InputAction.CallbackContext context)
     {
         float _currentTime = Time.time;
-        if(_currentTime - lastClickTimeR2 >= doubleClickThreshold)
-        {
-            if (_player.CheckCollisions.IsGrounded) return;
 
-            _player.Movement.ToggleHover();
+        if (_currentTime - lastClickTimeR2 >= doubleClickThreshold)
+        {
+            lastClickTimeR2 = _currentTime;
         }
-        lastClickTimeR2 = _currentTime;
+        else
+        {
+            _player.Movement.ToggleHover();
+
+            lastClickTimeR2 = _currentTime;
+        }
     }
 
     private void Dash_performed(InputAction.CallbackContext context)
     {
         float _currentTime = Time.time;
-        if(_currentTime - lastClickTimeL2 <= doubleClickThreshold)
+
+        if (_currentTime - lastClickTimeL2 >= doubleClickThreshold)
         {
-            if (_player.CheckCollisions.IsGrounded) return;
-            
-            _player.Movement.Dash(); // If jump + Blow HandleDash()
+            lastClickTimeR2 = _currentTime;
         }
-        lastClickTimeL2 = _currentTime;
+        else
+        {
+            _player.Movement.Dash();
+
+            lastClickTimeL2 = _currentTime;
+        }
     }
 
     private void Pause_performed(InputAction.CallbackContext context) 
