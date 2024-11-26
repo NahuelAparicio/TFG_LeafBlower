@@ -140,13 +140,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash() 
     {
-        if (_player.CheckCollisions.IsGrounded) return;
+        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.ObjectAttached) return;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
     }
 
     public void ToggleHover()
     {
-        if (_player.CheckCollisions.IsGrounded) return;
+        if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower()) return;
         isHovering = !isHovering;
         _player.BlowerController.isHovering = isHovering;
         if(isHovering)

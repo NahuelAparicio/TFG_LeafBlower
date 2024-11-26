@@ -18,18 +18,31 @@ public class CheckCollisions : MonoBehaviour
 
     [Header("Wall Check:")]
     public float raycastWallCheckDistance = 0.5f;
-
+    private Vector3 direction = Vector3.zero;
     private void Awake()
     {
         _player = transform.parent.GetComponent<PlayerController>();
     }
 
     //Returns Adjusted player position if there is a wall collision on his direction
-    public Vector3 IsWall(Vector3 direction)
+    public Vector3 IsWall(Vector3 _direction)
     {
-        Vector3 middle = transform.position;
-        Vector3 high = transform.position;
-        Vector3 low = transform.position;
+        direction = _direction;
+        Vector3 low, middle, high;
+        if(_player.BlowerController.Aspirer.ObjectAttached)
+        {
+            direction = _player.BlowerController.FirePoint.transform.forward;
+            low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
+            middle = low;
+            high = low;           
+        }
+        else
+        {
+            low = transform.position;
+            middle = transform.position;
+            high = transform.position;
+        }
+
         high.y += _player.playerCollider.height;
         middle.y += _player.playerCollider.height * 0.5f;
         low.y += 0.25f;
@@ -37,8 +50,12 @@ public class CheckCollisions : MonoBehaviour
         Vector3[] rays = { high, middle, low };
         foreach (var ray in rays)
         {
-            if (Physics.Raycast(ray, direction, out RaycastHit hit, raycastWallCheckDistance))
+            if (Physics.Raycast(ray, _direction, out RaycastHit hit, raycastWallCheckDistance))
             {
+                if(hit.collider.tag != "IsWall")
+                {
+                    continue;
+                }
                 float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
                 if (slopeAngle < _maxSlopeAngle)
                 {
@@ -46,14 +63,15 @@ public class CheckCollisions : MonoBehaviour
                     continue;
                 }
 
-                if (Vector3.Dot(hit.normal, direction) < 0)
+                if (Vector3.Dot(hit.normal, _direction) < 0)
                 {
-                    return Vector3.ProjectOnPlane(direction, hit.normal);
+                    return Vector3.ProjectOnPlane(_direction, hit.normal);
                 }
             }
         }
-        return direction;
+        return _direction;
     }
+
     public bool OnSlope() => _slopeAngle < _maxSlopeAngle && _slopeAngle != 0;
     public bool IsOnMaxSlopeAngle() => _slopeAngle >= _maxSlopeAngle;
 
@@ -69,6 +87,35 @@ public class CheckCollisions : MonoBehaviour
     {       
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, Vector3.down);
+
+        Vector3 low, middle, high;
+
+        if (_player.BlowerController.Aspirer.ObjectAttached)
+        {
+            low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
+            middle = low;
+            high = low;
+        }
+        else
+        {
+            low = transform.position;
+            middle = transform.position;
+            high = transform.position;
+        }
+
+        // Adjust heights based on player's collider
+        high.y += _player.playerCollider.height;
+        middle.y += _player.playerCollider.height * 0.5f;
+        low.y += 0.25f;
+
+        // Visualize the rays
+        Gizmos.color = Color.red;  // Set the ray color to red for visibility
+        Vector3[] rays = { high, middle, low };
+        foreach (var ray in rays)
+        {
+            // Draw the ray using Gizmos.DrawLine
+            Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
+        }
     }
 
     private void OnTriggerStay(Collider other)

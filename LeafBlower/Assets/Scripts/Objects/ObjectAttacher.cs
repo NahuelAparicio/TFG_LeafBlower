@@ -28,7 +28,7 @@ public class ObjectAttacher : MonoBehaviour
             other.gameObject.transform.SetParent(transform);
 
             Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            attacheable.Attach(transform, contactPoint, true);
+            attacheable.Attach(transform, contactPoint);
 
             _attachedObjects.Add(attacheable);
             maxAttachedObjects++;
