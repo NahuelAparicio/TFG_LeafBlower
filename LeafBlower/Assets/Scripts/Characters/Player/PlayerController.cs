@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CheckCollisions _checkCollisions;
     [SerializeField] private Enums.CharacterState _currentCharacterState = Enums.CharacterState.Idle;
 
+    [SerializeField] private Collider _collider;
     private Rigidbody _rb;
     public bool isInteracting, isStuned;
     public CapsuleCollider playerCollider;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimations Animations => _animations;
     public PlayerInteractable Interactable => _interactable;
     public CheckCollisions CheckCollisions => _checkCollisions;
+    public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rb;
     public bool IsTalking => _isTalking;
     #endregion

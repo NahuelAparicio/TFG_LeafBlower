@@ -83,7 +83,7 @@ public class AspirerForce : MonoBehaviour
                 if(shooteable != null)
                 {
                     if(!other.GetComponent<ShootableObject>().IsAttached)
-                        AttachObject(other.gameObject, shooteable);
+                        AttachObject(other.gameObject, pos, shooteable);
                 }
                 else
                 {
@@ -116,16 +116,18 @@ public class AspirerForce : MonoBehaviour
         outlineable.DisableOutline();
     }
 
-    public void AttachObject(GameObject obj, IShooteable shooteable)
+    public void AttachObject(GameObject obj, Vector3 closestPoint, IShooteable shooteable)
     {
+        obj.layer = LayerMask.NameToLayer("Movable");
         _attachedObject.Item1 = obj;
         _attachedObject.Item2 = shooteable;
-        obj.GetComponent<IAttacheable>().Attach(_blower.FirePoint, _blower.FirePoint.position, false);
+        obj.GetComponent<IAttacheable>().Attach(_blower.FirePoint, closestPoint);
         _isObjectAttached = true;
     }
 
     public void DetachObject()
     {
+        _attachedObject.Item1.layer = LayerMask.NameToLayer("Ground");
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
         _attachedObject.Item1 = null;
         _attachedObject.Item2 = null;

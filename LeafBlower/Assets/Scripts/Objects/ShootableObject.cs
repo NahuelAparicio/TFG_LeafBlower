@@ -14,6 +14,21 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
         _isAttached = false;
         _hasBeenShoot = false;
     }
+    private void Update()
+    {
+        if(_isAttached)
+        {
+            // Check the distance between the object's position and the attached point's position
+            float distance = Vector3.Distance(transform.position, transform.parent.position);
+
+            // If the distance is greater than 0.1f, update the object's position
+            if (distance > 0.1f)
+            {
+                // Move the object towards the parent (attachment point) smoothly
+                transform.position = Vector3.Lerp(transform.position, transform.parent.position, Time.deltaTime * 10f); // Adjust speed as needed
+            }
+        }
+    }
 
     public void OnAspiratableInteracts(Vector3 force)
     {
@@ -35,21 +50,25 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
     }
 
 
-    public void Attach(Transform pointToAttach, Vector3 positionToAttach, bool isAttachedToObject)
+    public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
-        transform.SetParent(pointToAttach);
-        _isAttached = true;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
-        _rb.isKinematic = true;
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        _rb.useGravity = false;
+
+        transform.position = closestPoint;
+
+        transform.SetParent(pointToAttach);
+        _isAttached = true;
     }
     public void Detach()
     {
-        transform.SetParent(null);
         _isAttached = false;
-        _rb.isKinematic = false;
+        _rb.useGravity = true;
+        _rb.constraints = RigidbodyConstraints.None;
+        transform.SetParent(null);
     }
 
     private void ResetAspiratable() => _hasBeenShoot = false;

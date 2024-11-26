@@ -87,7 +87,7 @@ public class PlayerInputs : MonoBehaviour
 
         if (_currentTime - lastClickTimeL2 >= doubleClickThreshold)
         {
-            lastClickTimeR2 = _currentTime;
+            lastClickTimeL2 = _currentTime;
         }
         else
         {
