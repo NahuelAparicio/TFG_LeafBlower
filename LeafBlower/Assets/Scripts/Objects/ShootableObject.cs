@@ -49,7 +49,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
         {
             _hasBeenShoot = true;
             Detach();
-            _rb.AddForce(force * 10, ForceMode.Impulse);
+            _rb.AddForce(force, ForceMode.Impulse);
             Invoke(nameof(ResetAspiratable), timeToEnableAspirating);
         }
     }
