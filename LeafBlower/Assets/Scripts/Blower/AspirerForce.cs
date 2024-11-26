@@ -14,6 +14,7 @@ public class AspirerForce : MonoBehaviour
     #endregion
     #region Properties
     public bool ObjectAttached => _isObjectAttached;
+    public (GameObject, IShooteable) AttachedObject => _attachedObject;
     #endregion
 
     private void Awake()
@@ -77,13 +78,16 @@ public class AspirerForce : MonoBehaviour
             }
 
             //If true -> and attacheable true attach, and stop doing aspire force
-            Vector3 pos = other.GetComponent<Collider>().ClosestPointOnBounds(_blower.FirePoint.position);
+            Vector3 pos = other.GetComponent<Collider>().ClosestPoint(_blower.FirePoint.position);
             if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
             {
                 if(shooteable != null)
                 {
                     if(!other.GetComponent<ShootableObject>().IsAttached)
+                    {
+                        Debug.Log("PositionClosestPoint = " + pos);
                         AttachObject(other.gameObject, pos, shooteable);
+                    }
                 }
                 else
                 {

@@ -7,27 +7,32 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 
     public float timeToEnableAspirating = 0.5f;
     private bool _hasBeenShoot = false;
+    float distanceBetweenParentAndObject;
 
     internal override void Awake()
     {
         base.Awake();
         _isAttached = false;
         _hasBeenShoot = false;
+
     }
     private void Update()
     {
-        if(_isAttached)
+        if (_isAttached)
         {
-            // Check the distance between the object's position and the attached point's position
-            float distance = Vector3.Distance(transform.position, transform.parent.position);
+            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
+            float distance = Vector3.Distance(transform.position, targetPosition);
 
-            // If the distance is greater than 0.1f, update the object's position
             if (distance > 0.1f)
             {
-                // Move the object towards the parent (attachment point) smoothly
-                transform.position = Vector3.Lerp(transform.position, transform.parent.position, Time.deltaTime * 10f); // Adjust speed as needed
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collisioned");
     }
 
     public void OnAspiratableInteracts(Vector3 force)
@@ -52,23 +57,24 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
+        tag = "Untagged";
+        transform.SetParent(pointToAttach);
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
-
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        distanceBetweenParentAndObject = Vector3.Distance(transform.position, transform.parent.position);
         _rb.useGravity = false;
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-        transform.position = closestPoint;
-
-        transform.SetParent(pointToAttach);
         _isAttached = true;
     }
     public void Detach()
     {
-        _isAttached = false;
-        _rb.useGravity = true;
+        tag = "IsWall";
         _rb.constraints = RigidbodyConstraints.None;
+        _rb.useGravity = true;
+
         transform.SetParent(null);
+        _isAttached = false;
     }
 
     private void ResetAspiratable() => _hasBeenShoot = false;
