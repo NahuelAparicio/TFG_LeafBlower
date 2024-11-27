@@ -136,7 +136,7 @@ public class AspirerForce : MonoBehaviour
     public void DetachObject()
     {
         _trajectory.DisableLineRender();
-        _attachedObject.Item1.gameObject.layer = LayerMask.NameToLayer("Ground");
+       _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
         _attachedObject.Item1 = null;
         _attachedObject.Item2 = null;
         _isObjectAttached = false;

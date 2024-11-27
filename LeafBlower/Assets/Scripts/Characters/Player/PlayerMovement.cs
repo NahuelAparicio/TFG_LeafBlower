@@ -120,10 +120,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime / 0.1f);
             }
-            else
-            {
-                transform.position = _targetPosition;
-            }
+            //else
+            //{
+            //    transform.position = _targetPosition;
+            //}
 
             // Stop downward momentum after anchoring
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);

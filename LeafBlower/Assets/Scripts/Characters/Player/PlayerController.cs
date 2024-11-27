@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStats _stats;
     private PlayerInputs _inputs;
     private DialogueController _dialogueController;
-
+    private PlayerInventory _inventory;
     [SerializeField] private BlowerController _blowerController;
     [SerializeField] private PlayerAnimations _animations;
     [SerializeField] private PlayerInteractable _interactable;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     #region Propierties
     public Enums.CharacterState CurrentCharacterState { get => _currentCharacterState; set => _currentCharacterState = value; }
     public PlayerMovement Movement => _movement;
+    public PlayerInventory Inventory => _inventory;
     public BlowerController BlowerController => _blowerController;
     public PlayerInputs Inputs => _inputs;
     public PlayerStats Stats => _stats;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         _movement = GetComponent<PlayerMovement>();
         _stats = GetComponent<PlayerStats>();
         _inputs = GetComponent<PlayerInputs>();
+        _inventory = GetComponent<PlayerInventory>();
         _rb = GetComponent<Rigidbody>();
         _dialogueController = FindObjectOfType<DialogueController>();
         _dialogueController.DialogueStarted += OnDialogueStarted;
