@@ -30,7 +30,8 @@ public class StaminaHandler : MonoBehaviour
         _currentStamina = _blowerController.Stats.maxStamina.Value;
         _blowerController.Hud.ResetStaminaBar();
     }
-
+    private float _currentTime = 0f;
+    private bool canRecoverStamina = false;
     private void Update()
     {
         if(!_blowerController.canUseLeafBlower)
@@ -40,8 +41,28 @@ public class StaminaHandler : MonoBehaviour
                 EnableLeafBlower();
             }
         }
+        if(canRecoverStamina)
+        {
+            _currentTime += Time.deltaTime;
+            if(isConsumingStamina)
+            {
+                _currentTime = 0;
+                canRecoverStamina = false;
+            }
+            if(_currentTime >= timeToStartRecovering)
+            {
+                RecoverStaminaOverTime();
+                _currentTime = 0;
+                canRecoverStamina = false;
+            }
+        }
     }
 
+    public void ReEnableRecoverStamina()
+    {
+        StopConsumingStamina();
+        canRecoverStamina = true;
+    }
     public void ConsumeStaminaOverTime()
     {
         if(HasStamina() && !isConsumingStamina)
@@ -98,7 +119,6 @@ public class StaminaHandler : MonoBehaviour
 
     private IEnumerator RecoverStamina()
     {
-        _blowerController.ResetStaminaCurrentTime();
         while (!isConsumingStamina && !HasMaxStamina())
         {
             _currentStamina += staminaRecoverOverTime;

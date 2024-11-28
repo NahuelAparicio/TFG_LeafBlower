@@ -20,7 +20,7 @@ public class BlowerForce : MonoBehaviour
     {
         var blowable = other.GetComponent<IBlowable>();
 
-        if (!_blower.IsBlowing() || blowable == null || _blower.Aspirer.ObjectAttached) return;
+        if (!_blower.IsBlowing() || blowable == null || _blower.Aspirer.IsObjectAttached) return;
 
         //var collider = other.GetComponent<Collider>();
 

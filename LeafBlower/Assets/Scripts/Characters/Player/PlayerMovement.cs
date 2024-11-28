@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
 
+    [SerializeField] private Transform _lookAt;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_player.CheckCollisions.IsGrounded)
         {
+            if (_player.CurrentCharacterState == Enums.CharacterState.Idle) return;
             HandleGroundBehavior();
         }
         else
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleAirBehavior()
     {
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
-        HandleRotation(rotationAirSpeed);
+        HandleRotation(rotationSpeed);
 
         if (isHovering)
         {
@@ -99,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 targetDirection = Vector3.zero;
         targetDirection = GetDirectionNormalized();
+        //targetDirection = Camera.main.transform.forward;
         targetDirection.y = 0;
         if (targetDirection != Vector3.zero)
         {
@@ -140,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash() 
     {
-        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.ObjectAttached) return;
+        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
     }
 

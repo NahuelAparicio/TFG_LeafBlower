@@ -7,13 +7,11 @@ public class AspirerForce : MonoBehaviour
     private TrajectoryHandler _trajectory;
     private bool _isObjectAttached;
     private (Rigidbody, IShooteable) _attachedObject;
-   // private float _timePressed = 0f;
-   // [SerializeField]private float _maxTimeToShoot;
     [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
 
     #endregion
     #region Properties
-    public bool ObjectAttached => _isObjectAttached;
+    public bool IsObjectAttached => _isObjectAttached;
     public (Rigidbody, IShooteable) AttachedObject => _attachedObject;
     #endregion
 
@@ -32,31 +30,14 @@ public class AspirerForce : MonoBehaviour
         if(_blower.IsShooting())
         {
             ShootAction();
-            //_timePressed += Time.deltaTime;
-            //_blower.Hud.UpdateShootBarForce(_timePressed, _maxTimeToShoot);
-            //if(_timePressed >= _maxTimeToShoot)
-            //{
-            //    _timePressed = _maxTimeToShoot;
-            //    ShootAction();
-            //}
-        }
-        else
-        {
-            //if(_timePressed != 0)
-            //{
-            //    ShootAction();
-            //}
         }
     }
 
     private void ShootAction()
     {
-        //float force = (_blower.Stats.aspireForce.Value * _timePressed) / _maxTimeToShoot;
         Vector3 forceDir = _blower.Stats.ShootForce * _blower.FirePoint.forward;
         _attachedObject.Item2.OnShoot(forceDir);
         DetachObject();
-        //_timePressed = 0;
-        //_blower.Hud.ResetShootBarForce();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -110,9 +91,6 @@ public class AspirerForce : MonoBehaviour
             if (shooteable != null)
                 if (other.GetComponent<ShootableObject>().IsAttached)
                     DetachObject();
-           // if(shooteable != null)
-                //if(other.GetComponent<ShootableObject>().IsAttached)
-                   // DetachObject();
         }
     }
 
@@ -136,7 +114,15 @@ public class AspirerForce : MonoBehaviour
     public void DetachObject()
     {
         _trajectory.DisableLineRender();
-       _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
+        _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
+        _attachedObject.Item1 = null;
+        _attachedObject.Item2 = null;
+        _isObjectAttached = false;
+    }
+
+    public void SaveObject()
+    {
+        _trajectory.DisableLineRender();
         _attachedObject.Item1 = null;
         _attachedObject.Item2 = null;
         _isObjectAttached = false;

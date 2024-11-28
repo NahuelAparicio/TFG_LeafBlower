@@ -7,7 +7,8 @@ public class PlayerInventory : MonoBehaviour
     private PlayerController _player;
     private void Awake()
     {
-        _player = GetComponent<PlayerController>();         
+        _player = GetComponent<PlayerController>();
+        objectSaved = null;
     }
 
     public void SaveObject(GameObject obj)
@@ -18,8 +19,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveObject()
     {
-      //  _player.BlowerController.Aspirer.AttachObject(objectSaved.GetComponent<Rigidbody>(), ,objectSaved.GetComponent<IShooteable>);
         objectSaved.SetActive(true);
         objectSaved = null;
     }
+
+    public bool IsObjectSaved() => objectSaved != null;
 }

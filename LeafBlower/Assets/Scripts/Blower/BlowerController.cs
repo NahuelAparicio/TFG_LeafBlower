@@ -13,8 +13,6 @@ public class BlowerController : MonoBehaviour
     [SerializeField] private AspirerForce _aspirer;
     [SerializeField] private BlowerHUD _hud;
 
-    private bool _wasInteracting;
-    private float _currentTime;
     public bool canUseLeafBlower;
     public bool isHovering;
 
@@ -41,29 +39,13 @@ public class BlowerController : MonoBehaviour
 
     private void Update()
     {
-        bool isBlowingAspiringHovering = IsBlowing() || IsAspirating() || isHovering;
         //&& _aspirer.ObjectAttached
-        if (isBlowingAspiringHovering )
+        if (isHovering)
         {
             _handler.ConsumeStaminaOverTime();
         }
-        else
-        {
-            _currentTime += Time.deltaTime;
-            if(_wasInteracting)
-            {
-                _handler.StopConsumingStamina();
-                _currentTime = 0;
-            }
-            if (_currentTime >= _handler.timeToStartRecovering)
-            {
-                _handler.RecoverStaminaOverTime();
-                
-            }
-        }
-
-        _wasInteracting = isBlowingAspiringHovering;
     }
+
 
     // Returns if Blow function is being used, while check if can be used
     public bool IsBlowing() => CanUseLeafBlower() && _inputs.IsBlowingInputPressed() && !_inputs.IsAspiringInputPressed();
@@ -75,7 +57,7 @@ public class BlowerController : MonoBehaviour
     public bool CanUseLeafBlower() => _handler.HasStamina() && canUseLeafBlower;
 
     //Returns if the object attached is being shoot
-    public bool IsShooting() => _aspirer.ObjectAttached && _inputs.IsBlowingInputPressed();
+    public bool IsShooting() => _aspirer.IsObjectAttached && _inputs.IsBlowingInputPressed();
 
     public Vector3 GetPlayerDirection() => _player.Inputs.GetMoveDirection();
 
@@ -84,5 +66,4 @@ public class BlowerController : MonoBehaviour
     public Vector3 DirectionToFirePointNormalized(Vector3 position) => (_firePoint.position - position).normalized;
     public Vector3 DirectionFromFirePointNormalized(Vector3 position) => (position - _firePoint.position).normalized;
 
-    public void ResetStaminaCurrentTime() => _currentTime = 0;
 }
