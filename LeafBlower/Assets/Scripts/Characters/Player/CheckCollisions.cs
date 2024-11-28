@@ -29,7 +29,7 @@ public class CheckCollisions : MonoBehaviour
     {
         direction = _direction;
         Vector3 low, middle, high;
-        if(_player.BlowerController.Aspirer.ObjectAttached)
+        if(_player.BlowerController.Aspirer.IsObjectAttached)
         {
             direction = _player.BlowerController.FirePoint.transform.forward;
             low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
@@ -90,32 +90,32 @@ public class CheckCollisions : MonoBehaviour
 
         Vector3 low, middle, high;
 
-        if (_player.BlowerController.Aspirer.ObjectAttached)
-        {
-            low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
-            middle = low;
-            high = low;
-        }
-        else
-        {
-            low = transform.position;
-            middle = transform.position;
-            high = transform.position;
-        }
+        //if (_player.BlowerController.Aspirer.ObjectAttached)
+        //{
+        //    low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
+        //    middle = low;
+        //    high = low;
+        //}
+        //else
+        //{
+        //    low = transform.position;
+        //    middle = transform.position;
+        //    high = transform.position;
+        //}
 
-        // Adjust heights based on player's collider
-        high.y += _player.playerCollider.height;
-        middle.y += _player.playerCollider.height * 0.5f;
-        low.y += 0.25f;
+        //// Adjust heights based on player's collider
+        //high.y += _player.playerCollider.height;
+        //middle.y += _player.playerCollider.height * 0.5f;
+        //low.y += 0.25f;
 
-        // Visualize the rays
-        Gizmos.color = Color.red;  // Set the ray color to red for visibility
-        Vector3[] rays = { high, middle, low };
-        foreach (var ray in rays)
-        {
-            // Draw the ray using Gizmos.DrawLine
-            Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
-        }
+        //// Visualize the rays
+        //Gizmos.color = Color.red;  // Set the ray color to red for visibility
+        //Vector3[] rays = { high, middle, low };
+        //foreach (var ray in rays)
+        //{
+        //    // Draw the ray using Gizmos.DrawLine
+        //    Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
+        //}
     }
 
     private void OnTriggerStay(Collider other)

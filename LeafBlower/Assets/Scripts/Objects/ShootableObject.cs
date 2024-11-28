@@ -69,6 +69,8 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
     }
     public void Detach()
     {
+        gameObject.layer = LayerMask.NameToLayer("Ground");
+
         tag = "IsWall";
         _rb.constraints = RigidbodyConstraints.None;
         _rb.useGravity = true;
