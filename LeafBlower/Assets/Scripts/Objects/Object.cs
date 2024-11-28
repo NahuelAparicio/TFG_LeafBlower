@@ -4,6 +4,7 @@ public class Object : MonoBehaviour
 {
     protected Rigidbody _rb;
     protected Outline _outline;
+    public Sprite uiImage;
     public Enums.ObjectWeight weight;
 
     protected virtual void Awake()

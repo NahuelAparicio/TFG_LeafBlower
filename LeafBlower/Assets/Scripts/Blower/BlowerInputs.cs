@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,7 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
+        Debug.Log("R2");
         _blower.Handler.ConsumeStaminaOverTime();
         // _blower.Blower.EnableCollider();
     }
@@ -55,7 +57,7 @@ public class BlowerInputs : MonoBehaviour
         }
         else
         {
-            _blower.Player.Inventory.SaveObject(_blower.Aspirer.AttachedObject.Item1.gameObject);
+            _blower.Player.Inventory.SaveObject(_blower.Aspirer.AttachedObject.Item1.gameObject, _blower.Aspirer.AttachedObject.Item1.gameObject.GetComponent<Object>().uiImage);
             _blower.Aspirer.SaveObject();   
         }
     }

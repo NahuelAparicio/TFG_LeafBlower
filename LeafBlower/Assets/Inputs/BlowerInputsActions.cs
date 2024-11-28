@@ -58,17 +58,6 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""04d521fb-9897-4e76-a285-e8eb8b246dec"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Blow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""75420379-ee0d-41b0-846f-b163a59ea8be"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -80,12 +69,12 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aed6e4fb-2415-4df6-8792-a50821dbc603"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""id"": ""d1a6f17c-15e1-4d81-81fc-90d657f1c26e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Aspire"",
+                    ""action"": ""Blow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -96,6 +85,28 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Aspire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89b98745-5c58-4635-83a7-afde62b84c7c"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Aspire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e94e9ae-bb93-4a1e-9862-7950d419dbea"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Aspire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
