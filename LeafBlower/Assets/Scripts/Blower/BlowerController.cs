@@ -40,10 +40,10 @@ public class BlowerController : MonoBehaviour
     private void Update()
     {
         //&& _aspirer.ObjectAttached
-        if (isHovering)
-        {
-            _handler.ConsumeStaminaOverTime();
-        }
+        //if (isHovering)
+        //{
+        //    _handler.ConsumeStaminaOverTime();
+        //}
     }
 
 

@@ -30,7 +30,8 @@ public class BlowerInputs : MonoBehaviour
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         //  _blower.Blower.DisableCollider();
-        _blower.Handler.ReEnableRecoverStamina();
+        if(!_blower.isHovering)
+            _blower.Handler.ReEnableRecoverStamina();
         NoAim();
     }
 

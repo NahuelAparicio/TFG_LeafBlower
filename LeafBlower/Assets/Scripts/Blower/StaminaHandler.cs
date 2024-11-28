@@ -65,7 +65,7 @@ public class StaminaHandler : MonoBehaviour
     }
     public void ConsumeStaminaOverTime()
     {
-        if(HasStamina() && !isConsumingStamina)
+        if(HasStamina() && !isConsumingStamina && _blowerController.canUseLeafBlower)
         {
             StopRecoveringStamina();
             isConsumingStamina = true;
@@ -108,10 +108,10 @@ public class StaminaHandler : MonoBehaviour
             yield return new WaitForSeconds(consumeRate);
         }
 
-        isConsumingStamina = false;
 
         if (_currentStamina <= 0)
         {
+            isConsumingStamina = false;
             DisableLeafBlower();
             _blowerController.isHovering = false;
         }

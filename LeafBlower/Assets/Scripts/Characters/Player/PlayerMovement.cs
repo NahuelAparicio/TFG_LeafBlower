@@ -155,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
         if(isHovering)
         {
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
+            _player.BlowerController.Handler.ConsumeStaminaOverTime();
+        }
+        else
+        {
+            _player.BlowerController.Handler.ReEnableRecoverStamina();
         }
     }
     public void Hover()
