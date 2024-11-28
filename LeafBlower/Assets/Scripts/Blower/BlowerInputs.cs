@@ -5,10 +5,8 @@ public class BlowerInputs : MonoBehaviour
 {
     private BlowerController _blower;
     private BlowerInputsActions _actions;
-    [SerializeField] private GameObject _mainCamera, _aimCamera; 
     private void Awake()
     {
-        NoAim();
         _blower = GetComponent<BlowerController>();
         _actions = new BlowerInputsActions();
         _actions.Blower.Enable();
@@ -25,14 +23,12 @@ public class BlowerInputs : MonoBehaviour
     {
         _blower.Handler.ConsumeStaminaOverTime();
         // _blower.Blower.EnableCollider();
-        Aim();
     }
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         //  _blower.Blower.DisableCollider();
         if(!_blower.isHovering)
             _blower.Handler.ReEnableRecoverStamina();
-        NoAim();
     }
 
     private void Aspire_performed(InputAction.CallbackContext context)
@@ -40,7 +36,6 @@ public class BlowerInputs : MonoBehaviour
         _blower.Handler.ConsumeStaminaOverTime();
 
         //  _blower.Aspirer.EnableCollider();
-        Aim();
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
@@ -48,20 +43,9 @@ public class BlowerInputs : MonoBehaviour
         _blower.Handler.ReEnableRecoverStamina();
 
         //   _blower.Aspirer.DisableCollider();
-        NoAim();
     }
 
-    private void Aim()
-    {
-        //_mainCamera.SetActive(false);
-        //_aimCamera.SetActive(true);
-    }
 
-    private void NoAim()
-    {
-        //_mainCamera.SetActive(true);
-        //_aimCamera.SetActive(false);
-    }
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
         if (!_blower.Aspirer.IsObjectAttached && !_blower.Player.Inventory.IsObjectSaved()) return;

@@ -69,7 +69,6 @@ public class AspirerForce : MonoBehaviour
                 {
                     if(!other.GetComponent<ShootableObject>().IsAttached)
                     {
-                        Debug.Log("PositionClosestPoint = " + pos);
                         AttachObject(other.attachedRigidbody, pos, shooteable);
                     }
                 }

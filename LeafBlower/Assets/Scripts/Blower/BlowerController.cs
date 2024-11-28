@@ -37,16 +37,6 @@ public class BlowerController : MonoBehaviour
         isHovering = false;
     }
 
-    private void Update()
-    {
-        //&& _aspirer.ObjectAttached
-        //if (isHovering)
-        //{
-        //    _handler.ConsumeStaminaOverTime();
-        //}
-    }
-
-
     // Returns if Blow function is being used, while check if can be used
     public bool IsBlowing() => CanUseLeafBlower() && _inputs.IsBlowingInputPressed() && !_inputs.IsAspiringInputPressed();
 

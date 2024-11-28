@@ -114,6 +114,7 @@ public class StaminaHandler : MonoBehaviour
             isConsumingStamina = false;
             DisableLeafBlower();
             _blowerController.isHovering = false;
+            ReEnableRecoverStamina();
         }
     }
 

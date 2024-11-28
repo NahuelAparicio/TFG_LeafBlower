@@ -20,6 +20,14 @@ public class PlayerInventory : MonoBehaviour
     public void RemoveObject()
     {
         objectSaved.SetActive(true);
+        if(_player.BlowerController.IsAspirating())
+        {
+            _player.BlowerController.Aspirer.AttachObject(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, objectSaved.GetComponent<IShooteable>());
+        }
+        else
+        {
+            objectSaved.GetComponent<IAttacheable>().Detach();
+        }
         objectSaved = null;
     }
 

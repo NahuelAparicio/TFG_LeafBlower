@@ -4,7 +4,7 @@ public class BlowableObject : Object, IBlowable
 {
     [SerializeField] private Enums.BlowType _type;
 
-    internal override void Awake()
+    protected override void Awake()
     {
         base.Awake();
 

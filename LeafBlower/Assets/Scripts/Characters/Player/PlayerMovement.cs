@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
             _player.BlowerController.Handler.ReEnableRecoverStamina();
         }
     }
+
     public void Hover()
     {
         if(!_player.BlowerController.Handler.HasStamina())
@@ -169,10 +170,8 @@ public class PlayerMovement : MonoBehaviour
             isHovering = false;
             return;
         }
-        if (isHovering)
-        {
-            MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
-        }
+        
+        MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
     }
     private void ClampSpeed(float speedToClamp)
     {
