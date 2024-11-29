@@ -46,27 +46,16 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""BlowerMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""b3cda24e-fa25-4069-9dcb-10984acc6c6b"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""SaveObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""f557b33f-bf6f-44a4-8c9c-a1eabc63fe64"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""04d521fb-9897-4e76-a285-e8eb8b246dec"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Blow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""75420379-ee0d-41b0-846f-b163a59ea8be"",
@@ -80,12 +69,12 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aed6e4fb-2415-4df6-8792-a50821dbc603"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""id"": ""d1a6f17c-15e1-4d81-81fc-90d657f1c26e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Aspire"",
+                    ""action"": ""Blow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -102,23 +91,34 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7324ebfd-d7b4-423f-ad17-81093f4b08ef"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""89b98745-5c58-4635-83a7-afde62b84c7c"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""BlowerMove"",
+                    ""action"": ""Aspire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7d89194d-d8df-4a24-8cdf-ec334ab9885e"",
-                    ""path"": ""<Mouse>/scroll"",
+                    ""id"": ""6e94e9ae-bb93-4a1e-9862-7950d419dbea"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""BlowerMove"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Aspire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77d1b9b3-17ed-4469-a6a9-f4796c625473"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SaveObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -154,7 +154,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
         m_Blower = asset.FindActionMap("Blower", throwIfNotFound: true);
         m_Blower_Blow = m_Blower.FindAction("Blow", throwIfNotFound: true);
         m_Blower_Aspire = m_Blower.FindAction("Aspire", throwIfNotFound: true);
-        m_Blower_BlowerMove = m_Blower.FindAction("BlowerMove", throwIfNotFound: true);
+        m_Blower_SaveObject = m_Blower.FindAction("SaveObject", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,14 +218,14 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
     private List<IBlowerActions> m_BlowerActionsCallbackInterfaces = new List<IBlowerActions>();
     private readonly InputAction m_Blower_Blow;
     private readonly InputAction m_Blower_Aspire;
-    private readonly InputAction m_Blower_BlowerMove;
+    private readonly InputAction m_Blower_SaveObject;
     public struct BlowerActions
     {
         private @BlowerInputsActions m_Wrapper;
         public BlowerActions(@BlowerInputsActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Blow => m_Wrapper.m_Blower_Blow;
         public InputAction @Aspire => m_Wrapper.m_Blower_Aspire;
-        public InputAction @BlowerMove => m_Wrapper.m_Blower_BlowerMove;
+        public InputAction @SaveObject => m_Wrapper.m_Blower_SaveObject;
         public InputActionMap Get() { return m_Wrapper.m_Blower; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,9 +241,9 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
             @Aspire.started += instance.OnAspire;
             @Aspire.performed += instance.OnAspire;
             @Aspire.canceled += instance.OnAspire;
-            @BlowerMove.started += instance.OnBlowerMove;
-            @BlowerMove.performed += instance.OnBlowerMove;
-            @BlowerMove.canceled += instance.OnBlowerMove;
+            @SaveObject.started += instance.OnSaveObject;
+            @SaveObject.performed += instance.OnSaveObject;
+            @SaveObject.canceled += instance.OnSaveObject;
         }
 
         private void UnregisterCallbacks(IBlowerActions instance)
@@ -254,9 +254,9 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
             @Aspire.started -= instance.OnAspire;
             @Aspire.performed -= instance.OnAspire;
             @Aspire.canceled -= instance.OnAspire;
-            @BlowerMove.started -= instance.OnBlowerMove;
-            @BlowerMove.performed -= instance.OnBlowerMove;
-            @BlowerMove.canceled -= instance.OnBlowerMove;
+            @SaveObject.started -= instance.OnSaveObject;
+            @SaveObject.performed -= instance.OnSaveObject;
+            @SaveObject.canceled -= instance.OnSaveObject;
         }
 
         public void RemoveCallbacks(IBlowerActions instance)
@@ -296,6 +296,6 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
     {
         void OnBlow(InputAction.CallbackContext context);
         void OnAspire(InputAction.CallbackContext context);
-        void OnBlowerMove(InputAction.CallbackContext context);
+        void OnSaveObject(InputAction.CallbackContext context);
     }
 }

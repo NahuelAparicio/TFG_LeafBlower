@@ -9,14 +9,14 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
     private bool _hasBeenShoot = false;
     float distanceBetweenParentAndObject;
 
-    internal override void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _isAttached = false;
         _hasBeenShoot = false;
 
     }
-    private void Update()
+    protected void Update()
     {
         if (_isAttached)
         {
@@ -29,12 +29,6 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collisioned");
-    }
-
     public void OnAspiratableInteracts(Vector3 force)
     {
         if(!_isAttached && !_hasBeenShoot)
@@ -69,6 +63,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
     }
     public void Detach()
     {
+        gameObject.layer = LayerMask.NameToLayer("Ground");
         tag = "IsWall";
         _rb.constraints = RigidbodyConstraints.None;
         _rb.useGravity = true;

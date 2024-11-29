@@ -9,12 +9,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Stat _runSpeed;
     public float RunSpeed => _runSpeed.Value;
 
-    //[SerializeField]private float _acceleration;
-    //public float Acceleration => _acceleration;
-
-    //[SerializeField] private float _airAcceleration;
-    //public float AirAcceleration => _airAcceleration;  
-
     [Header("Forces Stats:")]
 
     [SerializeField] private Stat _dashForce;
@@ -25,4 +19,6 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
+
+    public int maxDashes;
 }

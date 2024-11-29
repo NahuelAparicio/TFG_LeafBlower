@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    internal Rigidbody _rb;
-    internal Outline _outline;
+    protected Rigidbody _rb;
+    protected Outline _outline;
+    public Sprite uiImage;
     public Enums.ObjectWeight weight;
 
-    internal virtual void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _outline = GetComponent<Outline>();
@@ -25,7 +26,7 @@ public class Object : MonoBehaviour
             _outline.enabled = false;
     }
 
-    internal void ChangeWeight(Enums.ObjectWeight objectWeight)
+    protected void ChangeWeight(Enums.ObjectWeight objectWeight)
     {
         if (weight == objectWeight) return;
         weight = objectWeight;
@@ -40,7 +41,7 @@ public class Object : MonoBehaviour
                 _rb.mass = 0.1f;
                 break;
             case Enums.ObjectWeight.Leaf:
-                _rb.mass = 0.5f;
+                _rb.mass = 0.25f;
                 break;
             case Enums.ObjectWeight.Low:
                 _rb.mass = 2;

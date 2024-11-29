@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerMovement : MonoBehaviour
 {
     public List<MovementEntry> movements;
@@ -34,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
 
+    private int _currentDashes;
 
     private void Awake()
     {
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleAirBehavior()
     {
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
-        HandleRotation(rotationAirSpeed);
+        HandleRotation(rotationSpeed);
 
         if (isHovering)
         {
@@ -78,9 +78,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGroundBehavior()
     {
-        ClampSpeed(_moveSpeed);
-        MakeMovement(Enums.Movements.GroundMovement, GetTargetVelocity());
-        HandleRotation(rotationSpeed);
+        if (_player.CurrentCharacterState != Enums.CharacterState.Idle)
+        {
+            ClampSpeed(_moveSpeed);
+            MakeMovement(Enums.Movements.GroundMovement, GetTargetVelocity());
+            HandleRotation(rotationSpeed);
+        }
 
         if (!isJumping)
         {
@@ -99,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 targetDirection = Vector3.zero;
         targetDirection = GetDirectionNormalized();
+        //targetDirection = Camera.main.transform.forward;
         targetDirection.y = 0;
         if (targetDirection != Vector3.zero)
         {
@@ -120,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime / 0.1f);
             }
-            else
+            if(_player.CurrentCharacterState == Enums.CharacterState.Idle)
             {
                 transform.position = _targetPosition;
             }
@@ -140,7 +144,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash() 
     {
-        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.ObjectAttached) return;
+        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached || !CanDash()) return;
+        _currentDashes++;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
     }
 
@@ -152,8 +157,14 @@ public class PlayerMovement : MonoBehaviour
         if(isHovering)
         {
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
+            _player.BlowerController.Handler.ConsumeStaminaOverTime();
+        }
+        else
+        {
+            _player.BlowerController.Handler.ReEnableRecoverStamina();
         }
     }
+
     public void Hover()
     {
         if(!_player.BlowerController.Handler.HasStamina())
@@ -161,10 +172,8 @@ public class PlayerMovement : MonoBehaviour
             isHovering = false;
             return;
         }
-        if (isHovering)
-        {
-            MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
-        }
+        
+        MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
     }
     private void ClampSpeed(float speedToClamp)
     {
@@ -193,15 +202,12 @@ public class PlayerMovement : MonoBehaviour
         if (_player.CheckCollisions.OnSlope())
         {
             Vector3 slopeDirection = GetSlopeMoveDirection(_moveDirection);
-           // targetVelocity = slopeDirection * _player.Stats.Acceleration;
             if (_player.CheckCollisions.IsOnMaxSlopeAngle())
             {
                 // Project the movement direction onto the slope to avoid moving upwards
                 targetVelocity = Vector3.ProjectOnPlane(slopeDirection, slopeHit.normal) * _moveSpeed;
 
                 _player.Movement.isSprinting = false;
-                // Apply additional downward gravity to make the player slide
-               // ApplyAdditiveGravity(_gravity * 50);
             }
             else
             {
@@ -254,4 +260,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    private bool CanDash() => _player.Stats.maxDashes > _currentDashes;
+    public void ResetDash() => _currentDashes = 0;
 }
