@@ -3981,7 +3981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 3
   timeToEnableAspirating: 1.5
 --- !u!114 &81803930
@@ -4346,12 +4346,12 @@ PrefabInstance:
     - target: {fileID: 528268480084714613, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.36484194
+      value: 0.36484197
       objectReference: {fileID: 0}
     - target: {fileID: 528268480084714613, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1154859
+      value: -0.11548591
       objectReference: {fileID: 0}
     - target: {fileID: 4847170708000530032, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
@@ -14335,7 +14335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 3
   timeToEnableAspirating: 1.5
 --- !u!114 &352526640
@@ -21662,7 +21662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 5
   timeToEnableAspirating: 1.5
 --- !u!114 &533117753
@@ -32730,7 +32730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 3
   timeToEnableAspirating: 1.5
 --- !u!114 &763414721
@@ -34237,7 +34237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 3
   timeToEnableAspirating: 1.5
 --- !u!114 &789498606
@@ -42907,7 +42907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 1
   timeToEnableAspirating: 1.5
 --- !u!114 &973570980
@@ -47140,7 +47140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 2
   timeToEnableAspirating: 1.5
 --- !u!114 &1068907264
@@ -74769,7 +74769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 0
   timeToEnableAspirating: 1.5
 --- !u!114 &1669815460
@@ -90900,7 +90900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e63f591cd815bd46b07ee79f0228d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: bd374f6c031298b40a0cf4ce79484c70, type: 3}
+  uiImage: {fileID: 0}
   weight: 3
   timeToEnableAspirating: 1.5
 --- !u!114 &2070997416
@@ -92940,6 +92940,11 @@ PrefabInstance:
       objectReference: {fileID: 1653077769}
     - target: {fileID: 6789903918058447097, guid: b1189ffffd68e3b46a1e5f786bf4156b,
         type: 3}
+      propertyPath: movementSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789903918058447097, guid: b1189ffffd68e3b46a1e5f786bf4156b,
+        type: 3}
       propertyPath: movementRangeY.x
       value: -4
       objectReference: {fileID: 0}
@@ -93023,8 +93028,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Temporal
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6789903918058447097, guid: b1189ffffd68e3b46a1e5f786bf4156b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3066625131557805557, guid: b1189ffffd68e3b46a1e5f786bf4156b,

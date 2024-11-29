@@ -114,7 +114,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""77d1b9b3-17ed-4469-a6a9-f4796c625473"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",

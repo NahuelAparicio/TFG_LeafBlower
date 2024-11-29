@@ -10,7 +10,7 @@ public class PlayerInputs : MonoBehaviour
     private float doubleClickThreshold = 0.3f;
 
 
-    public GameObject Target;
+   // public GameObject Target;
 
     private void Awake()
     {
@@ -36,18 +36,18 @@ public class PlayerInputs : MonoBehaviour
 
     private void PosC_performed(InputAction.CallbackContext obj)
     {
-        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -7, Target.transform.localPosition.z);
+       // Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -7, Target.transform.localPosition.z);
     }
 
     private void PosB_performed(InputAction.CallbackContext obj)
     {
-        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -0.23f, Target.transform.localPosition.z);
+       // Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -0.23f, Target.transform.localPosition.z);
 
     }
 
     private void PosA_performed(InputAction.CallbackContext obj)
     {
-        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, 43, Target.transform.localPosition.z);
+      //  Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, 43, Target.transform.localPosition.z);
 
     }
 
