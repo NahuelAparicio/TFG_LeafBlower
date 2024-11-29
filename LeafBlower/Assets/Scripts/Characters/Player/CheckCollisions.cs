@@ -28,7 +28,7 @@ public class CheckCollisions : MonoBehaviour
     public Vector3 IsWall(Vector3 _direction)
     {
         direction = _direction;
-        Vector3 low, middle, high;
+        Vector3 low, middle, high, shootPoint;
         if(_player.BlowerController.Aspirer.IsObjectAttached)
         {
             direction = _player.BlowerController.FirePoint.transform.forward;
@@ -42,12 +42,13 @@ public class CheckCollisions : MonoBehaviour
             middle = transform.position;
             high = transform.position;
         }
+        shootPoint = _player.BlowerController.FirePoint.position;
 
         high.y += _player.playerCollider.height;
         middle.y += _player.playerCollider.height * 0.5f;
         low.y += 0.25f;
 
-        Vector3[] rays = { high, middle, low };
+        Vector3[] rays = { high, middle, low, shootPoint };
         foreach (var ray in rays)
         {
             if (Physics.Raycast(ray, _direction, out RaycastHit hit, raycastWallCheckDistance))
@@ -125,6 +126,7 @@ public class CheckCollisions : MonoBehaviour
             if(!_player.Movement.isJumping)
             {                
                 _isGrounded = true;
+                _player.Movement.ResetDash();
             }
         }
     }

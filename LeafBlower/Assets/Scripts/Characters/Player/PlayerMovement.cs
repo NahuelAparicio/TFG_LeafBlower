@@ -262,5 +262,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool CanDash() => _player.Stats.maxDashes > _currentDashes;
-    private void ResetDash() => _currentDashes = 0;
+    public void ResetDash() => _currentDashes = 0;
 }

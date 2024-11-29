@@ -6,8 +6,12 @@ public class BlowerInputs : MonoBehaviour
 {
     private BlowerController _blower;
     private BlowerInputsActions _actions;
+
+    public GameObject cameraHolding, cameraNormal;
+
     private void Awake()
     {
+        EnableNormal();
         _blower = GetComponent<BlowerController>();
         _actions = new BlowerInputsActions();
         _actions.Blower.Enable();
@@ -24,10 +28,12 @@ public class BlowerInputs : MonoBehaviour
     {
         Debug.Log("R2");
         _blower.Handler.ConsumeStaminaOverTime();
+        EnableHolding();
         // _blower.Blower.EnableCollider();
     }
     private void Blow_canceled(InputAction.CallbackContext context)
     {
+        EnableNormal();
         //  _blower.Blower.DisableCollider();
         if(!_blower.isHovering)
             _blower.Handler.ReEnableRecoverStamina();
@@ -36,13 +42,14 @@ public class BlowerInputs : MonoBehaviour
     private void Aspire_performed(InputAction.CallbackContext context)
     {
         _blower.Handler.ConsumeStaminaOverTime();
-
+        EnableHolding();
         //  _blower.Aspirer.EnableCollider();
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
         _blower.Handler.ReEnableRecoverStamina();
+        EnableNormal();
 
         //   _blower.Aspirer.DisableCollider();
     }
@@ -61,7 +68,16 @@ public class BlowerInputs : MonoBehaviour
             _blower.Aspirer.SaveObject();   
         }
     }
-
+    public void EnableHolding()
+    {
+        //cameraHolding.SetActive(true);
+        //cameraNormal.SetActive(false);
+    }
+    public void EnableNormal()
+    {
+        //cameraNormal.SetActive(true);
+        //cameraHolding.SetActive(false);
+    }
     private void OnDestroy()
     {
         _actions.Blower.Disable();
