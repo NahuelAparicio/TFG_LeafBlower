@@ -9,6 +9,9 @@ public class PlayerInputs : MonoBehaviour
     private float lastClickTimeR2 = 0f;
     private float doubleClickThreshold = 0.3f;
 
+
+    public GameObject Target;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -17,12 +20,34 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Move.performed += Move_performed;
         _actions.Player.Move.canceled += Move_canceled;
         _actions.Player.Interact.performed += Interact_performed;
-        _actions.Player.Jump.performed += Jump_performed;
         _actions.Player.Pause.performed += Pause_performed;
         _actions.Player.Sprint.performed += Sprint_performed;
         _actions.Player.Sprint.canceled += Sprint_canceled;
         _actions.Player.Dash.performed += Dash_performed;
         _actions.Player.Hover.performed += Hover_performed;
+        _actions.Player.Jump.performed += Jump_performed;
+
+
+        _actions.Player.HighPos.performed += PosA_performed;
+        _actions.Player.MiddlePos.performed += PosB_performed;
+        _actions.Player.DownPos.performed += PosC_performed;
+
+    }
+
+    private void PosC_performed(InputAction.CallbackContext obj)
+    {
+        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -7, Target.transform.localPosition.z);
+    }
+
+    private void PosB_performed(InputAction.CallbackContext obj)
+    {
+        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -0.23f, Target.transform.localPosition.z);
+
+    }
+
+    private void PosA_performed(InputAction.CallbackContext obj)
+    {
+        Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, 43, Target.transform.localPosition.z);
 
     }
 
@@ -109,7 +134,6 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Move.performed -= Move_performed;
         _actions.Player.Move.canceled -= Move_canceled;
         _actions.Player.Interact.performed -= Interact_performed;
-        _actions.Player.Jump.performed -= Jump_performed;
         _actions.Player.Pause.performed -= Pause_performed;
         _actions.Player.Sprint.performed -= Sprint_performed;
         _actions.Player.Sprint.canceled -= Sprint_canceled;

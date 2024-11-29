@@ -15,18 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Sprint",
                     "type": "Button",
-                    "id": "0b71040d-049a-4238-912f-9dd471cad047",
+                    "id": "dd813cab-efa6-4ec3-9726-9aff51e26479",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "43be74b4-f8fa-4517-be67-6b06a5758484",
+                    "id": "2e940d4a-3f97-482f-98bb-778a47cd8fde",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -42,22 +42,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Sprint",
+                    "name": "DownPos",
                     "type": "Button",
-                    "id": "dd813cab-efa6-4ec3-9726-9aff51e26479",
+                    "id": "133f206f-8935-41c8-9695-6b56ab77d2f3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "BlowerMove",
-                    "type": "Value",
-                    "id": "23d49c6a-cd23-4fdf-9dee-4bc968e40a38",
-                    "expectedControlType": "Vector2",
+                    "name": "MiddlePos",
+                    "type": "Button",
+                    "id": "23f0318f-6aac-404c-a0f0-1e9331d2eea0",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HighPos",
+                    "type": "Button",
+                    "id": "6fc9a806-65cc-4e86-b232-8ce7aa3f3b92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Dash",
@@ -76,6 +85,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "43be74b4-f8fa-4517-be67-6b06a5758484",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BlowerMove",
+                    "type": "Value",
+                    "id": "23d49c6a-cd23-4fdf-9dee-4bc968e40a38",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -147,28 +174,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0b0b91a3-27ae-4656-a984-c71bb9ae3b70",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d842c0e4-c14c-49db-ab44-e3f46105d63e",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7d06d17d-46d7-4ee6-9936-9e13d8eb2b7b",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -191,8 +196,30 @@
                 },
                 {
                     "name": "",
+                    "id": "952fb27a-32a8-43b9-b6cb-10f1de974ab6",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "BlowerMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "988e9aa9-716d-4fb3-8452-f20ef24e6509",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f80b1292-7bbe-4af7-8df1-97e8325babe5",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -213,23 +240,45 @@
                 },
                 {
                     "name": "",
+                    "id": "502c067e-b5a3-48f1-8997-415e1dc9c77a",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "HighPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5974ee09-4274-4a80-8e90-c6649e049ef2",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "MiddlePos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6dcaebef-bc9b-40ce-b2fe-f9e5d6ef5ecc",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "80f9178b-fd3e-41dd-a366-c11c0d8b46b9",
                     "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "952fb27a-32a8-43b9-b6cb-10f1de974ab6",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "BlowerMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -248,17 +297,6 @@
                     "name": "",
                     "id": "dbedce08-c641-43f5-a2e0-0b851489fe7b",
                     "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "419d07ef-f2d8-4043-a882-9f444dc1de11",
-                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
