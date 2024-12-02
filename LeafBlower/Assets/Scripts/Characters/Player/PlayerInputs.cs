@@ -125,7 +125,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Pause_performed(InputAction.CallbackContext context) 
     {
-        GameManager.Instance.PauseGameHandler();
+        GameManager.Instance.UpdateState(Enums.GameState.PauseMenu);
     }
 
 
