@@ -37,18 +37,18 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Sprint"",
                     ""type"": ""Button"",
-                    ""id"": ""0b71040d-049a-4238-912f-9dd471cad047"",
+                    ""id"": ""dd813cab-efa6-4ec3-9726-9aff51e26479"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""43be74b4-f8fa-4517-be67-6b06a5758484"",
+                    ""id"": ""2e940d4a-3f97-482f-98bb-778a47cd8fde"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -64,22 +64,31 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Sprint"",
+                    ""name"": ""DownPos"",
                     ""type"": ""Button"",
-                    ""id"": ""dd813cab-efa6-4ec3-9726-9aff51e26479"",
+                    ""id"": ""133f206f-8935-41c8-9695-6b56ab77d2f3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""BlowerMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""23d49c6a-cd23-4fdf-9dee-4bc968e40a38"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""MiddlePos"",
+                    ""type"": ""Button"",
+                    ""id"": ""23f0318f-6aac-404c-a0f0-1e9331d2eea0"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HighPos"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fc9a806-65cc-4e86-b232-8ce7aa3f3b92"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Dash"",
@@ -98,6 +107,24 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""43be74b4-f8fa-4517-be67-6b06a5758484"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BlowerMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""23d49c6a-cd23-4fdf-9dee-4bc968e40a38"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -169,28 +196,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0b0b91a3-27ae-4656-a984-c71bb9ae3b70"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d842c0e4-c14c-49db-ab44-e3f46105d63e"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7d06d17d-46d7-4ee6-9936-9e13d8eb2b7b"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -208,6 +213,28 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""952fb27a-32a8-43b9-b6cb-10f1de974ab6"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""BlowerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""988e9aa9-716d-4fb3-8452-f20ef24e6509"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -235,23 +262,45 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""502c067e-b5a3-48f1-8997-415e1dc9c77a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""HighPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5974ee09-4274-4a80-8e90-c6649e049ef2"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""MiddlePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dcaebef-bc9b-40ce-b2fe-f9e5d6ef5ecc"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""80f9178b-fd3e-41dd-a366-c11c0d8b46b9"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""952fb27a-32a8-43b9-b6cb-10f1de974ab6"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""BlowerMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -269,17 +318,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dbedce08-c641-43f5-a2e0-0b851489fe7b"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""419d07ef-f2d8-4043-a882-9f444dc1de11"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -417,13 +455,16 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_BlowerMove = m_Player.FindAction("BlowerMove", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_DownPos = m_Player.FindAction("DownPos", throwIfNotFound: true);
+        m_Player_MiddlePos = m_Player.FindAction("MiddlePos", throwIfNotFound: true);
+        m_Player_HighPos = m_Player.FindAction("HighPos", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hover = m_Player.FindAction("Hover", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_BlowerMove = m_Player.FindAction("BlowerMove", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_CameraLeft = m_Camera.FindAction("CameraLeft", throwIfNotFound: true);
@@ -493,25 +534,31 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Pause;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_BlowerMove;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_DownPos;
+    private readonly InputAction m_Player_MiddlePos;
+    private readonly InputAction m_Player_HighPos;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hover;
+    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_BlowerMove;
     public struct PlayerActions
     {
         private @PlayerInputsActions m_Wrapper;
         public PlayerActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
-        public InputAction @BlowerMove => m_Wrapper.m_Player_BlowerMove;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @DownPos => m_Wrapper.m_Player_DownPos;
+        public InputAction @MiddlePos => m_Wrapper.m_Player_MiddlePos;
+        public InputAction @HighPos => m_Wrapper.m_Player_HighPos;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hover => m_Wrapper.m_Player_Hover;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @BlowerMove => m_Wrapper.m_Player_BlowerMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -524,27 +571,36 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @BlowerMove.started += instance.OnBlowerMove;
-            @BlowerMove.performed += instance.OnBlowerMove;
-            @BlowerMove.canceled += instance.OnBlowerMove;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @DownPos.started += instance.OnDownPos;
+            @DownPos.performed += instance.OnDownPos;
+            @DownPos.canceled += instance.OnDownPos;
+            @MiddlePos.started += instance.OnMiddlePos;
+            @MiddlePos.performed += instance.OnMiddlePos;
+            @MiddlePos.canceled += instance.OnMiddlePos;
+            @HighPos.started += instance.OnHighPos;
+            @HighPos.performed += instance.OnHighPos;
+            @HighPos.canceled += instance.OnHighPos;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
             @Hover.started += instance.OnHover;
             @Hover.performed += instance.OnHover;
             @Hover.canceled += instance.OnHover;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @BlowerMove.started += instance.OnBlowerMove;
+            @BlowerMove.performed += instance.OnBlowerMove;
+            @BlowerMove.canceled += instance.OnBlowerMove;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -552,27 +608,36 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @BlowerMove.started -= instance.OnBlowerMove;
-            @BlowerMove.performed -= instance.OnBlowerMove;
-            @BlowerMove.canceled -= instance.OnBlowerMove;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @DownPos.started -= instance.OnDownPos;
+            @DownPos.performed -= instance.OnDownPos;
+            @DownPos.canceled -= instance.OnDownPos;
+            @MiddlePos.started -= instance.OnMiddlePos;
+            @MiddlePos.performed -= instance.OnMiddlePos;
+            @MiddlePos.canceled -= instance.OnMiddlePos;
+            @HighPos.started -= instance.OnHighPos;
+            @HighPos.performed -= instance.OnHighPos;
+            @HighPos.canceled -= instance.OnHighPos;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
             @Hover.started -= instance.OnHover;
             @Hover.performed -= instance.OnHover;
             @Hover.canceled -= instance.OnHover;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @BlowerMove.started -= instance.OnBlowerMove;
+            @BlowerMove.performed -= instance.OnBlowerMove;
+            @BlowerMove.canceled -= instance.OnBlowerMove;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -711,13 +776,16 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnBlowerMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnDownPos(InputAction.CallbackContext context);
+        void OnMiddlePos(InputAction.CallbackContext context);
+        void OnHighPos(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnHover(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnBlowerMove(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

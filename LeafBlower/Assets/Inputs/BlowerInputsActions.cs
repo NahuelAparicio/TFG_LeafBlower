@@ -117,7 +117,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""SaveObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
