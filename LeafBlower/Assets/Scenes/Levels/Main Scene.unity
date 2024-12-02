@@ -10281,7 +10281,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2061268591}
   - component: {fileID: 2061268595}
-  - component: {fileID: 2061268594}
   - component: {fileID: 2061268593}
   - component: {fileID: 2061268592}
   m_Layer: 0
@@ -10384,14 +10383,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &2061268594
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061268590}
-  m_Enabled: 1
 --- !u!20 &2061268595
 Camera:
   m_ObjectHideFlags: 0
@@ -10619,6 +10610,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2082904176}
+  - component: {fileID: 2082904177}
+  - component: {fileID: 2082904178}
   m_Layer: 0
   m_Name: \--| CAMERA |--/
   m_TagString: Untagged
@@ -10643,6 +10636,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082904177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082904175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 2082904175}
+--- !u!114 &2082904178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082904175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1813386645
+      Data2: 1074103180
+      Data3: -1209423968
+      Data4: -1324479688
+    Path: event:/Music/FAVELA ALEGRE BIEN
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2086665397
 PrefabInstance:
   m_ObjectHideFlags: 0
