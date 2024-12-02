@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,13 +20,9 @@ public class GameManager : MonoBehaviour
             }
             return _instance;
         }
-        set
-        {
-
-        }
     }
 
-    private Enums.GameState _state;
+    private Enums.GameState _state = Enums.GameState.Playing;
     private bool _isPaused;
     public bool IsPaused => _isPaused;
 
@@ -36,16 +35,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void LoadLevel(string levelName, GameObject _loaderCanvas, Image _progressBar)
     {
-        
+        StartCoroutine(LoadSceneAsyc(levelName, _loaderCanvas, _progressBar));
     }
 
-    void Update()
+    IEnumerator LoadSceneAsyc(string levelName, GameObject _loaderCanvas, Image _progressBar)
     {
-        
-    }
+        AsyncOperation async = SceneManager.LoadSceneAsync(levelName);
+        async.allowSceneActivation = false;
 
+        _loaderCanvas.SetActive(true);
+        float progress = 0f;
+        _progressBar.fillAmount = progress;
+        while (!async.isDone)
+        {
+            _progressBar.fillAmount = progress;
+            if (progress >= 0.9f)
+            {
+                _progressBar.fillAmount = 1;
+                async.allowSceneActivation = true;
+            }
+            progress = async.progress;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        UpdateState(Enums.GameState.Playing);
+        MainMenu.Hide();
+    }
     public void UpdateState(Enums.GameState state)
     {
         if(_state == state)
@@ -65,7 +82,8 @@ public class GameManager : MonoBehaviour
                 //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
-                //PauseMenu.Show()
+                PauseMenu.Show();
+                PauseGameHandler();
                 break;
             case Enums.GameState.Exit:
                 Application.Quit();
