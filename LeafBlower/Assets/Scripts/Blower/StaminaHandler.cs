@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class StaminaHandler : MonoBehaviour
@@ -14,124 +13,95 @@ public class StaminaHandler : MonoBehaviour
 
     private BlowerController _blowerController;
     private float _currentStamina;
-    public bool HasStamina() => _currentStamina > 0;
-    public bool HasMaxStamina() => _currentStamina >= _blowerController.Stats.maxStamina.Value;
+    private float _recoveryTimer = 0f;
 
     public bool isConsumingStamina = false;
-    public bool isRecoveringStamina = false;
 
-    private void Awake()
-    {
-
-    }
     private void Start()
     {
         _blowerController = GetComponent<BlowerController>();
         _currentStamina = _blowerController.Stats.maxStamina.Value;
         _blowerController.Hud.ResetStaminaBar();
     }
-    private float _currentTime = 0f;
-    private bool canRecoverStamina = false;
     private void Update()
     {
-        if(!_blowerController.canUseLeafBlower)
+        if (_blowerController.canUseLeafBlower && isConsumingStamina)
         {
-            if(Mathf.Clamp01(_currentStamina / _blowerController.Stats.maxStamina.Value) > 0.15f)
-            {
-                EnableLeafBlower();
-            }
+            ConsumeStamina();
         }
-        if(canRecoverStamina)
+        else
         {
-            _currentTime += Time.deltaTime;
-            if(isConsumingStamina)
+            HandleStaminaRecover();
+        }
+
+        if (!_blowerController.canUseLeafBlower && (_currentStamina / _blowerController.Stats.maxStamina.Value) >= 0.15f)
+        {
+            EnableLeafBlower();
+
+        }
+    }
+
+    private void HandleStaminaRecover()
+    {
+        if (!isConsumingStamina && _currentStamina < _blowerController.Stats.maxStamina.Value)
+        {
+            _recoveryTimer += Time.deltaTime;
+
+            if (_recoveryTimer >= timeToStartRecovering)
             {
-                _currentTime = 0;
-                canRecoverStamina = false;
-            }
-            if(_currentTime >= timeToStartRecovering)
-            {
-                RecoverStaminaOverTime();
-                _currentTime = 0;
-                canRecoverStamina = false;
+                ModifyStamina(staminaRecoverOverTime, recoveryRate);
             }
         }
     }
 
-    public void ReEnableRecoverStamina()
+    private void ConsumeStamina()
     {
-        StopConsumingStamina();
-        canRecoverStamina = true;
-    }
-    public void ConsumeStaminaOverTime()
-    {
-        if(HasStamina() && !isConsumingStamina && _blowerController.canUseLeafBlower)
+        if (_currentStamina > 0)
         {
-            StopRecoveringStamina();
+            ModifyStamina(-staminaConsumedOverTime, consumeRate);
+        }
+
+        if (_currentStamina <= 0)
+        {
+            DisableLeafBlower();
+            _blowerController.isHovering = false;
+            isConsumingStamina = false;
+            _recoveryTimer = 0f;
+        }
+    }
+    public void StartConsumingStamina()
+    {
+        if (isConsumingStamina || !_blowerController.canUseLeafBlower) return;
+
+        if (_currentStamina > 0)
+        {
             isConsumingStamina = true;
-            StartCoroutine(ConsumeStamina());
+            _recoveryTimer = 0f;
         }
     }
 
     public void StopConsumingStamina()
     {
         isConsumingStamina = false;
-        isRecoveringStamina = false;
-        StopCoroutine(ConsumeStamina());
     }
 
-    private void StopRecoveringStamina()
+    private void ModifyStamina(float value, float rate)
     {
-        isRecoveringStamina = false;
-        StopCoroutine(RecoverStamina());
+        _currentStamina += value * Time.deltaTime / rate;
+        _currentStamina = Mathf.Clamp(_currentStamina, 0, _blowerController.Stats.maxStamina.Value);
+        _blowerController.Hud.UpdateStaminaBar(_currentStamina, _blowerController.Stats.maxStamina.Value);
     }
 
-    public void RecoverStaminaOverTime()
+    public void EnableLeafBlower()
     {
-        if(!isRecoveringStamina)
-        {
-            isRecoveringStamina = true;
-            StartCoroutine(RecoverStamina());
-        }
-    }
-
-    public void EnableLeafBlower() => _blowerController.canUseLeafBlower = true;
-    public void DisableLeafBlower() => _blowerController.canUseLeafBlower = false;
-
-    private IEnumerator ConsumeStamina()
+        if (_blowerController.canUseLeafBlower) return;
+        _blowerController.canUseLeafBlower = true;
+    } 
+    public void DisableLeafBlower()
     {
-        while(HasStamina() && isConsumingStamina)
-        {
-            _currentStamina -= staminaConsumedOverTime;
-            _currentStamina = Mathf.Clamp(_currentStamina, 0, _blowerController.Stats.maxStamina.Value);
-            _blowerController.Hud.UpdateStaminaBar(_currentStamina, _blowerController.Stats.maxStamina.Value);
-            yield return new WaitForSeconds(consumeRate);
-        }
+        if (!_blowerController.canUseLeafBlower) return;
+        _blowerController.canUseLeafBlower = false;
+    } 
+    public bool HasStamina() => _currentStamina > 0;
 
-
-        if (_currentStamina <= 0)
-        {
-            isConsumingStamina = false;
-            DisableLeafBlower();
-            _blowerController.isHovering = false;
-            ReEnableRecoverStamina();
-        }
-    }
-
-    private IEnumerator RecoverStamina()
-    {
-        while (!isConsumingStamina && !HasMaxStamina())
-        {
-            _currentStamina += staminaRecoverOverTime;
-            _currentStamina = Mathf.Clamp(_currentStamina, 0, _blowerController.Stats.maxStamina.Value);
-            _blowerController.Hud.UpdateStaminaBar(_currentStamina, _blowerController.Stats.maxStamina.Value);
-            yield return new WaitForSeconds(recoveryRate);
-        }
-
-        if (HasMaxStamina())
-        {
-            _currentStamina = _blowerController.Stats.maxStamina.Value;
-        }
-        isRecoveringStamina = false;
-    }
 }

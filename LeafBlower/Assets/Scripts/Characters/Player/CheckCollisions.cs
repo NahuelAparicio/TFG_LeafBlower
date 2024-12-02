@@ -89,7 +89,6 @@ public class CheckCollisions : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, Vector3.down);
 
-        Vector3 low, middle, high;
 
         //if (_player.BlowerController.Aspirer.ObjectAttached)
         //{
@@ -126,7 +125,7 @@ public class CheckCollisions : MonoBehaviour
             if(!_player.Movement.isJumping)
             {                
                 _isGrounded = true;
-                _player.Movement.ResetDash();
+                _player.Movement.ResetMovements();
             }
         }
     }

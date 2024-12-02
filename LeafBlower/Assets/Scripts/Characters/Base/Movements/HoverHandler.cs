@@ -27,6 +27,9 @@ public class HoverHandler : MovementBehavior
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.95f, rb.velocity.z);
         }
     }
+
+    public override bool CanExecuteMovement() => true;
+    public override void ResetMovement() { }
 }
 
 #region HoverAllTheTime (Up & Down)

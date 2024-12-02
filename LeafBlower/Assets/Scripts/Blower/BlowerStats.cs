@@ -6,7 +6,7 @@ public class BlowerStats : MonoBehaviour
     public Stat maxStamina;
 
     [SerializeField] private Stat _blowForce;
-    public float BlowForce =>_blowForce.Value;
+    public float BlowForce => _blowForce.Value;
 
     [SerializeField] private Stat _aspireForce;
     public float AspireForce => _aspireForce.Value;

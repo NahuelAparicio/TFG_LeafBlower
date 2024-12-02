@@ -20,5 +20,4 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
 
-    public int maxDashes;
 }

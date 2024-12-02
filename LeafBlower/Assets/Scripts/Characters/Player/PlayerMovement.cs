@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isJumping = false;
     public bool isHovering = false;
-
     public bool isSprinting;
 
     private MovementStateHandler _stateHandler;
@@ -33,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
 
-    private int _currentDashes;
 
     private void Awake()
     {
@@ -144,8 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash() 
     {
-        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached || !CanDash()) return;
-        _currentDashes++;
+        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
     }
 
@@ -157,11 +154,11 @@ public class PlayerMovement : MonoBehaviour
         if(isHovering)
         {
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
-            _player.BlowerController.Handler.ConsumeStaminaOverTime();
+            _player.BlowerController.Handler.StartConsumingStamina();
         }
         else
         {
-            _player.BlowerController.Handler.ReEnableRecoverStamina();
+            _player.BlowerController.Handler.StopConsumingStamina();
         }
     }
 
@@ -238,14 +235,18 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;
     //private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
 
-       
+    // -- DIctionary approach maybe will be more performant ( I should rework this if its not performant enought)
     public void MakeMovement(Enums.Movements move, float force)
     {
         foreach (var movement in movements)
         {
             if(movement.type == move)
             {
-                movement.movement.ExecuteMovement(_player.Rigidbody, force);
+                if(movement.movement.CanExecuteMovement())
+                {
+                    movement.movement.ExecuteMovement(_player.Rigidbody, force);
+                    return;
+                }
             }
         }
     }
@@ -256,11 +257,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if (movement.type == move)
             {
-                movement.movement.ExecuteMovement(_player.Rigidbody, forceDir);
+                if(movement.movement.CanExecuteMovement())
+                {
+                    movement.movement.ExecuteMovement(_player.Rigidbody, forceDir);
+                    return;
+                }
             }
         }
     }
 
-    private bool CanDash() => _player.Stats.maxDashes > _currentDashes;
-    public void ResetDash() => _currentDashes = 0;
+    public void ResetMovements()
+    {
+        foreach (var movement in movements)
+        {
+            movement.movement.ResetMovement();
+        }
+    }
+
 }
