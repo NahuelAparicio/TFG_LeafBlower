@@ -57,12 +57,12 @@ public class CheckCollisions : MonoBehaviour
                 {
                     continue;
                 }
-                float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
-                if (slopeAngle < _maxSlopeAngle)
-                {
-                    // It's a ground hit, ignore for wall collision
-                    continue;
-                }
+                //float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
+                //if (slopeAngle < _maxSlopeAngle)
+                //{
+                //    // It's a ground hit, ignore for wall collision
+                //    continue;
+                //}
 
                 if (Vector3.Dot(hit.normal, _direction) < 0)
                 {
