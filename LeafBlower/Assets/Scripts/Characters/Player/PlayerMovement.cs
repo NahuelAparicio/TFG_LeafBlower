@@ -93,6 +93,9 @@ public class PlayerMovement : MonoBehaviour
         {
             isHovering = false;
             _player.BlowerController.isHovering = isHovering;
+
+            if(!_player.BlowerController.IsAspirating() && !_player.BlowerController.IsBlowing())
+                _player.BlowerController.Handler.StopConsumingStamina();
         }
     }
 

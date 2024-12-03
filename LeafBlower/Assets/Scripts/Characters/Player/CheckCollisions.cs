@@ -120,9 +120,9 @@ public class CheckCollisions : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Leaf"))
         {
-            if(!_player.Movement.isJumping)
+            if(!_player.Movement.isJumping && !_isGrounded)
             {                
                 _isGrounded = true;
                 _player.Movement.ResetMovements();
@@ -132,7 +132,7 @@ public class CheckCollisions : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Leaf"))
         {
             _isGrounded = false;
         }
