@@ -7,11 +7,14 @@ public class Object : MonoBehaviour
     public Sprite uiImage;
     public Enums.ObjectWeight weight;
 
+    protected Quaternion _originalRotation;
+
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _outline = GetComponent<Outline>();
         SetRibidBodyWeight();
+        _originalRotation = transform.rotation;
     }
 
     public virtual void EnableOutline() 
@@ -37,9 +40,6 @@ public class Object : MonoBehaviour
     {
         switch (weight)
         {
-            case Enums.ObjectWeight.None:
-                _rb.mass = 0.1f;
-                break;
             case Enums.ObjectWeight.Leaf:
                 _rb.mass = 0.25f;
                 break;

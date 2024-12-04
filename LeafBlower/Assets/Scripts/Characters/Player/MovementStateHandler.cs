@@ -4,9 +4,11 @@ using UnityEngine;
 // -- Handles Movement States and Lerps Between Speeds (to smooth transitions) on State Changes
 public class MovementStateHandler : MonoBehaviour
 {
-    private PlayerController _player;
 
     public float speedChangeFactor;
+    public float toZeroChangeFactor;
+
+    private PlayerController _player;
     private Enums.CharacterMoveState _moveState;
     private Enums.CharacterMoveState _lastState;
 
@@ -103,6 +105,7 @@ public class MovementStateHandler : MonoBehaviour
         }
 
         float boostFactor = speedChangeFactor;
+        if (_desiredVelocity == 0) boostFactor = toZeroChangeFactor;
 
         while (t < difference)
         {

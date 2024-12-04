@@ -87,11 +87,18 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Jump_performed(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.IsPaused) return;
+
         _player.Movement.Jump();
     }
 
     private void Hover_performed(InputAction.CallbackContext context)
     {
+        if(_player.Movement.isHovering)
+        {
+            _player.Movement.ToggleHover();
+            return;
+        }
         float _currentTime = Time.time;
 
         if (_currentTime - lastClickTimeR2 >= doubleClickThreshold)
