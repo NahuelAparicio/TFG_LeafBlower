@@ -26,6 +26,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
             if (distance > 0.1f)
             {
                 transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
+                transform.rotation = _originalRotation;
             }
         }
     }
@@ -51,6 +52,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
+        transform.rotation = _originalRotation;
         tag = "Untagged";
         transform.SetParent(pointToAttach);
         _rb.velocity = Vector3.zero;
