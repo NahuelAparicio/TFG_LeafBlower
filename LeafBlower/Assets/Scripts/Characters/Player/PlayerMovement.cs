@@ -98,12 +98,13 @@ public class PlayerMovement : MonoBehaviour
                 _player.BlowerController.Handler.StopConsumingStamina();
         }
     }
-
+    public float testingAngleRotation;
     private void HandleRotation(float speed)
     {
         Vector3 targetDirection = Vector3.zero;
-        targetDirection = GetDirectionNormalized();
-        //targetDirection = Camera.main.transform.forward;
+     
+       targetDirection = GetDirectionNormalized();
+
         targetDirection.y = 0;
         if (targetDirection != Vector3.zero)
         {

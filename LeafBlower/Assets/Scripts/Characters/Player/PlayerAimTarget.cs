@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerAimTarget : MonoBehaviour
@@ -10,6 +11,9 @@ public class PlayerAimTarget : MonoBehaviour
     private PlayerController _player;
     private Vector3 _initialPosition;
 
+    public CinemachineFreeLook cinemachine;
+    public bool moveFreeLook;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -18,10 +22,13 @@ public class PlayerAimTarget : MonoBehaviour
 
     void Update()
     {
-        MoveTarget();
+        if (moveFreeLook)
+            MoveTarget();
+        else
+            MoveTargetWithDirection();  
     }
 
-    private void MoveTarget()
+    private void MoveTargetWithDirection()
     {
         Vector2 aimDirection = _player.Inputs.GetAimMoveDirection();
         Vector3 newPos = targetToAim.localPosition;
@@ -36,5 +43,16 @@ public class PlayerAimTarget : MonoBehaviour
 
         targetToAim.localPosition = newPos;
     }
+
+    private void MoveTarget()
+    {
+        Vector3 newPos = targetToAim.localPosition;
+
+        newPos.y = Mathf.Lerp(movementRangeY.y, movementRangeY.x, cinemachine.m_YAxis.Value);
+        newPos.z = _initialPosition.z;
+
+        targetToAim.localPosition = newPos;
+    }
+
 
 }

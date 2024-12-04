@@ -4900,12 +4900,12 @@ PrefabInstance:
     - target: {fileID: 8592960414070553660, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.36126596
+      value: 0.36126593
       objectReference: {fileID: 0}
     - target: {fileID: 8592960414070553660, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.12622827
+      value: -0.12622826
       objectReference: {fileID: 0}
     - target: {fileID: 8598444183251510161, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
@@ -91419,12 +91419,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &1904512592 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3066625131557805557, guid: b1189ffffd68e3b46a1e5f786bf4156b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2662951631584360052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1905219760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96910,61 +96904,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &2033459614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2033459615}
-  - component: {fileID: 2033459616}
-  m_Layer: 0
-  m_Name: CollisionWeapon
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2033459615
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033459614}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1904512592}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2033459616
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033459614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.12
-  m_Height: 0.858464
-  m_Direction: 2
-  m_Center: {x: 2.8839306e-10, y: 0.0000000019721689, z: -0.005557629}
 --- !u!1 &2036341265 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 937d6c3721ff6934687db349f830b76c,
@@ -100606,6 +100545,11 @@ PrefabInstance:
       objectReference: {fileID: 1653077769}
     - target: {fileID: 6789903918058447097, guid: b1189ffffd68e3b46a1e5f786bf4156b,
         type: 3}
+      propertyPath: moveFreeLook
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789903918058447097, guid: b1189ffffd68e3b46a1e5f786bf4156b,
+        type: 3}
       propertyPath: movementSpeed
       value: 40
       objectReference: {fileID: 0}
@@ -100697,10 +100641,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3066625131557805557, guid: b1189ffffd68e3b46a1e5f786bf4156b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2033459615}
     - targetCorrespondingSourceObject: {fileID: 64678562011230500, guid: b1189ffffd68e3b46a1e5f786bf4156b,
         type: 3}
       insertIndex: -1

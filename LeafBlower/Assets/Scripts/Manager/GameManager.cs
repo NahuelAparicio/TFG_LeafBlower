@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        _isPaused = false;
     }
 
     public void LoadLevel(string levelName, GameObject _loaderCanvas, Image _progressBar)
@@ -83,7 +84,6 @@ public class GameManager : MonoBehaviour
                 break;
             case Enums.GameState.PauseMenu:
                 PauseMenu.Show();
-                PauseGameHandler();
                 break;
             case Enums.GameState.Exit:
                 Application.Quit();
@@ -94,7 +94,9 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGameHandler()
     {
+        Debug.Log("Before Pause: " + _isPaused);
         _isPaused = !_isPaused;
+        Debug.Log("After Pause: " + _isPaused);
         Time.timeScale = _isPaused ? 0 : 1;
     }
 }
