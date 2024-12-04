@@ -57,12 +57,12 @@ public class CheckCollisions : MonoBehaviour
                 {
                     continue;
                 }
-                float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
-                if (slopeAngle < _maxSlopeAngle)
-                {
-                    // It's a ground hit, ignore for wall collision
-                    continue;
-                }
+                //float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
+                //if (slopeAngle < _maxSlopeAngle)
+                //{
+                //    // It's a ground hit, ignore for wall collision
+                //    continue;
+                //}
 
                 if (Vector3.Dot(hit.normal, _direction) < 0)
                 {
@@ -89,7 +89,6 @@ public class CheckCollisions : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, Vector3.down);
 
-        Vector3 low, middle, high;
 
         //if (_player.BlowerController.Aspirer.ObjectAttached)
         //{
@@ -121,19 +120,19 @@ public class CheckCollisions : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Leaf"))
         {
-            if(!_player.Movement.isJumping)
+            if(!_player.Movement.isJumping && !_isGrounded)
             {                
                 _isGrounded = true;
-                _player.Movement.ResetDash();
+                _player.Movement.ResetMovements();
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Leaf"))
         {
             _isGrounded = false;
         }

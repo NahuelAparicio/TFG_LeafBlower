@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class AspirerForce : MonoBehaviour
+public class AspirerForce : BaseLeafBlower
 {
     #region Variables
-    private BlowerController _blower;
     private TrajectoryHandler _trajectory;
     private bool _isObjectAttached;
     private (Rigidbody, IShooteable) _attachedObject;
@@ -15,13 +14,13 @@ public class AspirerForce : MonoBehaviour
     public (Rigidbody, IShooteable) AttachedObject => _attachedObject;
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
-        _blower = transform.parent.GetComponent<BlowerController>();
+        base.Awake();
         _trajectory = GetComponent<TrajectoryHandler>();
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (!_isObjectAttached) return;
 
@@ -39,14 +38,8 @@ public class AspirerForce : MonoBehaviour
         _attachedObject.Item2.OnShoot(forceDir);
         DetachObject();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        var outlineable = other.GetComponent<IOutlineable>();
-        if (_blower.IsAspirating() || outlineable == null) return;
-        outlineable.EnableOutline();
-    }
 
-    private void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         var aspirable = other.GetComponent<IAspirable>();
 
@@ -56,10 +49,7 @@ public class AspirerForce : MonoBehaviour
 
         if (_blower.IsAspirating())
         {
-            if(_isObjectAttached)
-            {
-                return;
-            }
+            if(_isObjectAttached) return;
 
             //If true -> and attacheable true attach, and stop doing aspire force
             Vector3 pos = other.GetComponent<Collider>().ClosestPoint(_blower.FirePoint.position);
@@ -91,13 +81,6 @@ public class AspirerForce : MonoBehaviour
                 if (other.GetComponent<ShootableObject>().IsAttached)
                     DetachObject();
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        var outlineable = other.GetComponent<IOutlineable>();
-        if (_blower.IsAspirating() || outlineable == null) return;
-        outlineable.DisableOutline();
     }
 
     public void AttachObject(Rigidbody rb, Vector3 closestPoint, IShooteable shooteable)

@@ -3,6 +3,9 @@ using UnityEngine;
 public class NormalMovement : MovementBehavior
 {
     public float drag;
+
+    public override bool CanExecuteMovement() => true;    
+
     public override void ExecuteMovement(Rigidbody rb, float force)
     {
         // PlaceHolder
@@ -12,6 +15,8 @@ public class NormalMovement : MovementBehavior
     {
         SetRigidbodyDrag(rb);
     }
+
+    public override void ResetMovement() { }
 
     protected virtual void SetRigidbodyDrag(Rigidbody rb)
     {
