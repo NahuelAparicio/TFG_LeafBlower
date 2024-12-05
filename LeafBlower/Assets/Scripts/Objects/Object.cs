@@ -44,16 +44,16 @@ public class Object : MonoBehaviour
                 _rb.mass = 0.25f;
                 break;
             case Enums.ObjectWeight.Low:
-                _rb.mass = 2;
+                _rb.mass = (int)Enums.ObjectWeight.Low;
                 break;
             case Enums.ObjectWeight.Medium:
-                _rb.mass = 3;
+                _rb.mass = (int)Enums.ObjectWeight.Medium;
                 break;
             case Enums.ObjectWeight.Heavy:
-                _rb.mass = 4;
+                _rb.mass = (int)Enums.ObjectWeight.Heavy;
                 break;
             case Enums.ObjectWeight.SuperHeavy:
-                _rb.mass = 5;
+                _rb.mass = (int)Enums.ObjectWeight.SuperHeavy;
                 break;
             default:
                 break;
