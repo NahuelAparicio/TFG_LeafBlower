@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement:")]
     public float rotationSpeed = 15f;
     public float rotationAirSpeed = 6f;
+    public float extraAirSpeed;
 
     public bool isJumping = false;
     public bool isHovering = false;
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleAirBehavior()
     {
+        ClampSpeed(_moveSpeed + extraAirSpeed);
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
         HandleRotation(rotationSpeed);
 
