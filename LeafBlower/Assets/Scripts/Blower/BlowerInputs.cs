@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class BlowerInputs : MonoBehaviour
 {
@@ -30,8 +31,36 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
+        // Acción personalizada
         _blower.Handler.StartConsumingStamina();
+
+        // Referencia al objeto "Player Temporal"
+        GameObject playerTemporal = GameObject.Find("Player Temporal"); // Encuentra el objeto por su nombre
+
+        if (playerTemporal != null)
+        {
+            // Crea una instancia del evento de FMOD
+            FMOD.Studio.EventInstance engineEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Vehicles/Engine");
+
+            // Configura la posición del sonido en el objeto "Player Temporal"
+            engineEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(playerTemporal.transform.position));
+
+            // Establece el parámetro RPM en 2000
+            engineEvent.setParameterByName("EngineRPM", 2000);
+
+            // Inicia la reproducción del evento
+            engineEvent.start();
+
+            // Libera la instancia después de su uso
+            engineEvent.release();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'Player Temporal' en la escena.");
+        }
     }
+
+
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         if(!_blower.isHovering)
