@@ -65,11 +65,11 @@ public class DialogueController : MonoBehaviour
         }
         else if(_currentDialogue.Count > 1)
         {
-            if (_currentDialogue.Count - 1 > _indexDialogue)
+            if (_currentDialogue.Count - 1 >= _indexDialogue)
             {
-                _indexDialogue++;
                 _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
                 _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+                _indexDialogue++;
             }
             else
             {

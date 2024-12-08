@@ -5,7 +5,6 @@ public class PlayerInputs : MonoBehaviour
 {
     private PlayerController _player;
     private PlayerInputsActions _actions;
-    private float lastClickTimeL2 = 0f;
     private float lastClickTimeR2 = 0f;
     private float doubleClickThreshold = 0.3f;
 
@@ -26,29 +25,6 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Dash.performed += Dash_performed;
         _actions.Player.Hover.performed += Hover_performed;
         _actions.Player.Jump.performed += Jump_performed;
-
-
-        _actions.Player.HighPos.performed += PosA_performed;
-        _actions.Player.MiddlePos.performed += PosB_performed;
-        _actions.Player.DownPos.performed += PosC_performed;
-
-    }
-
-    private void PosC_performed(InputAction.CallbackContext obj)
-    {
-       // Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -7, Target.transform.localPosition.z);
-    }
-
-    private void PosB_performed(InputAction.CallbackContext obj)
-    {
-       // Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, -0.23f, Target.transform.localPosition.z);
-
-    }
-
-    private void PosA_performed(InputAction.CallbackContext obj)
-    {
-      //  Target.transform.localPosition = new Vector3(Target.transform.localPosition.x, 43, Target.transform.localPosition.z);
-
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
@@ -59,42 +35,44 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
+        if (!_player.CanMovePlayer()) return;
         _player.Movement.isSprinting = !_player.Movement.isSprinting;
     }
 
     private void Sprint_canceled(InputAction.CallbackContext context)
     {
-        //_player.Movement.isSprinting = false;
     }
 
     private void Move_performed(InputAction.CallbackContext context)
     {
-        if(!_player.isStuned)
-            _player.ChangeCharacterState(Enums.CharacterState.Moving);
+        if (!_player.CanMovePlayer()) return;
+
+        _player.ChangeCharacterState(Enums.CharacterState.Moving);
     }
     private void Move_canceled(InputAction.CallbackContext context)
     {
-        if (!_player.isStuned)
-        {
-            _player.Movement.DisableMovement();
-        }
+        if (!_player.CanMovePlayer()) return;
+
+        _player.Movement.DisableMovement();
     }
     private void Interact_performed(InputAction.CallbackContext context)
     {
         if (!_player.Interactable.canInteract && _player.IsTalking) return;
-
+        
         _player.Interactable.InteractPerformed();
     }
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.IsPaused) return;
+        if (!_player.CanMovePlayer()) return;
 
         _player.Movement.Jump();
     }
 
     private void Hover_performed(InputAction.CallbackContext context)
     {
-        if(_player.Movement.isHovering)
+        if (!_player.CanMovePlayer()) return;
+
+        if (_player.Movement.isHovering)
         {
             _player.Movement.ToggleHover();
             return;
@@ -115,19 +93,8 @@ public class PlayerInputs : MonoBehaviour
 
     private void Dash_performed(InputAction.CallbackContext context)
     {
+        if (!_player.CanMovePlayer()) return;
         _player.Movement.Dash();
-        //float _currentTime = Time.time;
-
-        //if (_currentTime - lastClickTimeL2 >= doubleClickThreshold)
-        //{
-        //    lastClickTimeL2 = _currentTime;
-        //}
-        //else
-        //{
-            
-
-        //    lastClickTimeL2 = _currentTime;
-        //}
     }
 
     private void Pause_performed(InputAction.CallbackContext context) 

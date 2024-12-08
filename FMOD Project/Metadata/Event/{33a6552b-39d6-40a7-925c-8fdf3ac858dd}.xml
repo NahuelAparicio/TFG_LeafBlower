@@ -55,10 +55,14 @@
 			<destination>{17f96e15-0fa9-49c5-819e-8ee5a204ff3b}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{0ea6fb9d-5677-4540-b74c-edf60b326746}</destination>
+			<destination>{7262de60-1b00-4995-badc-d184577463f1}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{20001eca-e9db-4f00-b87c-a93e6b64b2de}" />
+	<object class="EventAutomatableProperties" id="{20001eca-e9db-4f00-b87c-a93e6b64b2de}">
+		<property name="maximumDistance">
+			<value>1000</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{b07a4d4b-92cf-4d84-9fab-c158df02bc9b}" />
 	<object class="GroupTrack" id="{43ca3360-d8ba-430e-aab1-11af3d054718}">
 		<relationship name="modules">
@@ -136,7 +140,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{b040fc33-b80e-4052-b913-b21c9aababc4}">
 		<property name="volume">
-			<value>3.5</value>
+			<value>-18</value>
 		</property>
 		<property name="name">
 			<value>Grass</value>
@@ -176,7 +180,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{7e474358-0135-436a-a279-c082d8693cd9}">
 		<property name="volume">
-			<value>-21.5</value>
+			<value>-42</value>
 		</property>
 		<property name="name">
 			<value>Step</value>
@@ -219,7 +223,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{b6ddbcbb-c433-448c-90a8-9491a1981f9f}">
 		<property name="volume">
-			<value>-10</value>
+			<value>-29.5</value>
 		</property>
 		<property name="name">
 			<value>Dirt</value>
@@ -238,6 +242,7 @@
 		<relationship name="effects">
 			<destination>{5d13b216-425d-45c6-8aee-5c8b662795d2}</destination>
 			<destination>{72aba713-c09d-4b72-9938-3a37cb323730}</destination>
+			<destination>{cf2d9a9d-5990-42a9-8689-b8f07423c2d1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{53aa031b-6e13-4bcc-b8c5-c821779f1802}" />
@@ -478,6 +483,14 @@
 	<object class="MixerBusPanner" id="{90debb0c-679a-4be9-8f49-989ef3365213}" />
 	<object class="MixerBusFader" id="{5d13b216-425d-45c6-8aee-5c8b662795d2}" />
 	<object class="SpatialiserEffect" id="{72aba713-c09d-4b72-9938-3a37cb323730}" />
+	<object class="ThreeEQEffect" id="{cf2d9a9d-5990-42a9-8689-b8f07423c2d1}">
+		<property name="lowGain">
+			<value>-9.5</value>
+		</property>
+		<property name="highGain">
+			<value>-9</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{8706f793-856f-40a7-a003-44d855169910}">
 		<property name="position">
 			<value>0</value>

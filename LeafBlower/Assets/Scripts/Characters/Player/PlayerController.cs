@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
         _currentCharacterState = newState;
     }
 
+    public bool CanMovePlayer() => !IsTalking && !isStuned && !GameManager.Instance.IsPaused;
+
     private void OnDialogueStarted() => _isTalking = true;
     private void OnDialogueEnded() => _isTalking = false;
 

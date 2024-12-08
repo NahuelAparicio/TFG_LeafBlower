@@ -54,7 +54,10 @@ public class PlayerInteractable : MonoBehaviour
     // On Interact Button Performed checks interaction posibilities and intercts if it's possible
     public void InteractPerformed()
     {
-        foreach(var interactable in _touchingInteractables)
+
+        List<GameObject> interactablesCopy = new List<GameObject>(_touchingInteractables);
+
+        foreach (var interactable in interactablesCopy)
         {
             if(interactable != null)
             {
