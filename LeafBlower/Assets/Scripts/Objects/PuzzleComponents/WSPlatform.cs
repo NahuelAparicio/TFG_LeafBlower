@@ -14,7 +14,7 @@ public class WSPlatform : MonoBehaviour
             if (obj.weight != Enums.ObjectWeight.Leaf)
             {
                 UpdateWeight((int)obj.weight);
-                other.transform.SetParent(gameObject.transform);
+            //    other.transform.SetParent(gameObject.transform);
             }
         }
     }
@@ -27,7 +27,7 @@ public class WSPlatform : MonoBehaviour
             if (obj.weight != Enums.ObjectWeight.Leaf)
             {
                 UpdateWeight(-(int)obj.weight);
-                other.transform.SetParent(null);
+            //    other.transform.SetParent(null);
             }
         }
     }
