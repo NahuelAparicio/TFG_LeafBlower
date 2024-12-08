@@ -7,7 +7,9 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 
     public float timeToEnableAspirating = 0.5f;
     private bool _hasBeenShoot = false;
-    float distanceBetweenParentAndObject;
+    private float distanceBetweenParentAndObject;
+
+    public Quaternion currentRotation;
 
     protected override void Awake()
     {
@@ -26,7 +28,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
             if (distance > 0.1f)
             {
                 transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
-                transform.rotation = _originalRotation;
+                transform.rotation = currentRotation;
             }
         }
     }
@@ -52,6 +54,7 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
 
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
+        currentRotation = _originalRotation;
         transform.rotation = _originalRotation;
         tag = "Untagged";
         transform.SetParent(pointToAttach);
@@ -60,7 +63,6 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
         distanceBetweenParentAndObject = Vector3.Distance(transform.position, transform.parent.position);
         _rb.useGravity = false;
         _rb.constraints = RigidbodyConstraints.FreezeRotation;
-
         _isAttached = true;
     }
     public void Detach()
@@ -69,10 +71,17 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
         tag = "IsWall";
         _rb.constraints = RigidbodyConstraints.None;
         _rb.useGravity = true;
-
         transform.SetParent(null);
         _isAttached = false;
     }
 
     private void ResetAspiratable() => _hasBeenShoot = false;
+
+    public void OnRotate(Vector3 axis)
+    {
+        transform.RotateAround(transform.parent.position, axis, 90);
+        currentRotation = transform.rotation;
+    }
+    //currentRotation *= Quaternion.AngleAxis(90, axis); // 90 degrees around the given axis
+    //transform.rotation = currentRotation;
 }

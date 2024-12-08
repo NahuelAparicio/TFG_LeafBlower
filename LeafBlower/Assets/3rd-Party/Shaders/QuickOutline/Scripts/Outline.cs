@@ -79,7 +79,7 @@ public class Outline : MonoBehaviour {
   private Material outlineFillMaterial;
 
   private bool needsUpdate;
-
+    public bool enableOnStart;
   void Awake() {
 
     // Cache renderers
@@ -97,7 +97,10 @@ public class Outline : MonoBehaviour {
 
     // Apply material properties immediately
     needsUpdate = true;
+    if(!enableOnStart)
         enabled = false;
+    else
+       enabled = true;
   }
 
   void OnEnable() {

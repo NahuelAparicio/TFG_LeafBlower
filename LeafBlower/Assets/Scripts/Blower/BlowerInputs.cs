@@ -16,7 +16,15 @@ public class BlowerInputs : MonoBehaviour
         _actions.Blower.Aspire.performed += Aspire_performed;
         _actions.Blower.Aspire.canceled += Aspire_canceled;
         _actions.Blower.SaveObject.performed += SaveObject_performed;
+        _actions.Blower.RotateObject.performed += RotateObject_performed;
     }
+
+    private void RotateObject_performed(InputAction.CallbackContext obj)
+    {
+        if(_blower.Aspirer.IsObjectAttached)
+            _blower.Aspirer.AttachedObject.Item2.OnRotate(_blower.FirePoint.forward);
+    }
+
     public bool IsBlowingInputPressed() => _actions.Blower.Blow.IsPressed();
     public bool IsAspiringInputPressed() => _actions.Blower.Aspire.IsPressed();
 

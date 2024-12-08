@@ -53,6 +53,15 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""042a7c09-767b-4d04-9551-6ddded012b60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -121,6 +130,17 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                     ""action"": ""SaveObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c8ec46d-af21-47a8-8d94-481bf5f783d4"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""RotateObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +175,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
         m_Blower_Blow = m_Blower.FindAction("Blow", throwIfNotFound: true);
         m_Blower_Aspire = m_Blower.FindAction("Aspire", throwIfNotFound: true);
         m_Blower_SaveObject = m_Blower.FindAction("SaveObject", throwIfNotFound: true);
+        m_Blower_RotateObject = m_Blower.FindAction("RotateObject", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -219,6 +240,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Blower_Blow;
     private readonly InputAction m_Blower_Aspire;
     private readonly InputAction m_Blower_SaveObject;
+    private readonly InputAction m_Blower_RotateObject;
     public struct BlowerActions
     {
         private @BlowerInputsActions m_Wrapper;
@@ -226,6 +248,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
         public InputAction @Blow => m_Wrapper.m_Blower_Blow;
         public InputAction @Aspire => m_Wrapper.m_Blower_Aspire;
         public InputAction @SaveObject => m_Wrapper.m_Blower_SaveObject;
+        public InputAction @RotateObject => m_Wrapper.m_Blower_RotateObject;
         public InputActionMap Get() { return m_Wrapper.m_Blower; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -244,6 +267,9 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
             @SaveObject.started += instance.OnSaveObject;
             @SaveObject.performed += instance.OnSaveObject;
             @SaveObject.canceled += instance.OnSaveObject;
+            @RotateObject.started += instance.OnRotateObject;
+            @RotateObject.performed += instance.OnRotateObject;
+            @RotateObject.canceled += instance.OnRotateObject;
         }
 
         private void UnregisterCallbacks(IBlowerActions instance)
@@ -257,6 +283,9 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
             @SaveObject.started -= instance.OnSaveObject;
             @SaveObject.performed -= instance.OnSaveObject;
             @SaveObject.canceled -= instance.OnSaveObject;
+            @RotateObject.started -= instance.OnRotateObject;
+            @RotateObject.performed -= instance.OnRotateObject;
+            @RotateObject.canceled -= instance.OnRotateObject;
         }
 
         public void RemoveCallbacks(IBlowerActions instance)
@@ -297,5 +326,6 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
         void OnBlow(InputAction.CallbackContext context);
         void OnAspire(InputAction.CallbackContext context);
         void OnSaveObject(InputAction.CallbackContext context);
+        void OnRotateObject(InputAction.CallbackContext context);
     }
 }

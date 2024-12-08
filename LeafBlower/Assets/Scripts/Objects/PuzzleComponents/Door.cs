@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class Door : IActivable
 {
-
     public Transform doorLeft, doorRight;
     public float rotationSpeed;
 
     public override void DoAction()
     {
         StopAllCoroutines();
-        StartCoroutine(OpenDoors());
+        StartCoroutine(MoveDoors(Quaternion.Euler(0, -90, 0), Quaternion.Euler(0, 90, 0)));
 
     }
 
@@ -18,17 +17,14 @@ public class Door : IActivable
     {
         //Close Door
         StopAllCoroutines();
-        StartCoroutine(CloseDoors());
+        StartCoroutine(MoveDoors(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 0)));
     }
 
-    private IEnumerator OpenDoors()
+    private IEnumerator MoveDoors(Quaternion targetedLeft, Quaternion targetedRight)
     {
 
-        // Get the initial and target rotations
         Quaternion initialRotationLeft = doorLeft.localRotation;
         Quaternion initialRotationRight = doorRight.localRotation;
-        Quaternion targetRotationLeft = Quaternion.Euler(0, -90, 0);  // Target rotation for left door
-        Quaternion targetRotationRight = Quaternion.Euler(0, 90, 0);  // Target rotation for right door
 
         float t = 0f;
 
@@ -36,34 +32,10 @@ public class Door : IActivable
         {
             t += Time.deltaTime * rotationSpeed;
 
-            // Smoothly interpolate from initial to target rotations
-            doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetRotationLeft, t);
-            doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetRotationRight, t);
+            doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetedLeft, t);
+            doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetedRight, t);
 
-            yield return null; // Wait until the next frame
-        }
-
-    }
-
-    private IEnumerator CloseDoors()
-    {
-
-        Quaternion initialRotationLeft = doorLeft.localRotation;
-        Quaternion initialRotationRight = doorRight.localRotation;
-        Quaternion targetRotationLeft = Quaternion.Euler(0, 0, 0);  
-        Quaternion targetRotationRight = Quaternion.Euler(0, 0, 0);  
-
-        float t = 0f;
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime * rotationSpeed;
-
-            // Smoothly interpolate from initial to target rotations
-            doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetRotationLeft, t);
-            doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetRotationRight, t);
-
-            yield return null; // Wait until the next frame
+            yield return null; 
         }
 
     }

@@ -64,33 +64,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DownPos"",
-                    ""type"": ""Button"",
-                    ""id"": ""133f206f-8935-41c8-9695-6b56ab77d2f3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MiddlePos"",
-                    ""type"": ""Button"",
-                    ""id"": ""23f0318f-6aac-404c-a0f0-1e9331d2eea0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""HighPos"",
-                    ""type"": ""Button"",
-                    ""id"": ""6fc9a806-65cc-4e86-b232-8ce7aa3f3b92"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""9efc3e55-a61e-4edc-9729-a596808dcb51"",
@@ -262,39 +235,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""502c067e-b5a3-48f1-8997-415e1dc9c77a"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""HighPos"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5974ee09-4274-4a80-8e90-c6649e049ef2"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""MiddlePos"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6dcaebef-bc9b-40ce-b2fe-f9e5d6ef5ecc"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPos"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""80f9178b-fd3e-41dd-a366-c11c0d8b46b9"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
@@ -458,9 +398,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_DownPos = m_Player.FindAction("DownPos", throwIfNotFound: true);
-        m_Player_MiddlePos = m_Player.FindAction("MiddlePos", throwIfNotFound: true);
-        m_Player_HighPos = m_Player.FindAction("HighPos", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Hover = m_Player.FindAction("Hover", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
@@ -537,9 +474,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_DownPos;
-    private readonly InputAction m_Player_MiddlePos;
-    private readonly InputAction m_Player_HighPos;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Hover;
     private readonly InputAction m_Player_Pause;
@@ -552,9 +486,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @DownPos => m_Wrapper.m_Player_DownPos;
-        public InputAction @MiddlePos => m_Wrapper.m_Player_MiddlePos;
-        public InputAction @HighPos => m_Wrapper.m_Player_HighPos;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Hover => m_Wrapper.m_Player_Hover;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
@@ -580,15 +511,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @DownPos.started += instance.OnDownPos;
-            @DownPos.performed += instance.OnDownPos;
-            @DownPos.canceled += instance.OnDownPos;
-            @MiddlePos.started += instance.OnMiddlePos;
-            @MiddlePos.performed += instance.OnMiddlePos;
-            @MiddlePos.canceled += instance.OnMiddlePos;
-            @HighPos.started += instance.OnHighPos;
-            @HighPos.performed += instance.OnHighPos;
-            @HighPos.canceled += instance.OnHighPos;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -617,15 +539,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @DownPos.started -= instance.OnDownPos;
-            @DownPos.performed -= instance.OnDownPos;
-            @DownPos.canceled -= instance.OnDownPos;
-            @MiddlePos.started -= instance.OnMiddlePos;
-            @MiddlePos.performed -= instance.OnMiddlePos;
-            @MiddlePos.canceled -= instance.OnMiddlePos;
-            @HighPos.started -= instance.OnHighPos;
-            @HighPos.performed -= instance.OnHighPos;
-            @HighPos.canceled -= instance.OnHighPos;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -779,9 +692,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnDownPos(InputAction.CallbackContext context);
-        void OnMiddlePos(InputAction.CallbackContext context);
-        void OnHighPos(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnHover(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
