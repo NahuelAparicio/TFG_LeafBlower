@@ -76,10 +76,12 @@ public class GameManager : MonoBehaviour
         switch (_state)
         {
             case Enums.GameState.Menu:
+                MusicManager.Instance.PlayMenuMusic();
                 //MainMenu.Show();
                 //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
+                MusicManager.Instance.PlayExplorationMusic();
                 //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
@@ -94,9 +96,7 @@ public class GameManager : MonoBehaviour
     }
     public void PauseGameHandler()
     {
-        Debug.Log("Before Pause: " + _isPaused);
         _isPaused = !_isPaused;
-        Debug.Log("After Pause: " + _isPaused);
         Time.timeScale = _isPaused ? 0 : 1;
     }
 }

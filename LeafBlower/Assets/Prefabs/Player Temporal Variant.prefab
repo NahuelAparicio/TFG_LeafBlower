@@ -1207,7 +1207,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5994067538010053906}
   - component: {fileID: 7281831560189222985}
-  - component: {fileID: 715591779602588748}
   m_Layer: 0
   m_Name: Listener
   m_TagString: Untagged
@@ -1243,37 +1242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 8722587270949583272}
---- !u!114 &715591779602588748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8722587270949583272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1813386645
-      Data2: 1074103180
-      Data3: -1209423968
-      Data4: -1324479688
-    Path: event:/Music/FAVELA ALEGRE BIEN
-  Event: 
-  PlayEvent: 1
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 1000
 --- !u!1 &9160982284424684062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,7 +1837,12 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:Head'\n\tTransform
+        'mixamorig:RightHand'\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:RightShoulder'\n\tTransform
+        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:Spine'\n\tTransform
+        'mixamorig:RightArm'\n\tTransform 'mixamorig:Head'\n\tand more ..."
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2170,7 +2143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.1771983, g: 0.18309595, b: 0.20754719, a: 1}
-  outlineWidth: 2
+  outlineWidth: 1.6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -2323,7 +2296,8 @@ MonoBehaviour:
   isJumping: 0
   isHovering: 0
   isSprinting: 0
-  testingAngleRotation: 0
+  isDashing: 0
+  timeToDisableDash: 0.25
 --- !u!114 &1589580805953879826
 MonoBehaviour:
   m_ObjectHideFlags: 0

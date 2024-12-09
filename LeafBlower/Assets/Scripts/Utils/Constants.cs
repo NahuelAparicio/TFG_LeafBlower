@@ -8,4 +8,8 @@ public class Constants
     public const string ANIM_RIGHT_FOOT = "RightFoot";
 
     public const string DIALOGUE_ICONS_PATH = "DialogueIcons";
+
+    public const string MUSIC_EXPLORATION = "event:/Music/Exploration";
+    public const string MUSIC_MENU = "event:/Music/Menu event";
+    public const string MUSIC_DIALOGS = "event:/Dialogs/Diálogos";
 }
