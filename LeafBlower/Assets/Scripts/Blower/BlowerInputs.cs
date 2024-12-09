@@ -33,7 +33,6 @@ public class BlowerInputs : MonoBehaviour
     {
         //_blower.Handler.StartConsumingStamina();
         _blower.blowVFX.SetActive(true);
-
         _blower.Player.Sounds.PlayEngineSound();
     }
 

@@ -11,5 +11,5 @@ public class Constants
 
     public const string MUSIC_EXPLORATION = "event:/Music/Exploration";
     public const string MUSIC_MENU = "event:/Music/Menu event";
-    public const string MUSIC_DIALOGS = "event:/Dialogs/Diálogos";
+    public const string MUSIC_DIALOGS = "event:/Music/Dialogs/Diálogos";
 }
