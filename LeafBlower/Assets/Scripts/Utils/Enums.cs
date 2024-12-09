@@ -2,7 +2,7 @@ public class Enums
 {
     #region States
     public enum GameState { Menu, Playing, PauseMenu, Exit }
-    public enum CharacterState { Idle, Moving, Interacting }
+    public enum CharacterState { Idle, Moving, Interacting, Talking }
     public enum CharacterMoveState { None, Walking, Running, Air }
     public enum QuestState { Locked, Unlocked, InProgress, Completed, Canceled }
     #endregion

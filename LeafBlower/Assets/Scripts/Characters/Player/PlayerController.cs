@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
         {
             _animations.HandleMovingAnimations();
         }
+        else if(CurrentCharacterState == Enums.CharacterState.Talking)
+        {
+            _animations.HandleTalkingAnimation();
+        }
     }
     private void FixedUpdate()
     {
@@ -90,8 +94,16 @@ public class PlayerController : MonoBehaviour
 
     public bool CanMovePlayer() => !IsTalking && !isStuned && !GameManager.Instance.IsPaused;
 
-    private void OnDialogueStarted() => _isTalking = true;
-    private void OnDialogueEnded() => _isTalking = false;
+    private void OnDialogueStarted()
+    {
+        _isTalking = true;
+        ChangeCharacterState(Enums.CharacterState.Talking);
+    } 
+    private void OnDialogueEnded()
+    {
+        ChangeCharacterState(Enums.CharacterState.Idle);
+        _isTalking = false;
+    } 
 
     private void OnDestroy()
     {
