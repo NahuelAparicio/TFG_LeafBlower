@@ -76,6 +76,61 @@ MonoBehaviour:
     text: tu te hago un trabajillo que necesito unas jordans
   - character: 0
     text: jordans fortnite eh yo flipo macho
+--- !u!1 &2974667574130044111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4915436678371385343}
+  - component: {fileID: 2769781780628247640}
+  m_Layer: 3
+  m_Name: Collision
+  m_TagString: IsWall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4915436678371385343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974667574130044111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2409330427472245685}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2769781780628247640
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974667574130044111}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2642188
+  m_Height: 1.6398752
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.72957194, z: 0.023390293}
 --- !u!1 &5531396223183367063
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabMainCameraOnStart: 1
   NestObject: 0
-  OffsetDirection: {x: 0, y: 0, z: -1}
+  OffsetDirection: {x: 1, y: 0, z: 0}
   Up: {x: 0, y: 1, z: 0}
 --- !u!1 &7014022237989900631
 GameObject:
@@ -230,8 +285,9 @@ Transform:
   - {fileID: 5575028773935361197}
   - {fileID: 7050400034671497858}
   - {fileID: 4895763118470123134}
+  - {fileID: 4915436678371385343}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3250559823361141988
 MonoBehaviour:

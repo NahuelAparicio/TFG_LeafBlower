@@ -38,10 +38,11 @@ public class Object : MonoBehaviour
 
     private void SetRibidBodyWeight()
     {
+        if (_rb == null) return;
         switch (weight)
         {
             case Enums.ObjectWeight.Leaf:
-                _rb.mass = 0.25f;
+                _rb.mass = 1;
                 break;
             case Enums.ObjectWeight.Low:
                 _rb.mass = (int)Enums.ObjectWeight.Low;
