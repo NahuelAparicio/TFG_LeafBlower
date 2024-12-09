@@ -151,7 +151,6 @@ public class PlayerMovement : MonoBehaviour
     public void Dash() 
     {
         if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
-        _player.BlowerController.Handler.ConsumeValueStamina(15);
         isDashing = true;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
         Invoke(nameof(DisableDashing), timeToDisableDash);
@@ -170,6 +169,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _player.BlowerController.Handler.StopConsumingStamina();
+            _player.BlowerController.aspirarVFX.SetActive(false);
+            _player.BlowerController.blowVFX.SetActive(false);
+            _player.Sounds.StopEngineSound();
         }
     }
 
@@ -256,6 +258,8 @@ public class PlayerMovement : MonoBehaviour
                 if(movement.movement.CanExecuteMovement())
                 {
                     movement.movement.ExecuteMovement(_player.Rigidbody, force);
+                    if (movement.type == Enums.Movements.Dash)
+                        _player.BlowerController.Handler.ConsumeValueStamina(15);
                     return;
                 }
             }

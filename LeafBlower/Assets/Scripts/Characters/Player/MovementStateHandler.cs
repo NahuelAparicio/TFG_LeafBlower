@@ -79,7 +79,7 @@ public class MovementStateHandler : MonoBehaviour
                 {
                     _desiredVelocity = _player.Stats.RunSpeed;
                 }
-                else if(_lastState == Enums.CharacterMoveState.None)
+                else
                 {
                     _desiredVelocity = _player.Stats.WalkSpeed;
                 }
