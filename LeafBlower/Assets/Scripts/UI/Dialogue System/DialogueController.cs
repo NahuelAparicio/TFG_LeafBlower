@@ -30,6 +30,7 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(List<DialogueEntry> messages, Enums.DialogueTypingType t)
     {
+        MusicManager.Instance.PlayDialogs();
         _typeHandler.SetTypingType(t);
         _currentDialogue.AddRange(messages);
         _dialogueHolder.SetActive(true);
@@ -41,6 +42,7 @@ public class DialogueController : MonoBehaviour
     // Temporal, Fade/Effect should be added to image and text (?)
     private void HideDialogueBox()
     {
+        MusicManager.Instance.PlayExplorationMusic();
         _currentDialogue.Clear();
         _typeHandler.ResetTypingType();
         _typeHandler.ResetText();
