@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
     public void Dash() 
     {
         if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
+        _player.BlowerController.Handler.ConsumeValueStamina(15);
         isDashing = true;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
         Invoke(nameof(DisableDashing), timeToDisableDash);

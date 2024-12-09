@@ -53,7 +53,13 @@ public class StaminaHandler : MonoBehaviour
             }
         }
     }
+    public void ConsumeValueStamina(float value)
+    {
+        _currentStamina -= value;
+        _blowerController.Hud.UpdateStaminaBar(_currentStamina, _blowerController.Stats.maxStamina.Value);
+        _recoveryTimer = 0f;
 
+    }
     private void ConsumeStamina()
     {
         if (_currentStamina > 0)
