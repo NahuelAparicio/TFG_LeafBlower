@@ -14,6 +14,7 @@ public class BlowerController : MonoBehaviour
 
     public bool canUseLeafBlower;
     public bool isHovering;
+    public GameObject aspirarVFX, blowVFX; //TEMPORAL
 
     #endregion
     #region Properties
@@ -34,6 +35,8 @@ public class BlowerController : MonoBehaviour
         _stats = GetComponent<BlowerStats>();
         _hud = GetComponent<BlowerHUD>();
         isHovering = false;
+        aspirarVFX.SetActive(false);
+        blowVFX.SetActive(false);
     }
 
     // Returns if Blow function is being used, while check if can be used

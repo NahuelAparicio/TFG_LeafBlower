@@ -31,50 +31,41 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
-        // Acción personalizada
-        _blower.Handler.StartConsumingStamina();
+        //_blower.Handler.StartConsumingStamina();
+        _blower.blowVFX.SetActive(true);
 
-        // Referencia al objeto "Player Temporal"
-        GameObject playerTemporal = GameObject.Find("Player Temporal"); // Encuentra el objeto por su nombre
+        FMOD.Studio.EventInstance engineEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Vehicles/Engine");
 
-        if (playerTemporal != null)
-        {
-            // Crea una instancia del evento de FMOD
-            FMOD.Studio.EventInstance engineEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Vehicles/Engine");
+        engineEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(_blower.Player.transform.position));
+        engineEvent.setParameterByName("EngineRPM", 2000);
+        engineEvent.start();
 
-            // Configura la posición del sonido en el objeto "Player Temporal"
-            engineEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(playerTemporal.transform.position));
-
-            // Establece el parámetro RPM en 2000
-            engineEvent.setParameterByName("EngineRPM", 2000);
-
-            // Inicia la reproducción del evento
-            engineEvent.start();
-
-            // Libera la instancia después de su uso
-            engineEvent.release();
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el objeto 'Player Temporal' en la escena.");
-        }
+        engineEvent.release();
     }
 
 
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         if(!_blower.isHovering)
+        {
             _blower.Handler.StopConsumingStamina();
+            _blower.blowVFX.SetActive(false);
+        }
     }
 
     private void Aspire_performed(InputAction.CallbackContext context)
     {
-        _blower.Handler.StartConsumingStamina();
+        //_blower.Handler.StartConsumingStamina();
+        _blower.aspirarVFX.SetActive(true);
+
+
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
         _blower.Handler.StopConsumingStamina();
+        _blower.aspirarVFX.SetActive(false);
+
     }
 
 
