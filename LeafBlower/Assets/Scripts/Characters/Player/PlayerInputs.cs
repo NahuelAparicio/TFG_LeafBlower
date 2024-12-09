@@ -31,7 +31,7 @@ public class PlayerInputs : MonoBehaviour
 
     public Vector2 GetAimMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse (?)
 
-    public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.125f;
+    public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.05f;
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {

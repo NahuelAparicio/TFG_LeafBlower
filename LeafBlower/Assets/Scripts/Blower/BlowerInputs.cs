@@ -34,13 +34,7 @@ public class BlowerInputs : MonoBehaviour
         //_blower.Handler.StartConsumingStamina();
         _blower.blowVFX.SetActive(true);
 
-        FMOD.Studio.EventInstance engineEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Vehicles/Engine");
-
-        engineEvent.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(_blower.Player.transform.position));
-        engineEvent.setParameterByName("EngineRPM", 2000);
-        engineEvent.start();
-
-        engineEvent.release();
+        _blower.Player.Sounds.PlayEngineSound();
     }
 
 
@@ -50,6 +44,7 @@ public class BlowerInputs : MonoBehaviour
         {
             _blower.Handler.StopConsumingStamina();
             _blower.blowVFX.SetActive(false);
+            _blower.Player.Sounds.StopEngineSound();
         }
     }
 
@@ -57,14 +52,14 @@ public class BlowerInputs : MonoBehaviour
     {
         //_blower.Handler.StartConsumingStamina();
         _blower.aspirarVFX.SetActive(true);
-
-
+        _blower.Player.Sounds.PlayEngineSound();
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
         _blower.Handler.StopConsumingStamina();
         _blower.aspirarVFX.SetActive(false);
+        _blower.Player.Sounds.StopEngineSound();
 
     }
 
