@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class WeightedButton : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class WeightedButton : MonoBehaviour
     public GameObject pressObject;
     private Vector3 pressedPos;
 
+    private List<Object> objects = new List<Object>();
+
     private void Awake()
     {
         _isActive = false;
@@ -20,21 +23,77 @@ public class WeightedButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Object obj = other.GetComponent<Object>();
-        if(obj)
+        var obj = other.GetComponent<Object>();
+        if (obj == null) return;
+        if (obj.weight != Enums.ObjectWeight.Leaf)
         {
-            if(obj.weight != Enums.ObjectWeight.Leaf)
+            var shootableObject = obj.GetComponent<ShootableObject>();
+            if (shootableObject != null)
+            {
+                if (!shootableObject.IsAttached)
+                {
+                    UpdateWeight((int)obj.weight);
+                    if (!objects.Contains(obj))
+                        objects.Add(obj);
+                }
+            }
+            else
+            {
                 UpdateWeight((int)obj.weight);
+                if (!objects.Contains(obj))
+                    objects.Add(obj);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        var obj = other.GetComponent<Object>();
+        if (obj == null) return;
+        if(!objects.Contains(obj))
+        {
+            if(obj.GetComponent<ShootableObject>())
+            {
+                var shootableObject = obj.GetComponent<ShootableObject>();
+                if (!shootableObject.IsAttached)
+                {
+                    UpdateWeight((int)obj.weight);
+                    if (!objects.Contains(obj))
+                        objects.Add(obj);
+                }
+            }
+            else
+            {
+                UpdateWeight((int)obj.weight);
+                if (!objects.Contains(obj))
+                    objects.Add(obj);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Object obj = other.GetComponent<Object>();
-        if (obj)
+        var obj = other.GetComponent<Object>();
+        if(obj == null) return;
+
+        if (obj.weight != Enums.ObjectWeight.Leaf)
         {
-            if (obj.weight != Enums.ObjectWeight.Leaf)
+            var shootableObject = obj.GetComponent<ShootableObject>();
+            if (shootableObject != null)
+            {
+                if (!shootableObject.IsAttached)
+                {
+                    UpdateWeight(-(int)obj.weight);
+                    if (objects.Contains(obj))
+                        objects.Remove(obj);
+                }
+            }
+            else
+            {
                 UpdateWeight(-(int)obj.weight);
+                if (objects.Contains(obj))
+                    objects.Remove(obj);
+            }
         }
     }
 

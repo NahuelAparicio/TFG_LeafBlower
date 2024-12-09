@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
-
+    public bool isDashing = false;
+    public float timeToDisableDash;
 
     private void Awake()
     {
@@ -58,7 +59,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleAirBehavior()
     {
-        ClampSpeed(_moveSpeed + extraAirSpeed);
+        if(!isDashing)
+            ClampSpeed(_moveSpeed + extraAirSpeed);
+
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
         HandleRotation(rotationSpeed);
 
@@ -100,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
                 _player.BlowerController.Handler.StopConsumingStamina();
         }
     }
-    public float testingAngleRotation;
     private void HandleRotation(float speed)
     {
         Vector3 targetDirection = Vector3.zero;
@@ -149,9 +151,11 @@ public class PlayerMovement : MonoBehaviour
     public void Dash() 
     {
         if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
+        isDashing = true;
         MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
+        Invoke(nameof(DisableDashing), timeToDisableDash);
     }
-
+    private void DisableDashing() => isDashing = false;
     public void ToggleHover()
     {
         if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower()) return;
