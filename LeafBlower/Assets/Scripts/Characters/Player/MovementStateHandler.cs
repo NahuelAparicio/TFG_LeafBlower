@@ -36,7 +36,7 @@ public class MovementStateHandler : MonoBehaviour
         {
             ChangeMoveState(Enums.CharacterMoveState.Walking);
         }
-        else
+        else if(!_player.CheckCollisions.IsGrounded)
         {
             ChangeMoveState(Enums.CharacterMoveState.Air);
         }
@@ -78,6 +78,10 @@ public class MovementStateHandler : MonoBehaviour
                 else if (_lastState == Enums.CharacterMoveState.Running)
                 {
                     _desiredVelocity = _player.Stats.RunSpeed;
+                }
+                else if(_lastState == Enums.CharacterMoveState.None)
+                {
+                    _desiredVelocity = _player.Stats.WalkSpeed;
                 }
                 break;
             default:
