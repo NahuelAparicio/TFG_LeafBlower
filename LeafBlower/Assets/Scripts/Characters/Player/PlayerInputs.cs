@@ -71,30 +71,30 @@ public class PlayerInputs : MonoBehaviour
     private void Hover_performed(InputAction.CallbackContext context)
     {
         if (!_player.CanMovePlayer()) return;
+        _player.Movement.ToggleHover();
+        //if (_player.Movement.isHovering)
+        //{
+        //    _player.Movement.ToggleHover();
+        //    return;
+        //}
+        //float _currentTime = Time.time;
 
-        if (_player.Movement.isHovering)
-        {
-            _player.Movement.ToggleHover();
-            return;
-        }
-        float _currentTime = Time.time;
+        //if (_currentTime - lastClickTimeR2 >= doubleClickThreshold)
+        //{
+        //    lastClickTimeR2 = _currentTime;
+        //}
+        //else
+        //{
+        //    _player.Movement.ToggleHover();
 
-        if (_currentTime - lastClickTimeR2 >= doubleClickThreshold)
-        {
-            lastClickTimeR2 = _currentTime;
-        }
-        else
-        {
-            _player.Movement.ToggleHover();
-
-            lastClickTimeR2 = _currentTime;
-        }
+        //    lastClickTimeR2 = _currentTime;
+        //}
     }
 
     private void Dash_performed(InputAction.CallbackContext context)
     {
         if (!_player.CanMovePlayer()) return;
-        _player.Movement.Dash();
+        //_player.Movement.Dash();
     }
 
     private void Pause_performed(InputAction.CallbackContext context) 

@@ -165,6 +165,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
             _player.BlowerController.Handler.StartConsumingStamina();
+            _player.BlowerController.blowVFX.SetActive(true);
+            _player.Sounds.PlayEngineSound();
         }
         else
         {
