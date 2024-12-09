@@ -32,6 +32,7 @@ public class BlowerInputs : MonoBehaviour
     private void Blow_performed(InputAction.CallbackContext context)
     {
         //_blower.Handler.StartConsumingStamina();
+        if (IsAspiringInputPressed()) return;
         _blower.blowVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
     }
@@ -39,30 +40,29 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_canceled(InputAction.CallbackContext context)
     {
-        if(!_blower.isHovering)
-        {
-            _blower.Handler.StopConsumingStamina();
-            _blower.blowVFX.SetActive(false);
-            _blower.Player.Sounds.StopEngineSound();
-        }
+        if (_blower.isHovering || IsAspiringInputPressed()) return;
+        _blower.Handler.StopConsumingStamina();
+        _blower.blowVFX.SetActive(false);
+        _blower.Player.Sounds.StopEngineSound();
     }
 
     private void Aspire_performed(InputAction.CallbackContext context)
     {
         //_blower.Handler.StartConsumingStamina();
+        if (IsBlowingInputPressed()) return;
         _blower.aspirarVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
+
     }
 
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
+        if (IsBlowingInputPressed()) return;
         _blower.Handler.StopConsumingStamina();
         _blower.aspirarVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
 
     }
-
-
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
         if (!_blower.Aspirer.IsObjectAttached && !_blower.Player.Inventory.IsObjectSaved()) return;
