@@ -73,6 +73,12 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
+    internal void HandleTalkingAnimation()
+    {
+        _animator.SetFloat(Constants.ANIM_VAR_JOYDIR, 0);
+        _player.Rigidbody.velocity = Vector3.zero;
+    }
+
     internal void HandleJumpAnimations()
     {
         PlayTargetAnimation(Constants.ANIM_JUMP, true);
