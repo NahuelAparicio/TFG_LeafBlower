@@ -85,7 +85,7 @@ public class AspirerForce : BaseLeafBlower
 
     public void AttachObject(Rigidbody rb, Vector3 closestPoint, IShooteable shooteable)
     {
-        _blower.Handler.StartConsumingStamina();
+        _blower.StaminaHandler.StartConsumingStamina();
         _trajectory.EnableLineRender();
         rb.gameObject.layer = LayerMask.NameToLayer("Movable");
         _attachedObject.Item1 = rb;
@@ -96,7 +96,7 @@ public class AspirerForce : BaseLeafBlower
 
     public void DetachObject()
     {
-        _blower.Handler.StopConsumingStamina();
+        _blower.StaminaHandler.StopConsumingStamina();
         _trajectory.DisableLineRender();
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
         _attachedObject.Item1 = null;

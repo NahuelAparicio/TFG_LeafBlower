@@ -5,11 +5,9 @@ public class PlayerInputs : MonoBehaviour
 {
     private PlayerController _player;
     private PlayerInputsActions _actions;
-    private float lastClickTimeR2 = 0f;
-    private float doubleClickThreshold = 0.3f;
 
-
-   // public GameObject Target;
+    private float _jumpPressTime = -1f;
+    [SerializeField] private float _hoverThreshold = 0.25f;
 
     private void Awake()
     {
@@ -22,16 +20,17 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Pause.performed += Pause_performed;
         _actions.Player.Sprint.performed += Sprint_performed;
         _actions.Player.Sprint.canceled += Sprint_canceled;
-        _actions.Player.Dash.performed += Dash_performed;
-        _actions.Player.Hover.performed += Hover_performed;
         _actions.Player.Jump.performed += Jump_performed;
+        _actions.Player.Jump.canceled += Jump_canceled;
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
-
     public Vector2 GetAimMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse (?)
 
-    public bool IsMovingJoystick() => GetMoveDirection().magnitude > 0.05f;
+    public bool IsMovingLeftJoystick() => GetMoveDirection().magnitude > 0.05f;
+    public bool IsMovingRightJoystick() => GetAimMoveDirection().magnitude > 0.05f;
+
+    public bool IsHoveringInputPressed() => (_jumpPressTime > 0 && (Time.time - _jumpPressTime) >= _hoverThreshold);
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
@@ -61,41 +60,24 @@ public class PlayerInputs : MonoBehaviour
         
         _player.Interactable.InteractPerformed();
     }
+
     private void Jump_performed(InputAction.CallbackContext context)
     {
         if (!_player.CanMovePlayer()) return;
-
+        _jumpPressTime = Time.time;
+        _player.Movement.onStartHovering = true;
         _player.Movement.Jump();
     }
 
-    private void Hover_performed(InputAction.CallbackContext context)
+    private void Jump_canceled(InputAction.CallbackContext context)
     {
-        if (!_player.CanMovePlayer()) return;
-        _player.Movement.ToggleHover();
-        //if (_player.Movement.isHovering)
-        //{
-        //    _player.Movement.ToggleHover();
-        //    return;
-        //}
-        //float _currentTime = Time.time;
-
-        //if (_currentTime - lastClickTimeR2 >= doubleClickThreshold)
-        //{
-        //    lastClickTimeR2 = _currentTime;
-        //}
-        //else
-        //{
-        //    _player.Movement.ToggleHover();
-
-        //    lastClickTimeR2 = _currentTime;
-        //}
-    }
-
-    private void Dash_performed(InputAction.CallbackContext context)
-    {
-        if (!_player.CanMovePlayer()) return;
-        //_player.Movement.Dash();
-    }
+        _player.Movement.onStartHovering = false;
+        if(!_player.CheckCollisions.IsGrounded)
+        {
+            _player.Movement.OnUpdateHovering();
+        }
+        _jumpPressTime = -1f;
+    } 
 
     private void Pause_performed(InputAction.CallbackContext context) 
     {
@@ -111,8 +93,6 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Pause.performed -= Pause_performed;
         _actions.Player.Sprint.performed -= Sprint_performed;
         _actions.Player.Sprint.canceled -= Sprint_canceled;
-        _actions.Player.Dash.performed -= Dash_performed;
-        _actions.Player.Hover.performed -= Hover_performed;
         _actions.Player.Disable();
     }
 
