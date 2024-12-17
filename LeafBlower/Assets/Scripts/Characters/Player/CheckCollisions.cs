@@ -19,6 +19,9 @@ public class CheckCollisions : MonoBehaviour
     [Header("Wall Check:")]
     public float raycastWallCheckDistance = 0.5f;
     private Vector3 direction = Vector3.zero;
+
+    public float timeOnGround;
+
     private void Awake()
     {
         _player = transform.parent.GetComponent<PlayerController>();
@@ -125,6 +128,7 @@ public class CheckCollisions : MonoBehaviour
             if(!_player.Movement.isJumping && !_isGrounded)
             {                
                 _isGrounded = true;
+                timeOnGround = Time.time;
                 _player.Movement.ResetMovements();
             }
         }

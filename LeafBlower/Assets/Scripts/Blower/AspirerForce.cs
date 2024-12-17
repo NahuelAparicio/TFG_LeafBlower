@@ -34,11 +34,38 @@ public class AspirerForce : BaseLeafBlower
 
     private void ShootAction()
     {
+        _blower.StaminaHandler.ConsumeValueStamina(20);
         Vector3 forceDir = _blower.Stats.ShootForce * _blower.FirePoint.forward;
         _attachedObject.Item2.OnShoot(forceDir);
         DetachObject();
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
+        var aspirable = other.GetComponent<IAspirable>();
+        var shooteable = other.GetComponent<IShooteable>();
+
+        if (aspirable == null && shooteable == null) return;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
+        other.gameObject.layer = LayerMask.NameToLayer("Movable");
+
+
+    }
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+
+        var aspirable = other.GetComponent<IAspirable>();
+        var shooteable = other.GetComponent<IShooteable>();
+
+
+        if (aspirable == null && shooteable == null) return;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
+
+        other.gameObject.layer = LayerMask.NameToLayer("Ground");
+    }
     protected override void OnTriggerStay(Collider other)
     {
         var aspirable = other.GetComponent<IAspirable>();
@@ -85,7 +112,7 @@ public class AspirerForce : BaseLeafBlower
 
     public void AttachObject(Rigidbody rb, Vector3 closestPoint, IShooteable shooteable)
     {
-        _blower.StaminaHandler.StartConsumingStamina();
+       // _blower.StaminaHandler.StartConsumingStamina();
         _trajectory.EnableLineRender();
         rb.gameObject.layer = LayerMask.NameToLayer("Movable");
         _attachedObject.Item1 = rb;
@@ -96,7 +123,7 @@ public class AspirerForce : BaseLeafBlower
 
     public void DetachObject()
     {
-        _blower.StaminaHandler.StopConsumingStamina();
+      //  _blower.StaminaHandler.StopConsumingStamina();
         _trajectory.DisableLineRender();
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
         _attachedObject.Item1 = null;

@@ -63,7 +63,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        if (!_player.CanMovePlayer()) return;
+        if (!_player.CanMovePlayer() || _player.Movement.isJumping) return;
         _jumpPressTime = Time.time;
         _player.Movement.onStartHovering = true;
         _player.Movement.Jump();
@@ -72,10 +72,10 @@ public class PlayerInputs : MonoBehaviour
     private void Jump_canceled(InputAction.CallbackContext context)
     {
         _player.Movement.onStartHovering = false;
-        if(!_player.CheckCollisions.IsGrounded)
-        {
+        //if (!_player.CheckCollisions.IsGrounded)
+        //{
             _player.Movement.OnUpdateHovering();
-        }
+        //}
         _jumpPressTime = -1f;
     } 
 
