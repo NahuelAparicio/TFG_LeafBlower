@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private CustomGravityHandler _gravityHandler;
     private Vector3 _moveDirection;
     public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
+    private Vector3 _lastMoveDirection;
+    public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
 
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
