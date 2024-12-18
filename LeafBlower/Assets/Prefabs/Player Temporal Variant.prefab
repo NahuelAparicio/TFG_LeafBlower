@@ -360,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9090394115419008832
 Transform:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4101629458124625187}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45100054, y: 0.07000017, z: 1.472}
+  m_LocalPosition: {x: 0.45100054, y: -0.23, z: 2.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   _maxSlopeAngle: 45
   maxDistanceSlopeRay: 4
   raycastWallCheckDistance: 0.8
+  timeOnGround: 0
 --- !u!136 &4158180363818484377
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1288,16 +1289,16 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.36367607
-  m_Height: 1.4448643
+  m_Height: 1.3893876
   m_Direction: 1
-  m_Center: {x: 0, y: 0.71177816, z: 0.1612835}
+  m_Center: {x: 0, y: 0.7395165, z: 0.1612835}
 --- !u!114 &6882861427866214420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1647,17 +1648,17 @@ PrefabInstance:
     - target: {fileID: 4074180291764849447, guid: da387ef9566fb3e4884431f6512b9795,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.033
       objectReference: {fileID: 0}
     - target: {fileID: 4074180291764849447, guid: da387ef9566fb3e4884431f6512b9795,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.005
+      value: -0.141
       objectReference: {fileID: 0}
     - target: {fileID: 4074180291764849447, guid: da387ef9566fb3e4884431f6512b9795,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.366
+      value: -0.363
       objectReference: {fileID: 0}
     - target: {fileID: 4074180291764849447, guid: da387ef9566fb3e4884431f6512b9795,
         type: 3}
@@ -1737,22 +1738,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -17.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.1
+      value: -89.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2255,11 +2256,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed:
-    baseValue: 2.5
+    baseValue: 4
     _reCalculate: 1
     modifiers: []
   _runSpeed:
-    baseValue: 3.5
+    baseValue: 6
     _reCalculate: 1
     modifiers: []
   _dashForce:
@@ -2267,11 +2268,11 @@ MonoBehaviour:
     _reCalculate: 1
     modifiers: []
   _hoverForce:
-    baseValue: 15
+    baseValue: 100
     _reCalculate: 1
     modifiers: []
   _jumpForce:
-    baseValue: 12
+    baseValue: 15
     _reCalculate: 1
     modifiers: []
 --- !u!114 &3433457629364233482
@@ -2300,14 +2301,13 @@ MonoBehaviour:
   _velocityToStartFallAnimation: 0.5
   _offsetPlayerSlopesThreshold: 0
   _groundSnapThreshold: 0.5
-  rotationSpeed: 8
-  rotationAirSpeed: 4
+  rotationSpeed: 10
+  rotationAirSpeed: 10
   extraAirSpeed: 2
   isJumping: 0
-  isHovering: 0
   isSprinting: 0
-  isDashing: 0
-  timeToDisableDash: 0.25
+  onStartHovering: 0
+  timeToResetHover: 1
 --- !u!114 &1589580805953879826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2334,6 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80def67552e04924ba226735c9cd47db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverThreshold: 0.25
 --- !u!114 &4106401613235755447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2388,7 +2389,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9150275847382200016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -2439,7 +2440,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9150275847382200016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15b8e22c35f1704dbe97a480bc3c73c, type: 3}
   m_Name: 
@@ -2476,7 +2477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7c30943478d0c4abfccd2f8d3526f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravity: -19.8
+  _gravity: -27
 --- !u!114 &2793916602985163692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2644,12 +2645,12 @@ PrefabInstance:
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Size.x
-      value: 1.09
+      value: 2.080661
       objectReference: {fileID: 0}
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 2.017481
       objectReference: {fileID: 0}
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
@@ -2659,17 +2660,17 @@ PrefabInstance:
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.x
-      value: 0
+      value: 0.17600183
       objectReference: {fileID: 0}
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.y
-      value: 0
+      value: -0.31589928
       objectReference: {fileID: 0}
     - target: {fileID: 6372377177834008886, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.z
-      value: -1.6440095
+      value: -1.6440104
       objectReference: {fileID: 0}
     - target: {fileID: 6525555926776021204, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
@@ -2679,32 +2680,32 @@ PrefabInstance:
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Size.x
-      value: 1.09
+      value: 2.080661
       objectReference: {fileID: 0}
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 2.017481
       objectReference: {fileID: 0}
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Size.z
-      value: 3.407631
+      value: 3.3874636
       objectReference: {fileID: 0}
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.x
-      value: 0
+      value: 0.17600183
       objectReference: {fileID: 0}
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.y
-      value: 0
+      value: -0.31589928
       objectReference: {fileID: 0}
     - target: {fileID: 6652885662889175947, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: m_Center.z
-      value: -1.644
+      value: -1.6440104
       objectReference: {fileID: 0}
     - target: {fileID: 8597998638366377614, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}

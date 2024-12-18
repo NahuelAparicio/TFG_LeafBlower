@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 937d6c3721ff6934687db349f830b76c,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 937d6c3721ff6934687db349f830b76c,
         type: 3}
@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 937d6c3721ff6934687db349f830b76c,
         type: 3}
       propertyPath: m_Name
-      value: Leaf Variant
+      value: Leaf
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 937d6c3721ff6934687db349f830b76c,
         type: 3}
@@ -194,6 +194,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2277948819245221618}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 937d6c3721ff6934687db349f830b76c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7640206239963521961}
   m_SourcePrefab: {fileID: 100100000, guid: 937d6c3721ff6934687db349f830b76c, type: 3}
 --- !u!1 &3183041986512499911 stripped
 GameObject:
@@ -241,7 +245,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -264,3 +268,17 @@ MonoBehaviour:
   uiImage: {fileID: 0}
   weight: 0
   _type: 0
+--- !u!114 &7640206239963521961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183041986512499911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db058a2a702e7147ba3296e29aa62c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 0}
+  weight: 0

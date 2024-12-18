@@ -123,7 +123,7 @@ public class MovementStateHandler : MonoBehaviour
 
         if (_player.Movement.MoveSpeed == 0)
         {
-            _player.Movement.MoveDirection = Vector3.zero;
+          //  _player.Movement.MoveDirection = Vector3.zero;
             _player.Rigidbody.velocity = Vector3.zero;
             _player.Rigidbody.angularVelocity = Vector3.zero;
         }

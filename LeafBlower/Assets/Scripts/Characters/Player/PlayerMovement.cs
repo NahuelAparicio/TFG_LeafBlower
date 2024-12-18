@@ -24,17 +24,19 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping = false;
     public bool isSprinting;
 
+    [Header("Hover:")]
     public bool onStartHovering = false;
+    public float timeToResetHover = 0.5f;
 
     private MovementStateHandler _stateHandler;
     private CustomGravityHandler _gravityHandler;
     private Vector3 _moveDirection;
     public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
+    private Vector3 _lastMoveDirection;
+    public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
 
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
-    public bool isDashing = false;
-    public float timeToDisableDash;
 
     private void Awake()
     {
@@ -60,8 +62,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleAirBehavior()
     {
-        if(!isDashing)
-            ClampSpeed(_moveSpeed + extraAirSpeed);
+        ClampSpeed(_moveSpeed + extraAirSpeed);
 
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
         HandleRotation(rotationSpeed);
@@ -95,7 +96,8 @@ public class PlayerMovement : MonoBehaviour
             // -- Anchors Player to the Ground if is not falling -- //&& _player.Inputs.IsMovingJoystick()
             AnchorToGround();
         }
-        if (_player.Inputs.IsHoveringInputPressed())
+
+        if (_player.Inputs.IsHoveringInputPressed() && (_player.CheckCollisions.timeOnGround - Time.time) >= timeToResetHover)
         {
             onStartHovering = false;
             _player.BlowerController.isHovering = false;
@@ -107,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 targetDirection = Vector3.zero;
 
-        if (_player.Inputs.IsMovingRightJoystick())
+        if (_player.Inputs.IsMovingRightJoystick() && _player.BlowerController.Aspirer.IsObjectAttached)
         {
             targetDirection = GetRotationDirectionNormalized();
         }
@@ -166,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            _player.BlowerController.isHovering = false;
             _player.BlowerController.StaminaHandler.StopConsumingStamina();
             _player.BlowerController.aspirarVFX.SetActive(false);
             _player.BlowerController.blowVFX.SetActive(false);
@@ -174,7 +177,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool IsHovering()
     {
-        if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+      //  if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+        if (!_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
                 
         _player.BlowerController.isHovering = true;
 
@@ -261,8 +265,6 @@ public class PlayerMovement : MonoBehaviour
                 if(movement.movement.CanExecuteMovement())
                 {
                     movement.movement.ExecuteMovement(_player.Rigidbody, force);
-                    if (movement.type == Enums.Movements.Dash)
-                        _player.BlowerController.StaminaHandler.ConsumeValueStamina(15);
                     return;
                 }
             }
