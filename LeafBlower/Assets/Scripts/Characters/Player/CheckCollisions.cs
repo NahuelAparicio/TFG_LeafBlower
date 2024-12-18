@@ -27,6 +27,26 @@ public class CheckCollisions : MonoBehaviour
         _player = transform.parent.GetComponent<PlayerController>();
     }
 
+        RaycastHit _hit;
+    private void Update()
+    {
+        if(Physics.Raycast(Camera.main.transform.position, transform.position - Camera.main.transform.position, out _hit, Mathf.Infinity))
+        {
+            var transparent = _hit.transform.GetComponent<ITransparencyHandler>();
+            if (transparent == null) return; 
+            transparent.EnableTransparent();
+            //if(Vector3.Distance(_hit.transform.position, Camera.main.transform.position) >= Vector3.Distance(transform.position, Camera.main.transform.position))
+            //{
+            //    Debug.Log("HitBuild");
+            //}
+            //else
+            //{
+            //    Debug.Log("Hit Sthg");
+
+            //}
+        }
+    }
+
     //Returns Adjusted player position if there is a wall collision on his direction
     public Vector3 IsWall(Vector3 _direction)
     {
@@ -119,6 +139,19 @@ public class CheckCollisions : MonoBehaviour
         //    // Draw the ray using Gizmos.DrawLine
         //    Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
         //}
+
+
+        Gizmos.color = Color.green;
+
+        // Línea desde la cámara hasta el objeto
+        Gizmos.DrawLine(Camera.main.transform.position, transform.position);
+
+        // Punto en el impacto del rayo (si existe)
+        if (_hit.collider != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(_hit.point, 0.1f);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -141,7 +174,6 @@ public class CheckCollisions : MonoBehaviour
             _isGrounded = false;
         }
     }
-
 
 
 }
