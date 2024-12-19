@@ -41,7 +41,7 @@ public class BlowerInputs : MonoBehaviour
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         if (_blower.isHovering || IsAspiringInputPressed()) return;
-        _blower.Handler.StopConsumingStamina();
+        _blower.StaminaHandler.StopConsumingStamina();
         _blower.blowVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
     }
@@ -58,7 +58,7 @@ public class BlowerInputs : MonoBehaviour
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
         if (IsBlowingInputPressed()) return;
-        _blower.Handler.StopConsumingStamina();
+        _blower.StaminaHandler.StopConsumingStamina();
         _blower.aspirarVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
 

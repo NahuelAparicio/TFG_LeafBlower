@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6042504944101027165}
   - component: {fileID: 4385885329849014326}
   - component: {fileID: 811438005201402323}
+  - component: {fileID: -7457259637013287614}
   m_Layer: 3
   m_Name: Crate
   m_TagString: IsWall
@@ -131,8 +132,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!65 &4385885329849014326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -169,3 +170,17 @@ MonoBehaviour:
   uiImage: {fileID: 0}
   weight: 3
   _type: 0
+--- !u!114 &-7457259637013287614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671235022437628919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db058a2a702e7147ba3296e29aa62c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 0}
+  weight: 3

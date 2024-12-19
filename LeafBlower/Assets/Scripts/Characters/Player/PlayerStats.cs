@@ -20,4 +20,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
 
+    private int _level = 0;
+    public int Level => _level;
+
 }

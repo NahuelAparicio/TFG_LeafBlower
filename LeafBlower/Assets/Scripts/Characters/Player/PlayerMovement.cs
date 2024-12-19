@@ -22,18 +22,21 @@ public class PlayerMovement : MonoBehaviour
     public float extraAirSpeed;
 
     public bool isJumping = false;
-    public bool isHovering = false;
     public bool isSprinting;
+
+    [Header("Hover:")]
+    public bool onStartHovering = false;
+    public float timeToResetHover = 0.5f;
 
     private MovementStateHandler _stateHandler;
     private CustomGravityHandler _gravityHandler;
     private Vector3 _moveDirection;
     public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
+    private Vector3 _lastMoveDirection;
+    public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
 
     private float _moveSpeed;
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
-    public bool isDashing = false;
-    public float timeToDisableDash;
 
     private void Awake()
     {
@@ -59,13 +62,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleAirBehavior()
     {
-        if(!isDashing)
-            ClampSpeed(_moveSpeed + extraAirSpeed);
+        ClampSpeed(_moveSpeed + extraAirSpeed);
 
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
         HandleRotation(rotationSpeed);
 
-        if (isHovering)
+        if (IsHovering())
         {
             Hover();
         }
@@ -73,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _gravityHandler.ApplyAdditiveGravity(_player.Rigidbody);
         }
+
         if (!_player.isInteracting && Mathf.Abs(_player.Rigidbody.velocity.y) > _velocityToStartFallAnimation)
         {
             _player.Animations.PlayTargetAnimation(Constants.ANIM_FALLING, true);
@@ -92,22 +95,28 @@ public class PlayerMovement : MonoBehaviour
         {
             // -- Anchors Player to the Ground if is not falling -- //&& _player.Inputs.IsMovingJoystick()
             AnchorToGround();
-
         }
-        if (isHovering)
-        {
-            isHovering = false;
-            _player.BlowerController.isHovering = isHovering;
 
-            if(!_player.BlowerController.IsAspirating() && !_player.BlowerController.IsBlowing())
-                _player.BlowerController.Handler.StopConsumingStamina();
+        if (_player.Inputs.IsHoveringInputPressed() && (_player.CheckCollisions.timeOnGround - Time.time) >= timeToResetHover)
+        {
+            onStartHovering = false;
+            _player.BlowerController.isHovering = false;
+
+            OnUpdateHovering();
         }
     }
     private void HandleRotation(float speed)
     {
         Vector3 targetDirection = Vector3.zero;
-     
-       targetDirection = GetDirectionNormalized();
+
+        if (_player.Inputs.IsMovingRightJoystick() && _player.BlowerController.Aspirer.IsObjectAttached)
+        {
+            targetDirection = GetRotationDirectionNormalized();
+        }
+        else
+        {
+            targetDirection = GetDirectionNormalized();
+        }
 
         targetDirection.y = 0;
         if (targetDirection != Vector3.zero)
@@ -148,45 +157,40 @@ public class PlayerMovement : MonoBehaviour
         MakeMovement(Enums.Movements.Jump, _player.Stats.JumpForce);
     }
 
-    public void Dash() 
+    public void OnUpdateHovering()
     {
-        if (_player.CheckCollisions.IsGrounded || _player.BlowerController.Aspirer.IsObjectAttached) return;
-        isDashing = true;
-        MakeMovement(Enums.Movements.Dash, _player.Stats.DashForce);
-        Invoke(nameof(DisableDashing), timeToDisableDash);
-    }
-    private void DisableDashing() => isDashing = false;
-    public void ToggleHover()
-    {
-        if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower()) return;
-        isHovering = !isHovering;
-        _player.BlowerController.isHovering = isHovering;
-        if(isHovering)
+        if (onStartHovering)
         {
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
-            _player.BlowerController.Handler.StartConsumingStamina();
+            _player.BlowerController.StaminaHandler.StartConsumingStamina();
             _player.BlowerController.blowVFX.SetActive(true);
             _player.Sounds.PlayEngineSound();
         }
         else
         {
-            _player.BlowerController.Handler.StopConsumingStamina();
+            _player.BlowerController.isHovering = false;
+            _player.BlowerController.StaminaHandler.StopConsumingStamina();
             _player.BlowerController.aspirarVFX.SetActive(false);
             _player.BlowerController.blowVFX.SetActive(false);
             _player.Sounds.StopEngineSound();
         }
     }
-
-    public void Hover()
+    public bool IsHovering()
     {
-        if(!_player.BlowerController.Handler.HasStamina())
+      //  if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+        if (!_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+                
+        _player.BlowerController.isHovering = true;
+
+        if (_player.Movement.onStartHovering)
         {
-            isHovering = false;
-            return;
+            _player.Movement.OnUpdateHovering();
         }
-        
-        MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
+
+        return true;
     }
+    public void Hover() => MakeMovement(Enums.Movements.Hover, _player.Stats.HoverForce); 
+
     private void ClampSpeed(float speedToClamp)
     {
         Vector3 horizontalVelocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
@@ -232,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
             targetVelocity = _moveDirection * _moveSpeed;
         }
 
-        if (_moveDirection.magnitude == 0 && !isJumping && !_player.Inputs.IsMovingJoystick())
+        if (_moveDirection.magnitude == 0 && !isJumping && !_player.Inputs.IsMovingLeftJoystick())
         {
             _player.Rigidbody.velocity = Vector3.zero;
             return Vector3.zero;
@@ -247,6 +251,7 @@ public class PlayerMovement : MonoBehaviour
         return _moveDirection * _moveSpeed;
     }
     private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetMoveDirection().x;
+    private Vector3 GetRotationDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetAimMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetAimMoveDirection().x;
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;
     //private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
 
@@ -260,8 +265,6 @@ public class PlayerMovement : MonoBehaviour
                 if(movement.movement.CanExecuteMovement())
                 {
                     movement.movement.ExecuteMovement(_player.Rigidbody, force);
-                    if (movement.type == Enums.Movements.Dash)
-                        _player.BlowerController.Handler.ConsumeValueStamina(15);
                     return;
                 }
             }

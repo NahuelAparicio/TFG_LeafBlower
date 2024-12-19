@@ -62,14 +62,14 @@ public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
         _rb.angularVelocity = Vector3.zero;
         distanceBetweenParentAndObject = Vector3.Distance(transform.position, transform.parent.position);
         _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+      //  _rb.constraints = RigidbodyConstraints.FreezeRotation;
         _isAttached = true;
     }
     public void Detach()
     {
         gameObject.layer = LayerMask.NameToLayer("Ground");
         tag = "IsWall";
-        _rb.constraints = RigidbodyConstraints.None;
+     //   _rb.constraints = RigidbodyConstraints.None;
         _rb.useGravity = true;
         transform.SetParent(null);
         _isAttached = false;

@@ -34,11 +34,37 @@ public class AspirerForce : BaseLeafBlower
 
     private void ShootAction()
     {
+        _blower.StaminaHandler.ConsumeValueStamina(20);
         Vector3 forceDir = _blower.Stats.ShootForce * _blower.FirePoint.forward;
         _attachedObject.Item2.OnShoot(forceDir);
         DetachObject();
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
+        var aspirable = other.GetComponent<IAspirable>();
+        var shooteable = other.GetComponent<IShooteable>();
+
+        if (aspirable == null && shooteable == null) return;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
+
+
+
+    }
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+
+        var aspirable = other.GetComponent<IAspirable>();
+        var shooteable = other.GetComponent<IShooteable>();
+
+
+        if (aspirable == null && shooteable == null) return;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
+
+    }
     protected override void OnTriggerStay(Collider other)
     {
         var aspirable = other.GetComponent<IAspirable>();
@@ -50,8 +76,7 @@ public class AspirerForce : BaseLeafBlower
         if (_blower.IsAspirating())
         {
             if(_isObjectAttached) return;
-
-            //If true -> and attacheable true attach, and stop doing aspire force
+            other.gameObject.layer = LayerMask.NameToLayer("Movable");
             Vector3 pos = other.GetComponent<Collider>().ClosestPoint(_blower.FirePoint.position);
             if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
             {
@@ -65,8 +90,6 @@ public class AspirerForce : BaseLeafBlower
                 else
                 {
                     other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    //No force applied just gravity, Should lerp? Deceleration?
-                    //other.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
             }
             else
@@ -80,12 +103,15 @@ public class AspirerForce : BaseLeafBlower
             if (shooteable != null)
                 if (other.GetComponent<ShootableObject>().IsAttached)
                     DetachObject();
+
+            other.gameObject.layer = LayerMask.NameToLayer("Ground");
+
         }
     }
 
     public void AttachObject(Rigidbody rb, Vector3 closestPoint, IShooteable shooteable)
     {
-        _blower.Handler.StartConsumingStamina();
+       // _blower.StaminaHandler.StartConsumingStamina();
         _trajectory.EnableLineRender();
         rb.gameObject.layer = LayerMask.NameToLayer("Movable");
         _attachedObject.Item1 = rb;
@@ -96,7 +122,7 @@ public class AspirerForce : BaseLeafBlower
 
     public void DetachObject()
     {
-        _blower.Handler.StopConsumingStamina();
+      //  _blower.StaminaHandler.StopConsumingStamina();
         _trajectory.DisableLineRender();
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
         _attachedObject.Item1 = null;
