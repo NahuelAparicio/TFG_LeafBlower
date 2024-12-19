@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BlowableObject : Object, IBlowable
+public class MovableObject : Object, IBlowable, IAspirable
 {
     [SerializeField] private Enums.BlowType _type;
 
@@ -35,4 +35,8 @@ public class BlowableObject : Object, IBlowable
         }
     }
 
+    public void OnAspiratableInteracts(Vector3 force)
+    {
+        _rb.AddForce(force, ForceMode.Impulse);
+    }
 }

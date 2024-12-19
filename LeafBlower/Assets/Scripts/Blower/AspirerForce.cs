@@ -49,7 +49,7 @@ public class AspirerForce : BaseLeafBlower
 
         if (aspirable == null && shooteable == null) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
-        other.gameObject.layer = LayerMask.NameToLayer("Movable");
+
 
 
     }
@@ -64,7 +64,6 @@ public class AspirerForce : BaseLeafBlower
         if (aspirable == null && shooteable == null) return;
         if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
 
-        other.gameObject.layer = LayerMask.NameToLayer("Ground");
     }
     protected override void OnTriggerStay(Collider other)
     {
@@ -77,8 +76,7 @@ public class AspirerForce : BaseLeafBlower
         if (_blower.IsAspirating())
         {
             if(_isObjectAttached) return;
-
-            //If true -> and attacheable true attach, and stop doing aspire force
+            other.gameObject.layer = LayerMask.NameToLayer("Movable");
             Vector3 pos = other.GetComponent<Collider>().ClosestPoint(_blower.FirePoint.position);
             if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
             {
@@ -92,8 +90,6 @@ public class AspirerForce : BaseLeafBlower
                 else
                 {
                     other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    //No force applied just gravity, Should lerp? Deceleration?
-                    //other.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
             }
             else
@@ -107,6 +103,9 @@ public class AspirerForce : BaseLeafBlower
             if (shooteable != null)
                 if (other.GetComponent<ShootableObject>().IsAttached)
                     DetachObject();
+
+            other.gameObject.layer = LayerMask.NameToLayer("Ground");
+
         }
     }
 
