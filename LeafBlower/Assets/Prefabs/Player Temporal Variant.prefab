@@ -483,62 +483,6 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
---- !u!1 &4040806554731254224
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7394341129815231930}
-  - component: {fileID: 46944368764095346}
-  m_Layer: 0
-  m_Name: Decal Projector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7394341129815231930
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040806554731254224}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8482424120401540202}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &46944368764095346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040806554731254224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 45b1db965ee8a624db67f636d44e939a, type: 2}
-  m_DrawDistance: 1000
-  m_FadeScale: 0.9
-  m_StartAngleFade: 180
-  m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
-  m_DecalLayerMask: 1
-  m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: -1.8569894}
-  m_Size: {x: 1, y: 0.8, z: 4.103636}
-  m_FadeFactor: 0.688
 --- !u!1 &4101629458124625187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1743,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -1854,12 +1798,17 @@ PrefabInstance:
     - target: {fileID: -2681273021480683728, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2681273021480683728, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -2681273021480683728, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_StaticShadowCaster
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2681273021480683728, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -1870,7 +1819,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9ce453262f894664e91aca95e56c97b2, type: 2}
+      objectReference: {fileID: 2100000, guid: 96c6a5ddc394097478066529c9c64380, type: 2}
     - target: {fileID: -2681273021480683728, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -1895,6 +1844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1779578588566202853, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1779578588566202853, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -1973,10 +1927,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5994067538010053906}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7394341129815231930}
     - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       insertIndex: -1
@@ -2334,6 +2284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eb1c920d7e8d049bb906f74e9d4165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _level: 1
   _walkSpeed:
     baseValue: 4
     _reCalculate: 1
@@ -2626,7 +2577,7 @@ PrefabInstance:
     - target: {fileID: 3874100795324936286, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: _blowForce.baseValue
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3874100795324936286, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
@@ -2636,7 +2587,7 @@ PrefabInstance:
     - target: {fileID: 3874100795324936286, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
       propertyPath: _shootForce.baseValue
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3874100795324936286, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
@@ -2650,8 +2601,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4170102656261960933, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
+      propertyPath: targetToaim
+      value: 
+      objectReference: {fileID: 4686835287840660688}
+    - target: {fileID: 4170102656261960933, guid: 159bd38227e4c094983d28c15dd4209b,
+        type: 3}
+      propertyPath: _maxTimeToShoot
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170102656261960933, guid: 159bd38227e4c094983d28c15dd4209b,
+        type: 3}
       propertyPath: _distanceToAttach
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170102656261960933, guid: 159bd38227e4c094983d28c15dd4209b,
+        type: 3}
+      propertyPath: maxOffsetYTargetToAim
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5301373955981896644, guid: 159bd38227e4c094983d28c15dd4209b,
         type: 3}
