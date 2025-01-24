@@ -42,19 +42,22 @@ public class Object : MonoBehaviour
         switch (weight)
         {
             case Enums.ObjectWeight.Leaf:
-                _rb.mass = 1;
+                _rb.mass = Constants.LEAF_WEIGHT;
                 break;
             case Enums.ObjectWeight.Low:
-                _rb.mass = (int)Enums.ObjectWeight.Low;
+                _rb.mass = Constants.LOW_WEIGHT;
                 break;
             case Enums.ObjectWeight.Medium:
-                _rb.mass = (int)Enums.ObjectWeight.Medium;
+                _rb.mass = Constants.MEDIUM_WEIGHT;
                 break;
             case Enums.ObjectWeight.Heavy:
-                _rb.mass = (int)Enums.ObjectWeight.Heavy;
+                _rb.mass = Constants.HEAVY_WEIGHT;
                 break;
             case Enums.ObjectWeight.SuperHeavy:
-                _rb.mass = (int)Enums.ObjectWeight.SuperHeavy;
+                _rb.mass = Constants.SUPERHEAVY_WEIGHT;
+                break;
+            case Enums.ObjectWeight.MegaHeavy:
+                _rb.mass = Constants.MEGAHEAVY_WEIGHT;
                 break;
             default:
                 break;

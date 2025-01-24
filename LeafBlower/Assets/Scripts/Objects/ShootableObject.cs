@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootableObject : Object, IAspirable, IShooteable, IAttacheable
+public class ShootableObject : Object, IAspirable, IAttacheable
 {
     private bool _isAttached;
     public bool IsAttached => _isAttached;

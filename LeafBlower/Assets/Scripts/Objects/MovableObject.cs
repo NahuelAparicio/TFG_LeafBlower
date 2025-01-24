@@ -28,6 +28,7 @@ public class MovableObject : Object, IBlowable, IAspirable
             case Enums.BlowType.PuzzleBlow:
                 break;
             case Enums.BlowType.DirectionalBlow:
+                force.y = 0;
                 _rb.AddForce(force, ForceMode.Impulse); //Applies force in the center of the object to the direcion between shootPoint and object
                 break;
             default:
@@ -37,6 +38,7 @@ public class MovableObject : Object, IBlowable, IAspirable
 
     public void OnAspiratableInteracts(Vector3 force)
     {
+        if (weight == Enums.ObjectWeight.Leaf) force /= 2;
         _rb.AddForce(force, ForceMode.Impulse);
     }
 }

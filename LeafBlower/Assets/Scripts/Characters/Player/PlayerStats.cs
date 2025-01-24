@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField] private int _level = 0;
+    public int Level => _level;
+
     [Header ("Movement Stats:")]
     [SerializeField] private Stat _walkSpeed;
     public float WalkSpeed => _walkSpeed.Value;
@@ -20,7 +23,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
 
-    private int _level = 0;
-    public int Level => _level;
+    public void AddLevel() => _level++;
 
 }
