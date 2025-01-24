@@ -8,7 +8,10 @@ public class BlowerForce : BaseLeafBlower
 
         if (!_blower.IsBlowing() || blowable == null || _blower.Aspirer.IsObjectAttached) return;
 
-        Vector3 forceDir = _blower.DirectionFromFirePointNormalized(other.gameObject.transform.position) * CalculateForceByDistance(other.gameObject);
+        if ((int)other.GetComponent<Object>().weight > _blower.Player.Stats.Level + 1) return;
+
+       // Vector3 forceDir = _blower.DirectionFromFirePointNormalized(other.gameObject.transform.position) * CalculateForceByDistance(other.gameObject);
+        Vector3 forceDir = _blower.FirePoint.forward * CalculateForceByDistance(other.gameObject);
         blowable.OnBlowableInteracts(forceDir, other.ClosestPointOnBounds(transform.position));
     }
 

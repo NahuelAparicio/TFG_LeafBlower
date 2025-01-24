@@ -30,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (_player.BlowerController.IsAspirating())
         {
-            _player.BlowerController.Aspirer.AttachObject(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, objectSaved.GetComponent<IShooteable>());
+            _player.BlowerController.Aspirer.AttachObject(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, objectSaved.GetComponent<ShootableObject>());
         }
         else
         {

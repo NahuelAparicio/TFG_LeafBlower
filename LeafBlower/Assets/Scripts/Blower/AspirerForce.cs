@@ -1,23 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AspirerForce : BaseLeafBlower
 {
     #region Variables
+    [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
     private TrajectoryHandler _trajectory;
     private bool _isObjectAttached;
-    private (Rigidbody, IShooteable) _attachedObject;
-    [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
-
+    private (Rigidbody, ShootableObject) _attachedObject;
+    private LayerMask _ground, _movable;
     #endregion
     #region Properties
     public bool IsObjectAttached => _isObjectAttached;
-    public (Rigidbody, IShooteable) AttachedObject => _attachedObject;
+    public (Rigidbody, ShootableObject) AttachedObject => _attachedObject;
     #endregion
+
+    private Dictionary<Collider, (IAspirable, IShooteable, Rigidbody)> _componentCache = new Dictionary<Collider, (IAspirable, IShooteable, Rigidbody)>();
 
     protected override void Awake()
     {
         base.Awake();
         _trajectory = GetComponent<TrajectoryHandler>();
+        _ground = LayerMask.NameToLayer("Ground");
+        _movable = LayerMask.NameToLayer("Movable");
+
     }
 
     protected override void Update()
@@ -40,57 +46,34 @@ public class AspirerForce : BaseLeafBlower
         DetachObject();
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-
-        var aspirable = other.GetComponent<IAspirable>();
-        var shooteable = other.GetComponent<IShooteable>();
-
-        if (aspirable == null && shooteable == null) return;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
-
-
-
-    }
-    protected override void OnTriggerExit(Collider other)
-    {
-        base.OnTriggerExit(other);
-
-        var aspirable = other.GetComponent<IAspirable>();
-        var shooteable = other.GetComponent<IShooteable>();
-
-
-        if (aspirable == null && shooteable == null) return;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Leaf")) return;
-
-    }
     protected override void OnTriggerStay(Collider other)
     {
         var aspirable = other.GetComponent<IAspirable>();
 
         if(aspirable == null) return;
 
-        var shooteable = other.GetComponent<IShooteable>();
+        var shooteable = other.GetComponent<ShootableObject>();
+        var obj = other.GetComponent<Object>();
+
+        HandleAspirating(other, aspirable, shooteable, obj);
+    }
+
+    private void HandleAspirating(Collider other, IAspirable aspirable, ShootableObject shooteable, Object obj)
+    {
+        if ((int)obj.weight > _blower.Player.Stats.Level + 1) return; // CHECK
 
         if (_blower.IsAspirating())
         {
-            if(_isObjectAttached) return;
-            other.gameObject.layer = LayerMask.NameToLayer("Movable");
-            Vector3 pos = other.GetComponent<Collider>().ClosestPoint(_blower.FirePoint.position);
-            if(_blower.DistanceToFirePoint(pos) <= _distanceToAttach)
+            if (_isObjectAttached) return;
+
+            if (other.gameObject.layer != _movable)
+                other.gameObject.layer = _movable;
+
+            Vector3 pos = other.ClosestPoint(_blower.FirePoint.position);
+
+            if (_blower.DistanceToFirePoint(pos) <= _distanceToAttach && (int)obj.weight <= _blower.Player.Stats.Level)
             {
-                if(shooteable != null)
-                {
-                    if(!other.GetComponent<ShootableObject>().IsAttached)
-                    {
-                        AttachObject(other.attachedRigidbody, pos, shooteable);
-                    }
-                }
-                else
-                {
-                    other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                }
+                TryAttachObject(other, pos, shooteable);
             }
             else
             {
@@ -100,41 +83,52 @@ public class AspirerForce : BaseLeafBlower
         }
         else
         {
-            if (shooteable != null)
-                if (other.GetComponent<ShootableObject>().IsAttached)
-                    DetachObject();
-
-            other.gameObject.layer = LayerMask.NameToLayer("Ground");
-
+            HandleNotAspirating(other, shooteable);
         }
     }
-
-    public void AttachObject(Rigidbody rb, Vector3 closestPoint, IShooteable shooteable)
+    private void TryAttachObject(Collider other, Vector3 closestPoint, ShootableObject shooteable)
     {
-       // _blower.StaminaHandler.StartConsumingStamina();
+        if (shooteable != null)
+        {
+            if (other.GetComponent<ShootableObject>().IsAttached) return;
+
+            AttachObject(other.attachedRigidbody, closestPoint, shooteable);
+        }
+        else
+        {
+            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+    }
+    private void HandleNotAspirating(Collider other, ShootableObject shooteable)
+    {
+        if(other.gameObject.layer != _ground)
+            other.gameObject.layer = _ground;
+        if (shooteable == null) return;
+        if (!shooteable.IsAttached) return;
+        
+        DetachObject();
+    }
+
+    public void AttachObject(Rigidbody rb, Vector3 closestPoint, ShootableObject shooteable)
+    {
         _trajectory.EnableLineRender();
-        rb.gameObject.layer = LayerMask.NameToLayer("Movable");
-        _attachedObject.Item1 = rb;
-        _attachedObject.Item2 = shooteable;
+        _attachedObject = (rb, shooteable);
         rb.GetComponent<IAttacheable>().Attach(_blower.FirePoint, closestPoint);
         _isObjectAttached = true;
     }
 
     public void DetachObject()
     {
-      //  _blower.StaminaHandler.StopConsumingStamina();
         _trajectory.DisableLineRender();
         _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
-        _attachedObject.Item1 = null;
-        _attachedObject.Item2 = null;
+        _attachedObject = (null, null);
         _isObjectAttached = false;
     }
 
     public void SaveObject()
     {
         _trajectory.DisableLineRender();
-        _attachedObject.Item1 = null;
-        _attachedObject.Item2 = null;
+        _attachedObject = (null, null);
         _isObjectAttached = false;
     }
 }
