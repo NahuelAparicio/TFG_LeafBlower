@@ -97,19 +97,35 @@ public class AspirerForce : BaseLeafBlower
 
     protected override void OnTriggerStay(Collider other)
     {
-        var aspirable = other.GetComponent<IAspirable>();
 
-        if(aspirable == null) return;
+        if (!_blower.IsAspirating()) return;
 
-        var shooteable = other.GetComponent<ShootableObject>();
-        var obj = other.GetComponent<Object>();
+        if(_closestObject != null)
+        {
+            MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
+            if (movableObject != null)
+            {
+                movableObject.SetKinematic(false);
+            }
 
-        HandleAspirating(other, aspirable, shooteable, obj);
+            var aspirable = _closestObject.GetComponent<IAspirable>();
+            var shooteable = _closestObject.GetComponent<ShootableObject>();
+            var obj = _closestObject.GetComponent<Object>();
+
+            HandleAspirating(_closestObject.GetComponent<Collider>(), aspirable, shooteable, obj);
+        }
+
+        foreach (var obj in _objects)
+        {
+            if (!obj.IsLeaf()) continue;
+
+            HandleAspirating(obj.GetComponent<Collider>(), obj.GetComponent<IAspirable>(), obj.GetComponent<ShootableObject>(), obj.GetComponent<Object>());
+        }
+
     }
 
     private void HandleAspirating(Collider other, IAspirable aspirable, ShootableObject shooteable, Object obj)
     {
-        if ((int)obj.weight > _blower.Player.Stats.Level + 1) return; // CHECK
 
         if (_blower.IsAspirating())
         {

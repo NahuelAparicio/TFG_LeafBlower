@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class Utils 
 {
@@ -15,6 +16,22 @@ public class Utils
         Vector3 right = cam.transform.right;
         right.y = 0;
         return right.normalized;
+    }
+
+    public static void AddToList<T>(List<T> list, T obj)
+    {
+        if(!list.Contains(obj))
+        {
+            list.Add(obj);
+        }
+    }
+
+    public static void RemoveFromList<T>(List<T> list, T obj)
+    {
+        if (list.Contains(obj))
+        {
+            list.Remove(obj);
+        }
     }
 }
 

@@ -10,7 +10,7 @@ public class Enums
     public enum Movements { Dash, Jump, Hover, GroundMovement, AirMovement }
     public enum NPCMovements { InPlace, MoveAround, MoveSequence }
     public enum ModifierType { Flat, PercentualToBase }
-    public enum BlowType { RealisticBlow, PuzzleBlow, DirectionalBlow }
+    public enum BlowType { RealisticBlow, DirectionalBlow }
     public enum DialogueTypingType { NoEffect, TypingMachine }
 
     public enum CharacterNames

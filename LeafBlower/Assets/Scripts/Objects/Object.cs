@@ -63,4 +63,8 @@ public class Object : MonoBehaviour
                 break;
         }
     }
+
+    public virtual bool CanBeMoved(int level) => true;
+
+    public virtual bool IsLeaf() => weight == Enums.ObjectWeight.Leaf;
 }
