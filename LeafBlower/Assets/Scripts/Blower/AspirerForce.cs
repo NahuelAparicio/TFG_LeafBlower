@@ -9,14 +9,18 @@ public class AspirerForce : BaseLeafBlower
     private LayerMask movable;
     #endregion
 
-
+    public float _shootDelayThreshold = 0.25f;
     private float _timePressed = 0;
+    public float TimePressed => _timePressed;
     public Transform targetToaim;
     private Vector3 targetToAimDefaultPos;
 
     public float addedForceOnMaxPressed;
     public float _maxTimeToShoot;
     public float maxOffsetYTargetToAim;
+
+
+    private bool wasShootPressed = false;
     protected override void Awake()
     {
         base.Awake();
@@ -35,33 +39,39 @@ public class AspirerForce : BaseLeafBlower
 
         if (_blower.IsShooting())
         {
+            if (!wasShootPressed)
+                wasShootPressed = true;
+
             _timePressed += Time.deltaTime;
-            _blower.Hud.UpdateShootBarForce(_timePressed, _maxTimeToShoot);
+            float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
 
-            float normalizedTime = Mathf.Clamp01(_timePressed / _maxTimeToShoot);
+            _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
 
+            float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
             float force = Mathf.Lerp(_blower.Stats.ShootForce, _blower.Stats.ShootForce + addedForceOnMaxPressed, normalizedTime);
 
             UpdateTargetToAimPosition(normalizedTime);
-
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, force);
 
-            if (_timePressed >= _maxTimeToShoot)
+            if (_timePressed >= _maxTimeToShoot + _shootDelayThreshold)
             {
-                _timePressed = _maxTimeToShoot;
+                wasShootPressed = false;
+                _timePressed = _maxTimeToShoot + _shootDelayThreshold;
                 ShootAction(force);
             }
         }
         else
         {
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, _blower.Stats.ShootForce);
-
-            if (_timePressed != 0)
+            if(_timePressed < _shootDelayThreshold && wasShootPressed)
             {
-                ShootAction(_blower.Stats.ShootForce);
+                wasShootPressed = false;
+                _blower.Aspirer.ShootAction(_blower.Stats.ShootForce);
             }
         }
     }
+
+    public bool IsNormalShoot() => _timePressed < _shootDelayThreshold;
 
     private void UpdateTargetToAimPosition(float normalizedTime)
     {
@@ -75,7 +85,7 @@ public class AspirerForce : BaseLeafBlower
            targetToaim.localPosition = Vector3.Lerp(targetToaim.localPosition, targetToAimDefaultPos, Time.deltaTime * 5);
     }
 
-    private void ShootAction(float force)
+    public void ShootAction(float force)
     {
         Vector3 forceDir = force * _blower.FirePoint.forward;
 

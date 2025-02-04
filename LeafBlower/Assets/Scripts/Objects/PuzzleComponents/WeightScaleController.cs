@@ -3,11 +3,16 @@ using UnityEngine;
 public class WeightScaleController : MonoBehaviour
 {
     public float maximumRange = 5f; 
-    public float moveSpeed = 2f;    
+    public float moveSpeed = 2f;
+    public float abruptChangeFactor = .5f;
 
     public WSPlatform platformLeft, platformRight;
 
-    private Vector3 _leftInitialPos, _rightInitialPos; 
+    private Vector3 _leftInitialPos, _rightInitialPos;
+    private int _previousWeightDifference;
+    [SerializeField] private PlayerController _player;
+
+    [SerializeField] private TrackingPlatform _trackingPlatformLeft, _trackingPlatformRight;
 
     private void Start()
     {
@@ -23,12 +28,19 @@ public class WeightScaleController : MonoBehaviour
     private void UpdatePlatforms()
     {
         int totalWeight = platformLeft.CurrentWeight + platformRight.CurrentWeight;
+        int weightDifference = platformLeft.CurrentWeight - platformRight.CurrentWeight;
 
         if (totalWeight == 0)
         {
             platformLeft.transform.position = Vector3.Lerp(platformLeft.transform.position, _leftInitialPos, moveSpeed * Time.deltaTime);
             platformRight.transform.position = Vector3.Lerp(platformRight.transform.position, _rightInitialPos, moveSpeed * Time.deltaTime);
             return;
+        }
+
+        int weightChange = Mathf.Abs(weightDifference - _previousWeightDifference);
+        if (weightChange > abruptChangeFactor)
+        {
+            LaunchPlayer();
         }
 
         // Calculate the target offset based on weight difference
@@ -40,5 +52,13 @@ public class WeightScaleController : MonoBehaviour
 
         platformLeft.transform.position = Vector3.Lerp(platformLeft.transform.position, leftTargetPos, moveSpeed * Time.deltaTime);
         platformRight.transform.position = Vector3.Lerp(platformRight.transform.position, rightTargetPos, moveSpeed * Time.deltaTime);
+
+        _previousWeightDifference = weightDifference; 
+    }
+
+    private void LaunchPlayer()
+    {
+        if(_trackingPlatformLeft.IsPlayerInPlatform || _trackingPlatformRight.IsPlayerInPlatform)
+            _player.Rigidbody.AddForce(Vector3.up * 100, ForceMode.Impulse);
     }
 }

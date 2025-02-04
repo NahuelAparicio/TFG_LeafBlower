@@ -10,7 +10,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     private float distanceBetweenParentAndObject;
 
     public Quaternion currentRotation;
-
+    private float _currentTime = 0f;
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +19,15 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
     protected void Update()
     {
+        if(_hasBeenShoot)
+        {
+            _currentTime += Time.deltaTime;
+            if(_currentTime >= timeToEnableAspirating)
+            {
+                _hasBeenShoot = false;
+                _currentTime = 0f;
+            }
+        }
         if (_isAttached)
         {
             Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
@@ -46,13 +55,13 @@ public class ShootableObject : Object, IAspirable, IAttacheable
             _hasBeenShoot = true;
             Detach();
             _rb.AddForce(force, ForceMode.Impulse);
-            Invoke(nameof(ResetAspiratable), timeToEnableAspirating);
         }
     }
 
 
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
+        _currentTime = 0;
         currentRotation = _originalRotation;
         transform.rotation = _originalRotation;
         tag = "Untagged";

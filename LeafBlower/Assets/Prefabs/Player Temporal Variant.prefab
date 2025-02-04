@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiImage: {fileID: 0}
-  weight: 3
+  weight: 1
 --- !u!1001 &798450720325391733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2110,10 +2110,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6789903918058447097}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14b022e50ecd23a4595f7e046d23067e,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 727867876206758687}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2501,6 +2497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverThreshold: 0.25
+  _jumpBufferTime: 0.25
 --- !u!114 &4106401613235755447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2599,24 +2596,6 @@ MonoBehaviour:
   - {fileID: 8812444811125782013}
   - {fileID: 6504494227688473897}
   - {fileID: 2132822348344272267}
---- !u!114 &6789903918058447097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9150275847382200016}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15b8e22c35f1704dbe97a480bc3c73c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetToAim: {fileID: 4686835287840660688}
-  movementRangeX: {x: 0, y: 0}
-  movementRangeY: {x: -3, y: 3}
-  movementSpeed: 10
-  cinemachine: {fileID: 0}
-  moveFreeLook: 0
 --- !u!114 &727867876206758687
 MonoBehaviour:
   m_ObjectHideFlags: 0

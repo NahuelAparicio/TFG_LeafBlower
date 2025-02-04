@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WSPlatform : MonoBehaviour
@@ -9,31 +10,36 @@ public class WSPlatform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Object obj = other.GetComponent<Object>();
-        if (obj)
-        {
-            if (obj.weight != Enums.ObjectWeight.Leaf)
-            {
-                UpdateWeight((int)obj.weight);
-            //    other.transform.SetParent(gameObject.transform);
-            }
-        }
+
+        if (!obj) return;
+        if (obj.weight == Enums.ObjectWeight.Leaf) return;
+
+        UpdateWeight((int)obj.weight);
     }
 
     private void OnTriggerExit(Collider other)
     {
         Object obj = other.GetComponent<Object>();
-        if (obj)
-        {
-            if (obj.weight != Enums.ObjectWeight.Leaf)
-            {
-                UpdateWeight(-(int)obj.weight);
-            //    other.transform.SetParent(null);
-            }
-        }
+        if (!obj) return;
+        if (obj.weight == Enums.ObjectWeight.Leaf) return;
+
+        UpdateWeight(-(int)obj.weight);
     }
 
     private void UpdateWeight(int weight)
     {
         _currentWeight += weight;
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
