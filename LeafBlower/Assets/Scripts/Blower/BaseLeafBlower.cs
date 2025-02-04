@@ -5,8 +5,6 @@ public class BaseLeafBlower : MonoBehaviour
 {
     protected BlowerController _blower;
 
-  //  protected List<MovableObject> _objects = new List<MovableObject>();
-
     protected HashSet<Object> _objects = new HashSet<Object>();
 
     protected Object _closestObject;
@@ -35,7 +33,40 @@ public class BaseLeafBlower : MonoBehaviour
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        UpdateClosestMovable();        
+        UpdateClosestMovable();
+
+        if(_blower.IsBlowing() && !_blower.Aspirer.attachableObject.IsAttached)
+        {
+            HandleBlow();
+        }
+
+        if (_blower.IsAspirating())
+        {
+            if(_closestObject != null)
+                HandleAspire(_closestObject);
+        }
+        else
+        {
+            if(!_blower.IsShooting())
+            {
+                if (_closestObject != null)
+                    HandleAspire(_closestObject);
+            }
+        }
+
+        foreach (var obj in _objects)
+        {
+            if (!obj.IsLeaf()) continue;
+
+            if(_blower.IsAspirating())
+            {
+                HandleAspire(obj);
+            }
+            if (_blower.IsBlowing() && !_blower.Aspirer.attachableObject.IsAttached)
+            {
+                BlowLeaf(obj.GetComponent<MovableObject>());
+            }
+        }
     }
 
     protected virtual void OnTriggerExit(Collider other)
@@ -50,7 +81,7 @@ public class BaseLeafBlower : MonoBehaviour
         }
     }
 
-    protected void UpdateClosestMovable()
+    public void UpdateClosestMovable()
     {
         if (_objects.Count == 0)
         {
@@ -92,6 +123,26 @@ public class BaseLeafBlower : MonoBehaviour
         if(newClosest != null)
             _closestObject.EnableOutline();
 
+    }
+
+    protected virtual void BlowLeaf(MovableObject obj)
+    {
+        obj.OnBlowableInteracts(GetBlowForceDir(obj), obj.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+    }
+
+    protected virtual void HandleBlow() { }
+
+    protected virtual void HandleAspire(Object obj) 
+    {
+        if (!obj.CanBeMoved(_blower.Player.Stats.Level)) return;
+    }
+    protected virtual void HandleNotAspirating(Collider other, ShootableObject shooteable) { }
+
+    protected Vector3 GetBlowForceDir(Object obj) => _blower.FirePoint.forward * CalculateForceByDistance(obj.gameObject);
+    protected float CalculateForceByDistance(GameObject go)
+    {
+        float distance = Vector3.Distance(_blower.FirePoint.position, go.transform.position);
+        return _blower.Stats.BlowForce / Mathf.Max(1, distance);
     }
 
 }

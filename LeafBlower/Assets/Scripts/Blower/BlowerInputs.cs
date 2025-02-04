@@ -22,8 +22,8 @@ public class BlowerInputs : MonoBehaviour
 
     private void RotateObject_performed(InputAction.CallbackContext obj)
     {
-        if(_blower.Aspirer.IsObjectAttached)
-            _blower.Aspirer.AttachedObject.Item2.OnRotate(_blower.FirePoint.forward);
+        if(_blower.Aspirer.attachableObject.IsAttached)
+            _blower.Aspirer.attachableObject.Shootable.OnRotate(_blower.FirePoint.forward);
     }
 
     public bool IsBlowingInputPressed() => _actions.Blower.Blow.IsPressed();
@@ -65,15 +65,15 @@ public class BlowerInputs : MonoBehaviour
     }
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
-        if (!_blower.Aspirer.IsObjectAttached && !_blower.Player.Inventory.IsObjectSaved()) return;
+        if (!_blower.Aspirer.attachableObject.IsAttached && !_blower.Player.Inventory.IsObjectSaved()) return;
         if(_blower.Player.Inventory.IsObjectSaved())
         {
             _blower.Player.Inventory.RemoveObject();
         }
         else
         {
-            _blower.Player.Inventory.SaveObject(_blower.Aspirer.AttachedObject.Item1.gameObject, _blower.Aspirer.AttachedObject.Item1.gameObject.GetComponent<Object>().uiImage);
-            _blower.Aspirer.SaveObject();   
+            _blower.Player.Inventory.SaveObject(_blower.Aspirer.attachableObject.Rigidbody.gameObject, _blower.Aspirer.attachableObject.Rigidbody.gameObject.GetComponent<Object>().uiImage);
+            _blower.Aspirer.attachableObject.DetachOnSave();   
         }
     }
 

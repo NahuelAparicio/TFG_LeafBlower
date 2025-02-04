@@ -5,7 +5,7 @@ public class FollowTargetCamera : MonoBehaviour
     [SerializeField] private PlayerController _player;
     [SerializeField] private Transform _followTarget;
 
-    [SerializeField] private float _rotationalSpeed = 30f;
+    //[SerializeField] private float _rotationalSpeed = 30f;
     [SerializeField] private float _topClamp = 70f;
     [SerializeField] private float _bottomClamp = -40f;
 

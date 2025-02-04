@@ -25,18 +25,23 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveObject()
     {
+        if(!_player.CheckCollisions.IsGrounded)
+            objectSaved.transform.position = transform.position;
+
+
         objectSaved.SetActive(true);
         objectImage.gameObject.SetActive(false);
 
         if (_player.BlowerController.IsAspirating())
         {
-            _player.BlowerController.Aspirer.AttachObject(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, objectSaved.GetComponent<ShootableObject>());
+            _player.BlowerController.Aspirer.attachableObject.Attach(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, _player.BlowerController.FirePoint);
         }
         else
         {
             objectSaved.GetComponent<IAttacheable>().Detach();
         }
         objectSaved = null;
+
     }
 
     public bool IsObjectSaved() => objectSaved != null;

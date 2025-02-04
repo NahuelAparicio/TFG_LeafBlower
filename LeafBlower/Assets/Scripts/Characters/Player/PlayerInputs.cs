@@ -9,6 +9,10 @@ public class PlayerInputs : MonoBehaviour
     private float _jumpPressTime = -1f;
     [SerializeField] private float _hoverThreshold = 0.25f;
 
+    private float _jumpBufferTime = 0.125f;
+    public float JumpBufferTime => _jumpBufferTime;
+    public float LastJumpPressedTime => _jumpPressTime;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -63,9 +67,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        if (!_player.CanMovePlayer() || _player.Movement.isJumping) return;
+        if (!_player.CanMovePlayer()) return;
+
         _jumpPressTime = Time.time;
+
         _player.Movement.onStartHovering = true;
+
+        if (_player.Movement.isJumping && _player.CheckCollisions.IsGrounded) return;
+
         _player.Movement.Jump();
     }
 

@@ -28,14 +28,18 @@ public class PlayerMovement : MonoBehaviour
     public bool onStartHovering = false;
     public float timeToResetHover = 0.5f;
 
+    [Header("Jump:")]
+    private float _lastGroundedTime = -1f;
+
+
     private MovementStateHandler _stateHandler;
     private CustomGravityHandler _gravityHandler;
     private Vector3 _moveDirection;
-    public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
     private Vector3 _lastMoveDirection;
-    public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
-
     private float _moveSpeed;
+
+    public Vector3 MoveDirection { get => _moveDirection; set { _moveDirection = value; } }
+    public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
 
     private void Awake()
@@ -50,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
         _player.CheckCollisions.UpdateTerrainSlopeAngle();
 
         _stateHandler.HandleState();
+
+        if (Time.time - _lastGroundedTime <= _player.Inputs.JumpBufferTime &&
+            Time.time - _player.Inputs.LastJumpPressedTime <= _player.Inputs.JumpBufferTime)
+        {
+            Jump(); 
+        }
 
         if (_player.CheckCollisions.IsGrounded)
         {
@@ -74,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _gravityHandler.ApplyAdditiveGravity(_player.Rigidbody);
-        }
+        }            
 
         if (!_player.isInteracting && Mathf.Abs(_player.Rigidbody.velocity.y) > _velocityToStartFallAnimation)
         {
@@ -84,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGroundBehavior()
     {
+        _lastGroundedTime = Time.time;
+
         if (_player.CurrentCharacterState != Enums.CharacterState.Idle)
         {
             ClampSpeed(_moveSpeed);
@@ -109,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 targetDirection = Vector3.zero;
 
-        if (_player.Inputs.IsMovingRightJoystick() && _player.BlowerController.Aspirer.IsObjectAttached)
+        if (_player.Inputs.IsMovingRightJoystick() && _player.BlowerController.Aspirer.attachableObject.IsAttached)
         {
             targetDirection = GetRotationDirectionNormalized();
         }
@@ -150,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
-        if (isJumping || !_player.CheckCollisions.IsGrounded) return;
+        if (isJumping) return;
 
         _player.Animations.HandleJumpAnimations();
 

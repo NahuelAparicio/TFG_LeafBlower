@@ -16,7 +16,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         base.Awake();
         _isAttached = false;
         _hasBeenShoot = false;
-
     }
     protected void Update()
     {
@@ -62,14 +61,12 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _rb.angularVelocity = Vector3.zero;
         distanceBetweenParentAndObject = Vector3.Distance(transform.position, transform.parent.position);
         _rb.useGravity = false;
-      //  _rb.constraints = RigidbodyConstraints.FreezeRotation;
         _isAttached = true;
     }
     public void Detach()
     {
         gameObject.layer = LayerMask.NameToLayer("Ground");
         tag = "IsWall";
-     //   _rb.constraints = RigidbodyConstraints.None;
         _rb.useGravity = true;
         transform.SetParent(null);
         _isAttached = false;
@@ -82,6 +79,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         transform.RotateAround(transform.parent.position, axis, 90);
         currentRotation = transform.rotation;
     }
-    //currentRotation *= Quaternion.AngleAxis(90, axis); // 90 degrees around the given axis
-    //transform.rotation = currentRotation;
+
+    public override bool CanBeMoved(int level) => (int)weight <= level;
 }

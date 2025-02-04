@@ -49,7 +49,7 @@ public class BlowerController : MonoBehaviour
     public bool CanUseLeafBlower() => _staminaHandler.HasStamina() && canUseLeafBlower;
 
     //Returns if the object attached is being shoot
-    public bool IsShooting() => _aspirer.IsObjectAttached && _inputs.IsBlowingInputPressed();
+    public bool IsShooting() => _aspirer.attachableObject.IsAttached && _inputs.IsBlowingInputPressed();
 
     public Vector3 GetPlayerDirection() => _player.Inputs.GetMoveDirection();
 

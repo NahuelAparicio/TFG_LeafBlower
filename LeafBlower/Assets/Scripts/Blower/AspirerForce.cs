@@ -1,21 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AspirerForce : BaseLeafBlower
 {
     #region Variables
+    public AttachableObject attachableObject;
     [SerializeField] private float _distanceToAttach; //Minim distance to attach the object to the point
-    private TrajectoryHandler _trajectory;
-    private bool _isObjectAttached;
-    private (Rigidbody, ShootableObject) _attachedObject;
-    private LayerMask _ground, _movable;
-    #endregion
-    #region Properties
-    public bool IsObjectAttached => _isObjectAttached;
-    public (Rigidbody, ShootableObject) AttachedObject => _attachedObject;
+    private LayerMask ground;
+    private LayerMask movable;
     #endregion
 
-    private Dictionary<Collider, (IAspirable, IShooteable, Rigidbody)> _componentCache = new Dictionary<Collider, (IAspirable, IShooteable, Rigidbody)>();
 
     private float _timePressed = 0;
     public Transform targetToaim;
@@ -27,16 +20,14 @@ public class AspirerForce : BaseLeafBlower
     protected override void Awake()
     {
         base.Awake();
-        _trajectory = GetComponent<TrajectoryHandler>();
-        _ground = LayerMask.NameToLayer("Ground");
-        _movable = LayerMask.NameToLayer("Movable");
         targetToAimDefaultPos = targetToaim.localPosition;
-
+        ground = LayerMask.NameToLayer("Ground");
+        movable = LayerMask.NameToLayer("Movable");
     }
 
     protected override void Update()
     {
-        if(!_isObjectAttached)
+        if(!attachableObject.IsAttached)
         {
             ResetTargetToAimPosition();
             return;
@@ -53,7 +44,7 @@ public class AspirerForce : BaseLeafBlower
 
             UpdateTargetToAimPosition(normalizedTime);
 
-            _trajectory.DrawTrajectory(_blower.FirePoint, _attachedObject.Item1, force);
+            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, force);
 
             if (_timePressed >= _maxTimeToShoot)
             {
@@ -63,7 +54,7 @@ public class AspirerForce : BaseLeafBlower
         }
         else
         {
-            _trajectory.DrawTrajectory(_blower.FirePoint, _attachedObject.Item1, _blower.Stats.ShootForce);
+            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, _blower.Stats.ShootForce);
 
             if (_timePressed != 0)
             {
@@ -89,112 +80,78 @@ public class AspirerForce : BaseLeafBlower
         Vector3 forceDir = force * _blower.FirePoint.forward;
 
         _blower.StaminaHandler.ConsumeValueStamina(20);
-        _attachedObject.Item2.OnShoot(forceDir);
+        attachableObject.Shootable.OnShoot(forceDir);
         _timePressed = 0;
         _blower.Hud.ResetShootBarForce();
-        DetachObject();
+        attachableObject.Detach();
     }
 
-    protected override void OnTriggerStay(Collider other)
+    protected override void HandleAspire(Object obj)
     {
+        base.HandleAspire(obj);
 
-        if (!_blower.IsAspirating()) return;
-
-        if(_closestObject != null)
+        if (_closestObject != null)
         {
             MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
             if (movableObject != null)
             {
                 movableObject.SetKinematic(false);
             }
-
-            var aspirable = _closestObject.GetComponent<IAspirable>();
-            var shooteable = _closestObject.GetComponent<ShootableObject>();
-            var obj = _closestObject.GetComponent<Object>();
-
-            HandleAspirating(_closestObject.GetComponent<Collider>(), aspirable, shooteable, obj);
         }
 
-        foreach (var obj in _objects)
-        {
-            if (!obj.IsLeaf()) continue;
+        Collider collider = obj.GetComponent<Collider>();
+        IAspirable aspirable = obj.GetComponent<IAspirable>();
+        ShootableObject shooteable = obj.GetComponent<ShootableObject>();
 
-            HandleAspirating(obj.GetComponent<Collider>(), obj.GetComponent<IAspirable>(), obj.GetComponent<ShootableObject>(), obj.GetComponent<Object>());
+        if(!_blower.IsAspirating())
+        {
+            if (!_blower.IsShooting())
+            {
+                HandleNotAspirating(collider, shooteable);
+            }
+            return;
         }
 
-    }
+        if (attachableObject.IsAttached) return;  
 
-    private void HandleAspirating(Collider other, IAspirable aspirable, ShootableObject shooteable, Object obj)
-    {
+        if (collider.gameObject.layer != movable)
+            collider.gameObject.layer = movable;
 
-        if (_blower.IsAspirating())
+        Vector3 pos = collider.ClosestPoint(_blower.FirePoint.position);
+
+        if (_blower.DistanceToFirePoint(pos) <= _distanceToAttach && (int)obj.weight <= _blower.Player.Stats.Level)
         {
-            if (_isObjectAttached) return;
-
-            if (other.gameObject.layer != _movable)
-                other.gameObject.layer = _movable;
-
-            Vector3 pos = other.ClosestPoint(_blower.FirePoint.position);
-
-            if (_blower.DistanceToFirePoint(pos) <= _distanceToAttach && (int)obj.weight <= _blower.Player.Stats.Level)
-            {
-                TryAttachObject(other, pos, shooteable);
-            }
-            else
-            {
-                Vector3 forceDir = _blower.DirectionToFirePointNormalized(other.transform.position) * _blower.Stats.AspireForce;
-                aspirable.OnAspiratableInteracts(forceDir);
-            }
+            TryAttachObject(collider, pos, shooteable);
         }
         else
         {
-            if(!_blower.IsShooting())
-                HandleNotAspirating(other, shooteable);
+            Vector3 forceDir = _blower.DirectionToFirePointNormalized(collider.transform.position) * _blower.Stats.AspireForce;
+            aspirable.OnAspiratableInteracts(forceDir);
         }
     }
+
     private void TryAttachObject(Collider other, Vector3 closestPoint, ShootableObject shooteable)
     {
         if (shooteable != null)
         {
             if (other.GetComponent<ShootableObject>().IsAttached) return;
 
-            AttachObject(other.attachedRigidbody, closestPoint, shooteable);
+            attachableObject.Attach(other.attachedRigidbody, closestPoint, _blower.FirePoint);
         }
         else
         {
             other.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
-    private void HandleNotAspirating(Collider other, ShootableObject shooteable)
+    protected override void HandleNotAspirating(Collider other, ShootableObject shooteable)
     {
-        if(other.gameObject.layer != _ground)
-            other.gameObject.layer = _ground;
+        if(other.gameObject.layer != ground)
+            other.gameObject.layer = ground;
         if (shooteable == null) return;
         if (!shooteable.IsAttached) return;
-        
-        DetachObject();
-    }
-
-    public void AttachObject(Rigidbody rb, Vector3 closestPoint, ShootableObject shooteable)
-    {
-        _trajectory.EnableLineRender();
-        _attachedObject = (rb, shooteable);
-        rb.GetComponent<IAttacheable>().Attach(_blower.FirePoint, closestPoint);
-        _isObjectAttached = true;
-    }
-
-    public void DetachObject()
-    {
-        _trajectory.DisableLineRender();
-        _attachedObject.Item1.GetComponent<IAttacheable>().Detach();
-        _attachedObject = (null, null);
-        _isObjectAttached = false;
-    }
-
-    public void SaveObject()
-    {
-        _trajectory.DisableLineRender();
-        _attachedObject = (null, null);
-        _isObjectAttached = false;
+        if(attachableObject.IsAttached)
+        {
+            attachableObject.Detach();
+        }
     }
 }

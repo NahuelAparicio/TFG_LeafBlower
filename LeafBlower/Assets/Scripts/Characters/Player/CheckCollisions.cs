@@ -52,10 +52,10 @@ public class CheckCollisions : MonoBehaviour
     {
         direction = _direction;
         Vector3 low, middle, high, shootPoint;
-        if(_player.BlowerController.Aspirer.IsObjectAttached)
+        if(_player.BlowerController.Aspirer.attachableObject.IsAttached)
         {
             direction = _player.BlowerController.FirePoint.transform.forward;
-            low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
+            low = _player.BlowerController.Aspirer.attachableObject.Rigidbody.transform.position;
             middle = low;
             high = low;           
         }
