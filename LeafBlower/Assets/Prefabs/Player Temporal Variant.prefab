@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 822173225672911982}
   - component: {fileID: 347116612067083758}
   - component: {fileID: 8777726888365060625}
+  - component: {fileID: 3790720186303312442}
   m_Layer: 8
   m_Name: Actioner
   m_TagString: Untagged
@@ -857,6 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f9a4c43e7ddd48ab783b8d7049fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachableObject: {fileID: 3790720186303312442}
   _distanceToAttach: 0.1
   targetToaim: {fileID: 4686835287840660688}
   addedForceOnMaxPressed: 5
@@ -979,6 +981,19 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3790720186303312442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121540392717833761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716e445db6fe4de4d95fa643decde36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectory: {fileID: 347116612067083758}
 --- !u!1 &7374632889170115555
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,6 +2473,7 @@ MonoBehaviour:
   isSprinting: 0
   onStartHovering: 0
   timeToResetHover: 1
+  lastGroundedTime: -1
 --- !u!114 &1589580805953879826
 MonoBehaviour:
   m_ObjectHideFlags: 0

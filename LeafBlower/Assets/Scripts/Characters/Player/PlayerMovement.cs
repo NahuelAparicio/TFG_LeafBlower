@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public float timeToResetHover = 0.5f;
 
     [Header("Jump:")]
-    private float _lastGroundedTime = -1f;
+    public float lastGroundedTime = -1f;
 
 
     private MovementStateHandler _stateHandler;
@@ -54,12 +54,6 @@ public class PlayerMovement : MonoBehaviour
         _player.CheckCollisions.UpdateTerrainSlopeAngle();
 
         _stateHandler.HandleState();
-
-        if (Time.time - _lastGroundedTime <= _player.Inputs.JumpBufferTime &&
-            Time.time - _player.Inputs.LastJumpPressedTime <= _player.Inputs.JumpBufferTime)
-        {
-            Jump(); 
-        }
 
         if (_player.CheckCollisions.IsGrounded)
         {
@@ -94,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleGroundBehavior()
     {
-        _lastGroundedTime = Time.time;
+        lastGroundedTime = Time.time;
 
         if (_player.CurrentCharacterState != Enums.CharacterState.Idle)
         {

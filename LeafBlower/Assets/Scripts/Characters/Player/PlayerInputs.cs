@@ -9,9 +9,7 @@ public class PlayerInputs : MonoBehaviour
     private float _jumpPressTime = -1f;
     [SerializeField] private float _hoverThreshold = 0.25f;
 
-    private float _jumpBufferTime = 0.125f;
-    public float JumpBufferTime => _jumpBufferTime;
-    public float LastJumpPressedTime => _jumpPressTime;
+    [SerializeField] private float _jumpBufferTime = 0.125f;
 
     private void Awake()
     {
@@ -73,9 +71,12 @@ public class PlayerInputs : MonoBehaviour
 
         _player.Movement.onStartHovering = true;
 
-        if (_player.Movement.isJumping && _player.CheckCollisions.IsGrounded) return;
+        if (_player.Movement.isJumping) return;        
 
-        _player.Movement.Jump();
+        if (Time.time - _player.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
+        {
+            _player.Movement.Jump();
+        }
     }
 
     private void Jump_canceled(InputAction.CallbackContext context)
