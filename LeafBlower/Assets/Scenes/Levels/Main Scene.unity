@@ -1827,8 +1827,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57954179}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.822, y: -21.15, z: -53.6465}
-  m_LocalScale: {x: 3.7742546, y: 60.79999, z: 10.610052}
+  m_LocalPosition: {x: -4.822, y: -21.15, z: -52.0611}
+  m_LocalScale: {x: 3.7742546, y: 60.79999, z: 13.780335}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 539361285}
@@ -5186,6 +5186,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169686993}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &173181117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 173181118}
+  m_Layer: 0
+  m_Name: Invisible Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &173181118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173181117}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1689354750}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &174525909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24432,6 +24463,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 933421307}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &934444847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7138523960205921502, guid: b1189ffffd68e3b46a1e5f786bf4156b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1918289865}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4eb1c920d7e8d049bb906f74e9d4165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &937263327
 GameObject:
   m_ObjectHideFlags: 0
@@ -39719,6 +39762,41 @@ PrefabInstance:
       propertyPath: _dialogueTexts.Array.data[4].character
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 934444847}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerStats, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1882849929889183972, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
       propertyPath: m_Height
@@ -43224,6 +43302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 173181118}
   - {fileID: 539361285}
   - {fileID: 1506675545}
   - {fileID: 2022860259}

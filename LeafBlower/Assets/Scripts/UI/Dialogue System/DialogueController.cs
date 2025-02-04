@@ -71,6 +71,7 @@ public class DialogueController : MonoBehaviour
             {
                 _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
                 _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+                _currentDialogue[_indexDialogue].Invoke();
                 _indexDialogue++;
             }
             else

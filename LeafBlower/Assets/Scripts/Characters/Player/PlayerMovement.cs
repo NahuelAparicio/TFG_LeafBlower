@@ -183,7 +183,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool IsHovering()
     {
-      //  if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+        //  if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
+        if (_player.Stats.Level <= 0) return false;
+
         if (!_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
                 
         _player.BlowerController.isHovering = true;
