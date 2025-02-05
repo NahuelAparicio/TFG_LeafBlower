@@ -147,14 +147,7 @@ public class BaseLeafBlower : MonoBehaviour
 
     public void CheckForNulls()
     {
-
-        foreach (var obj in _objects)
-        {
-            if(obj.isActiveAndEnabled)
-            {
-                _objects.Remove(obj);
-            }
-        }
+        _objects.RemoveWhere(obj => obj == null || !obj.isActiveAndEnabled);
     }
 
 }

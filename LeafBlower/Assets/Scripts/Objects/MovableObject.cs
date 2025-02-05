@@ -26,6 +26,7 @@ public class MovableObject : Object, IBlowable, IAspirable
                 {
                     force.y += Mathf.Abs(force.magnitude) * 0.5f; // Scale this to control how much upward force to add
                 }
+                force /= 2;
                 _rb.AddForceAtPosition(force, point); // Applies force in the nearest point between the object and the blower (More Realistic)
                 break;
             case Enums.BlowType.DirectionalBlow:

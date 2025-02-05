@@ -20,5 +20,5 @@ public class Enums
         Noseque
     }
 
-    public enum ObjectWeight {Leaf = 0, Low, Medium, Heavy, SuperHeavy, MegaHeavy }
+    public enum ObjectWeight {Leaf = 0, Low , Medium, Heavy, SuperHeavy, MegaHeavy }
 }
