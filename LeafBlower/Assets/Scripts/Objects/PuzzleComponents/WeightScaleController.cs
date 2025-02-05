@@ -62,15 +62,11 @@ public class WeightScaleController : MonoBehaviour
         float leftPlatformDeltaY = platformLeft.transform.position.y - _previousYLeft;
         float rightPlatformDeltaY = platformRight.transform.position.y - _previousYRight;
 
-        Debug.Log("Right Platform ?Y in 0.7s: " + rightPlatformDeltaY);
-        Debug.Log("Left Platform ?Y in 0.7s: " + leftPlatformDeltaY);
 
-        // If left platform dropped significantly, launch player from right
         if (_trackingPlatformRight.IsPlayerInPlatform && leftPlatformDeltaY < -abruptChangeFactor)
         {
             _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.left * 5, ForceMode.Impulse);
         }
-        // If right platform dropped significantly, launch player from left
         else if (_trackingPlatformLeft.IsPlayerInPlatform && rightPlatformDeltaY < -abruptChangeFactor)
         {
             _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.right * 5, ForceMode.Impulse);

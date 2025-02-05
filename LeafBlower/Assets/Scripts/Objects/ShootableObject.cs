@@ -18,8 +18,9 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _isAttached = false;
         _hasBeenShoot = false;
     }
-    protected void Update()
+    protected override void Update()
     {
+        base.Update();
         if(_hasBeenShoot)
         {
             _currentTime += Time.deltaTime;

@@ -9,12 +9,35 @@ public class Object : MonoBehaviour
 
     protected Quaternion _originalRotation;
 
+    protected Vector3 _spawnPosition;
+
     protected virtual void Awake()
     {
+        _spawnPosition = transform.position;
         _rb = GetComponent<Rigidbody>();
         _outline = GetComponent<Outline>();
         SetRibidBodyWeight();
         _originalRotation = transform.rotation;
+    }
+
+    protected virtual void Update()
+    {
+        if(Time.frameCount % 70 == 0)
+        {
+            if(transform.position.y <=  -45)
+            {
+                if(gameObject.transform.parent != null)
+                {
+                    gameObject.transform.parent.position = _spawnPosition;
+                }
+                else
+                {
+                    transform.position = _spawnPosition;
+                }
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
+            }
+        }
     }
 
     public virtual void EnableOutline() 
