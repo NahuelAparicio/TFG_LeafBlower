@@ -100,7 +100,7 @@ public class BaseLeafBlower : MonoBehaviour
         foreach (var obj in _objects)
         {
             float distance = Vector3.Distance(_blower.FirePoint.position, obj.transform.position);
-            if (distance < minDistance && obj.CanBeMoved(_blower.Player.Stats.Level) && !obj.IsLeaf())
+            if (distance < minDistance && obj.CanBeMoved(_blower.Player.Stats.Level) && !obj.IsLeaf() && obj.gameObject != _blower.Player.Inventory.objectSaved)
             {
                 minDistance = distance;
                 newClosest = obj;
@@ -143,6 +143,18 @@ public class BaseLeafBlower : MonoBehaviour
     {
         float distance = Vector3.Distance(_blower.FirePoint.position, go.transform.position);
         return _blower.Stats.BlowForce / Mathf.Max(1, distance);
+    }
+
+    public void CheckForNulls()
+    {
+
+        foreach (var obj in _objects)
+        {
+            if(obj.isActiveAndEnabled)
+            {
+                _objects.Remove(obj);
+            }
+        }
     }
 
 }

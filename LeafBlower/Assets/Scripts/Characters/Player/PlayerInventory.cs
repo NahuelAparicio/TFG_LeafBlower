@@ -18,16 +18,18 @@ public class PlayerInventory : MonoBehaviour
     public void SaveObject(GameObject obj, Sprite sprite )
     {
         objectSaved = obj;
-        obj.SetActive(false);
+        objectSaved.SetActive(false);
         objectImage.sprite = sprite;
         objectImage.gameObject.SetActive(true);
+        _player.BlowerController.Aspirer.CheckForNulls();
     }
 
     public void RemoveObject()
     {
-        if(!_player.CheckCollisions.IsGrounded)
-            objectSaved.transform.position = transform.position;
+        if (_player.BlowerController.Aspirer.attachableObject.IsAttached) return;
 
+        if (!_player.CheckCollisions.IsGrounded)
+            objectSaved.transform.position = transform.position;
 
         objectSaved.SetActive(true);
         objectImage.gameObject.SetActive(false);
