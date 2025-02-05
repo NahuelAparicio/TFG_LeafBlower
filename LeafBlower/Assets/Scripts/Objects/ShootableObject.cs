@@ -7,6 +7,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
 
     public float timeToEnableAspirating = 0.5f;
     private bool _hasBeenShoot = false;
+    public bool HasBeenShoot => _hasBeenShoot;
     private float distanceBetweenParentAndObject;
 
     public Quaternion currentRotation;
@@ -52,8 +53,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     {
         if(_isAttached)
         {
-            _hasBeenShoot = true;
             Detach();
+            _hasBeenShoot = true;
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }

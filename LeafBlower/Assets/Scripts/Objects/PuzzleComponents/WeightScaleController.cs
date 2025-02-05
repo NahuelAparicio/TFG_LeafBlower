@@ -5,43 +5,46 @@ public class WeightScaleController : MonoBehaviour
     public float maximumRange = 5f; 
     public float moveSpeed = 2f;
     public float abruptChangeFactor = .5f;
+    public float timeToCheck = 0.25f;
 
     public WSPlatform platformLeft, platformRight;
 
     private Vector3 _leftInitialPos, _rightInitialPos;
-    private int _previousWeightDifference;
     [SerializeField] private PlayerController _player;
 
     [SerializeField] private TrackingPlatform _trackingPlatformLeft, _trackingPlatformRight;
 
+    private float _previousYLeft, _previousYRight;
+    private float _currentTime = 0f;
     private void Start()
     {
         _leftInitialPos = platformLeft.transform.position;
         _rightInitialPos = platformRight.transform.position;
+        _previousYLeft = platformLeft.transform.position.y;
+        _previousYRight = platformRight.transform.position.y;
     }
 
     private void Update()
     {
         UpdatePlatforms();
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= timeToCheck)
+        {
+            CheckAbruptTime();
+            _currentTime = 0f; 
+        }
     }
 
     private void UpdatePlatforms()
     {
         int totalWeight = platformLeft.CurrentWeight + platformRight.CurrentWeight;
-        int weightDifference = platformLeft.CurrentWeight - platformRight.CurrentWeight;
 
         if (totalWeight == 0)
         {
             platformLeft.transform.position = Vector3.Lerp(platformLeft.transform.position, _leftInitialPos, moveSpeed * Time.deltaTime);
             platformRight.transform.position = Vector3.Lerp(platformRight.transform.position, _rightInitialPos, moveSpeed * Time.deltaTime);
             return;
-        }
-
-        int weightChange = Mathf.Abs(weightDifference - _previousWeightDifference);
-        if (weightChange > abruptChangeFactor)
-        {
-            LaunchPlayer();
-        }
+        }           
 
         // Calculate the target offset based on weight difference
         float deltaPosition = (platformLeft.CurrentWeight - platformRight.CurrentWeight) / (float)totalWeight * maximumRange;
@@ -52,13 +55,28 @@ public class WeightScaleController : MonoBehaviour
 
         platformLeft.transform.position = Vector3.Lerp(platformLeft.transform.position, leftTargetPos, moveSpeed * Time.deltaTime);
         platformRight.transform.position = Vector3.Lerp(platformRight.transform.position, rightTargetPos, moveSpeed * Time.deltaTime);
-
-        _previousWeightDifference = weightDifference; 
     }
 
-    private void LaunchPlayer()
+    private void CheckAbruptTime()
     {
-        if(_trackingPlatformLeft.IsPlayerInPlatform || _trackingPlatformRight.IsPlayerInPlatform)
-            _player.Rigidbody.AddForce(Vector3.up * 100, ForceMode.Impulse);
+        float leftPlatformDeltaY = platformLeft.transform.position.y - _previousYLeft;
+        float rightPlatformDeltaY = platformRight.transform.position.y - _previousYRight;
+
+        Debug.Log("Right Platform ?Y in 0.7s: " + rightPlatformDeltaY);
+        Debug.Log("Left Platform ?Y in 0.7s: " + leftPlatformDeltaY);
+
+        // If left platform dropped significantly, launch player from right
+        if (_trackingPlatformRight.IsPlayerInPlatform && leftPlatformDeltaY < -abruptChangeFactor)
+        {
+            _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.left * 5, ForceMode.Impulse);
+        }
+        // If right platform dropped significantly, launch player from left
+        else if (_trackingPlatformLeft.IsPlayerInPlatform && rightPlatformDeltaY < -abruptChangeFactor)
+        {
+            _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.right * 5, ForceMode.Impulse);
+        }
+
+        _previousYLeft = platformLeft.transform.position.y;
+        _previousYRight = platformRight.transform.position.y;
     }
 }

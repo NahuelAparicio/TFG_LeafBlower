@@ -20,7 +20,7 @@ public class AspirerForce : BaseLeafBlower
     public float maxOffsetYTargetToAim;
 
 
-    private bool wasShootPressed = false;
+    public bool wasShootPressed = false;
     protected override void Awake()
     {
         base.Awake();
@@ -28,7 +28,6 @@ public class AspirerForce : BaseLeafBlower
         ground = LayerMask.NameToLayer("Ground");
         movable = LayerMask.NameToLayer("Movable");
     }
-
     protected override void Update()
     {
         if(!attachableObject.IsAttached)
@@ -39,38 +38,43 @@ public class AspirerForce : BaseLeafBlower
 
         if (_blower.IsShooting())
         {
-            if (!wasShootPressed)
-                wasShootPressed = true;
-
+            wasShootPressed = true;
             _timePressed += Time.deltaTime;
-            float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
 
-            _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
+            _blower.Hud.UpdateShootBarForce(GetEffectiveTime(), _maxTimeToShoot);
 
-            float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
-            float force = Mathf.Lerp(_blower.Stats.ShootForce, _blower.Stats.ShootForce + addedForceOnMaxPressed, normalizedTime);
+            UpdateTargetToAimPosition(GetNormalizedTime());
 
-            UpdateTargetToAimPosition(normalizedTime);
-            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, force);
+            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
 
             if (_timePressed >= _maxTimeToShoot + _shootDelayThreshold)
             {
                 wasShootPressed = false;
-                _timePressed = _maxTimeToShoot + _shootDelayThreshold;
-                ShootAction(force);
+                ShootAction(GetShootForce());
             }
         }
         else
         {
-            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, _blower.Stats.ShootForce);
-            if(_timePressed < _shootDelayThreshold && wasShootPressed)
+            if(_timePressed <= _shootDelayThreshold)
+            {
+                attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, _blower.Stats.ShootForce);
+
+                if (wasShootPressed)
+                {
+                    wasShootPressed = false;
+                    ShootAction(_blower.Stats.ShootForce);
+                }
+            }
+            if(_timePressed > _shootDelayThreshold && _timePressed <= _maxTimeToShoot + _shootDelayThreshold && wasShootPressed)
             {
                 wasShootPressed = false;
-                _blower.Aspirer.ShootAction(_blower.Stats.ShootForce);
+                ShootAction(GetShootForce());
             }
         }
     }
-
+    private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
+    private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
+    private float GetShootForce() => Mathf.Lerp(_blower.Stats.ShootForce, _blower.Stats.ShootForce + addedForceOnMaxPressed, GetNormalizedTime());
     public bool IsNormalShoot() => _timePressed < _shootDelayThreshold;
 
     private void UpdateTargetToAimPosition(float normalizedTime)
@@ -87,9 +91,8 @@ public class AspirerForce : BaseLeafBlower
 
     public void ShootAction(float force)
     {
-        Vector3 forceDir = force * _blower.FirePoint.forward;
-
         _blower.StaminaHandler.ConsumeValueStamina(20);
+        Vector3 forceDir = force * _blower.FirePoint.forward;
         attachableObject.Shootable.OnShoot(forceDir);
         _timePressed = 0;
         _blower.Hud.ResetShootBarForce();
@@ -144,7 +147,7 @@ public class AspirerForce : BaseLeafBlower
     {
         if (shooteable != null)
         {
-            if (other.GetComponent<ShootableObject>().IsAttached) return;
+            if (other.GetComponent<ShootableObject>().IsAttached || other.GetComponent<ShootableObject>().HasBeenShoot) return;
 
             attachableObject.Attach(other.attachedRigidbody, closestPoint, _blower.FirePoint);
         }

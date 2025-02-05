@@ -41,7 +41,10 @@ public class TrackingPlatform : MonoBehaviour
 
         if (other.tag != "Player")
         {
-            other.GetComponent<Rigidbody>().useGravity = true;
+            if(!other.GetComponent<ShootableObject>().IsAttached)
+            {
+                other.GetComponent<Rigidbody>().useGravity = true;
+            }
             StopTrackingObject(other.transform);
         }
         else

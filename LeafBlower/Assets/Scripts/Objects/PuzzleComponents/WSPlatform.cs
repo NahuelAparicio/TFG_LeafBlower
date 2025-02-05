@@ -13,7 +13,6 @@ public class WSPlatform : MonoBehaviour
 
         if (!obj) return;
         if (obj.weight == Enums.ObjectWeight.Leaf) return;
-
         UpdateWeight((int)obj.weight);
     }
 
@@ -22,7 +21,6 @@ public class WSPlatform : MonoBehaviour
         Object obj = other.GetComponent<Object>();
         if (!obj) return;
         if (obj.weight == Enums.ObjectWeight.Leaf) return;
-
         UpdateWeight(-(int)obj.weight);
     }
 

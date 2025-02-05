@@ -32,6 +32,10 @@ public class BlowerInputs : MonoBehaviour
     private void Blow_performed(InputAction.CallbackContext context)
     {
         //_blower.Handler.StartConsumingStamina();
+        if(_blower.Aspirer.attachableObject.IsAttached)
+        {
+            _blower.Aspirer.wasShootPressed = true;
+        }
         if (IsAspiringInputPressed()) return;
         _blower.blowVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
