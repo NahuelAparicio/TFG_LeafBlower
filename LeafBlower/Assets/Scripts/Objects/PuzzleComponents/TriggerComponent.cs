@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class TriggerComponent : MonoBehaviour
@@ -10,6 +11,8 @@ public class TriggerComponent : MonoBehaviour
     private int _currentImpacts = 0;
 
     public event System.Action OnComplete;
+
+    public UnityEvent eventToTrigger;
 
     private void Awake()
     {
@@ -23,7 +26,10 @@ public class TriggerComponent : MonoBehaviour
         _currentImpacts++;
 
         if(IsCompleted())
+        {
             OnComplete?.Invoke();
+            eventToTrigger?.Invoke();
+        }
     }
 
     private bool IsCompleted() => _currentImpacts == _impactsToComplete;
