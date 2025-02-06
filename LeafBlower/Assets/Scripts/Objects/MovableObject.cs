@@ -3,24 +3,22 @@ using UnityEngine;
 public class MovableObject : Object, IBlowable, IAspirable
 {
     [SerializeField] private Enums.BlowType _type;
-
     public Enums.BlowType Type => _type;
 
+    private float _currentTime = 0f;
+    public float timeToEnableFreeze = 0.1f;
     protected override void Awake()
     {
         base.Awake();
-
-        if(_type == Enums.BlowType.DirectionalBlow)
-        {
-            _rb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if (_rb.velocity.magnitude < 0.1f && _rb.angularVelocity.magnitude < 0.1f && _type == Enums.BlowType.DirectionalBlow)
+        if (_isFreezed) return;
+        _currentTime += Time.deltaTime;
+        if (_rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _type == Enums.BlowType.DirectionalBlow && _currentTime >= timeToEnableFreeze)
         {
             FreezeConstraints();
         }
@@ -29,6 +27,7 @@ public class MovableObject : Object, IBlowable, IAspirable
     public void OnBlowableInteracts(Vector3 force, Vector3 point)
     {
         UnFreeze();
+        _currentTime = 0;
         switch (_type)
         {
             case Enums.BlowType.RealisticBlow:
@@ -51,6 +50,7 @@ public class MovableObject : Object, IBlowable, IAspirable
     public void OnAspiratableInteracts(Vector3 force)
     {
         UnFreeze();
+        _currentTime = 0;
         if (weight == Enums.ObjectWeight.Leaf) force /= 2;
         _rb.AddForce(force, ForceMode.Impulse);
     }

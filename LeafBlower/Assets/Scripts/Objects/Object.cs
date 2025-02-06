@@ -11,6 +11,8 @@ public class Object : MonoBehaviour
 
     protected Vector3 _spawnPosition;
 
+    protected bool _isFreezed = false;
+
     protected virtual void Awake()
     {
         _spawnPosition = transform.position;
@@ -96,11 +98,14 @@ public class Object : MonoBehaviour
 
     protected virtual void FreezeConstraints()
     {
+        _isFreezed = true;
         _rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     protected virtual void UnFreeze()
     {
+        if (!_isFreezed) return;
+        _isFreezed = false;
         _rb.constraints = RigidbodyConstraints.None;
     }
 }

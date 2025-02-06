@@ -12,6 +12,9 @@ public class ShootableObject : Object, IAspirable, IAttacheable
 
     public Quaternion currentRotation;
     private float _currentTime = 0f;
+    private float _timerToFreeze = 0f;
+    public float timeToFreeze = 0.15f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -43,9 +46,14 @@ public class ShootableObject : Object, IAspirable, IAttacheable
             }
         }
 
-        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.1f && _rb.angularVelocity.magnitude < 0.1f)
+        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
         {
+            if (_isFreezed) return;
             FreezeConstraints();
+        }
+        else
+        {
+            _timerToFreeze += Time.deltaTime;
         }
     }
     public void OnAspiratableInteracts(Vector3 force)
@@ -67,8 +75,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }
-
-
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
         _currentTime = 0;
@@ -84,9 +90,12 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
     public void Detach()
     {
+        _timerToFreeze = 0;
         gameObject.layer = LayerMask.NameToLayer("Ground");
         tag = "IsWall";
         _rb.useGravity = true;
+        UnFreeze();
+        _rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         transform.SetParent(null);
         _isAttached = false;
     }
@@ -98,6 +107,14 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
 
     public override bool CanBeMoved(int level) => (int)weight <= level;
+
+    private void OnEnable()
+    {
+        _isAttached = false;
+        _hasBeenShoot = false;
+        _timerToFreeze = 0;
+        UnFreeze();
+    }
 
 
 }
