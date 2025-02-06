@@ -24,11 +24,11 @@ public class BaseLeafBlower : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Object movableObject = other.GetComponent<Object>();
+        Object obj = other.GetComponent<Object>();
 
-        if (movableObject == null) return;
+        if (obj == null) return;
 
-        _objects.Add(movableObject);
+        _objects.Add(obj);
     }
 
     protected virtual void OnTriggerStay(Collider other)
@@ -71,14 +71,11 @@ public class BaseLeafBlower : MonoBehaviour
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        Object movableObject = other.GetComponent<Object>();
+        Object obj = other.GetComponent<Object>();
 
-        if (movableObject == null) return;      
+        if (obj == null) return;
 
-        if (_objects.Remove(movableObject))
-        {
-            movableObject.GetComponent<MovableObject>()?.SetKinematic(true);
-        }
+        _objects.Remove(obj);
     }
 
     public void UpdateClosestMovable()

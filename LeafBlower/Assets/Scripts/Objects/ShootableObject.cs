@@ -17,6 +17,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         base.Awake();
         _isAttached = false;
         _hasBeenShoot = false;
+        FreezeConstraints();
     }
     protected override void Update()
     {
@@ -41,11 +42,17 @@ public class ShootableObject : Object, IAspirable, IAttacheable
                 transform.rotation = currentRotation;
             }
         }
+
+        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.1f && _rb.angularVelocity.magnitude < 0.1f)
+        {
+            FreezeConstraints();
+        }
     }
     public void OnAspiratableInteracts(Vector3 force)
     {
         if(!_isAttached && !_hasBeenShoot)
         {
+            UnFreeze();
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }
@@ -56,6 +63,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         {
             Detach();
             _hasBeenShoot = true;
+            UnFreeze();
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }
@@ -83,8 +91,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _isAttached = false;
     }
 
-    private void ResetAspiratable() => _hasBeenShoot = false;
-
     public void OnRotate(Vector3 axis)
     {
         transform.RotateAround(transform.parent.position, axis, 90);
@@ -92,4 +98,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
 
     public override bool CanBeMoved(int level) => (int)weight <= level;
+
+
 }

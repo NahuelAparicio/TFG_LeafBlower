@@ -13,12 +13,22 @@ public class MovableObject : Object, IBlowable, IAspirable
         if(_type == Enums.BlowType.DirectionalBlow)
         {
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
-            _rb.isKinematic = true;
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (_rb.velocity.magnitude < 0.1f && _rb.angularVelocity.magnitude < 0.1f && _type == Enums.BlowType.DirectionalBlow)
+        {
+            FreezeConstraints();
         }
     }
 
     public void OnBlowableInteracts(Vector3 force, Vector3 point)
     {
+        UnFreeze();
         switch (_type)
         {
             case Enums.BlowType.RealisticBlow:
@@ -40,15 +50,10 @@ public class MovableObject : Object, IBlowable, IAspirable
 
     public void OnAspiratableInteracts(Vector3 force)
     {
+        UnFreeze();
         if (weight == Enums.ObjectWeight.Leaf) force /= 2;
         _rb.AddForce(force, ForceMode.Impulse);
     }
 
-    public void SetKinematic(bool active)
-    {
-        if (_type != Enums.BlowType.DirectionalBlow) return;
-
-        _rb.isKinematic = active; 
-    }
     public override bool CanBeMoved(int level) => (int)weight <= level + 1;
 }

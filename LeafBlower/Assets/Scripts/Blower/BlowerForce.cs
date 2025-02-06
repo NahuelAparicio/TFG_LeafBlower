@@ -12,7 +12,7 @@ public class BlowerForce : BaseLeafBlower
 
         if (movableObject == null) return;
 
-        movableObject.SetKinematic(false);
+        //movableObject.SetKinematic(false);
 
         movableObject.OnBlowableInteracts(GetBlowForceDir(movableObject), movableObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
     }

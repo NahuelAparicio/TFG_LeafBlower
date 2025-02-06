@@ -103,14 +103,14 @@ public class AspirerForce : BaseLeafBlower
     {
         base.HandleAspire(obj);
 
-        if (_closestObject != null)
-        {
-            MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
-            if (movableObject != null)
-            {
-                movableObject.SetKinematic(false);
-            }
-        }
+        //if (_closestObject != null)
+        //{
+        //    MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
+        //    if (movableObject != null)
+        //    {
+        //        movableObject.SetKinematic(false);
+        //    }
+        //}
 
         Collider collider = obj.GetComponent<Collider>();
         IAspirable aspirable = obj.GetComponent<IAspirable>();
