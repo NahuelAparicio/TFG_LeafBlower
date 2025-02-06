@@ -30,12 +30,18 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(List<DialogueEntry> messages, Enums.DialogueTypingType t)
     {
+        if (messages == null || messages.Count == 0) return;
+
         MusicManager.Instance.PlayDialogs();
         _typeHandler.SetTypingType(t);
+
+        _currentDialogue.Clear();
         _currentDialogue.AddRange(messages);
+
         _dialogueHolder.SetActive(true);
         _icon.sprite = _characterIcons[(int)messages[_indexDialogue].character];
         _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+
         DialogueStarted?.Invoke();
     }
 
@@ -61,24 +67,35 @@ public class DialogueController : MonoBehaviour
     }
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
-        if(_indexDialogue == 0 && _currentDialogue.Count == 1)
+        if(_indexDialogue < _currentDialogue.Count)
+        {
+            _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
+            _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+            _currentDialogue[_indexDialogue].Invoke();
+            _indexDialogue++;
+        }
+        else
         {
             HideDialogueBox();
         }
-        else if(_currentDialogue.Count > 1)
-        {
-            if (_currentDialogue.Count - 1 >= _indexDialogue)
-            {
-                _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
-                _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
-                _currentDialogue[_indexDialogue].Invoke();
-                _indexDialogue++;
-            }
-            else
-            {
-                HideDialogueBox();
-            }
-        }       
+        //if(_indexDialogue == 0 && _currentDialogue.Count == 1)
+        //{
+        //    HideDialogueBox();
+        //}
+        //else if(_currentDialogue.Count > 1)
+        //{
+        //    if (_currentDialogue.Count - 1 >= _indexDialogue)
+        //    {
+        //        _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
+        //        _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+        //        _currentDialogue[_indexDialogue].Invoke();
+        //        _indexDialogue++;
+        //    }
+        //    else
+        //    {
+        //        HideDialogueBox();
+        //    }
+        //}       
     }
     #endregion
 
