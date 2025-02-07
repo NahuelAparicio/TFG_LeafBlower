@@ -3,8 +3,28 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "QuestData", menuName = "Quests")]
 public class QuestData : ScriptableObject
 {
-    public int id;
+    [field: SerializeField] public string id { get; private set; }
+
+    [Header("General info: ")]
     public string qName;
     [TextArea] public string description;
     public Sprite icon;
+
+
+    [Header("Requirements :")]
+    public int levelRequired;
+    public GameObject[] questStepPrefabs;
+
+    public QuestData[] questPreequisits;
+
+    [Header("Rewards: ")]
+    public int goldReward;
+
+    private void OnValidate()
+    {
+        #if UNITY_EDITOR
+        id = this.name;
+        UnityEditor.EditorUtility.SetDirty(this);
+        #endif
+    }
 }

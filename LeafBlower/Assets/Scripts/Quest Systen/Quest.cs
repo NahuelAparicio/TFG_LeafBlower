@@ -1,17 +1,48 @@
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+public class Quest
 {
     public QuestData data;
     private Enums.QuestState _state;
+    public Enums.QuestState State => _state;
 
-    private void Awake()
+    private int _currentQuestStepIndex;
+
+    public Quest(QuestData data)
     {
-        _state = Enums.QuestState.Locked;   //Change in the future for save data system
+        this.data = data;
+        _state = Enums.QuestState.Locked;
+        _currentQuestStepIndex = 0;
     }
 
-    void Update()
+    public void MoveToNextStep()
     {
-        
+        _currentQuestStepIndex++;
+    }
+
+    public bool CurrentStepExists() => _currentQuestStepIndex < data.questStepPrefabs.Length;
+
+    public void InstantiateCurrentQuestStep(Transform parentTransform)
+    {
+        GameObject questStepPrefab = GetCurrentQuestStepPrefab();
+        if(questStepPrefab != null)
+        {
+            Object.Instantiate<GameObject>(questStepPrefab, parentTransform);
+        }
+    }
+
+    private GameObject GetCurrentQuestStepPrefab()
+    {
+        GameObject questPrefab = null;
+        if(CurrentStepExists())
+        {
+            questPrefab = data.questStepPrefabs[_currentQuestStepIndex];
+        }
+        else
+        {
+            Debug.LogWarning("Out of range step prefab" + "No current step for Quest id" + data.id + ", stepindex " + _currentQuestStepIndex);
+        }
+
+        return questPrefab;
     }
 }
