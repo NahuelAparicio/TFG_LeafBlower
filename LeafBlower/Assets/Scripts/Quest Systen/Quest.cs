@@ -3,15 +3,14 @@ using UnityEngine;
 public class Quest
 {
     public QuestData data;
-    private Enums.QuestState _state;
-    public Enums.QuestState State => _state;
+    public Enums.QuestState state;
 
     private int _currentQuestStepIndex;
 
     public Quest(QuestData data)
     {
         this.data = data;
-        _state = Enums.QuestState.Locked;
+        state = Enums.QuestState.Locked;
         _currentQuestStepIndex = 0;
     }
 
@@ -27,7 +26,8 @@ public class Quest
         GameObject questStepPrefab = GetCurrentQuestStepPrefab();
         if(questStepPrefab != null)
         {
-            Object.Instantiate<GameObject>(questStepPrefab, parentTransform);
+            QuestStep questStep = Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
+            questStep.InitializeQuestStep(data.id);
         }
     }
 

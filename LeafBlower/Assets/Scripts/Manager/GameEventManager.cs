@@ -23,7 +23,10 @@ public class GameEventManager : MonoBehaviour
 
     public event Action onCollectCoin;
     public event Action onButtonPushed;
+    public event Action<int> onLevelUp;
+
     public QuestEvents questEvents;
+
     private void Awake()
     {
         if( _instance == null )
@@ -36,6 +39,8 @@ public class GameEventManager : MonoBehaviour
     }
 
     public void CoinCollected() => onCollectCoin?.Invoke();
+
+    public void PlayerLevelChange(int level) => onLevelUp?.Invoke(level);
 
     public void OnButtonPushed() => onButtonPushed?.Invoke();
 

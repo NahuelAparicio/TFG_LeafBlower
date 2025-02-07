@@ -23,6 +23,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Stat _jumpForce;
     public float JumpForce => _jumpForce.Value;
 
-    public void AddLevel() => _level++;
+    public void AddLevel()
+    {
+        _level++;
+        GameEventManager.Instance.PlayerLevelChange(_level);
+    } 
 
 }

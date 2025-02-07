@@ -3416,6 +3416,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130160463}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &134257243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2821735943910596365, guid: 685e69fdaabf8174f8b872a7a42421b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1556865484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &134257247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134257243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f86ebd76c854ef48a086a08b237b105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quest: {fileID: 11400000, guid: e3f529e167a282447a3fe10615c1c3a5, type: 2}
+  startPoint: 0
+  finishPoint: 1
 --- !u!1 &140166754
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,6 +5512,41 @@ PrefabInstance:
       propertyPath: _dialogueTexts.Array.data[4].character
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1410300669}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GiveQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestPoint, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1882849929889183972, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
       propertyPath: m_Height
@@ -5653,7 +5709,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2821735943910596365, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1410300672}
+      addedObject: {fileID: 1410300669}
   m_SourcePrefab: {fileID: 100100000, guid: 685e69fdaabf8174f8b872a7a42421b8, type: 3}
 --- !u!1 &210122508
 GameObject:
@@ -34521,7 +34577,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 210100990}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1410300672
+--- !u!114 &1410300669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34530,10 +34586,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1410300668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f5cdff91a4c88c4583cc937387a70aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f86ebd76c854ef48a086a08b237b105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 0}
+  _quest: {fileID: 11400000, guid: e3f529e167a282447a3fe10615c1c3a5, type: 2}
+  startPoint: 1
+  finishPoint: 0
 --- !u!1 &1410989428
 GameObject:
   m_ObjectHideFlags: 0
@@ -39432,7 +39490,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
       propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
@@ -39442,7 +39510,17 @@ PrefabInstance:
       objectReference: {fileID: 934444847}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 134257247}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
       propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
@@ -39452,12 +39530,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GiveQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
       propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerStats, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
         type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: QuestPoint, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
       propertyPath: _dialogueTexts.Array.data[0].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 393165248633811312, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      propertyPath: _dialogueTexts.Array.data[1].onDialogueEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1882849929889183972, guid: 685e69fdaabf8174f8b872a7a42421b8,
@@ -39619,6 +39712,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2112688397}
+    - targetCorrespondingSourceObject: {fileID: 2821735943910596365, guid: 685e69fdaabf8174f8b872a7a42421b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 134257247}
   m_SourcePrefab: {fileID: 100100000, guid: 685e69fdaabf8174f8b872a7a42421b8, type: 3}
 --- !u!1001 &1557785891
 PrefabInstance:

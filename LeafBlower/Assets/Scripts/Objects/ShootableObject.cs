@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootableObject : Object, IAspirable, IAttacheable
+public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
 {
     private bool _isAttached;
     public bool IsAttached => _isAttached;
@@ -60,6 +60,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     {
         if(!_isAttached && !_hasBeenShoot)
         {
+            _timerToFreeze = 0;
             UnFreeze();
             _rb.AddForce(force, ForceMode.Impulse);
         }
@@ -116,5 +117,12 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         UnFreeze();
     }
 
-
+    public void OnBlowableInteracts(Vector3 force, Vector3 point)
+    {
+        if (_isAttached || _hasBeenShoot) return;
+        UnFreeze();
+        _currentTime = 0;
+        force.y = 0;
+        _rb.AddForce(force, ForceMode.Impulse);
+    }
 }
