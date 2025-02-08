@@ -863,7 +863,7 @@ MonoBehaviour:
   _shootDelayThreshold: 0.25
   targetToaim: {fileID: 4686835287840660688}
   addedForceOnMaxPressed: 2.5
-  _maxTimeToShoot: 0.3
+  _maxTimeToShoot: 0.5
   maxOffsetYTargetToAim: 2.5
   wasShootPressed: 0
 --- !u!114 &347116612067083758
@@ -1880,22 +1880,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.32
+      value: 11.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.64
+      value: 3.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -86.16
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2020,6 +2020,26 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
@@ -2383,7 +2403,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &540852464731609719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,9 +2484,9 @@ MonoBehaviour:
   _velocityToStartFallAnimation: 0.5
   _offsetPlayerSlopesThreshold: 0
   _groundSnapThreshold: 0.5
-  rotationSpeed: 10
-  rotationAirSpeed: 10
-  extraAirSpeed: 2
+  rotationSpeed: 15
+  rotationAirSpeed: 15
+  extraAirSpeed: 1
   isJumping: 0
   isSprinting: 0
   onStartHovering: 0
@@ -2611,7 +2631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedChangeFactor: 5
-  toZeroChangeFactor: 40
+  toZeroChangeFactor: 75
 --- !u!114 &4524749939932590577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2624,7 +2644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7c30943478d0c4abfccd2f8d3526f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravity: -27
+  _gravity: -35
 --- !u!114 &2793916602985163692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2663,10 +2683,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3119c54e1e7b41043bd332f99478b9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  low: {fileID: 977325547906300440, guid: 749b8b66350ca9d46883576be1c171e5, type: 3}
-  medium: {fileID: 977325547906300440, guid: f1a6e10bba1aa244680e7acb31a5ca1c, type: 3}
-  heavy: {fileID: 977325547906300440, guid: 5246300572ce41340a4c75646b79b1e3, type: 3}
-  superHeavy: {fileID: 977325547906300440, guid: bb5a2ac4259ab91449e26e48c1e17e15,
+  low: {fileID: 4518556955136399011, guid: 084e60f50146a0c42a41179c762a619d, type: 3}
+  medium: {fileID: 4518556955136399011, guid: 084e60f50146a0c42a41179c762a619d, type: 3}
+  heavy: {fileID: 4518556955136399011, guid: 084e60f50146a0c42a41179c762a619d, type: 3}
+  superHeavy: {fileID: 4518556955136399011, guid: 084e60f50146a0c42a41179c762a619d,
     type: 3}
 --- !u!1001 &8884029114669303707
 PrefabInstance:
@@ -2972,11 +2992,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb748e9e6d9be474684d352902a1b7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaConsumedOverTime: 5
+  staminaConsumedOverTime: 10
   consumeRate: 0.1
-  staminaRecoverOverTime: 2
-  recoveryRate: 0.1
-  timeToStartRecovering: 1.2
+  staminaRecoverOverTime: 4
+  recoveryRate: 0.05
+  timeToStartRecovering: 2
   isConsumingStamina: 0
 --- !u!4 &3066625131557805557 stripped
 Transform:

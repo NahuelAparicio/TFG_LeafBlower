@@ -103,7 +103,9 @@ public class WeightedButton : MonoBehaviour
 
         if(_currentWeight >= neededWeight && !_isActive)
         {
+            Debug.Log("Button Pushed");
             _activable.DoAction();
+            GameEventManager.Instance.triggerEvents.TriggerButton(); /// TEMPORAL TESTING
             pressObject.transform.localPosition = pressedPos;
             _isActive = true;
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootableObject : Object, IAspirable, IAttacheable
+public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
 {
     private bool _isAttached;
     public bool IsAttached => _isAttached;
@@ -12,11 +12,15 @@ public class ShootableObject : Object, IAspirable, IAttacheable
 
     public Quaternion currentRotation;
     private float _currentTime = 0f;
+    private float _timerToFreeze = 0f;
+    public float timeToFreeze = 0.15f;
+
     protected override void Awake()
     {
         base.Awake();
         _isAttached = false;
         _hasBeenShoot = false;
+        FreezeConstraints();
     }
     protected override void Update()
     {
@@ -41,11 +45,23 @@ public class ShootableObject : Object, IAspirable, IAttacheable
                 transform.rotation = currentRotation;
             }
         }
+
+        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
+        {
+            if (_isFreezed) return;
+            FreezeConstraints();
+        }
+        else
+        {
+            _timerToFreeze += Time.deltaTime;
+        }
     }
     public void OnAspiratableInteracts(Vector3 force)
     {
         if(!_isAttached && !_hasBeenShoot)
         {
+            _timerToFreeze = 0;
+            UnFreeze();
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }
@@ -56,11 +72,10 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         {
             Detach();
             _hasBeenShoot = true;
+            UnFreeze();
             _rb.AddForce(force, ForceMode.Impulse);
         }
     }
-
-
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
         _currentTime = 0;
@@ -76,14 +91,15 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
     public void Detach()
     {
+        _timerToFreeze = 0;
         gameObject.layer = LayerMask.NameToLayer("Ground");
         tag = "IsWall";
         _rb.useGravity = true;
+        UnFreeze();
+        _rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         transform.SetParent(null);
         _isAttached = false;
     }
-
-    private void ResetAspiratable() => _hasBeenShoot = false;
 
     public void OnRotate(Vector3 axis)
     {
@@ -92,4 +108,21 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
 
     public override bool CanBeMoved(int level) => (int)weight <= level;
+
+    private void OnEnable()
+    {
+        _isAttached = false;
+        _hasBeenShoot = false;
+        _timerToFreeze = 0;
+        UnFreeze();
+    }
+
+    public void OnBlowableInteracts(Vector3 force, Vector3 point)
+    {
+        if (_isAttached || _hasBeenShoot) return;
+        UnFreeze();
+        _currentTime = 0;
+        force.y = 0;
+        _rb.AddForce(force, ForceMode.Impulse);
+    }
 }

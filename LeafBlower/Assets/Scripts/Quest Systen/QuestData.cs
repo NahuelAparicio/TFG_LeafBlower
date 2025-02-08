@@ -1,10 +1,15 @@
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestData", menuName = "Quests")]
-public class QuestData : ScriptableObject
+[System.Serializable]
+public class QuestData 
 {
-    public int id;
-    public string qName;
-    [TextArea] public string description;
-    public Sprite icon;
+    public Enums.QuestState state;
+    public int questStepIndex;
+    public QuestStepState[] questStepStates;
+
+    public QuestData(Enums.QuestState _state, int index, QuestStepState[] _questStepStates)
+    {
+        state = _state;
+        questStepIndex = index;
+        questStepStates = _questStepStates;
+    }
 }

@@ -11,6 +11,8 @@ public class Object : MonoBehaviour
 
     protected Vector3 _spawnPosition;
 
+    protected bool _isFreezed = false;
+
     protected virtual void Awake()
     {
         _spawnPosition = transform.position;
@@ -26,16 +28,19 @@ public class Object : MonoBehaviour
         {
             if(transform.position.y <=  -45)
             {
-                if(gameObject.transform.parent != null)
+                _rb.velocity = Vector3.zero;
+                _rb.angularVelocity = Vector3.zero;
+
+                if (gameObject.transform.parent == null)
+                {
+                    transform.position = _spawnPosition;
+                    return;
+                }
+
+                if(gameObject.transform.parent.name == "Player")
                 {
                     gameObject.transform.parent.position = _spawnPosition;
                 }
-                else
-                {
-                    transform.position = _spawnPosition;
-                }
-                _rb.velocity = Vector3.zero;
-                _rb.angularVelocity = Vector3.zero;
             }
         }
     }
@@ -90,4 +95,17 @@ public class Object : MonoBehaviour
     public virtual bool CanBeMoved(int level) => true;
 
     public virtual bool IsLeaf() => weight == Enums.ObjectWeight.Leaf;
+
+    protected virtual void FreezeConstraints()
+    {
+        _isFreezed = true;
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    protected virtual void UnFreeze()
+    {
+        if (!_isFreezed) return;
+        _isFreezed = false;
+        _rb.constraints = RigidbodyConstraints.None;
+    }
 }
