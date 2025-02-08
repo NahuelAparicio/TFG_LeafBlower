@@ -1,47 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEventManager : MonoBehaviour
 {
-    private static GameEventManager _instance;
+    public static GameEventManager Instance { get; private set; }
 
-    public static GameEventManager Instance
-    {
-        get
-        {
-            if(_instance == null )
-            {
-                GameObject go = new GameObject("Game Events");
-                go.AddComponent<GameEventManager>();
-                DontDestroyOnLoad(go);
-            }
-            return _instance;
-        }
-    }
-
-    public event Action onCollectCoin;
-    public event Action onButtonPushed;
     public event Action<int> onLevelUp;
 
     public QuestEvents questEvents;
+    public CollectingEvents collectingEvents;
+    public TriggerEvents triggerEvents;
 
     private void Awake()
     {
-        if( _instance == null )
+        if (Instance != null)
         {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
+            Debug.LogError("Found more than one Game Events Manager in the scene.");
         }
 
+        Instance = this;
+
         questEvents = new QuestEvents();
+        collectingEvents = new CollectingEvents();
+        triggerEvents = new TriggerEvents();
     }
 
-    public void CoinCollected() => onCollectCoin?.Invoke();
-
     public void PlayerLevelChange(int level) => onLevelUp?.Invoke(level);
-
-    public void OnButtonPushed() => onButtonPushed?.Invoke();
 
 }

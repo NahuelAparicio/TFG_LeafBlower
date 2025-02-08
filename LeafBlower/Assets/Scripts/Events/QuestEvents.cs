@@ -6,6 +6,7 @@ public class QuestEvents
     public event Action<string> onAdvanceQuest;
     public event Action<string> onFinishQuest;
     public event Action<Quest> onQuestStateChange;
+    public event Action<string, int, QuestStepState> onQuestStepChange;
 
     public void StartQuest(string id)
     {
@@ -36,6 +37,14 @@ public class QuestEvents
         if (onQuestStateChange != null)
         {
             onQuestStateChange(q);
+        }
+    }
+
+    public void QuestStepStateChange(string id, int stepIndex, QuestStepState questStepState)
+    {
+        if (onQuestStepChange != null)
+        {
+            onQuestStepChange(id, stepIndex, questStepState);
         }
     }
 }

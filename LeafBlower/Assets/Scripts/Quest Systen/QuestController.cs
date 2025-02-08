@@ -1,31 +1,37 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
 {
+    [SerializeField] private bool _loadQuestState = true;
+
     private int _currentPlayerLevel = 1;
-    public Dictionary<string, Quest> questMap = new Dictionary<string, Quest>();
+    private Dictionary<string, Quest> _questMap = new Dictionary<string, Quest>();
 
     private void Awake()
     {
-        questMap = CreateQuestMap();
+        _questMap = CreateQuestMap();
     }
 
     private void OnEnable()
     {
+        Debug.Log($"[QuestController] OnEnable() called on {gameObject.name}. Instance ID: {GetInstanceID()}");
+
         GameEventManager.Instance.questEvents.onStartQuest += StartQuest;
         GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
         GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
-
+        GameEventManager.Instance.questEvents.onQuestStepChange += QuestStepStateChange;
         GameEventManager.Instance.onLevelUp += PlayerLevelChange;
     }
+
+
 
     private void OnDisable()
     {
         GameEventManager.Instance.questEvents.onStartQuest -= StartQuest;
         GameEventManager.Instance.questEvents.onAdvanceQuest -= AdvanceQuest;
         GameEventManager.Instance.questEvents.onFinishQuest -= FinishQuest;
+        GameEventManager.Instance.questEvents.onQuestStepChange -= QuestStepStateChange;
 
         GameEventManager.Instance.onLevelUp -= PlayerLevelChange;
 
@@ -33,42 +39,44 @@ public class QuestController : MonoBehaviour
 
     private void Start()
     {
-        foreach (Quest quest in questMap.Values)
+        foreach (Quest quest in _questMap.Values)
         {
+            if(quest.state == Enums.QuestState.InProgress)
+            {
+                quest.InstantiateCurrentQuestStep(transform);
+            }
             GameEventManager.Instance.questEvents.QuestStateChange(quest);
         }
     }
 
     private void Update()
     {
-        foreach (Quest quest in questMap.Values)
+        foreach (Quest quest in _questMap.Values)
         {
-            if(quest.state == Enums.QuestState.Locked && CheckRequirements(quest))
+            if(quest.state == Enums.QuestState.RequirementNotMet && CheckRequirements(quest))
             {
-                ChangeQuestState(quest.data.id, Enums.QuestState.Unlocked);
+                ChangeQuestState(quest.info.id, Enums.QuestState.CanStart);
             }
         }
     }
 
-    private void PlayerLevelChange(int level)
-    {
-        _currentPlayerLevel = level;
-    }
+    private void PlayerLevelChange(int level) => _currentPlayerLevel = level;
 
     private bool CheckRequirements(Quest quest)
     {
         bool meetsRequirement = true;
 
-        if(_currentPlayerLevel < quest.data.levelRequired)
+        if(_currentPlayerLevel < quest.info.levelRequired)
         {
             meetsRequirement = false;
         }
 
-        foreach (QuestData prerequisitsData in quest.data.questPreequisits)
+        foreach (QuestInfoSO prerequisitsData in quest.info.questPreequisits)
         {
-            if(GetQuestById(prerequisitsData.id).state != Enums.QuestState.Completed)
+            if(GetQuestById(prerequisitsData.id).state != Enums.QuestState.Finished)
             {
                 meetsRequirement = false;
+                break;
             }
         }
         return meetsRequirement;
@@ -78,7 +86,7 @@ public class QuestController : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(transform);
-        ChangeQuestState(quest.data.id, Enums.QuestState.InProgress);
+        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);
     }
 
     private void AdvanceQuest(string id)
@@ -92,7 +100,7 @@ public class QuestController : MonoBehaviour
         }
         else
         {
-            ChangeQuestState(quest.data.id, Enums.QuestState.Completed);
+            ChangeQuestState(quest.info.id, Enums.QuestState.CanFinish);
         }
 
     }
@@ -101,7 +109,7 @@ public class QuestController : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
         ClaimRewards(quest);
-        ChangeQuestState(quest.data.id, Enums.QuestState.Finished);
+        ChangeQuestState(quest.info.id, Enums.QuestState.Finished);
     }
 
     private void ClaimRewards(Quest quest)
@@ -119,15 +127,15 @@ public class QuestController : MonoBehaviour
 
     private Dictionary<string, Quest> CreateQuestMap()
     {
-        QuestData[] allQuests = Resources.LoadAll<QuestData>("Quests");
+        QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
         Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
-        foreach (QuestData q in allQuests)
+        foreach (QuestInfoSO q in allQuests)
         {
             if(idToQuestMap.ContainsKey(q.id))
             {
                 Debug.LogWarning("Duplicate ID found" + q.id);
             }
-            idToQuestMap.Add(q.id, new Quest(q));
+            idToQuestMap.Add(q.id, LoadQuest(q));
         }
 
         return idToQuestMap;
@@ -135,7 +143,57 @@ public class QuestController : MonoBehaviour
 
     private Quest GetQuestById(string id)
     {
-        Quest quest = questMap[id];
+        Quest quest = _questMap[id];
         return quest;
+    }
+    private void QuestStepStateChange(string id, int stepIndex, QuestStepState questStepState)
+    {
+        Quest quest = GetQuestById(id);
+        quest.StoreQuestStepState(questStepState, stepIndex);
+        ChangeQuestState(id, quest.state);
+    }
+
+    private void SaveQuest(Quest quest)
+    {
+        try
+        {
+            QuestData questSaveData = quest.GetQuestData();
+            string serializedData = JsonUtility.ToJson(questSaveData);
+            PlayerPrefs.SetString(quest.info.id, serializedData);
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError("Failed to save quest with id " + quest.info.id + " : " + e);
+        }
+    }
+
+    private Quest LoadQuest(QuestInfoSO questInfo)
+    {
+        Quest quest = null;
+        try
+        {
+            if(PlayerPrefs.HasKey(questInfo.id) && _loadQuestState)
+            {
+                string serializedData = PlayerPrefs.GetString(questInfo.id); 
+                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
+                quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
+            }
+            else
+            {
+                quest = new Quest(questInfo);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to load quest with" + e);
+        }
+        return quest;
+    }
+    private void OnApplicationQuit()
+    {
+        foreach (Quest quest in _questMap.Values)
+        {
+            SaveQuest(quest);
+        }
     }
 }

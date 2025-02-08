@@ -3,7 +3,7 @@ using UnityEngine;
 public class QuestPoint : MonoBehaviour
 {
     [Header("Quest")]
-    [SerializeField] private QuestData _quest;
+    [SerializeField] private QuestInfoSO _quest;
     private string _questId;
     private Enums.QuestState _currentQuestState;
 
@@ -17,25 +17,24 @@ public class QuestPoint : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventManager.Instance.questEvents.onQuestStateChange += QuestEvents_onQuestStateChange;
+        GameEventManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
     }
     
     public void GiveQuest()
     {
-
-        if(_currentQuestState.Equals(Enums.QuestState.Unlocked) && startPoint)
+        if(_currentQuestState.Equals(Enums.QuestState.CanStart) && startPoint)
         {
             GameEventManager.Instance.questEvents.StartQuest(_questId);
         }
-        else if(_currentQuestState.Equals(Enums.QuestState.Finished) && finishPoint)
+        else if(_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
         {
             GameEventManager.Instance.questEvents.FinishQuest(_questId);
         }
     }
 
-    private void QuestEvents_onQuestStateChange(Quest quest)
+    private void QuestStateChange(Quest quest)
     {
-        if(quest.data.id.Equals(_questId))
+        if(quest.info.id.Equals(_questId))
         {
             _currentQuestState = quest.state;
         }
@@ -43,7 +42,7 @@ public class QuestPoint : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEventManager.Instance.questEvents.onQuestStateChange -= QuestEvents_onQuestStateChange;
+        GameEventManager.Instance.questEvents.onQuestStateChange -= QuestStateChange;
     }
 
 }

@@ -1,4 +1,4 @@
-
+using UnityEngine;
 public class PushButtonQuestStep : QuestStep
 {
     private int buttonsPushed = 0;
@@ -6,20 +6,41 @@ public class PushButtonQuestStep : QuestStep
 
     private void OnEnable()
     {
-        GameEventManager.Instance.onButtonPushed += Instance_onButtonPushed;
+        GameEventManager.Instance.triggerEvents.onTriggerButton += ButtonPushed;
+
     }
 
     private void OnDisable()
     {
-        GameEventManager.Instance.onButtonPushed -= Instance_onButtonPushed;
+        GameEventManager.Instance.triggerEvents.onTriggerButton -= ButtonPushed;
+
     }
 
-    private void Instance_onButtonPushed()
+    private void ButtonPushed()
     {
-        buttonsPushed++;
+        if (isFinished) return;
+
+        if(buttonsPushed < buttonsToPush)
+        {
+            buttonsPushed++;
+            UpdateState();
+        }
         if(buttonsPushed >= buttonsToPush)
         {
             FinishQuestStep();
         }
+    }
+
+    private void UpdateState()
+    {
+        string state = buttonsPushed.ToString();
+        string status = "Pushed: " + buttonsPushed + " / " + buttonsToPush;
+        ChangeState(state, status);
+    }
+
+    protected override void SetQuestStepState(string state)
+    {
+        buttonsPushed = System.Int32.Parse(state);
+        UpdateState();
     }
 }

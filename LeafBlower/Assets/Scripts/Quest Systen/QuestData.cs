@@ -1,30 +1,15 @@
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestData", menuName = "Quests")]
-public class QuestData : ScriptableObject
+[System.Serializable]
+public class QuestData 
 {
-    [field: SerializeField] public string id { get; private set; }
+    public Enums.QuestState state;
+    public int questStepIndex;
+    public QuestStepState[] questStepStates;
 
-    [Header("General info: ")]
-    public string qName;
-    [TextArea] public string description;
-    public Sprite icon;
-
-
-    [Header("Requirements :")]
-    public int levelRequired;
-    public GameObject[] questStepPrefabs;
-
-    public QuestData[] questPreequisits;
-
-    [Header("Rewards: ")]
-    public int goldReward;
-
-    private void OnValidate()
+    public QuestData(Enums.QuestState _state, int index, QuestStepState[] _questStepStates)
     {
-        #if UNITY_EDITOR
-        id = this.name;
-        UnityEditor.EditorUtility.SetDirty(this);
-        #endif
+        state = _state;
+        questStepIndex = index;
+        questStepStates = _questStepStates;
     }
 }
