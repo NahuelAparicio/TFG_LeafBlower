@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameEventManager : MonoBehaviour
 {
     public static GameEventManager Instance { get; private set; }
-
+   
     public event Action<int> onLevelUp;
 
     public QuestEvents questEvents;

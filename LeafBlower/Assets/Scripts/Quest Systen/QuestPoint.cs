@@ -15,11 +15,11 @@ public class QuestPoint : MonoBehaviour
         _questId = _quest.id;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         GameEventManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
     }
-    
+
     public void GiveQuest()
     {
         if(_currentQuestState.Equals(Enums.QuestState.CanStart) && startPoint)

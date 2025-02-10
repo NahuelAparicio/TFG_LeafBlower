@@ -1,18 +1,33 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
+    private int _coins = 0;
+    public int Coins => _coins;
+
     public GameObject objectSaved;
 
     public Image objectImage;
 
     private PlayerController _player;
+
+    //TEMPORAL
+    [SerializeField] private TextMeshProUGUI _text;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
         objectSaved = null;
         objectImage.gameObject.SetActive(false);
+        GameEventManager.Instance.collectingEvents.onCollectCoin += CollectCoin; ;
+    }
+
+    private void CollectCoin(int num)
+    {
+        _coins += num;
+        _text.text = "COINS: " + num;
     }
 
     public void SaveObject(GameObject obj, Sprite sprite )
@@ -47,4 +62,5 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public bool IsObjectSaved() => objectSaved != null;
+
 }
