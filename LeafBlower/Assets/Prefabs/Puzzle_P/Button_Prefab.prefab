@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8343674785264879995}
   - component: {fileID: 9073855853976900854}
   - component: {fileID: 4812579751263086657}
+  - component: {fileID: -34911421135892203}
   m_Layer: 8
   m_Name: Button_Prefab
   m_TagString: Untagged
@@ -70,6 +71,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3680999, y: 3.308056, z: 1.3457403}
   m_Center: {x: -0.019016385, y: 1.6479851, z: 0.0071139336}
+--- !u!114 &-34911421135892203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889366766841022900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 36154459
+      Data2: 1084076113
+      Data3: 1974184890
+      Data4: 1933928906
+    Path: event:/Interactables/Button/Button_Press
+  Event: 
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1868936319821027885
 PrefabInstance:
   m_ObjectHideFlags: 0

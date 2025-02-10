@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
 
 public class DialogueController : MonoBehaviour
 {
@@ -18,13 +20,12 @@ public class DialogueController : MonoBehaviour
     public event System.Action DialogueStarted;
     public event System.Action DialogueEnded;
 
-
     private void Awake()
     {
         _characterIcons = Resources.LoadAll<Sprite>(Constants.DIALOGUE_ICONS_PATH).ToList();
         _typeHandler = GetComponent<TypingHandler>();
         _dialogueHolder = transform.GetChild(0).gameObject;
-        EnableInputs(); 
+        EnableInputs();
         HideDialogueBox();
     }
 
@@ -45,7 +46,6 @@ public class DialogueController : MonoBehaviour
         DialogueStarted?.Invoke();
     }
 
-    // Temporal, Fade/Effect should be added to image and text (?)
     private void HideDialogueBox()
     {
         MusicManager.Instance.PlayExplorationMusic();
@@ -65,38 +65,26 @@ public class DialogueController : MonoBehaviour
         _actions.Dialogue.Enable();
         _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
     }
+
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
-        if(_indexDialogue < _currentDialogue.Count)
+        if (_indexDialogue < _currentDialogue.Count)
         {
             _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
             _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
             _currentDialogue[_indexDialogue].Invoke();
+            PlayDialogueSound();
             _indexDialogue++;
         }
         else
         {
             HideDialogueBox();
         }
-        //if(_indexDialogue == 0 && _currentDialogue.Count == 1)
-        //{
-        //    HideDialogueBox();
-        //}
-        //else if(_currentDialogue.Count > 1)
-        //{
-        //    if (_currentDialogue.Count - 1 >= _indexDialogue)
-        //    {
-        //        _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
-        //        _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
-        //        _currentDialogue[_indexDialogue].Invoke();
-        //        _indexDialogue++;
-        //    }
-        //    else
-        //    {
-        //        HideDialogueBox();
-        //    }
-        //}       
+    }
+
+    private void PlayDialogueSound()
+    {
+        RuntimeManager.PlayOneShot("event:/Dialogs/Dialog_Start");
     }
     #endregion
-
 }

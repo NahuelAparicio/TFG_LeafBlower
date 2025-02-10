@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9095118972054403809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Vegetation/Leaves
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Vegetation/Leaves
+  Guid:
+    Data1: -1989166307
+    Data2: 1180681338
+    Data3: -314319953
+    Data4: 1967654781
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 360
 --- !u!114 &-8719480609402233569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +42,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Dialogs.bank
   Name: Dialogs
   StudioPath: bank:/Dialogs
-  lastModified: 638693849415901891
+  lastModified: 638748009920316975
   FileSizes:
   - Name: Desktop
-    Value: 801696
+    Value: 912512
   Exists: 1
 --- !u!114 &-7986133936066753656
 MonoBehaviour:
@@ -116,7 +143,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638693849415832077
+  lastModified: 638693640421247423
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -175,6 +202,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 305
+--- !u!114 &-3664659736305831016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Menu_Open
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Menu_Open
+  Guid:
+    Data1: 1868576475
+    Data2: 1265519386
+    Data3: 1177032869
+    Data4: -1930048566
+  Banks:
+  - {fileID: -8719480609402233569}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 614
 --- !u!114 &-3085406132778897325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,10 +244,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638693849415852030
+  lastModified: 638747926153547811
   FileSizes:
   - Name: Desktop
-    Value: 223840
+    Value: 453184
   Exists: 1
 --- !u!114 &-2053799473636126364
 MonoBehaviour:
@@ -261,7 +315,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638693849416081409
+  lastModified: 638693640421636413
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -300,12 +354,22 @@ MonoBehaviour:
   - {fileID: -7986133936066753656}
   - {fileID: 7757800172070778348}
   - {fileID: 2570295127400679692}
+  - {fileID: 6710742146090870538}
+  - {fileID: 4692233646841293865}
+  - {fileID: 156299042953131177}
+  - {fileID: -3664659736305831016}
+  - {fileID: 1365815706618143889}
+  - {fileID: 6724423740835676741}
+  - {fileID: 3706128581997801714}
+  - {fileID: -9095118972054403809}
+  - {fileID: 172325858588438521}
+  - {fileID: 6439522840126732099}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7811750703780057934}
   StringsBanks:
   - {fileID: 3545977160960496948}
-  cacheTime: 638693849416231006
+  cacheTime: 638748050945267637
   cacheVersion: 131618
 --- !u!114 &111827735277207414
 MonoBehaviour:
@@ -322,11 +386,65 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 638693849416231006
+  lastModified: 638693640422166215
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &156299042953131177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Dialog_Start
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Dialog_Start
+  Guid:
+    Data1: -1721646713
+    Data2: 1170408486
+    Data3: -1431504728
+    Data4: -1411888425
+  Banks:
+  - {fileID: -8719480609402233569}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 55
+--- !u!114 &172325858588438521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Metal_Hit_3D
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Metal_Hit_3D
+  Guid:
+    Data1: 948117178
+    Data2: 1145996254
+    Data3: 407704996
+    Data4: -61562859
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 250
 --- !u!114 &226146550168810317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,10 +460,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 638693849415911862
+  lastModified: 638748050945199941
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 620512
   Exists: 1
 --- !u!114 &400946701611347502
 MonoBehaviour:
@@ -374,6 +492,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 350
+--- !u!114 &1365815706618143889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Metal_Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Metal_Hit
+  Guid:
+    Data1: -1696567541
+    Data2: 1108902886
+    Data3: 1664419466
+    Data4: -1859552551
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 250
 --- !u!114 &2570295127400679692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,11 +561,38 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638693849415921842
+  lastModified: 638748050945267637
   FileSizes:
   - Name: Desktop
-    Value: 1736
+    Value: 2226
   Exists: 1
+--- !u!114 &3706128581997801714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Button/Button_Press
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Button/Button_Press
+  Guid:
+    Data1: 36154459
+    Data2: 1084076113
+    Data3: 1974184890
+    Data4: 1933928906
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 781
 --- !u!114 &4627823868942466745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,11 +608,38 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638693849416221033
+  lastModified: 638747796447059413
   FileSizes:
   - Name: Desktop
     Value: 2682976
   Exists: 1
+--- !u!114 &4692233646841293865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/FootSteps/FootSteps_Metal
+  m_EditorClassIdentifier: 
+  Path: event:/Character/FootSteps/FootSteps_Metal
+  Guid:
+    Data1: -44112737
+    Data2: 1239602144
+    Data3: 1335409325
+    Data4: 1427560792
+  Banks:
+  - {fileID: -3085406132778897325}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 305
 --- !u!114 &4800637921916976077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +667,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 394
+--- !u!114 &6439522840126732099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Vegetation/Barrel
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Vegetation/Barrel
+  Guid:
+    Data1: 1042903220
+    Data2: 1268851927
+    Data3: -925024080
+    Data4: 1924122202
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 438
+--- !u!114 &6710742146090870538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Jump/Jump_Metal
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Jump/Jump_Metal
+  Guid:
+    Data1: -206656359
+    Data2: 1150929879
+    Data3: -632803699
+    Data4: 1393156059
+  Banks:
+  - {fileID: -3085406132778897325}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 300
+--- !u!114 &6724423740835676741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/RadioCasette/Radio_Casette
+  m_EditorClassIdentifier: 
+  Path: event:/Character/RadioCasette/Radio_Casette
+  Guid:
+    Data1: 1510564889
+    Data2: 1301688065
+    Data3: 6841765
+    Data4: -1938416716
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 187
 --- !u!114 &7757800172070778348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +791,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638693849415921842
+  lastModified: 638748050945257597
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -531,7 +811,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638693849416081409
+  lastModified: 638747796446627397
   FileSizes:
   - Name: Desktop
     Value: 3031936
