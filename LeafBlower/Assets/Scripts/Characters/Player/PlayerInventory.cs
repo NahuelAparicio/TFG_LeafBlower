@@ -21,7 +21,11 @@ public class PlayerInventory : MonoBehaviour
         _player = GetComponent<PlayerController>();
         objectSaved = null;
         objectImage.gameObject.SetActive(false);
-        GameEventManager.Instance.collectingEvents.onCollectCoin += CollectCoin; ;
+    }
+
+    private void Start()
+    {
+        GameEventManager.Instance.collectingEvents.onCollectCoin += CollectCoin;
     }
 
     private void CollectCoin(int num)
@@ -62,5 +66,11 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public bool IsObjectSaved() => objectSaved != null;
+
+    private void OnDisable()
+    {
+        GameEventManager.Instance.collectingEvents.onCollectCoin -= CollectCoin;
+
+    }
 
 }

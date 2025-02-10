@@ -8,7 +8,8 @@ public class ItemData : ScriptableObject
 
     public string itemName;
     public Sprite icon;
-    [TextArea]public string description;
+    [TextArea] public string description;
+    [SerializeField] private int amount;
 
 
     private void OnValidate()

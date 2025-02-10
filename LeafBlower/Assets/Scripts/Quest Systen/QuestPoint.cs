@@ -10,9 +10,12 @@ public class QuestPoint : MonoBehaviour
     public bool startPoint;
     public bool finishPoint;
 
+    private QuestIcon _questIcon;
+
     private void Awake()
     {
         _questId = _quest.id;
+        _questIcon = GetComponentInChildren<QuestIcon>();
     }
 
     private void Start()
@@ -37,6 +40,7 @@ public class QuestPoint : MonoBehaviour
         if(quest.info.id.Equals(_questId))
         {
             _currentQuestState = quest.state;
+            _questIcon.SetState(_currentQuestState, startPoint, finishPoint);
         }
     }
 
