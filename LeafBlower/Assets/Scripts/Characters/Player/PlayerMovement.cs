@@ -240,7 +240,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
+            _moveDirection = GetDirectionNormalized();
+            //    _player.CheckCollisions.IsWall(GetDirectionNormalized());
             targetVelocity = _moveDirection * _moveSpeed;
         }
 
@@ -254,8 +255,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private Vector3 GetAirDirectionToMove()
     {
-        _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
-        _moveDirection.y = 0;
+     //   _moveDirection = _player.CheckCollisions.IsWall(GetDirectionNormalized());
+        _moveDirection = GetDirectionNormalized();
+        _moveDirection.y = GetDirectionNormalized().y;
         return _moveDirection * _moveSpeed;
     }
     private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetMoveDirection().x;
