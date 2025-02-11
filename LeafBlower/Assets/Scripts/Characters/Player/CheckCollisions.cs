@@ -28,53 +28,53 @@ public class CheckCollisions : MonoBehaviour
     }
 
     //Returns Adjusted player position if there is a wall collision on his direction
-    public Vector3 IsWall(Vector3 _direction)
-    {
-        direction = _direction;
-        Vector3 low, middle, high, shootPoint;
-        if(_player.BlowerController.Aspirer.attachableObject.IsAttached)
-        {
-            direction = _player.BlowerController.FirePoint.transform.forward;
-            low = _player.BlowerController.Aspirer.attachableObject.Rigidbody.transform.position;
-            middle = low;
-            high = low;           
-        }
-        else
-        {
-            low = transform.position;
-            middle = transform.position;
-            high = transform.position;
-        }
-        shootPoint = _player.BlowerController.FirePoint.position;
+    //public Vector3 IsWall(Vector3 _direction)
+    //{
+    //    direction = _direction;
+    //    Vector3 low, middle, high, shootPoint;
+    //    if(_player.BlowerController.Aspirer.attachableObject.IsAttached)
+    //    {
+    //        direction = _player.BlowerController.FirePoint.transform.forward;
+    //        low = _player.BlowerController.Aspirer.attachableObject.Rigidbody.transform.position;
+    //        middle = low;
+    //        high = low;           
+    //    }
+    //    else
+    //    {
+    //        low = transform.position;
+    //        middle = transform.position;
+    //        high = transform.position;
+    //    }
+    //    shootPoint = _player.BlowerController.FirePoint.position;
 
-        high.y += _player.playerCollider.height * -0.1f;
-        middle.y += _player.playerCollider.height * -0.25f;
-        low.y += _player.playerCollider.height * -0.5f;
+    //    high.y += _player.playerCollider.height * -0.1f;
+    //    middle.y += _player.playerCollider.height * -0.25f;
+    //    low.y += _player.playerCollider.height * -0.5f;
 
-        Vector3[] rays = { high, middle, low, shootPoint };
-        foreach (var ray in rays)
-        {
-            if (Physics.Raycast(ray, _direction, out RaycastHit hit, raycastWallCheckDistance))
-            {
-                if(hit.collider.tag != "IsWall")
-                {
-                    continue;
-                }
-                float wallAngle = Vector3.Angle(Vector3.up, hit.normal);
-                if (wallAngle < 75f)
-                {
-                    // It's a ground hit, ignore for wall collision
-                    return _direction;
-                }
+    //    Vector3[] rays = { high, middle, low, shootPoint };
+    //    foreach (var ray in rays)
+    //    {
+    //        if (Physics.Raycast(ray, _direction, out RaycastHit hit, raycastWallCheckDistance))
+    //        {
+    //            if(hit.collider.tag != "IsWall")
+    //            {
+    //                continue;
+    //            }
+    //            float wallAngle = Vector3.Angle(Vector3.up, hit.normal);
+    //            if (wallAngle < 75f)
+    //            {
+    //                // It's a ground hit, ignore for wall collision
+    //                return _direction;
+    //            }
 
-                if (Vector3.Dot(hit.normal, _direction) < 0)
-                {
-                    return Vector3.ProjectOnPlane(_direction, hit.normal);
-                }
-            }
-        }
-        return _direction;
-    }
+    //            if (Vector3.Dot(hit.normal, _direction) < 0)
+    //            {
+    //                return Vector3.ProjectOnPlane(_direction, hit.normal);
+    //            }
+    //        }
+    //    }
+    //    return _direction;
+    //}
 
     public bool OnSlope() => _slopeAngle < _maxSlopeAngle && _slopeAngle != 0;
     public bool IsOnMaxSlopeAngle() => _slopeAngle >= _maxSlopeAngle;
@@ -87,41 +87,41 @@ public class CheckCollisions : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {       
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, Vector3.down);
+    //private void OnDrawGizmos()
+    //{       
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawRay(transform.position, Vector3.down);
 
-        Vector3 low, middle, high, shootPoint;
-        ////if (_player.BlowerController.Aspirer.ObjectAttached)
-        ////{
-        ////    low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
-        ////    middle = low;
-        ////    high = low;
-        ////}
-        ////else
-        ////{
-        low = transform.position;
-        middle = transform.position;
-        high = transform.position;
-        ////}
+    //    Vector3 low, middle, high, shootPoint;
+    //    ////if (_player.BlowerController.Aspirer.ObjectAttached)
+    //    ////{
+    //    ////    low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
+    //    ////    middle = low;
+    //    ////    high = low;
+    //    ////}
+    //    ////else
+    //    ////{
+    //    low = transform.position;
+    //    middle = transform.position;
+    //    high = transform.position;
+    //    ////}
 
-        // Adjust heights based on player's collider
-        high.y += _player.playerCollider.height * -0.1f;
-        middle.y += _player.playerCollider.height * -0.25f;
-        low.y += _player.playerCollider.height * -0.5f;
+    //    // Adjust heights based on player's collider
+    //    high.y += _player.playerCollider.height * -0.1f;
+    //    middle.y += _player.playerCollider.height * -0.25f;
+    //    low.y += _player.playerCollider.height * -0.5f;
 
-        // Visualize the rays
-        Gizmos.color = Color.red;  // Set the ray color to red for visibility
-        Vector3[] rays = { high, middle, low };
-        foreach (var ray in rays)
-        {
-            // Draw the ray using Gizmos.DrawLine
-            Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
-        }
+    //    // Visualize the rays
+    //    Gizmos.color = Color.red;  // Set the ray color to red for visibility
+    //    Vector3[] rays = { high, middle, low };
+    //    foreach (var ray in rays)
+    //    {
+    //        // Draw the ray using Gizmos.DrawLine
+    //        Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
+    //    }
 
 
-    }
+    //}
 
     private void OnTriggerStay(Collider other)
     {
