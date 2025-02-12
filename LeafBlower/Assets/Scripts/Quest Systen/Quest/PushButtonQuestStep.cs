@@ -7,13 +7,11 @@ public class PushButtonQuestStep : QuestStep
     private void OnEnable()
     {
         GameEventManager.Instance.triggerEvents.onTriggerButton += ButtonPushed;
-
     }
 
     private void OnDisable()
     {
         GameEventManager.Instance.triggerEvents.onTriggerButton -= ButtonPushed;
-
     }
 
     private void ButtonPushed()

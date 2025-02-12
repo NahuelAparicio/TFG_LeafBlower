@@ -81,7 +81,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
         _currentTime = 0;
         currentRotation = _originalRotation;
         transform.rotation = _originalRotation;
-        tag = "Untagged";
         transform.SetParent(pointToAttach);
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
@@ -93,7 +92,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
     {
         _timerToFreeze = 0;
         gameObject.layer = LayerMask.NameToLayer("Ground");
-        tag = "IsWall";
         _rb.useGravity = true;
         UnFreeze();
         _rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);

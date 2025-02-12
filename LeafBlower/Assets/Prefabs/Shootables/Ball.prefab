@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2082970701374300698}
   m_Layer: 3
   m_Name: Ball
-  m_TagString: IsWall
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 990054223187193625}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7840612957281751633
 Rigidbody:
@@ -100,6 +100,7 @@ MonoBehaviour:
   weight: 1
   timeToEnableAspirating: 1
   currentRotation: {x: 0, y: 0, z: 0, w: 0}
+  timeToFreeze: 0.15
 --- !u!114 &2082970701374300698
 MonoBehaviour:
   m_ObjectHideFlags: 0
