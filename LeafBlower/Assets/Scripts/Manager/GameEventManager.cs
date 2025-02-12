@@ -10,6 +10,7 @@ public class GameEventManager : MonoBehaviour
     public QuestEvents questEvents;
     public CollectingEvents collectingEvents;
     public TriggerEvents triggerEvents;
+    public CameraEvents cameraEvents;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class GameEventManager : MonoBehaviour
         questEvents = new QuestEvents();
         collectingEvents = new CollectingEvents();
         triggerEvents = new TriggerEvents();
+        cameraEvents = new CameraEvents();
     }
 
     public void PlayerLevelChange(int level) => onLevelUp?.Invoke(level);

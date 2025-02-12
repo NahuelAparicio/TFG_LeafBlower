@@ -69,16 +69,19 @@ public class BlowerInputs : MonoBehaviour
     }
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
-        if (!_blower.Aspirer.attachableObject.IsAttached && !_blower.Player.Inventory.IsObjectSaved()) return;
+        if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;
+
         if(_blower.Player.Inventory.IsObjectSaved())
         {
             _blower.Player.Inventory.RemoveObject();
         }
         else
         {
-            _blower.Player.Inventory.SaveObject(_blower.Aspirer.attachableObject.Rigidbody.gameObject, _blower.Aspirer.attachableObject.Rigidbody.gameObject.GetComponent<Object>().uiImage);
+            _blower.Aspirer.AttachObjectOnSave();
+            _blower.Player.Inventory.SaveObject(_blower.Aspirer.ClosestObject.gameObject, _blower.Aspirer.ClosestObject.uiImage);
             _blower.Aspirer.attachableObject.DetachOnSave();   
         }
+
     }
 
     private void OnDestroy()

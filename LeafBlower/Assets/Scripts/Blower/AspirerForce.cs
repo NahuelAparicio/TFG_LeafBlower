@@ -35,42 +35,34 @@ public class AspirerForce : BaseLeafBlower
             ResetTargetToAimPosition();
             return;
         }
-
         if (_blower.IsShooting())
         {
             wasShootPressed = true;
             _timePressed += Time.deltaTime;
 
-            _blower.Hud.UpdateShootBarForce(GetEffectiveTime(), _maxTimeToShoot);
+            if(_timePressed > _shootDelayThreshold)
+            {
+                float chargeTime = Mathf.PingPong(Time.time * 2, 1);
+                float effectiveTime = chargeTime * _maxTimeToShoot;
 
-            UpdateTargetToAimPosition(GetNormalizedTime());
+                _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
+                UpdateTargetToAimPosition(chargeTime);
+            }
 
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
-
-            if (_timePressed >= _maxTimeToShoot + _shootDelayThreshold)
-            {
-                wasShootPressed = false;
-                ShootAction(GetShootForce());
-            }
         }
         else
         {
-            if(_timePressed <= _shootDelayThreshold)
-            {
-                attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, _blower.Stats.ShootForce);
-
-                if (wasShootPressed)
-                {
-                    wasShootPressed = false;
-                    ShootAction(_blower.Stats.ShootForce);
-                }
-            }
-            if(_timePressed > _shootDelayThreshold && _timePressed <= _maxTimeToShoot + _shootDelayThreshold && wasShootPressed)
+            if (wasShootPressed)
             {
                 wasShootPressed = false;
-                ShootAction(GetShootForce());
+                ShootAction(GetShootForce()); 
             }
+            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
+
+            _timePressed = 0f; 
         }
+     
     }
     private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
     private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
@@ -81,6 +73,7 @@ public class AspirerForce : BaseLeafBlower
     {
         Vector3 targetPosition = targetToAimDefaultPos + new Vector3(0, maxOffsetYTargetToAim * normalizedTime, 0);
         targetToaim.localPosition = targetPosition;
+
     }
 
     private void ResetTargetToAimPosition()
@@ -102,15 +95,6 @@ public class AspirerForce : BaseLeafBlower
     protected override void HandleAspire(Object obj)
     {
         base.HandleAspire(obj);
-
-        //if (_closestObject != null)
-        //{
-        //    MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
-        //    if (movableObject != null)
-        //    {
-        //        movableObject.SetKinematic(false);
-        //    }
-        //}
 
         Collider collider = obj.GetComponent<Collider>();
         IAspirable aspirable = obj.GetComponent<IAspirable>();
@@ -141,6 +125,17 @@ public class AspirerForce : BaseLeafBlower
             Vector3 forceDir = _blower.DirectionToFirePointNormalized(collider.transform.position) * _blower.Stats.AspireForce;
             aspirable.OnAspiratableInteracts(forceDir);
         }
+    }
+
+    public void AttachObjectOnSave()
+    {
+        if (attachableObject.IsAttached) return;
+
+        Collider collider = _closestObject.GetComponent<Collider>();
+        IAspirable aspirable = _closestObject.GetComponent<IAspirable>();
+        ShootableObject shooteable = _closestObject.GetComponent<ShootableObject>();
+
+        TryAttachObject(collider,_blower.FirePoint.position, shooteable);
     }
 
     private void TryAttachObject(Collider other, Vector3 closestPoint, ShootableObject shooteable)

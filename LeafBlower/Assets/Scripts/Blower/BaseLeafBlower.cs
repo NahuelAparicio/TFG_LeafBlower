@@ -9,6 +9,8 @@ public class BaseLeafBlower : MonoBehaviour
 
     protected Object _closestObject;
 
+    public Object ClosestObject => _closestObject;
+
     protected virtual void Awake()
     {
         _blower = transform.parent.GetComponent<BlowerController>();

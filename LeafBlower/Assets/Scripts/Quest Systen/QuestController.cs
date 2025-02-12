@@ -108,8 +108,7 @@ public class QuestController : MonoBehaviour
 
     private void ClaimRewards(Quest quest)
     {
-        //TODOO ----------- Gain Gold
-        Debug.Log("You gained gold");
+        GameEventManager.Instance.collectingEvents.CollectCoin(quest.info.goldReward);
     }
 
     private void ChangeQuestState(string id, Enums.QuestState state)
