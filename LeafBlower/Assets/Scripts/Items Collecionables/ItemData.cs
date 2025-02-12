@@ -9,8 +9,9 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite icon;
     [TextArea] public string description;
-    [SerializeField] private int amount;
+    [SerializeField] private int _amount;
 
+    public int GetAmount() => _amount;
 
     private void OnValidate()
     {

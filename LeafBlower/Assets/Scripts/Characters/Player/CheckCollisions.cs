@@ -87,42 +87,6 @@ public class CheckCollisions : MonoBehaviour
         }
     }
 
-    //private void OnDrawGizmos()
-    //{       
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawRay(transform.position, Vector3.down);
-
-    //    Vector3 low, middle, high, shootPoint;
-    //    ////if (_player.BlowerController.Aspirer.ObjectAttached)
-    //    ////{
-    //    ////    low = _player.BlowerController.Aspirer.AttachedObject.Item1.transform.position;
-    //    ////    middle = low;
-    //    ////    high = low;
-    //    ////}
-    //    ////else
-    //    ////{
-    //    low = transform.position;
-    //    middle = transform.position;
-    //    high = transform.position;
-    //    ////}
-
-    //    // Adjust heights based on player's collider
-    //    high.y += _player.playerCollider.height * -0.1f;
-    //    middle.y += _player.playerCollider.height * -0.25f;
-    //    low.y += _player.playerCollider.height * -0.5f;
-
-    //    // Visualize the rays
-    //    Gizmos.color = Color.red;  // Set the ray color to red for visibility
-    //    Vector3[] rays = { high, middle, low };
-    //    foreach (var ray in rays)
-    //    {
-    //        // Draw the ray using Gizmos.DrawLine
-    //        Gizmos.DrawLine(ray, ray + direction * raycastWallCheckDistance);
-    //    }
-
-
-    //}
-
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Leaf"))

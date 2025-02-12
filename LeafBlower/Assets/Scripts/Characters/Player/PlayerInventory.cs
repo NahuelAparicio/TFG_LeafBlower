@@ -26,6 +26,12 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         GameEventManager.Instance.collectingEvents.onCollectCoin += CollectCoin;
+        GameEventManager.Instance.collectingEvents.onCollectColectionable += CollectColectionable;
+    }
+
+    private void CollectColectionable(string id)
+    {
+        Debug.Log(id + " Collected");
     }
 
     private void CollectCoin(int num)
@@ -70,6 +76,8 @@ public class PlayerInventory : MonoBehaviour
     private void OnDisable()
     {
         GameEventManager.Instance.collectingEvents.onCollectCoin -= CollectCoin;
+        GameEventManager.Instance.collectingEvents.onCollectColectionable -= CollectColectionable;
+
 
     }
 

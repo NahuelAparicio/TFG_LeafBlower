@@ -1,16 +1,22 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class ItemColectable : MonoBehaviour
 {
     public ItemData data;
 
-    protected virtual void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        
+        OnCollect();
     }
 
-    protected virtual void OnTriggerExit(Collider other)
+    protected virtual void OnCollect()
     {
-        
+        PickUpEffect();
+    }
+
+    protected virtual void PickUpEffect()
+    {
+        Destroy(gameObject);
     }
 }
