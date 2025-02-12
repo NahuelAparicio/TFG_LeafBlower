@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
@@ -12,20 +13,7 @@ public class QuestController : MonoBehaviour
     {
         _questMap = CreateQuestMap();
     }
-
-    private void OnEnable()
-    {
-        Debug.Log($"[QuestController] OnEnable() called on {gameObject.name}. Instance ID: {GetInstanceID()}");
-
-        GameEventManager.Instance.questEvents.onStartQuest += StartQuest;
-        GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
-        GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
-        GameEventManager.Instance.questEvents.onQuestStepChange += QuestStepStateChange;
-        GameEventManager.Instance.onLevelUp += PlayerLevelChange;
-    }
-
-
-
+ 
     private void OnDisable()
     {
         GameEventManager.Instance.questEvents.onStartQuest -= StartQuest;
@@ -34,11 +22,17 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onQuestStepChange -= QuestStepStateChange;
 
         GameEventManager.Instance.onLevelUp -= PlayerLevelChange;
-
     }
 
     private void Start()
     {
+
+        GameEventManager.Instance.questEvents.onStartQuest += StartQuest;
+        GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
+        GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
+        GameEventManager.Instance.questEvents.onQuestStepChange += QuestStepStateChange;
+        GameEventManager.Instance.onLevelUp += PlayerLevelChange;
+
         foreach (Quest quest in _questMap.Values)
         {
             if(quest.state == Enums.QuestState.InProgress)
@@ -114,8 +108,7 @@ public class QuestController : MonoBehaviour
 
     private void ClaimRewards(Quest quest)
     {
-        //TODOO ----------- Gain Gold
-        Debug.Log("You gained gold");
+        GameEventManager.Instance.collectingEvents.CollectCoin(quest.info.goldReward);
     }
 
     private void ChangeQuestState(string id, Enums.QuestState state)

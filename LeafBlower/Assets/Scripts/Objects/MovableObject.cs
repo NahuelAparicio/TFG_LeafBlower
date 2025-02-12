@@ -33,7 +33,7 @@ public class MovableObject : Object, IBlowable, IAspirable
             case Enums.BlowType.RealisticBlow:
                 if(weight == Enums.ObjectWeight.Leaf)
                 {
-                    force.y += Mathf.Abs(force.magnitude) * 0.5f; // Scale this to control how much upward force to add
+                    force.y += Mathf.Abs(force.magnitude) * 0.35f; 
                 }
                 force /= 2;
                 _rb.AddForceAtPosition(force, point); // Applies force in the nearest point between the object and the blower (More Realistic)

@@ -1,6 +1,6 @@
 
 [System.Serializable]
-public class QuestData 
+public class QuestData
 {
     public Enums.QuestState state;
     public int questStepIndex;

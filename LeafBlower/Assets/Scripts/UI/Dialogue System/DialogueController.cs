@@ -32,7 +32,7 @@ public class DialogueController : MonoBehaviour
     public void StartDialogue(List<DialogueEntry> messages, Enums.DialogueTypingType t)
     {
         if (messages == null || messages.Count == 0) return;
-
+        GameEventManager.Instance.cameraEvents.Zoom(15);
         MusicManager.Instance.PlayDialogs();
         _typeHandler.SetTypingType(t);
 

@@ -13,7 +13,7 @@ public class Constants
     public const string MUSIC_MENU = "event:/Music/Menu event";
     public const string MUSIC_DIALOGS = "event:/Music/Dialogs/Diálogos";
 
-    public const float LEAF_WEIGHT = 0.1f;
+    public const float LEAF_WEIGHT = 0.5f;
     public const int LOW_WEIGHT = 2;
     public const int MEDIUM_WEIGHT = 6;
     public const int HEAVY_WEIGHT = 8;
