@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using FMODUnity;
 
 public class BlowerInputs : MonoBehaviour
 {
@@ -71,12 +70,14 @@ public class BlowerInputs : MonoBehaviour
     {
         if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;
 
-        if(_blower.Player.Inventory.IsObjectSaved())
+        if (_blower.Player.Inventory.IsObjectSaved())
         {
             _blower.Player.Inventory.RemoveObject();
         }
         else
         {
+            if (_blower.Aspirer.ClosestObject.GetComponent<MovableObject>() != null) return;
+
             _blower.Aspirer.AttachObjectOnSave();
             _blower.Player.Inventory.SaveObject(_blower.Aspirer.ClosestObject.gameObject, _blower.Aspirer.ClosestObject.uiImage);
             _blower.Aspirer.attachableObject.DetachOnSave();   
