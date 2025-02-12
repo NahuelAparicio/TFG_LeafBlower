@@ -2,16 +2,16 @@ using System;
 
 public class CameraEvents
 {
-    public event Action<int> onZoomIn;
-    public event Action<int> onZoomOut;
+    public event Action<int> onZoom;
+    public event Action onResetZoom;
 
-    public void ZoomIn(int zoom)
+    public void ResetZoom()
     {
-        onZoomIn?.Invoke(zoom);
+        onResetZoom?.Invoke();
     }
 
-    public void ZoomOut(int zoom) 
-    {  
-        onZoomOut?.Invoke(zoom); 
+    public void Zoom(int zoom)
+    {
+        onZoom?.Invoke(zoom);
     }
 }

@@ -35111,6 +35111,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1411175172}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1413144919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4847170708000530032, guid: be7b5344ae47e344aa0449293bcd8c2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2045566989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1413144922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413144919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8385c5fb25e104ea0d0af5308d8ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zoomSmoothTime: 0.5
 --- !u!1 &1418830408
 GameObject:
   m_ObjectHideFlags: 0
@@ -43547,7 +43566,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 32.90113
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -48278,7 +48297,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 32.90113
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -49912,7 +49931,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 32.90113
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -52252,6 +52271,11 @@ PrefabInstance:
       objectReference: {fileID: 1918289866}
     - target: {fileID: 8068585202745795696, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 32.90113
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068585202745795696, guid: be7b5344ae47e344aa0449293bcd8c2a,
+        type: 3}
       propertyPath: m_Rigs.Array.data[0]
       value: 
       objectReference: {fileID: 1968299576}
@@ -52364,6 +52388,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4847170708000530032, guid: be7b5344ae47e344aa0449293bcd8c2a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1413144922}
     - targetCorrespondingSourceObject: {fileID: 422869282548365472, guid: be7b5344ae47e344aa0449293bcd8c2a,
         type: 3}
       insertIndex: -1
@@ -53382,7 +53410,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 33
+  field of view: 32.90113
   orthographic: 0
   orthographic size: 10
   m_Depth: 0

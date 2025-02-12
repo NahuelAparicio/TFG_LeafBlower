@@ -42,6 +42,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private void OnDialogueEnded()
     {
         _isTalking = false;
+        GameEventManager.Instance.cameraEvents.ResetZoom();
         Invoke(nameof(OnEnableCollider), 2f);
     }
 
