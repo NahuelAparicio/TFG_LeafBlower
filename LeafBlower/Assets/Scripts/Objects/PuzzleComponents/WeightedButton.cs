@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class WeightedButton : MonoBehaviour
 {
-    public int neededWeight;
-
     public IActivable _activable;
-    private int _currentWeight;
-
     private bool _isActive;
 
     public GameObject pressObject;
     private Vector3 pressedPos;
 
-    private List<Object> objects = new List<Object>();
+    private HashSet<GameObject> _activeObjects = new HashSet<GameObject>();
 
     private void Awake()
     {
         _isActive = false;
         pressedPos = new Vector3(0, -0.136f, 0);
+    }
+
+    private void Update()
+    {
+        CheckForNulls();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,47 +28,7 @@ public class WeightedButton : MonoBehaviour
         if (obj == null) return;
         if (obj.weight != Enums.ObjectWeight.Leaf)
         {
-            var shootableObject = obj.GetComponent<ShootableObject>();
-            if (shootableObject != null)
-            {
-                if (!shootableObject.IsAttached)
-                {
-                    UpdateWeight((int)obj.weight);
-                    if (!objects.Contains(obj))
-                        objects.Add(obj);
-                }
-            }
-            else
-            {
-                UpdateWeight((int)obj.weight);
-                if (!objects.Contains(obj))
-                    objects.Add(obj);
-            }
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        var obj = other.GetComponent<Object>();
-        if (obj == null) return;
-        if(!objects.Contains(obj))
-        {
-            if(obj.GetComponent<ShootableObject>())
-            {
-                var shootableObject = obj.GetComponent<ShootableObject>();
-                if (!shootableObject.IsAttached)
-                {
-                    UpdateWeight((int)obj.weight);
-                    if (!objects.Contains(obj))
-                        objects.Add(obj);
-                }
-            }
-            else
-            {
-                UpdateWeight((int)obj.weight);
-                if (!objects.Contains(obj))
-                    objects.Add(obj);
-            }
+            _activeObjects.Add(other.gameObject);
         }
     }
 
@@ -78,42 +39,33 @@ public class WeightedButton : MonoBehaviour
 
         if (obj.weight != Enums.ObjectWeight.Leaf)
         {
-            var shootableObject = obj.GetComponent<ShootableObject>();
-            if (shootableObject != null)
-            {
-                if (!shootableObject.IsAttached)
-                {
-                    UpdateWeight(-(int)obj.weight);
-                    if (objects.Contains(obj))
-                        objects.Remove(obj);
-                }
-            }
-            else
-            {
-                UpdateWeight(-(int)obj.weight);
-                if (objects.Contains(obj))
-                    objects.Remove(obj);
-            }
+            _activeObjects.Remove(other.gameObject);
         }
     }
 
-    private void UpdateWeight(int weight)
+    private void SetButtonBehavior()
     {
-        _currentWeight += weight;
-
-        if(_currentWeight >= neededWeight && !_isActive)
+        if(_isActive && _activeObjects.Count <= 0)
         {
-            Debug.Log("Button Pushed");
-            _activable.DoAction();
-            GameEventManager.Instance.triggerEvents.TriggerButton(); /// TEMPORAL TESTING
-            pressObject.transform.localPosition = pressedPos;
-            _isActive = true;
-        }
-        else if(_currentWeight < neededWeight && _isActive)
-        {
+            
             _activable.UndoAction();
             pressObject.transform.localPosition = Vector3.zero;
             _isActive = false;
         }
+        else if(!_isActive && _activeObjects.Count > 0)
+        {
+            _activable.DoAction();
+            GameEventManager.Instance.triggerEvents.TriggerButton();
+            pressObject.transform.localPosition = pressedPos;
+            _isActive = true;
+        }
+
     }
+
+    private void CheckForNulls()
+    {
+        _activeObjects.RemoveWhere(obj => obj == null || !obj.activeInHierarchy);
+        SetButtonBehavior();
+    }
+
 }
