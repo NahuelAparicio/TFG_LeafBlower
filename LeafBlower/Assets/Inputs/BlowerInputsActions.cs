@@ -133,6 +133,17 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cadb97e1-8888-4450-8a00-58832d95bba9"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SaveObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9c8ec46d-af21-47a8-8d94-481bf5f783d4"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",

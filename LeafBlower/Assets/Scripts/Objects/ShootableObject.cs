@@ -15,6 +15,11 @@ public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
     private float _timerToFreeze = 0f;
     public float timeToFreeze = 0.15f;
 
+    private float _timerSave = 0f;
+    public float timeToRestoreSave = 1f;
+
+    public bool canBeSaved = true;
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +30,17 @@ public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
     protected override void Update()
     {
         base.Update();
+
+        if(!canBeSaved)
+        {
+            _timerSave += Time.deltaTime;
+            if(_timerSave >= timeToRestoreSave)
+            {
+                canBeSaved = true;
+                _timerSave = 0f;
+            }
+        }
+
         if(_hasBeenShoot)
         {
             _currentTime += Time.deltaTime;

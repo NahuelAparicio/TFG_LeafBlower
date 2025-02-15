@@ -133,7 +133,6 @@ public class AspirerForce : BaseLeafBlower
     {
         if (attachableObject.IsAttached) return;
 
-
         Collider collider = _closestObject.GetComponent<Collider>();
         IAspirable aspirable = _closestObject.GetComponent<IAspirable>();
         ShootableObject shooteable = _closestObject.GetComponent<ShootableObject>();
