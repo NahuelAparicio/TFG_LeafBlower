@@ -54,10 +54,14 @@ public class PlayerInventory : MonoBehaviour
         if (_player.BlowerController.Aspirer.attachableObject.IsAttached) return;
 
         if (!_player.CheckCollisions.IsGrounded)
+        {
             objectSaved.transform.position = transform.position;
+        }
 
         objectSaved.SetActive(true);
         objectImage.gameObject.SetActive(false);
+
+        objectSaved.GetComponent<ShootableObject>().canBeSaved = false;
 
         if (_player.BlowerController.IsAspirating())
         {
@@ -77,8 +81,6 @@ public class PlayerInventory : MonoBehaviour
     {
         GameEventManager.Instance.collectingEvents.onCollectCoin -= CollectCoin;
         GameEventManager.Instance.collectingEvents.onCollectColectionable -= CollectColectionable;
-
-
     }
 
 }

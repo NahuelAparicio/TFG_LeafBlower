@@ -188,18 +188,7 @@ public partial class @BlowerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3522ef44-8a57-41b1-b9cc-228fabb3ec86"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SaveObject"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9202af01-23e3-47a8-8586-a4b100650a07"",
+                    ""id"": ""cadb97e1-8888-4450-8a00-58832d95bba9"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",

@@ -70,6 +70,8 @@ public class BlowerInputs : MonoBehaviour
     {
         if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;
 
+        
+
         if (_blower.Player.Inventory.IsObjectSaved())
         {
             _blower.Player.Inventory.RemoveObject();
@@ -77,7 +79,7 @@ public class BlowerInputs : MonoBehaviour
         else
         {
             if (_blower.Aspirer.ClosestObject.GetComponent<MovableObject>() != null) return;
-
+            if (!_blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().canBeSaved) return;
             _blower.Aspirer.AttachObjectOnSave();
             _blower.Player.Inventory.SaveObject(_blower.Aspirer.ClosestObject.gameObject, _blower.Aspirer.ClosestObject.uiImage);
             _blower.Aspirer.attachableObject.DetachOnSave();   
