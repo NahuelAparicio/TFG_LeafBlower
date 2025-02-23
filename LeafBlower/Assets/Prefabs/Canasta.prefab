@@ -114,6 +114,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2564980352831420736}
+  - component: {fileID: 8815926515272545558}
+  - component: {fileID: 4367464248992523075}
   m_Layer: 0
   m_Name: Canasta
   m_TagString: Untagged
@@ -141,8 +143,42 @@ Transform:
   - {fileID: 6222137931447104982}
   - {fileID: 2195284677838612692}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8815926515272545558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892211680718166001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6690998, y: 0.10642433, z: 2.2795556}
+  m_Center: {x: -0.057753086, y: 3.1385727, z: -0.8947946}
+--- !u!114 &4367464248992523075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892211680718166001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f547e92a7bb4142aeb4947baef952b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idQuestAttached: 
 --- !u!1 &3227183775883665357
 GameObject:
   m_ObjectHideFlags: 0

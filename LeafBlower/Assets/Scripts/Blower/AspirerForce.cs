@@ -58,8 +58,10 @@ public class AspirerForce : BaseLeafBlower
                 wasShootPressed = false;
                 ShootAction(GetShootForce()); 
             }
-            attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
-
+            if(attachableObject.Rigidbody != null)
+            {
+                attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
+            }
             _timePressed = 0f; 
         }
      
@@ -135,7 +137,7 @@ public class AspirerForce : BaseLeafBlower
         Collider collider = _closestObject.GetComponent<Collider>();
         IAspirable aspirable = _closestObject.GetComponent<IAspirable>();
         ShootableObject shooteable = _closestObject.GetComponent<ShootableObject>();
-
+        _closestObject.transform.position = _blower.FirePoint.position;
         TryAttachObject(collider,_blower.FirePoint.position, shooteable);
     }
 
