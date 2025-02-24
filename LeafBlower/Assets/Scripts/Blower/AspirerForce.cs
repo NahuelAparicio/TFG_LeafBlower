@@ -42,11 +42,13 @@ public class AspirerForce : BaseLeafBlower
 
             if(_timePressed > _shootDelayThreshold)
             {
+                float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
+                float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
                 //float chargeTime = Mathf.PingPong(Time.time * 2, 1);
                 //float effectiveTime = chargeTime * _maxTimeToShoot;
 
                 _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
-                UpdateTargetToAimPosition(chargeTime);
+                UpdateTargetToAimPosition(normalizedTime);
             }
 
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
@@ -63,8 +65,10 @@ public class AspirerForce : BaseLeafBlower
                 attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
             }
             _timePressed = 0f; 
-        }
-     
+        }  
+    
+
+
     }
     private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
     private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
