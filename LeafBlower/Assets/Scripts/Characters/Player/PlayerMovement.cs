@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement:")]
     public float rotationSpeed = 15f;
-    public float rotationAirSpeed = 6f;
+    public float rotationSpeedWithObjectAttached = 10f;
     public float extraAirSpeed;
 
     public bool isJumping = false;
@@ -69,7 +69,14 @@ public class PlayerMovement : MonoBehaviour
         ClampSpeed(_moveSpeed + extraAirSpeed);
 
         MakeMovement(Enums.Movements.AirMovement, GetAirDirectionToMove());
-        HandleRotation(rotationSpeed);
+        if(_player.BlowerController.Aspirer.attachableObject.IsAttached)
+        {
+            HandleRotation(rotationSpeedWithObjectAttached);
+        }
+        else
+        {
+            HandleRotation(rotationSpeed);
+        }
 
         if (IsHovering())
         {
@@ -94,7 +101,15 @@ public class PlayerMovement : MonoBehaviour
         {
             ClampSpeed(_moveSpeed);
             MakeMovement(Enums.Movements.GroundMovement, GetTargetVelocity());
-            HandleRotation(rotationSpeed);
+
+            if (_player.BlowerController.Aspirer.attachableObject.IsAttached)
+            {
+                HandleRotation(rotationSpeedWithObjectAttached);
+            }
+            else
+            {
+                HandleRotation(rotationSpeed);
+            }
         }
 
         if (!isJumping)

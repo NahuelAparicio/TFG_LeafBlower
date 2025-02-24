@@ -28,6 +28,9 @@ public class AspirerForce : BaseLeafBlower
         ground = LayerMask.NameToLayer("Ground");
         movable = LayerMask.NameToLayer("Movable");
     }
+
+
+
     protected override void Update()
     {
         if(!attachableObject.IsAttached)
@@ -44,8 +47,6 @@ public class AspirerForce : BaseLeafBlower
             {
                 float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
                 float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
-                //float chargeTime = Mathf.PingPong(Time.time * 2, 1);
-                //float effectiveTime = chargeTime * _maxTimeToShoot;
 
                 _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
                 UpdateTargetToAimPosition(normalizedTime);
@@ -95,7 +96,7 @@ public class AspirerForce : BaseLeafBlower
         attachableObject.Shootable.OnShoot(forceDir);
         _timePressed = 0;
         _blower.Hud.ResetShootBarForce();
-        attachableObject.Detach();
+        GameEventManager.Instance.playerEvents.DetachObject();
     }
 
     protected override void HandleAspire(Object obj)
@@ -165,7 +166,9 @@ public class AspirerForce : BaseLeafBlower
         if (!shooteable.IsAttached) return;
         if(attachableObject.IsAttached)
         {
-            attachableObject.Detach();
+            GameEventManager.Instance.playerEvents.DetachObject();
         }
     }
+
+
 }

@@ -12,6 +12,16 @@ public class AttachableObject : MonoBehaviour
         trajectory = GetComponent<TrajectoryHandler>();
     }
 
+    private void Start()
+    {
+        GameEventManager.Instance.playerEvents.onDetachObject += Detach;
+    }
+
+    private void OnDisable()
+    {
+        GameEventManager.Instance.playerEvents.onDetachObject -= Detach;
+    }
+
     public void Attach(Rigidbody rb, Vector3 attachPosition, Transform attachPoint)
     {
         if (rb == null) return;

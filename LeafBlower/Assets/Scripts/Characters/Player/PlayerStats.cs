@@ -26,7 +26,7 @@ public class PlayerStats : MonoBehaviour
     public void AddLevel()
     {
         _level++;
-        GameEventManager.Instance.PlayerLevelChange(_level);
+        GameEventManager.Instance.playerEvents.PlayerLevelChange(_level);
     } 
 
 }

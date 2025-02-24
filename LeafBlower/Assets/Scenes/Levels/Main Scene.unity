@@ -2609,7 +2609,7 @@ PrefabInstance:
     - target: {fileID: 2927559254214651527, guid: 0b65ff11a814f75448b8a46f05de2eb5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 49.908463
+      value: 40.49
       objectReference: {fileID: 0}
     - target: {fileID: 2927559254214651527, guid: 0b65ff11a814f75448b8a46f05de2eb5,
         type: 3}
@@ -75577,6 +75577,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1685498213}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1685981685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8919919583617905740, guid: 0b65ff11a814f75448b8a46f05de2eb5,
+    type: 3}
+  m_PrefabInstance: {fileID: 37998401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1686309134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80251,7 +80257,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1751645864}
   - component: {fileID: 1751645865}
-  m_Layer: 0
+  - component: {fileID: 1751645866}
+  m_Layer: 12
   m_Name: Restricted Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80294,6 +80301,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 12.362256, y: 10, z: 11.094746}
   m_Center: {x: 1.2463603, y: 0, z: 2.2273502}
+--- !u!114 &1751645866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751645863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a315d0f959fb21349852d0d7a02d676f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 1685981685}
 --- !u!1001 &1755473695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92339,6 +92360,11 @@ PrefabInstance:
       propertyPath: objectSaved
       value: 
       objectReference: {fileID: 1016884523}
+    - target: {fileID: 3433457629364233482, guid: b1189ffffd68e3b46a1e5f786bf4156b,
+        type: 3}
+      propertyPath: rotationSpeedWithObjectAttached
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8180769630536811777, guid: b1189ffffd68e3b46a1e5f786bf4156b,
         type: 3}
       propertyPath: _fillShootGo
