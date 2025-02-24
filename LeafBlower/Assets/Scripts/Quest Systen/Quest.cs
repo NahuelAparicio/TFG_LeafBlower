@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using static Enums;
 
 public class Quest
@@ -8,6 +9,7 @@ public class Quest
 
     private int _currentQuestStepIndex;
     private QuestStepState[] _questStepStates;
+    public TextMeshProUGUI text;
 
     public Quest(QuestInfoSO _data)
     {
@@ -82,41 +84,10 @@ public class Quest
 
     public QuestData GetQuestData() => new QuestData(state, _currentQuestStepIndex, _questStepStates);
 
-    public string GetFullStatusText()
+    public string GetCurrentStateToText()
     {
-        string fullStatus = "";
-
-        if (state == QuestState.RequirementNotMet)
-        {
-            fullStatus = "Requirements are not yet met to start this quest.";
-        }
-        else if (state == QuestState.CanStart)
-        {
-            fullStatus = "This quest can be started!";
-        }
-        else
-        {
-            // display all previous quests with strikethroughs
-            for (int i = 0; i < _currentQuestStepIndex; i++)
-            {
-                fullStatus += "<s>" + _questStepStates[i].status + "</s>\n";
-            }
-            // display the current step, if it exists
-            if (CurrentStepExists())
-            {
-                fullStatus += _questStepStates[_currentQuestStepIndex].status;
-            }
-            // when the quest is completed or turned in
-            if (state == QuestState.CanFinish)
-            {
-                fullStatus += "The quest is ready to be turned in.";
-            }
-            else if (state == QuestState.Finished)
-            {
-                fullStatus += "The quest has been completed!";
-            }
-        }
-
-        return fullStatus;
+        return _questStepStates[_currentQuestStepIndex].status;
     }
+
+
 }

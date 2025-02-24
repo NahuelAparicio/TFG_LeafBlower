@@ -5,12 +5,10 @@ public class BasketMade : QuestStep
     private int basketsDone = 0;
     public int basketsToMade = 0;
 
-
-
     private void Start()
     {
         GameEventManager.Instance.triggerEvents.onTriggerBasket += OnBasketMade;
-
+        UpdateState();
     }
 
     private void OnDisable()

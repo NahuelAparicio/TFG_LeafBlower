@@ -14,6 +14,11 @@ public class PushButtonQuestStep : QuestStep
         GameEventManager.Instance.triggerEvents.onTriggerButton -= ButtonPushed;
     }
 
+    private void Start()
+    {
+        UpdateState();
+    }
+
     private void ButtonPushed()
     {
         if (isFinished) return;

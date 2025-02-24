@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class QuestController : MonoBehaviour
 {
@@ -8,6 +8,9 @@ public class QuestController : MonoBehaviour
 
     private int _currentPlayerLevel = 1;
     private Dictionary<string, Quest> _questMap = new Dictionary<string, Quest>();
+
+    public GameObject questText;
+    public RectTransform questTextTarget;
 
     private void Awake()
     {
@@ -80,7 +83,10 @@ public class QuestController : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(transform);
-        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);
+        quest.text = InstantiateQuestText(quest);
+        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);       
+
+
     }
 
     private void AdvanceQuest(string id)
@@ -103,9 +109,21 @@ public class QuestController : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
         ClaimRewards(quest);
+        Destroy(quest.text.gameObject);
         ChangeQuestState(quest.info.id, Enums.QuestState.Finished);
     }
+    private TextMeshProUGUI InstantiateQuestText(Quest quest)
+    {
+        GameObject textUI = Instantiate(questText, questTextTarget);
+        RectTransform rectTransform = textUI.GetComponent<RectTransform>();
+        rectTransform.localPosition = Vector3.zero;  
+        rectTransform.localScale = Vector3.one;
 
+        TextMeshProUGUI text = textUI.GetComponent<TextMeshProUGUI>();
+        text.text = quest.info.description + " " + quest.GetCurrentStateToText();
+
+        return text;
+    }
     private void ClaimRewards(Quest quest)
     {
         GameEventManager.Instance.collectingEvents.CollectCoin(quest.info.goldReward);
@@ -144,6 +162,7 @@ public class QuestController : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.StoreQuestStepState(questStepState, stepIndex);
         ChangeQuestState(id, quest.state);
+        quest.text.text = quest.info.description + " " + quest.GetCurrentStateToText();
     }
 
     private void SaveQuest(Quest quest)
@@ -189,4 +208,6 @@ public class QuestController : MonoBehaviour
             SaveQuest(quest);
         }
     }
+
+
 }

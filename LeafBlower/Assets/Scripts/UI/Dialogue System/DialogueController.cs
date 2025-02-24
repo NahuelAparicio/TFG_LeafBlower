@@ -78,6 +78,8 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
+            GameEventManager.Instance.cameraEvents.ResetZoom();
+
             HideDialogueBox();
         }
     }
