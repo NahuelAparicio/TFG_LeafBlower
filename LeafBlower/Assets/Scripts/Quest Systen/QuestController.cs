@@ -40,6 +40,7 @@ public class QuestController : MonoBehaviour
         {
             if(quest.state == Enums.QuestState.InProgress)
             {
+                quest.text = InstantiateQuestText(quest);
                 quest.InstantiateCurrentQuestStep(transform);
             }
             GameEventManager.Instance.questEvents.QuestStateChange(quest);
@@ -84,9 +85,7 @@ public class QuestController : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(transform);
         quest.text = InstantiateQuestText(quest);
-        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);       
-
-
+        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);
     }
 
     private void AdvanceQuest(string id)

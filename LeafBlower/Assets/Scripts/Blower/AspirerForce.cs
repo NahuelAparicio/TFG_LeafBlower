@@ -42,8 +42,8 @@ public class AspirerForce : BaseLeafBlower
 
             if(_timePressed > _shootDelayThreshold)
             {
-                float chargeTime = Mathf.PingPong(Time.time * 2, 1);
-                float effectiveTime = chargeTime * _maxTimeToShoot;
+                //float chargeTime = Mathf.PingPong(Time.time * 2, 1);
+                //float effectiveTime = chargeTime * _maxTimeToShoot;
 
                 _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
                 UpdateTargetToAimPosition(chargeTime);
