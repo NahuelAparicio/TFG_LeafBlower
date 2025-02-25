@@ -1,5 +1,4 @@
 
-
 public class BasketMade : QuestStep
 {
     private int basketsDone = 0;
@@ -34,7 +33,7 @@ public class BasketMade : QuestStep
     private void UpdateState()
     {
         string state = basketsDone.ToString();
-        string status = "Pushed: " + basketsDone + " / " + basketsToMade;
+        string status = "(" + basketsDone + " / " + basketsToMade + ")";
         ChangeState(state, status);
     }
     protected override void SetQuestStepState(string state)

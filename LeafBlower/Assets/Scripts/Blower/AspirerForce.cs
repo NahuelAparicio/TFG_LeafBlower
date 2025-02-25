@@ -116,7 +116,8 @@ public class AspirerForce : BaseLeafBlower
             return;
         }
 
-        if (attachableObject.IsAttached) return;  
+        if (attachableObject.IsAttached) return;
+        if (shooteable.isInTunel) return;
 
         if (collider.gameObject.layer != movable)
             collider.gameObject.layer = movable;

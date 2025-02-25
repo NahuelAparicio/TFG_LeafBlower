@@ -108,5 +108,6 @@ public class CheckCollisions : MonoBehaviour
         }
     }
 
+    public void SetGrounded(bool grounded) => _isGrounded = grounded;
 
 }
