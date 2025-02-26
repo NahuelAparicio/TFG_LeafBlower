@@ -15,7 +15,6 @@ public class MovableObject : Object, IBlowable, IAspirable
     protected override void Update()
     {
         base.Update();
-
         if (_isFreezed) return;
         _currentTime += Time.deltaTime;
         if (_rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _type == Enums.BlowType.DirectionalBlow && _currentTime >= timeToEnableFreeze)

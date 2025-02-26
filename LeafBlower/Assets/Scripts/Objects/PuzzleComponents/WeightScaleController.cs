@@ -16,6 +16,7 @@ public class WeightScaleController : MonoBehaviour
 
     private float _previousYLeft, _previousYRight;
     private float _currentTime = 0f;
+    [SerializeField] private bool canThrowObjects = true;
     private void Start()
     {
         _leftInitialPos = platformLeft.transform.position;
@@ -59,6 +60,8 @@ public class WeightScaleController : MonoBehaviour
 
     private void CheckAbruptTime()
     {
+        if (!canThrowObjects) return;
+
         float leftPlatformDeltaY = platformLeft.transform.position.y - _previousYLeft;
         float rightPlatformDeltaY = platformRight.transform.position.y - _previousYRight;
 
