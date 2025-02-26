@@ -42,6 +42,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void SaveObject(GameObject obj, Sprite sprite )
     {
+        _player.CheckCollisions.SetGrounded(false);
         objectSaved = obj;
         objectSaved.SetActive(false);
         objectImage.sprite = sprite;

@@ -20,6 +20,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable, IBlowable
 
     public bool canBeSaved = true;
 
+    public bool isInTunel = false;
+
     protected override void Awake()
     {
         base.Awake();

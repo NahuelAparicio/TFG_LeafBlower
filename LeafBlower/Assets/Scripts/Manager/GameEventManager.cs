@@ -1,16 +1,14 @@
-using System;
 using UnityEngine;
 
 public class GameEventManager : MonoBehaviour
 {
     public static GameEventManager Instance { get; private set; }
    
-    public event Action<int> onLevelUp;
-
     public QuestEvents questEvents;
     public CollectingEvents collectingEvents;
     public TriggerEvents triggerEvents;
     public CameraEvents cameraEvents;
+    public PlayerEvents playerEvents;
 
     private void Awake()
     {
@@ -25,8 +23,8 @@ public class GameEventManager : MonoBehaviour
         collectingEvents = new CollectingEvents();
         triggerEvents = new TriggerEvents();
         cameraEvents = new CameraEvents();
+        playerEvents = new PlayerEvents();
     }
 
-    public void PlayerLevelChange(int level) => onLevelUp?.Invoke(level);
 
 }

@@ -65,11 +65,11 @@ public class WeightScaleController : MonoBehaviour
 
         if (_trackingPlatformRight.IsPlayerInPlatform && leftPlatformDeltaY < -abruptChangeFactor)
         {
-            _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.left * 5, ForceMode.Impulse);
+            _player.Rigidbody.AddForce(Vector3.up * 40 + Vector3.left * 5, ForceMode.Impulse);
         }
         else if (_trackingPlatformLeft.IsPlayerInPlatform && rightPlatformDeltaY < -abruptChangeFactor)
         {
-            _player.Rigidbody.AddForce(Vector3.up * 20 + Vector3.right * 5, ForceMode.Impulse);
+            _player.Rigidbody.AddForce(Vector3.up * 40 + Vector3.right * 5, ForceMode.Impulse);
         }
 
         _previousYLeft = platformLeft.transform.position.y;

@@ -28,6 +28,9 @@ public class AspirerForce : BaseLeafBlower
         ground = LayerMask.NameToLayer("Ground");
         movable = LayerMask.NameToLayer("Movable");
     }
+
+
+
     protected override void Update()
     {
         if(!attachableObject.IsAttached)
@@ -42,11 +45,11 @@ public class AspirerForce : BaseLeafBlower
 
             if(_timePressed > _shootDelayThreshold)
             {
-                float chargeTime = Mathf.PingPong(Time.time * 2, 1);
-                float effectiveTime = chargeTime * _maxTimeToShoot;
+                float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
+                float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
 
                 _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
-                UpdateTargetToAimPosition(chargeTime);
+                UpdateTargetToAimPosition(normalizedTime);
             }
 
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
@@ -63,8 +66,10 @@ public class AspirerForce : BaseLeafBlower
                 attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
             }
             _timePressed = 0f; 
-        }
-     
+        }  
+    
+
+
     }
     private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
     private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
@@ -91,7 +96,7 @@ public class AspirerForce : BaseLeafBlower
         attachableObject.Shootable.OnShoot(forceDir);
         _timePressed = 0;
         _blower.Hud.ResetShootBarForce();
-        attachableObject.Detach();
+        GameEventManager.Instance.playerEvents.DetachObject();
     }
 
     protected override void HandleAspire(Object obj)
@@ -111,7 +116,8 @@ public class AspirerForce : BaseLeafBlower
             return;
         }
 
-        if (attachableObject.IsAttached) return;  
+        if (attachableObject.IsAttached) return;
+        if (shooteable.isInTunel) return;
 
         if (collider.gameObject.layer != movable)
             collider.gameObject.layer = movable;
@@ -161,7 +167,9 @@ public class AspirerForce : BaseLeafBlower
         if (!shooteable.IsAttached) return;
         if(attachableObject.IsAttached)
         {
-            attachableObject.Detach();
+            GameEventManager.Instance.playerEvents.DetachObject();
         }
     }
+
+
 }

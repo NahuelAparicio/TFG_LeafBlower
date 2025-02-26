@@ -37,7 +37,7 @@ public class PushButtonQuestStep : QuestStep
     private void UpdateState()
     {
         string state = buttonsPushed.ToString();
-        string status = "Pushed: " + buttonsPushed + " / " + buttonsToPush;
+        string status = "(" + buttonsPushed + " / " + buttonsToPush + ")";
         ChangeState(state, status);
     }
 

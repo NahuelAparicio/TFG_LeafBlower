@@ -24,7 +24,7 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onFinishQuest -= FinishQuest;
         GameEventManager.Instance.questEvents.onQuestStepChange -= QuestStepStateChange;
 
-        GameEventManager.Instance.onLevelUp -= PlayerLevelChange;
+        GameEventManager.Instance.playerEvents.onLevelUp -= PlayerLevelChange;
     }
 
     private void Start()
@@ -34,12 +34,13 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
         GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
         GameEventManager.Instance.questEvents.onQuestStepChange += QuestStepStateChange;
-        GameEventManager.Instance.onLevelUp += PlayerLevelChange;
+        GameEventManager.Instance.playerEvents.onLevelUp += PlayerLevelChange;
 
         foreach (Quest quest in _questMap.Values)
         {
             if(quest.state == Enums.QuestState.InProgress)
             {
+                quest.text = InstantiateQuestText(quest);
                 quest.InstantiateCurrentQuestStep(transform);
             }
             GameEventManager.Instance.questEvents.QuestStateChange(quest);
@@ -84,9 +85,7 @@ public class QuestController : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(transform);
         quest.text = InstantiateQuestText(quest);
-        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);       
-
-
+        ChangeQuestState(quest.info.id, Enums.QuestState.InProgress);
     }
 
     private void AdvanceQuest(string id)
