@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump:")]
     public float lastGroundedTime = -1f;
+    private float _jumpForce = 16f;
+    public float minJumpForce = 5f;
+    public float maxJumpForce = 15f;
 
 
     private MovementStateHandler _stateHandler;
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         _player = GetComponent<PlayerController>();
         _stateHandler = GetComponent<MovementStateHandler>();
         _gravityHandler = GetComponent<CustomGravityHandler>();
+        _jumpForce = minJumpForce;
     }
 
     public void HandleAllMovement()
@@ -169,13 +173,15 @@ public class PlayerMovement : MonoBehaviour
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
         }
     }
-    public void Jump()
+    public void Jump(float time)
     {
         if (isJumping) return;
 
+        float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
+
         _player.Animations.HandleJumpAnimations();
 
-        MakeMovement(Enums.Movements.Jump, _player.Stats.JumpForce);
+        MakeMovement(Enums.Movements.Jump, force);
     }
 
     public void OnUpdateHovering()
@@ -198,7 +204,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool IsHovering()
     {
-        //  if (_player.CheckCollisions.IsGrounded || !_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
         if (_player.Stats.Level <= 1) return false;
 
         if (!_player.BlowerController.CanUseLeafBlower() || !_player.Inputs.IsHoveringInputPressed()) return false;
@@ -316,5 +321,7 @@ public class PlayerMovement : MonoBehaviour
             movement.movement.ResetMovement();
         }
     }
+
+
 
 }
