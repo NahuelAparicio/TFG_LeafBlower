@@ -7,7 +7,6 @@ public class BasketMade : QuestStep
     private void Start()
     {
         GameEventManager.Instance.triggerEvents.onTriggerBasket += OnBasketMade;
-        UpdateState();
     }
 
     private void OnDisable()
@@ -34,6 +33,7 @@ public class BasketMade : QuestStep
     {
         string state = basketsDone.ToString();
         string status = "(" + basketsDone + " / " + basketsToMade + ")";
+        if (state == null) state = "";
         ChangeState(state, status);
     }
     protected override void SetQuestStepState(string state)

@@ -173,15 +173,15 @@ public class PlayerMovement : MonoBehaviour
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
         }
     }
-    public void Jump(float time)
+    public void Jump()
     {
         if (isJumping) return;
 
-        float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
+      //  float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
 
         _player.Animations.HandleJumpAnimations();
 
-        MakeMovement(Enums.Movements.Jump, force);
+        MakeMovement(Enums.Movements.Jump, _player.Movement.maxJumpForce);
     }
 
     public void OnUpdateHovering()

@@ -9,11 +9,11 @@ public class BringMango : QuestStep
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Mango"))
+        if(other.CompareTag(nameObject))
         {
             string status = "The " + nameObject + " has been given.";
             ChangeState("", status);
-            Destroy(other.gameObject);
+            Destroy(other.gameObject.transform.parent.gameObject);
             FinishQuestStep();
         }
     }

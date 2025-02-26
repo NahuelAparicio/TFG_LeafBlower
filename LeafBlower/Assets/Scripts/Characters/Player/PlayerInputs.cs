@@ -5,13 +5,13 @@ public class PlayerInputs : MonoBehaviour
 {
     private PlayerController _player;
     private PlayerInputsActions _actions;
-    [SerializeField] private float _maxHoldTime = 0.25f;
-    private float _currentHoldTime;
+    //[SerializeField] private float _maxHoldTime = 0.25f;
+    //private float _currentHoldTime;
     private float _jumpPressTime = -1f;
     [SerializeField] private float _hoverThreshold = 0.75f;
 
     [SerializeField] private float _jumpBufferTime = 0.125f;
-    private float _currentTime = 0f;
+    //private float _currentTime = 0f;
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -26,18 +26,18 @@ public class PlayerInputs : MonoBehaviour
         _actions.Player.Jump.performed += Jump_performed;
         _actions.Player.Jump.canceled += Jump_canceled;
     }
-    private void Update()
-    {
-        if(_actions.Player.Jump.IsPressed() && _player.CheckCollisions.IsGrounded)
-        {
-            _currentTime += Time.deltaTime;
-            if(_currentTime >= _maxHoldTime)
-            {
-                _player.Movement.Jump(1);
-                _currentTime = 0f;
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    if(_actions.Player.Jump.IsPressed() && _player.CheckCollisions.IsGrounded)
+    //    {
+    //        _currentTime += Time.deltaTime;
+    //        if(_currentTime >= _maxHoldTime)
+    //        {
+    //            _player.Movement.Jump(1);
+    //            _currentTime = 0f;
+    //        }
+    //    }
+    //}
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
     public Vector2 GetAimMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse (?)
 
@@ -80,24 +80,24 @@ public class PlayerInputs : MonoBehaviour
         if (!_player.CanMovePlayer()) return;
 
         _jumpPressTime = Time.time;
-        _currentHoldTime = 0f;
+        //_currentHoldTime = 0f;
         _player.Movement.onStartHovering = true;
 
-        if (_player.Movement.isJumping || _player.CheckCollisions.IsGrounded) return;        
+        if (_player.Movement.isJumping) return;        
 
         if (Time.time - _player.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
         {
-            _player.Movement.Jump(1);
+            _player.Movement.Jump();
         }
     }
 
     private void Jump_canceled(InputAction.CallbackContext context)
     {
-        if(!_player.Movement.isJumping && _player.CheckCollisions.IsGrounded)
-        {
-            _currentHoldTime = Mathf.Min(Time.time - _jumpPressTime, _maxHoldTime);
-            _player.Movement.Jump(_currentHoldTime / _maxHoldTime);
-        }
+        //if(!_player.Movement.isJumping && _player.CheckCollisions.IsGrounded)
+        //{
+        //    _currentHoldTime = Mathf.Min(Time.time - _jumpPressTime, _maxHoldTime);
+        //    _player.Movement.Jump(_currentHoldTime / _maxHoldTime);
+        //}
 
         _player.Movement.onStartHovering = false;
         _player.Movement.OnUpdateHovering();

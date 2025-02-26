@@ -2,35 +2,19 @@ using UnityEngine;
 
 public class FollowTargetCamera : MonoBehaviour
 {
-    [SerializeField] private PlayerController _player;
-    [SerializeField] private Transform _followTarget;
+    [SerializeField] private Transform _followTarget; 
+    [SerializeField] private float _followSpeed = 5f; 
 
-    //[SerializeField] private float _rotationalSpeed = 30f;
-    [SerializeField] private float _topClamp = 70f;
-    [SerializeField] private float _bottomClamp = -40f;
-
-    private float _targetYaw;
-    private float _targetPitch;
 
     private void LateUpdate()
     {
-        CameraLogic();
+        FollowTarget();
     }
 
-    private void ApplyRotations()
+    private void FollowTarget()
     {
-        _followTarget.rotation = Quaternion.Euler(_targetPitch, _targetYaw, _followTarget.eulerAngles.z);
-    }
-    private void CameraLogic()
-    {
-        _targetPitch = UpdateRotation(_targetPitch, _player.Inputs.GetAimMoveDirection().y, _bottomClamp, _topClamp, true);
-        _targetYaw = UpdateRotation(_targetYaw, _player.Inputs.GetAimMoveDirection().x, float.MinValue, float.MaxValue, false);
-        ApplyRotations();
-    }
+        Vector3 targetPosition = new Vector3(_followTarget.position.x, transform.position.y, _followTarget.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, _followSpeed * Time.deltaTime);
 
-    private float UpdateRotation(float currentRotation, float input,float min, float max, bool isXaxis)
-    {
-        currentRotation += isXaxis ? -input : input;
-        return Mathf.Clamp(currentRotation, min, max);
     }
 }
