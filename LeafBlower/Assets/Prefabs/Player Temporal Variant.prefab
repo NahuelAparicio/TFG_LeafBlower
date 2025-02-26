@@ -1885,17 +1885,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.2
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 51.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -91.9
+      value: 110.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2458,10 +2458,6 @@ MonoBehaviour:
     baseValue: 100
     _reCalculate: 1
     modifiers: []
-  _jumpForce:
-    baseValue: 16
-    _reCalculate: 1
-    modifiers: []
 --- !u!114 &3433457629364233482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,13 +2485,15 @@ MonoBehaviour:
   _offsetPlayerSlopesThreshold: 0
   _groundSnapThreshold: 0.5
   rotationSpeed: 15
-  rotationAirSpeed: 15
+  rotationSpeedWithObjectAttached: 10
   extraAirSpeed: 1
   isJumping: 0
   isSprinting: 0
   onStartHovering: 0
   timeToResetHover: 1
   lastGroundedTime: -1
+  minJumpForce: 16
+  maxJumpForce: 16
 --- !u!114 &1589580805953879826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2522,7 +2520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80def67552e04924ba226735c9cd47db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverThreshold: 0.25
+  _maxHoldTime: 0.2
+  _hoverThreshold: 0.7
   _jumpBufferTime: 0.25
 --- !u!114 &4106401613235755447
 MonoBehaviour:
