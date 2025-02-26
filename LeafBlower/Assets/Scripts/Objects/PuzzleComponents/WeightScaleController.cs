@@ -1,8 +1,9 @@
 using UnityEngine;
+using FMODUnity;
 
 public class WeightScaleController : MonoBehaviour
 {
-    public float maximumRange = 5f; 
+    public float maximumRange = 5f;
     public float moveSpeed = 2f;
     public float abruptChangeFactor = .5f;
     public float timeToCheck = 0.25f;
@@ -17,6 +18,9 @@ public class WeightScaleController : MonoBehaviour
     private float _previousYLeft, _previousYRight;
     private float _currentTime = 0f;
     [SerializeField] private bool canThrowObjects = true;
+
+    private bool _isActive = false;
+
     private void Start()
     {
         _leftInitialPos = platformLeft.transform.position;
@@ -27,12 +31,24 @@ public class WeightScaleController : MonoBehaviour
 
     private void Update()
     {
+        bool wasActive = _isActive;
+        _isActive = platformLeft.CurrentWeight != 0 || platformRight.CurrentWeight != 0;
+
+        if (_isActive && !wasActive)
+        {
+            RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press");
+        }
+        else if (!_isActive && wasActive)
+        {
+            RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press");
+        }
+
         UpdatePlatforms();
         _currentTime += Time.deltaTime;
         if (_currentTime >= timeToCheck)
         {
             CheckAbruptTime();
-            _currentTime = 0f; 
+            _currentTime = 0f;
         }
     }
 
@@ -45,12 +61,10 @@ public class WeightScaleController : MonoBehaviour
             platformLeft.transform.position = Vector3.Lerp(platformLeft.transform.position, _leftInitialPos, moveSpeed * Time.deltaTime);
             platformRight.transform.position = Vector3.Lerp(platformRight.transform.position, _rightInitialPos, moveSpeed * Time.deltaTime);
             return;
-        }           
+        }
 
-        // Calculate the target offset based on weight difference
         float deltaPosition = (platformLeft.CurrentWeight - platformRight.CurrentWeight) / (float)totalWeight * maximumRange;
 
-        // Desired target pos within the range to initial pos
         Vector3 leftTargetPos = new Vector3(_leftInitialPos.x, _leftInitialPos.y - deltaPosition, _leftInitialPos.z);
         Vector3 rightTargetPos = new Vector3(_rightInitialPos.x, _rightInitialPos.y + deltaPosition, _rightInitialPos.z);
 
@@ -64,7 +78,6 @@ public class WeightScaleController : MonoBehaviour
 
         float leftPlatformDeltaY = platformLeft.transform.position.y - _previousYLeft;
         float rightPlatformDeltaY = platformRight.transform.position.y - _previousYRight;
-
 
         if (_trackingPlatformRight.IsPlayerInPlatform && leftPlatformDeltaY < -abruptChangeFactor)
         {

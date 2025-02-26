@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Dialogs.bank
   Name: Dialogs
   StudioPath: bank:/Dialogs
-  lastModified: 638760228331942148
+  lastModified: 638748009920316975
   FileSizes:
   - Name: Desktop
     Value: 912512
@@ -143,7 +143,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638693849415832077
+  lastModified: 638693640421247423
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -244,7 +244,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638760228331845717
+  lastModified: 638747926153547811
   FileSizes:
   - Name: Desktop
     Value: 453184
@@ -315,7 +315,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638693849416081409
+  lastModified: 638693640421636413
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -364,12 +364,15 @@ MonoBehaviour:
   - {fileID: -9095118972054403809}
   - {fileID: 172325858588438521}
   - {fileID: 6439522840126732099}
+  - {fileID: 8979068063627295923}
+  - {fileID: 6197273199227547943}
+  - {fileID: 3119028658823052817}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7811750703780057934}
   StringsBanks:
   - {fileID: 3545977160960496948}
-  cacheTime: 638760228332348299
+  cacheTime: 638762130721859766
   cacheVersion: 131618
 --- !u!114 &111827735277207414
 MonoBehaviour:
@@ -386,7 +389,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 638693849416231006
+  lastModified: 638693640422166215
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -460,10 +463,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 638760228331982016
+  lastModified: 638762130721779912
   FileSizes:
   - Name: Desktop
-    Value: 620512
+    Value: 1305984
   Exists: 1
 --- !u!114 &400946701611347502
 MonoBehaviour:
@@ -546,6 +549,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 54000
+--- !u!114 &3119028658823052817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Vegetation/Tree
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Vegetation/Tree
+  Guid:
+    Data1: 888852451
+    Data2: 1192336240
+    Data3: -205832037
+    Data4: -134305216
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 360
 --- !u!114 &3545977160960496948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,10 +591,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638760228332001982
+  lastModified: 638762130721859766
   FileSizes:
   - Name: Desktop
-    Value: 2226
+    Value: 2364
   Exists: 1
 --- !u!114 &3706128581997801714
 MonoBehaviour:
@@ -608,7 +638,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638760228332348299
+  lastModified: 638747796447059413
   FileSizes:
   - Name: Desktop
     Value: 2682976
@@ -667,6 +697,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 394
+--- !u!114 &6197273199227547943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Platform/Platform_Unpress
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Platform/Platform_Unpress
+  Guid:
+    Data1: -1178121219
+    Data2: 1099491543
+    Data3: 2144169629
+    Data4: 9167575
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 457
 --- !u!114 &6439522840126732099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +848,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638693849415921842
+  lastModified: 638762130721839813
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -811,8 +868,35 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638760228332178762
+  lastModified: 638747796446627397
   FileSizes:
   - Name: Desktop
     Value: 3031936
   Exists: 1
+--- !u!114 &8979068063627295923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Platform/Platform_Press
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Platform/Platform_Press
+  Guid:
+    Data1: 1250818508
+    Data2: 1311411119
+    Data3: -474228338
+    Data4: 392122551
+  Banks:
+  - {fileID: 226146550168810317}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
