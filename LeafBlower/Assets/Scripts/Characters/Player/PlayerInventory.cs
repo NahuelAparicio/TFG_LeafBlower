@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
         _player = GetComponent<PlayerController>();
         objectSaved = null;
         objectImage.gameObject.SetActive(false);
+        LoadData();
     }
 
     private void Start()
@@ -82,6 +83,19 @@ public class PlayerInventory : MonoBehaviour
     {
         GameEventManager.Instance.collectingEvents.onCollectCoin -= CollectCoin;
         GameEventManager.Instance.collectingEvents.onCollectColectionable -= CollectColectionable;
+        SaveData();
     }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("Gold", _coins);
+    }
+
+    private void LoadData()
+    {
+        _coins = PlayerPrefs.GetInt("Gold");  
+    }
+
+  
 
 }
