@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpForce = 16f;
     public float minJumpForce = 5f;
     public float maxJumpForce = 15f;
+    public float fallingGravity = -60f; //Hola soy Bryan he creado esta nueva variable para que la gravedad sea más fuerte al caer que al subir
 
 
     private MovementStateHandler _stateHandler;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (_player.CheckCollisions.IsGrounded)
         {
             HandleGroundBehavior();
+            
         }
         else
         {
@@ -85,9 +87,15 @@ public class PlayerMovement : MonoBehaviour
         if (IsHovering())
         {
             Hover();
+            return;
         }
         else
         {
+            //Hola, soy Bryan, he añadido este if para que en el momento en el que el jugador está cayendo la gravedad pase a ser la gravedad de caída (más alta)
+            if (_player.Rigidbody.velocity.y < 0)
+            {
+                _gravityHandler._gravity = fallingGravity;
+            }
             _gravityHandler.ApplyAdditiveGravity(_player.Rigidbody);
         }            
 
