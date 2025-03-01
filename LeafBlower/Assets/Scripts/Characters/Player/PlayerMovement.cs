@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump:")]
     public float lastGroundedTime = -1f;
     private float _jumpForce = 16f;
-    public float minJumpForce = 5f;
-    public float maxJumpForce = 15f;
+    public float minJumpForce = 20f;
+    public float maxJumpForce = 20f;
     public float fallingGravity = -60f; //Hola soy Bryan he creado esta nueva variable para que la gravedad sea más fuerte al caer que al subir
 
 
