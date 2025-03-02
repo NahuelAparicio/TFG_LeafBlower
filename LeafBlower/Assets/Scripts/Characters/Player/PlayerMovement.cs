@@ -183,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump()
     {
+        _gravityHandler._gravity = -35f;
         if (isJumping) return;
 
       //  float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
