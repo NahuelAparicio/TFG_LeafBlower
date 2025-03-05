@@ -19,6 +19,8 @@ public abstract class BaseMenu<T> : Menu<T> where T: BaseMenu<T>
         StartCoroutine(highlightButton());
     }
 
+
+
     public static void Show()
     {
         Open();

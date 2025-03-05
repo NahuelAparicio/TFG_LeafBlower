@@ -33,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpForce = 16f;
     public float minJumpForce = 20f;
     public float maxJumpForce = 20f;
-    public float fallingGravity = -60f; //Hola soy Bryan he creado esta nueva variable para que la gravedad sea más fuerte al caer que al subir
-
 
     private MovementStateHandler _stateHandler;
     private CustomGravityHandler _gravityHandler;
@@ -94,7 +92,11 @@ public class PlayerMovement : MonoBehaviour
             //Hola, soy Bryan, he añadido este if para que en el momento en el que el jugador está cayendo la gravedad pase a ser la gravedad de caída (más alta)
             if (_player.Rigidbody.velocity.y < 0)
             {
-                _gravityHandler._gravity = fallingGravity;
+                _gravityHandler.SetFallingGravity();
+            }
+            else
+            {
+                _gravityHandler.SetNormalGravity();
             }
             _gravityHandler.ApplyAdditiveGravity(_player.Rigidbody);
         }            
@@ -181,16 +183,15 @@ public class PlayerMovement : MonoBehaviour
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
         }
     }
-    public void Jump()
+    public void Jump(float time)
     {
-        _gravityHandler._gravity = -35f;
         if (isJumping) return;
 
-      //  float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
+        float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
 
         _player.Animations.HandleJumpAnimations();
 
-        MakeMovement(Enums.Movements.Jump, _player.Movement.maxJumpForce);
+        MakeMovement(Enums.Movements.Jump, force);
     }
 
     public void OnUpdateHovering()

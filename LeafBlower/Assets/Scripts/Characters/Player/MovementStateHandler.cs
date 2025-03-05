@@ -58,7 +58,7 @@ public class MovementStateHandler : MonoBehaviour
         {
             return;
         }
-
+        _lastState = _moveState;
         switch (newState)
         {
             case Enums.CharacterMoveState.None:
@@ -88,7 +88,7 @@ public class MovementStateHandler : MonoBehaviour
                 break;
         }
 
-        _lastState = _moveState;
+
 
         _moveState = newState;
     }

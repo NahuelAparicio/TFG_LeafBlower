@@ -21,8 +21,8 @@ public class BlowerInputs : MonoBehaviour
 
     private void RotateObject_performed(InputAction.CallbackContext obj)
     {
-        if(_blower.Aspirer.attachableObject.IsAttached)
-            _blower.Aspirer.attachableObject.Shootable.OnRotate(_blower.FirePoint.forward);
+        //if(_blower.Aspirer.attachableObject.IsAttached)
+        //    _blower.Aspirer.attachableObject.Shootable.OnRotate(_blower.FirePoint.forward);
     }
 
     public bool IsBlowingInputPressed() => _actions.Blower.Blow.IsPressed();

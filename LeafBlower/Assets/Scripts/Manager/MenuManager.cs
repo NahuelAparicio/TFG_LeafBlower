@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class MenuManager : MonoBehaviour
 
     public MainMenu menu;
     public PauseMenu pause;
+
+    public bool isMainMenu;
+    public bool isPauseMenu;
     public static MenuManager Instance
     {
         get
@@ -27,6 +31,24 @@ public class MenuManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
         LoadResources();
+    }
+
+    private void Update()
+    {
+        if(isPauseMenu)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null )
+            {
+                menu.OnRetarget();
+            }
+        }
+        if(isMainMenu)
+        {
+            if(EventSystem.current.currentSelectedGameObject == null)
+            {
+                pause.OnRetarget();
+            }
+        }
     }
 
     private void LoadResources()

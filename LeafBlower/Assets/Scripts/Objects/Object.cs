@@ -98,7 +98,7 @@ public class Object : MonoBehaviour
 
     public virtual bool IsLeaf() => weight == Enums.ObjectWeight.Leaf;
 
-    protected virtual void FreezeConstraints()
+    public virtual void FreezeConstraints()
     {
         _isFreezed = true;
         _rb.constraints = RigidbodyConstraints.FreezeAll;

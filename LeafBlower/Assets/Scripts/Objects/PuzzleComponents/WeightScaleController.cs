@@ -19,6 +19,7 @@ public class WeightScaleController : MonoBehaviour
     [SerializeField] private bool canThrowObjects = true;
     private void Start()
     {
+        _player = FindObjectOfType<PlayerController>();
         _leftInitialPos = platformLeft.transform.position;
         _rightInitialPos = platformRight.transform.position;
         _previousYLeft = platformLeft.transform.position.y;

@@ -9,7 +9,7 @@ public class Door : IActivable
     public override void DoAction()
     {
         StopAllCoroutines();
-        StartCoroutine(MoveDoors(Quaternion.Euler(0, -90, 0), Quaternion.Euler(0, 90, 0)));
+        StartCoroutine(MoveDoors(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 0)));
 
     }
 

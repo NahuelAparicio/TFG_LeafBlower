@@ -17,10 +17,7 @@ public class BlowerForce : BaseLeafBlower
         {
             movableObject.OnBlowableInteracts(GetBlowForceDir(movableObject), movableObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
         }
-        if(shootableObject)
-        {
-            shootableObject.OnBlowableInteracts(GetBlowForceDir(shootableObject), shootableObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
-        }
+
 
     }
 }

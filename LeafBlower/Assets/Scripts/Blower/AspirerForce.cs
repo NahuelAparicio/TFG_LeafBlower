@@ -67,9 +67,6 @@ public class AspirerForce : BaseLeafBlower
             }
             _timePressed = 0f; 
         }  
-    
-
-
     }
     private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
     private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
