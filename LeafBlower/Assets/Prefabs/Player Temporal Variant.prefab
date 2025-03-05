@@ -1880,42 +1880,42 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.3
+      value: -17.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 51.5
+      value: -0.5713
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 110.6
+      value: -87.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071065
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.0000000668493
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071071
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.000000054861914
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -1925,7 +1925,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2040,7 +2040,12 @@ PrefabInstance:
     - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.23
       objectReference: {fileID: 0}
     - target: {fileID: 6907623909028153314, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2492,8 +2497,9 @@ MonoBehaviour:
   onStartHovering: 0
   timeToResetHover: 1
   lastGroundedTime: -1
-  minJumpForce: 16
-  maxJumpForce: 16
+  minJumpForce: 20
+  maxJumpForce: 20
+  fallingGravity: -55
 --- !u!114 &1589580805953879826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2520,8 +2526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80def67552e04924ba226735c9cd47db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHoldTime: 0.2
-  _hoverThreshold: 0.7
+  _hoverThreshold: 0.35
   _jumpBufferTime: 0.25
 --- !u!114 &4106401613235755447
 MonoBehaviour:
