@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 2564980352831420736}
   - component: {fileID: 8815926515272545558}
   - component: {fileID: 4367464248992523075}
+  - component: {fileID: 5534401009337042146}
   m_Layer: 0
   m_Name: Canasta
   m_TagString: Untagged
@@ -179,6 +180,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idQuestAttached: 
+--- !u!114 &5534401009337042146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892211680718166001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Ball
+  EventReference:
+    Guid:
+      Data1: 292274037
+      Data2: 1314488493
+      Data3: -2082975590
+      Data4: 1075107349
+    Path: event:/Interactables/Ball/Ball_Celebration
+  Event: 
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &3227183775883665357
 GameObject:
   m_ObjectHideFlags: 0
