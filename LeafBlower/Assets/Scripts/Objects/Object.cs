@@ -104,6 +104,11 @@ public class Object : MonoBehaviour
         _rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
+    public virtual void FreezeRotation()
+    {
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
     public virtual void UnFreeze()
     {
         if (!_isFreezed) return;

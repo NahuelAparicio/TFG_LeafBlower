@@ -40,6 +40,8 @@ public class PlayerRespawnHandler : MonoBehaviour
 
     private void OnRespawn()
     {
+        _player.Rigidbody.velocity = Vector3.zero;
+        _player.Rigidbody.angularVelocity = Vector3.zero;
         _player.transform.position = positionToRespawn;
     }
 }

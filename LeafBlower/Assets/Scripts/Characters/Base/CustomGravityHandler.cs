@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CustomGravityHandler : MonoBehaviour
 {
-    public float _gravity;
-    [SerializeField]private float _normalGravity = -35;
+    private float _gravity;
+    [SerializeField] private float _normalGravity = -35;
     [SerializeField] private float _fallingGravity = -60f;
     public void SetFallingGravity()
     {

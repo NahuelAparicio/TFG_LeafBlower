@@ -52,19 +52,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
                 _currentTime = 0f;
             }
         }
-        if (_isAttached)
-        {
-            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
-            float distance = Vector3.Distance(transform.position, targetPosition);
 
-            if (distance > 0.1f)
-            {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
-                transform.rotation = currentRotation;
-            }
-        }
-
-        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
+        if (!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
         {
             if (_isFreezed) return;
             FreezeConstraints();
@@ -74,6 +63,21 @@ public class ShootableObject : Object, IAspirable, IAttacheable
             _timerToFreeze += Time.deltaTime;
         }
     }
+    private void LateUpdate()
+    {
+        if (_isAttached)
+        {
+
+                Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
+
+                // Mueve el objeto suavemente hacia la posición objetivo
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
+
+                // Mantiene la rotación original con la que fue attached
+                transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, Time.deltaTime * 25f);
+        }
+    }
+
     public void OnAspiratableInteracts(Vector3 force)
     {
         if(!_isAttached && !_hasBeenShoot)
@@ -115,12 +119,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         transform.SetParent(null);
         _isAttached = false;
-    }
-
-    public void OnRotate(Vector3 axis)
-    {
-        transform.RotateAround(transform.parent.position, axis, 90);
-        currentRotation = transform.rotation;
     }
 
     public override bool CanBeMoved(int level) => (int)weight <= level;
