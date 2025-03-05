@@ -7,9 +7,12 @@ public class AttachableObject : MonoBehaviour
     public ShootableObject Shootable { get; private set; }
     public bool IsAttached => Rigidbody != null;
 
+    [SerializeField] private Collider _collider;
+
     private void Awake()
     {
         trajectory = GetComponent<TrajectoryHandler>();
+        _collider.enabled = false;
     }
 
     private void Start()
@@ -25,6 +28,7 @@ public class AttachableObject : MonoBehaviour
     public void Attach(Rigidbody rb, Vector3 attachPosition, Transform attachPoint)
     {
         if (rb == null) return;
+        _collider.enabled = true;
         trajectory.EnableLineRender();
         Rigidbody = rb;
         Shootable = rb.GetComponent<ShootableObject>();
@@ -33,6 +37,7 @@ public class AttachableObject : MonoBehaviour
 
     public void Detach()
     {
+        _collider.enabled = false;
         trajectory.DisableLineRender();
         if (Rigidbody == null) return;
         Rigidbody.GetComponent<IAttacheable>().Detach();
@@ -42,9 +47,11 @@ public class AttachableObject : MonoBehaviour
 
     public void DetachOnSave()
     {
+        _collider.enabled = false;
         trajectory.DisableLineRender();
         if (Rigidbody == null) return;
         Rigidbody = null;
         Shootable = null;
     }
+
 }

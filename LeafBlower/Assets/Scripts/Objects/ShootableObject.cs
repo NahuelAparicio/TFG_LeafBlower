@@ -52,19 +52,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
                 _currentTime = 0f;
             }
         }
-        if (_isAttached)
-        {
-            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
-            float distance = Vector3.Distance(transform.position, targetPosition);
 
-            if (distance > 0.1f)
-            {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
-                transform.rotation = currentRotation;
-            }
-        }
-
-        if(!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
+        if (!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
         {
             if (_isFreezed) return;
             FreezeConstraints();
@@ -72,6 +61,44 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         else
         {
             _timerToFreeze += Time.deltaTime;
+        }
+    }
+    private void LateUpdate()
+    {
+        if (_isAttached)
+        {
+            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, Time.deltaTime * 25f);
+        }
+    }
+
+    //TODO: Sphere cast to detect wall and detach?
+    public float distDraw;
+    public float radius;
+    private void OnDrawGizmos()
+    {
+        if (_isAttached)
+        {
+            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
+            Vector3 direction = (targetPosition - transform.position).normalized;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, radius); // Dibuja la esfera en la posición actual
+
+            if (Physics.SphereCast(transform.position, radius, direction, out RaycastHit hit, distDraw))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, hit.point); // Línea hasta la colisión
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(hit.point, radius * 0.5f); // Dibuja una esfera en el punto de colisión
+            }
+            else
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, targetPosition); // Dibuja la dirección de movimiento
+            }
         }
     }
     public void OnAspiratableInteracts(Vector3 force)
@@ -115,12 +142,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _rb.AddForce(Vector3.down * 0.5f, ForceMode.Impulse);
         transform.SetParent(null);
         _isAttached = false;
-    }
-
-    public void OnRotate(Vector3 axis)
-    {
-        transform.RotateAround(transform.parent.position, axis, 90);
-        currentRotation = transform.rotation;
     }
 
     public override bool CanBeMoved(int level) => (int)weight <= level;

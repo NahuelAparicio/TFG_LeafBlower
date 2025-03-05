@@ -19,7 +19,6 @@ public class AspirerForce : BaseLeafBlower
     public float _maxTimeToShoot;
     public float maxOffsetYTargetToAim;
 
-
     public bool wasShootPressed = false;
     protected override void Awake()
     {
