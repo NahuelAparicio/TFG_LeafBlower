@@ -35,21 +35,27 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        if(isPauseMenu)
+        if (isPauseMenu)
         {
-            if (EventSystem.current.currentSelectedGameObject == null )
+            // Si no hay nada seleccionado o si el menú no tiene el foco correctamente
+            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
             {
-                menu.OnRetarget();
-            }
-        }
-        if(isMainMenu)
-        {
-            if(EventSystem.current.currentSelectedGameObject == null)
-            {
+                EventSystem.current.SetSelectedGameObject(null);
                 pause.OnRetarget();
             }
         }
+
+        if (isMainMenu)
+        {
+            // Si no hay nada seleccionado o si el menú no tiene el foco correctamente
+            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                menu.OnRetarget();
+            }
+        }
     }
+
 
     private void LoadResources()
     {
