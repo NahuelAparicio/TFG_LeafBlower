@@ -34,6 +34,17 @@ public class PauseMenu : BaseMenu<PauseMenu>
         Hide();
         SceneManager.LoadScene(0);
     }
+
+    public void OnSoundMenu()
+    {
+        Hide();
+        MenuManager.Instance.isPauseMenu = false;
+
+        GameManager.Instance.PauseGameHandler();
+        Hide();
+        SceneManager.LoadScene(1);
+    }
+
     public void OnQuitPressed()
     {
         MenuManager.Instance.isPauseMenu = false;

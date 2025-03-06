@@ -260,7 +260,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2205413219392894021}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: OnQuitPressed
         m_Mode: 1
@@ -420,9 +420,9 @@ GameObject:
   - component: {fileID: 3267287727937273777}
   - component: {fileID: 4818841631828694962}
   - component: {fileID: 5231627721476455219}
-  - component: {fileID: 2205413219392894021}
+  - component: {fileID: -85972016770480599}
   m_Layer: 5
-  m_Name: PauseMenu
+  m_Name: MusicMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2205413219392894021
+--- !u!114 &-85972016770480599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -522,12 +522,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4117194667005231050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010b24c8b654c2d4d9f70db5db067d54, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ad69a2d683f61a48a11c6244850b45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyWhenClosed: 1
-  disableMenuUnderneath: 1
-  firstSelectedInspector: {fileID: 547467281895234727}
 --- !u!1 &4578694554668205514
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +687,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2205413219392894021}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: OnSoundMenu
         m_Mode: 1
@@ -900,7 +897,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2205413219392894021}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: OnMainMenu
         m_Mode: 1
