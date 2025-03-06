@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BlowerInputs : MonoBehaviour
 {
@@ -30,8 +31,10 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
+        if (_blower.Player.IsTalking) return;
+
         //_blower.Handler.StartConsumingStamina();
-        if(_blower.Aspirer.attachableObject.IsAttached)
+        if (_blower.Aspirer.attachableObject.IsAttached)
         {
             _blower.Aspirer.wasShootPressed = true;
         }
@@ -51,6 +54,8 @@ public class BlowerInputs : MonoBehaviour
 
     private void Aspire_performed(InputAction.CallbackContext context)
     {
+        if (_blower.Player.IsTalking) return;
+
         //_blower.Handler.StartConsumingStamina();
         if (IsBlowingInputPressed()) return;
         _blower.aspirarVFX.SetActive(true);
@@ -68,9 +73,8 @@ public class BlowerInputs : MonoBehaviour
     }
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
-        if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;
-
-        
+        if (_blower.Player.IsTalking) return;
+        if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;        
 
         if (_blower.Player.Inventory.IsObjectSaved())
         {
