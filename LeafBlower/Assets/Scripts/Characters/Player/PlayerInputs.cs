@@ -70,7 +70,7 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Interact_performed(InputAction.CallbackContext context)
     {
-        if (!_player.Interactable.canInteract && _player.IsTalking) return;
+        if (!_player.Interactable.canInteract || _player.IsTalking) return;
         
         _player.Interactable.InteractPerformed();
     }

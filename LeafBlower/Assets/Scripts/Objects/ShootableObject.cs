@@ -74,33 +74,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         }
     }
 
-    //TODO: Sphere cast to detect wall and detach?
-    public float distDraw;
-    public float radius;
-    private void OnDrawGizmos()
-    {
-        if (_isAttached)
-        {
-            Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
-            Vector3 direction = (targetPosition - transform.position).normalized;
+ 
 
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, radius); // Dibuja la esfera en la posición actual
-
-            if (Physics.SphereCast(transform.position, radius, direction, out RaycastHit hit, distDraw))
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position, hit.point); // Línea hasta la colisión
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(hit.point, radius * 0.5f); // Dibuja una esfera en el punto de colisión
-            }
-            else
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawLine(transform.position, targetPosition); // Dibuja la dirección de movimiento
-            }
-        }
-    }
     public void OnAspiratableInteracts(Vector3 force)
     {
         if(!_isAttached && !_hasBeenShoot)

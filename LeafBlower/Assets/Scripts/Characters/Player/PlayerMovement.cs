@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_player.CheckCollisions.IsGrounded)
         {
+            if (_player.IsTalking) return;
             HandleGroundBehavior();
             
         }

@@ -41,11 +41,14 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private void OnDialogueEnded()
     {
-        _isTalking = false;
         Invoke(nameof(OnEnableCollider), 2f);
     }
 
-    public void OnEnableCollider() => _collider.enabled = true;
+    public void OnEnableCollider()
+    {
+        _collider.enabled = true;
+        _isTalking = false;
+    }
     public void OnDisableCollider()
     {
         _collider.enabled = false;

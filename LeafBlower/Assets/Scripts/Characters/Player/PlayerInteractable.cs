@@ -6,6 +6,14 @@ public class PlayerInteractable : MonoBehaviour
     private List<GameObject> _touchingInteractables = new List<GameObject>();
     public bool canInteract;
 
+    private void Update()
+    {
+        if(_touchingInteractables.Count <= 0)
+        {
+            canInteract = false;
+        }
+    }
+
     // Saves and deletes interacable objects so you can interact with them
     private void OnTriggerEnter(Collider other)
     {
