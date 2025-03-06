@@ -20,13 +20,16 @@ public class DialogueController : MonoBehaviour
     public event System.Action DialogueStarted;
     public event System.Action DialogueEnded;
 
+    public FadeImage[] _fade;
+    public FadeTextMeshPro[] _texts;
+
     private void Awake()
     {
         _characterIcons = Resources.LoadAll<Sprite>(Constants.DIALOGUE_ICONS_PATH).ToList();
         _typeHandler = GetComponent<TypingHandler>();
-        _dialogueHolder = transform.GetChild(0).gameObject;
+        _dialogueHolder = transform.GetChild(1).gameObject;
         EnableInputs();
-        HideDialogueBox();
+        EndDialogue();
     }
 
     public void StartDialogue(List<DialogueEntry> messages, Enums.DialogueTypingType t)
@@ -34,12 +37,21 @@ public class DialogueController : MonoBehaviour
         if (messages == null || messages.Count == 0) return;
         GameEventManager.Instance.cameraEvents.Zoom(15);
         MusicManager.Instance.PlayDialogs();
+        _dialogueHolder.SetActive(true);
+
+        foreach (FadeImage fadeImg in _fade)
+        {
+            fadeImg.OnFadeIn();
+        }
+        foreach (FadeTextMeshPro fadeTxt in _texts)
+        {
+            fadeTxt.OnFadeIn();
+        }
         _typeHandler.SetTypingType(t);
 
         _currentDialogue.Clear();
         _currentDialogue.AddRange(messages);
 
-        _dialogueHolder.SetActive(true);
         _icon.sprite = _characterIcons[(int)messages[_indexDialogue].character];
         _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
 
@@ -48,14 +60,26 @@ public class DialogueController : MonoBehaviour
 
     private void HideDialogueBox()
     {
+        foreach (FadeImage fadeImg in _fade)
+        {
+            fadeImg.OnFadeOut();
+        }
+        foreach (FadeTextMeshPro fadeTxt in _texts)
+        {
+            fadeTxt.OnFadeOut();
+        }
+        Invoke(nameof(EndDialogue), _fade[0].fadeDuration);
+    }
+
+    private void EndDialogue()
+    {
+        DialogueEnded?.Invoke();
         MusicManager.Instance.PlayExplorationMusic();
         _currentDialogue.Clear();
         _typeHandler.ResetTypingType();
         _typeHandler.ResetText();
         _indexDialogue = 0;
         _dialogueHolder.SetActive(false);
-
-        DialogueEnded?.Invoke();
     }
 
     #region Enable and Handle Inputs
@@ -68,6 +92,7 @@ public class DialogueController : MonoBehaviour
 
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
+        if (_currentDialogue.Count <= 0) return;
         if (_indexDialogue < _currentDialogue.Count)
         {
             _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
@@ -79,7 +104,6 @@ public class DialogueController : MonoBehaviour
         else
         {
             GameEventManager.Instance.cameraEvents.ResetZoom();
-
             HideDialogueBox();
         }
     }

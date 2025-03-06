@@ -69,8 +69,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(!_isTalking)
-            _movement.HandleAllMovement();
+        _movement.HandleAllMovement();
     }
 
     private void LateUpdate()
