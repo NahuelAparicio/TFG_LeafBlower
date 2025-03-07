@@ -183,6 +183,7 @@ public class AspirerForce : BaseLeafBlower
 
     private void TryAttachObject(Collider other, Vector3 closestPoint, ShootableObject shooteable)
     {
+        if (!shooteable.canBeAttached) return;
         if (shooteable != null)
         {
             if (other.GetComponent<ShootableObject>().IsAttached || other.GetComponent<ShootableObject>().HasBeenShoot) return;
