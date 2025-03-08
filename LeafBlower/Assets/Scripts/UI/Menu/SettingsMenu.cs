@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class SettingsMenu : BaseMenu<SettingsMenu>
 {
+
     protected override void Awake()
     {
         base.Awake();
@@ -10,6 +11,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         canvas.worldCamera = Camera.main;
         MenuManager.Instance.isInSettingsMenu = true;
     }
+
     public EventSystem GetEventSystem()
     {
         if (_eventSystem == null)
@@ -26,9 +28,8 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     {
         MenuManager.Instance.isInSettingsMenu = false;
         MenuManager.Instance.isMainMenu = true;
-        Hide();
-        //MenuManager.Instance.isMainMenu = false;
         MainMenu.Show();
-
+        Hide();
+        Destroy(gameObject);
     }
 }

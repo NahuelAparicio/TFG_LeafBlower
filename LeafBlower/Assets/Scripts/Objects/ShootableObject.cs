@@ -116,7 +116,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     {
         if (!canBeAttached) return;
         _currentTime = 0;
-        currentRotation = _originalRotation;
         transform.rotation = _originalRotation;
         transform.SetParent(pointToAttach);
         _rb.velocity = Vector3.zero;

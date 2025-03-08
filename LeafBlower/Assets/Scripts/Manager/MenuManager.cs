@@ -71,6 +71,7 @@ public class MenuManager : MonoBehaviour
     {
         menu = Resources.Load<MainMenu>("Menus/MainMenu");
         pause = Resources.Load<PauseMenu>("Menus/PauseMenu");
+        settings = Resources.Load<SettingsMenu>("Menus/SettingsMenu");
     }
 
     public void CreateInstance<T>() where T : Menu

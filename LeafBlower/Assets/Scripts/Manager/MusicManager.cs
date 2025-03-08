@@ -1,6 +1,6 @@
 using FMODUnity;
 using UnityEngine;
-
+using FMOD.Studio;
 // -- Singleton managing music, It can be called in any script for play music or whatever related with music
 public class MusicManager : MonoBehaviour
 {
@@ -23,6 +23,22 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    Bus _master;
+    Bus _music;
+    Bus _sfx;
+    Bus _ambience;
+
+    [Header("Volume")]
+    [Range(0, 1)]
+    public float masterVolume = 1;
+    [Range(0, 1)]
+    public float musicVolume = 1;
+    [Range(0, 1)]
+    public float ambienceVolume = 1;
+    [Range(0, 1)]
+    public float SFXVolume = 1;
+
+
     private void Awake()
     {
         if (_instance == null)
@@ -30,10 +46,19 @@ public class MusicManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        _master = RuntimeManager.GetBus("bus:/");
+        _music = RuntimeManager.GetBus("bus:/Music");
+        _sfx = RuntimeManager.GetBus("bus:/Sfx");
+        _ambience = RuntimeManager.GetBus("bus:/Ambience");
+    }
+
+    private void Update()
+    {
+        _master.setVolume(masterVolume);
+        _music.setVolume(musicVolume);
+        _sfx.setVolume(SFXVolume);
+        _ambience.setVolume(ambienceVolume);
     }
 
     public void PlayExplorationMusic()
