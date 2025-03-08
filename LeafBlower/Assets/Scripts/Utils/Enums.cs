@@ -12,7 +12,7 @@ public class Enums
     public enum ModifierType { Flat, PercentualToBase }
     public enum BlowType { RealisticBlow, DirectionalBlow }
     public enum DialogueTypingType { NoEffect, TypingMachine }
-
+    public enum VolumeType { Master, Music, Sfx, Ambience }
     public enum CharacterNames
     {
         None = 0,

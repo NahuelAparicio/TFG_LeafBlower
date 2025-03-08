@@ -3,7 +3,9 @@ using System;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using FMODUnity;
+using FMOD;
+using FMODUnityResonance;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
