@@ -39,13 +39,13 @@ public class AspirerForce : BaseLeafBlower
             return;
         }
 
-        if(Physics.SphereCast(_blower.FirePoint.position, radiusSphere, _blower.FirePoint.forward, out RaycastHit hit, distance))
-        {
-            if(hit.collider.gameObject.layer == ground)
-            {
-                GameEventManager.Instance.playerEvents.DetachObject();
-            }
-        }
+        //if(Physics.SphereCast(_blower.FirePoint.position, radiusSphere, _blower.FirePoint.forward, out RaycastHit hit, distance))
+        //{
+        //    if(hit.collider.gameObject.layer == ground)
+        //    {
+        //        GameEventManager.Instance.playerEvents.DetachObject();
+        //    }
+        //}
 
         if (_blower.IsShooting())
         {
@@ -78,33 +78,33 @@ public class AspirerForce : BaseLeafBlower
         }  
     }
 
-    //void OnDrawGizmos()
-    //{
-    //    // Define the start position of the sphere cast (object's position)
-    //    Vector3 start = _blower.FirePoint.position;
+    void OnDrawGizmos()
+    {
+        // Define the start position of the sphere cast (object's position)
+        Vector3 start = _blower.FirePoint.position;
 
-    //    // Define the direction of the sphere cast (forward direction)
-    //    Vector3 direction = _blower.FirePoint.forward * distance;
+        // Define the direction of the sphere cast (forward direction)
+        Vector3 direction = _blower.FirePoint.forward * distance;
 
-    //    // Draw a line representing the cast path
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawLine(start, start + direction);
+        // Draw a line representing the cast path
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(start, start + direction);
 
-    //    // Draw a wire sphere at the hit location if we are hitting something
-    //    RaycastHit hit;
-    //    if (Physics.SphereCast(start, radiusSphere, _blower.FirePoint.forward, out hit, distance))
-    //    {
-    //        // Draw the sphere at the hit point, if the hit was on the ground
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawWireSphere(hit.point, radiusSphere);
-    //    }
-    //    else
-    //    {
-    //        // Draw a wire sphere at the end point of the cast if no hit was found
-    //        Gizmos.color = Color.blue;
-    //        Gizmos.DrawWireSphere(start + direction, radiusSphere);
-    //    }
-    //}
+        // Draw a wire sphere at the hit location if we are hitting something
+        RaycastHit hit;
+        if (Physics.SphereCast(start, radiusSphere, _blower.FirePoint.forward, out hit, distance))
+        {
+            // Draw the sphere at the hit point, if the hit was on the ground
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(hit.point, radiusSphere);
+        }
+        else
+        {
+            // Draw a wire sphere at the end point of the cast if no hit was found
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(start + direction, radiusSphere);
+        }
+    }
 
     private float GetEffectiveTime() => Mathf.Max(0, _timePressed - _shootDelayThreshold);
     private float GetNormalizedTime() => Mathf.Clamp01(GetEffectiveTime() / _maxTimeToShoot);
@@ -141,8 +141,7 @@ public class AspirerForce : BaseLeafBlower
         Collider collider = obj.GetComponent<Collider>();
         IAspirable aspirable = obj.GetComponent<IAspirable>();
         ShootableObject shooteable = obj.GetComponent<ShootableObject>();
-
-        if(!_blower.IsAspirating())
+        if (!_blower.IsAspirating())
         {
             if (!_blower.IsShooting())
             {
@@ -152,7 +151,7 @@ public class AspirerForce : BaseLeafBlower
         }
 
         if (attachableObject.IsAttached) return;
-        if (shooteable.isInTunel) return;
+        if (shooteable.isInTunel || !shooteable.canBeAttached) return;
 
         if (collider.gameObject.layer != movable)
             collider.gameObject.layer = movable;
@@ -183,6 +182,7 @@ public class AspirerForce : BaseLeafBlower
 
     private void TryAttachObject(Collider other, Vector3 closestPoint, ShootableObject shooteable)
     {
+        
         if (shooteable != null)
         {
             if (other.GetComponent<ShootableObject>().IsAttached || other.GetComponent<ShootableObject>().HasBeenShoot) return;

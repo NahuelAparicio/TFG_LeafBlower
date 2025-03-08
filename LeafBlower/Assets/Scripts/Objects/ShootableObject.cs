@@ -18,6 +18,11 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     private float _timerSave = 0f;
     public float timeToRestoreSave = 1f;
 
+    private float _timerToReAttach = 0f;
+    public float timeToRestoreAttach = 1f;
+
+    public bool canBeAttached = true;
+
     public bool canBeSaved = true;
 
     public bool isInTunel = false;
@@ -42,6 +47,17 @@ public class ShootableObject : Object, IAspirable, IAttacheable
                 _timerSave = 0f;
             }
         }
+
+        if(!canBeAttached) 
+        { 
+            _timerToReAttach += Time.deltaTime;
+            if(_timerToReAttach >= timeToRestoreAttach)
+            {
+                canBeAttached = true;
+                _timerToReAttach = 0f;
+            }
+        }
+
 
         if(_hasBeenShoot)
         {
@@ -98,6 +114,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
     public void Attach(Transform pointToAttach, Vector3 closestPoint)
     {
+        if (!canBeAttached) return;
         _currentTime = 0;
         currentRotation = _originalRotation;
         transform.rotation = _originalRotation;
@@ -110,6 +127,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     }
     public void Detach()
     {
+        canBeAttached = false;
         _timerToFreeze = 0;
         gameObject.layer = LayerMask.NameToLayer("Ground");
         _rb.useGravity = true;
