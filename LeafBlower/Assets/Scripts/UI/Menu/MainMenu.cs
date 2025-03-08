@@ -37,9 +37,10 @@ public class MainMenu : BaseMenu<MainMenu>
 
     public void OnSettingsPressed()
     {
+        MenuManager.Instance.isMainMenu = false;
         //   AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
-
-        //    SettingsMenu.Show();
+        SettingsMenu.Show();
+        MenuManager.Instance.isInSettingsMenu = true;
     }
 
     public override void OnBackPressed()

@@ -35,7 +35,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
         SceneManager.LoadScene(0);
     }
 
-    public void OnSoundMenu()
+    public void OnSettingsMenu()
     {
         Hide();
         MenuManager.Instance.isPauseMenu = false;

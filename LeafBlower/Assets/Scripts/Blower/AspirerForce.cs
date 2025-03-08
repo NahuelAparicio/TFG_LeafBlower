@@ -57,7 +57,7 @@ public class AspirerForce : BaseLeafBlower
                 float effectiveTime = Mathf.Max(0, _timePressed - _shootDelayThreshold);
                 float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
 
-                _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
+               // _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
                 UpdateTargetToAimPosition(normalizedTime);
             }
 
@@ -130,7 +130,7 @@ public class AspirerForce : BaseLeafBlower
         Vector3 forceDir = force * _blower.FirePoint.forward;
         attachableObject.Shootable.OnShoot(forceDir);
         _timePressed = 0;
-        _blower.Hud.ResetShootBarForce();
+        //_blower.Hud.ResetShootBarForce();
         GameEventManager.Instance.playerEvents.DetachObject();
     }
 

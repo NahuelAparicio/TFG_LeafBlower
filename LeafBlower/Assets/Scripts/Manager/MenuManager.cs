@@ -9,9 +9,11 @@ public class MenuManager : MonoBehaviour
 
     public MainMenu menu;
     public PauseMenu pause;
+    public SettingsMenu settings;
 
     public bool isMainMenu;
     public bool isPauseMenu;
+    public bool isInSettingsMenu;
     public static MenuManager Instance
     {
         get
@@ -48,6 +50,14 @@ public class MenuManager : MonoBehaviour
         if (isMainMenu)
         {
             // Si no hay nada seleccionado o si el menú no tiene el foco correctamente
+            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                menu.OnRetarget();
+            }
+        }
+        if(isInSettingsMenu)
+        {
             if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
             {
                 EventSystem.current.SetSelectedGameObject(null);

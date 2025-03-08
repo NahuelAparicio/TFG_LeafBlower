@@ -38,7 +38,7 @@ public class PlayerInventory : MonoBehaviour
     private void CollectCoin(int num)
     {
         _coins += num;
-        _text.text = "COINS: " + _coins;
+        _text.text = "MONEDAS: " + _coins;
     }
 
     public void SaveObject(GameObject obj, Sprite sprite )

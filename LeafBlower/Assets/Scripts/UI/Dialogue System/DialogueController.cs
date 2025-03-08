@@ -23,20 +23,23 @@ public class DialogueController : MonoBehaviour
     public FadeImage[] _fade;
     public FadeTextMeshPro[] _texts;
 
+    public FadeImage[] _fadeUI;
+    public FadeTextMeshPro[] _textsUI;
+    public GameObject minimapa;
+
     private void Awake()
     {
         _characterIcons = Resources.LoadAll<Sprite>(Constants.DIALOGUE_ICONS_PATH).ToList();
         _typeHandler = GetComponent<TypingHandler>();
         _dialogueHolder = transform.GetChild(1).gameObject;
         EnableInputs();
-        EndDialogue();
+        _dialogueHolder.SetActive(false);
     }
-
     public void StartDialogue(List<DialogueEntry> messages, Enums.DialogueTypingType t)
     {
         if (messages == null || messages.Count == 0) return;
         GameEventManager.Instance.cameraEvents.Zoom(15);
-        MusicManager.Instance.PlayDialogs();
+        //MusicManager.Instance.PlayDialogs();
         _dialogueHolder.SetActive(true);
 
         foreach (FadeImage fadeImg in _fade)
@@ -47,6 +50,15 @@ public class DialogueController : MonoBehaviour
         {
             fadeTxt.OnFadeIn();
         }
+        foreach (FadeImage fadeImg in _fadeUI)
+        {
+            fadeImg.OnFadeOut();
+        }
+        foreach (FadeTextMeshPro fadeTxt in _textsUI)
+        {
+            fadeTxt.OnFadeOut();
+        }
+        minimapa.SetActive(false);
         _typeHandler.SetTypingType(t);
 
         _currentDialogue.Clear();
@@ -68,13 +80,26 @@ public class DialogueController : MonoBehaviour
         {
             fadeTxt.OnFadeOut();
         }
+        foreach (FadeImage fadeImg in _fadeUI)
+        {
+            if (fadeImg.isActiveAndEnabled)
+            {
+                fadeImg.OnFadeIn();
+            }
+        }
+        foreach (FadeTextMeshPro fadeTxt in _textsUI)
+        {
+                fadeTxt.OnFadeIn();
+        }
+            minimapa.SetActive(true);
+
         Invoke(nameof(EndDialogue), _fade[0].fadeDuration);
     }
 
     private void EndDialogue()
     {
         DialogueEnded?.Invoke();
-        MusicManager.Instance.PlayExplorationMusic();
+        //MusicManager.Instance.PlayExplorationMusic();
         _currentDialogue.Clear();
         _typeHandler.ResetTypingType();
         _typeHandler.ResetText();
