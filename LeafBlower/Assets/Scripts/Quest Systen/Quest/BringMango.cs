@@ -4,14 +4,14 @@ public class BringMango : QuestStep
     [SerializeField] private string nameObject;
     private void Start()
     {
-        string status = "Bring me " + nameObject + ".";
+        string status = "Encuentra mi " + nameObject + ".";
         ChangeState("", status);
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag(nameObject))
         {
-            string status = "The " + nameObject + " has been given.";
+            string status = "El " + nameObject + " ha sido entregado.";
             ChangeState("", status);
             Destroy(other.gameObject.transform.parent.gameObject);
             FinishQuestStep();
