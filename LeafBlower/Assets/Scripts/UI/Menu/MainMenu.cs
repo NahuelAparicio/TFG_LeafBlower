@@ -13,12 +13,11 @@ public class MainMenu : BaseMenu<MainMenu>
         loadingInspector.SetActive(false);
         Canvas canvas = GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
-        MenuManager.Instance.isMainMenu = true;
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
     }
     public void OnPlayPressed()
     {
         // AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
-        MenuManager.Instance.isMainMenu = false;
 
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
@@ -37,17 +36,15 @@ public class MainMenu : BaseMenu<MainMenu>
 
     public void OnSettingsPressed()
     {
-        MenuManager.Instance.isMainMenu = false;
+
         //   AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
         SettingsMenu.Show();
-        MenuManager.Instance.isInSettingsMenu = true;
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
     }
 
     public override void OnBackPressed()
     {
         //    AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
-        MenuManager.Instance.isMainMenu = false;
-
         GameManager.Instance.UpdateState(Enums.GameState.Exit);
     }
 }

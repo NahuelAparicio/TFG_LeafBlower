@@ -9,7 +9,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         base.Awake();
         Canvas canvas = GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
-        MenuManager.Instance.isInSettingsMenu = true;
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
     }
 
     public EventSystem GetEventSystem()
@@ -26,10 +26,15 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     }
     public override void OnBackPressed()
     {
-        MenuManager.Instance.isInSettingsMenu = false;
-        MenuManager.Instance.isMainMenu = true;
-        MainMenu.Show();
         Hide();
-        Destroy(gameObject);
+        if (GameManager.Instance.State == Enums.GameState.Playing || GameManager.Instance.State == Enums.GameState.PauseMenu)
+        {
+            PauseMenu.Show();
+        }
+        //else
+        //{
+        //    MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
+        //    MainMenu.Show();
+        //}
     }
 }

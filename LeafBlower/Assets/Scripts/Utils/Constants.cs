@@ -10,7 +10,7 @@ public class Constants
     public const string DIALOGUE_ICONS_PATH = "DialogueIcons";
 
     public const string MUSIC_EXPLORATION = "event:/Music/Exploration";
-    public const string MUSIC_MENU = "event:/Music/Menu event";
+    public const string MUSIC_MENU = "event:/MUSIC/MAIN THEME (MENU)";
     public const string MUSIC_DIALOGS = "event:/Music/Dialogs/Diálogos";
 
     public const float LEAF_WEIGHT = 0.5f;

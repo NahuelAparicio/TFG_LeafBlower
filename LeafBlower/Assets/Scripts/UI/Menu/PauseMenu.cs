@@ -11,7 +11,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
         canvas.worldCamera = Camera.main;
         canvas.planeDistance = 1;
         GameManager.Instance.PauseGameHandler();
-        MenuManager.Instance.isPauseMenu = true;
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.PauseMenu);
     }
 
     public void OnRetarget()
@@ -28,7 +28,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
     } 
     public void OnMainMenu()
     {
-        MenuManager.Instance.isPauseMenu = false;
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
 
         GameManager.Instance.PauseGameHandler();
         Hide();
@@ -37,18 +37,12 @@ public class PauseMenu : BaseMenu<PauseMenu>
 
     public void OnSettingsMenu()
     {
-        Hide();
-        MenuManager.Instance.isPauseMenu = false;
-
-        GameManager.Instance.PauseGameHandler();
-        Hide();
-        SceneManager.LoadScene(1);
+        MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
+        SettingsMenu.Show();
     }
 
     public void OnQuitPressed()
     {
-        MenuManager.Instance.isPauseMenu = false;
-
         GameManager.Instance.UpdateState(Enums.GameState.Playing);
         GameManager.Instance.PauseGameHandler();
         Hide();

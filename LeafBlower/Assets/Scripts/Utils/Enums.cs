@@ -20,5 +20,7 @@ public class Enums
         Noseque
     }
 
+    public enum MenuState { MainMenu, SettingsMenu, PauseMenu}
+
     public enum ObjectWeight {Leaf = 0, Low , Medium, Heavy, SuperHeavy, MegaHeavy }
 }

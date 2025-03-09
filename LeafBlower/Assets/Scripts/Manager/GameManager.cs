@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     private bool _isPaused;
     public bool IsPaused => _isPaused;
 
+    public Enums.GameState State => _state;
+
     private void Awake()
     {
         if(_instance == null)
@@ -80,12 +82,11 @@ public class GameManager : MonoBehaviour
         switch (_state)
         {
             case Enums.GameState.Menu:
-                //MusicManager.Instance.PlayMenuMusic();
+                MusicManager.Instance.PlayMenuMusic();
                 //MainMenu.Show();
                 //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
-                //MusicManager.Instance.PlayExplorationMusic();
                 //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:

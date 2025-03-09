@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,9 +12,9 @@ public class MenuManager : MonoBehaviour
     public PauseMenu pause;
     public SettingsMenu settings;
 
-    public bool isMainMenu;
-    public bool isPauseMenu;
-    public bool isInSettingsMenu;
+    public Enums.MenuState currentState;
+    public Enums.MenuState lastState;
+
     public static MenuManager Instance
     {
         get
@@ -37,36 +38,40 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (isPauseMenu)
+        switch (currentState)
         {
-            // Si no hay nada seleccionado o si el menú no tiene el foco correctamente
-            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                pause.OnRetarget();
-            }
-        }
-
-        if (isMainMenu)
-        {
-            // Si no hay nada seleccionado o si el menú no tiene el foco correctamente
-            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                menu.OnRetarget();
-            }
-        }
-        if(isInSettingsMenu)
-        {
-            if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                menu.OnRetarget();
-            }
+            case Enums.MenuState.MainMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    menu.OnRetarget();
+                }
+                break;
+            case Enums.MenuState.SettingsMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    settings.OnRetarget();
+                }
+                break;
+            case Enums.MenuState.PauseMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    pause.OnRetarget();
+                }
+                break;
+            default:
+                break;
         }
     }
 
-
+    public void ChangeMenuState(Enums.MenuState newState)
+    {
+        if (currentState == newState) return;
+        lastState = currentState;
+        currentState = newState;
+    }
     private void LoadResources()
     {
         menu = Resources.Load<MainMenu>("Menus/MainMenu");
@@ -82,6 +87,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu(Menu instance)
     {
+        menuStack = new Stack<Menu>(menuStack.Where(menu => menu != null));
         if (menuStack.Count > 0)
         {
             if (instance.disableMenuUnderneath)
