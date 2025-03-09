@@ -10,7 +10,6 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     public bool HasBeenShoot => _hasBeenShoot;
     private float distanceBetweenParentAndObject;
 
-    public Quaternion currentRotation;
     private float _currentTime = 0f;
     private float _timerToFreeze = 0f;
     public float timeToFreeze = 0.15f;
@@ -86,7 +85,7 @@ public class ShootableObject : Object, IAspirable, IAttacheable
             Vector3 targetPosition = transform.parent.position + (transform.parent.forward * distanceBetweenParentAndObject);
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 25f);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, currentRotation, Time.deltaTime * 25f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _originalRotation, Time.deltaTime * 25f);
         }
     }
 

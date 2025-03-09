@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &69836867456354521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4299618400191429013}
+  - component: {fileID: 6160569696328390537}
+  m_Layer: 9
+  m_Name: PlayerCollisionObjectAttached
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4299618400191429013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69836867456354521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3145891113449486431}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6160569696328390537
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69836867456354521}
+  m_Material: {fileID: 13400000, guid: 58c1e931256e47247a7921f86d97b391, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.51797885
+  m_Height: 1.7338047
+  m_Direction: 2
+  m_Center: {x: 0.065556765, y: 0.93469256, z: 0.7212553}
 --- !u!1 &1108483272330379562
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +921,8 @@ MonoBehaviour:
   _maxTimeToShoot: 0.5
   maxOffsetYTargetToAim: 2.5
   wasShootPressed: 0
+  radiusSphere: 1
+  distance: 1
 --- !u!114 &347116612067083758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,8 +1001,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0.8354292, a: 1}
+      key1: {r: 1, g: 0, b: 0.71341753, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -969,7 +1026,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -996,6 +1053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trajectory: {fileID: 347116612067083758}
+  _collider: {fileID: 6160569696328390537}
 --- !u!1 &7374632889170115555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9d725427a84b440ae86d6501e93970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToSavePos: 5
   positionToRespawn: {x: 0, y: 0, z: 0}
 --- !u!65 &8544450968840054094
 BoxCollider:
@@ -1551,7 +1608,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.162, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4299618400191429013}
   m_Father: {fileID: 8482424120401540202}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1574,10 +1632,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.26760855
+  m_Radius: 0.30446815
   m_Height: 1.4227005
   m_Direction: 1
-  m_Center: {x: 5.190283e-10, y: 0.72286004, z: 0.065215945}
+  m_Center: {x: 0, y: 0.72286004, z: 0.10207558}
 --- !u!114 &6882861427866214420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2027,17 +2085,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.32
+      value: -17.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.15
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.57
+      value: -69.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14b022e50ecd23a4595f7e046d23067e,
         type: 3}
@@ -2596,7 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eb1c920d7e8d049bb906f74e9d4165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: 2
+  _level: 1
   _walkSpeed:
     baseValue: 4
     _reCalculate: 1
@@ -2788,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bf8aa1cba0db440ae3ffde113d0222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedChangeFactor: 5
+  speedChangeFactor: 7
   toZeroChangeFactor: 75
 --- !u!114 &4524749939932590577
 MonoBehaviour:
@@ -2802,7 +2860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7c30943478d0c4abfccd2f8d3526f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravity: -35
   _normalGravity: -35
   _fallingGravity: -60
 --- !u!114 &2793916602985163692

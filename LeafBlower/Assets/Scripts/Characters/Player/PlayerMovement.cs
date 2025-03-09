@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump:")]
     public float lastGroundedTime = -1f;
-    private float _jumpForce = 16f;
-    public float minJumpForce = 20f;
     public float maxJumpForce = 20f;
 
     private MovementStateHandler _stateHandler;
@@ -49,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         _player = GetComponent<PlayerController>();
         _stateHandler = GetComponent<MovementStateHandler>();
         _gravityHandler = GetComponent<CustomGravityHandler>();
-        _jumpForce = minJumpForce;
     }
 
     public void HandleAllMovement()
@@ -184,15 +181,15 @@ public class PlayerMovement : MonoBehaviour
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
         }
     }
-    public void Jump(float time)
+    public void Jump()
     {
         if (isJumping) return;
 
-        float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
+        //float force = Mathf.Lerp(minJumpForce, maxJumpForce, time);
 
         _player.Animations.HandleJumpAnimations();
 
-        MakeMovement(Enums.Movements.Jump, force);
+        MakeMovement(Enums.Movements.Jump, _player.Movement.maxJumpForce);
     }
 
     public void OnUpdateHovering()
