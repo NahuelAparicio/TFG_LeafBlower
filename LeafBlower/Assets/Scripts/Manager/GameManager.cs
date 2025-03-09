@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private Enums.GameState _state = Enums.GameState.Playing;
     private bool _isPaused;
     public bool IsPaused => _isPaused;
-
+    public bool hasStartedNewGame = false;
     public Enums.GameState State => _state;
 
     private void Awake()
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             case Enums.GameState.Menu:
                 MusicManager.Instance.PlayMenuMusic();
-                //MainMenu.Show();
+                MainMenu.Show();
                 //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:

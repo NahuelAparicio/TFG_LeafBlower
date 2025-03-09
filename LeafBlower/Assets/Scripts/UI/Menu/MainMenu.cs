@@ -6,7 +6,7 @@ public class MainMenu : BaseMenu<MainMenu>
 {
     public GameObject loadingInspector;
     public Image loadingFillAmountInspector;
-
+    public GameObject continueGo;
     protected override void Awake()
     {
         base.Awake();
@@ -14,13 +14,28 @@ public class MainMenu : BaseMenu<MainMenu>
         Canvas canvas = GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
+        if(GameManager.Instance.hasStartedNewGame)
+        {
+            continueGo.SetActive(true);
+        }
+        else
+        {
+            continueGo.SetActive(false);
+        }
     }
-    public void OnPlayPressed()
+    public void OnNewGamePressed()
     {
         // AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
-
+        GameManager.Instance.hasStartedNewGame = true;
+        ResetData();
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
+
+    public void OnContinuePressed()
+    {
+        GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
+    }
+
     public EventSystem GetEventSystem()
     {
         if (_eventSystem == null)
@@ -29,6 +44,12 @@ public class MainMenu : BaseMenu<MainMenu>
         }
         return _eventSystem;
     }
+
+    private void ResetData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void OnRetarget()
     {
         GetEventSystem().SetSelectedGameObject(_firstSelected);
