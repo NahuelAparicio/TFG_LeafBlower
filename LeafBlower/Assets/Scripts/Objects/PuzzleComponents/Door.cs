@@ -6,23 +6,33 @@ public class Door : IActivable
     public Transform doorLeft, doorRight;
     public float rotationSpeed;
 
+    public Quaternion targetRotationLeft;
+    public Quaternion targetRotationRight;
+
+    private Quaternion originalRotationLeft;
+    private Quaternion originalRotationRight;
+    private Coroutine moveCoroutine;
+
+    private void Start()
+    {
+        originalRotationLeft = doorLeft.localRotation;
+        originalRotationRight = doorRight.localRotation;
+    }
+
     public override void DoAction()
     {
-        StopAllCoroutines();
-        StartCoroutine(MoveDoors(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 0)));
-
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        moveCoroutine = StartCoroutine(MoveDoors(targetRotationLeft, targetRotationRight));
     }
 
     public override void UndoAction()
     {
-        //Close Door
-        StopAllCoroutines();
-        StartCoroutine(MoveDoors(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0, 0, 0)));
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        moveCoroutine = StartCoroutine(MoveDoors(originalRotationLeft, originalRotationRight));
     }
 
-    private IEnumerator MoveDoors(Quaternion targetedLeft, Quaternion targetedRight)
+    private IEnumerator MoveDoors(Quaternion targetLeft, Quaternion targetRight)
     {
-
         Quaternion initialRotationLeft = doorLeft.localRotation;
         Quaternion initialRotationRight = doorRight.localRotation;
 
@@ -31,12 +41,13 @@ public class Door : IActivable
         while (t < 1f)
         {
             t += Time.deltaTime * rotationSpeed;
-
-            doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetedLeft, t);
-            doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetedRight, t);
-
-            yield return null; 
+            doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetLeft, t);
+            doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetRight, t);
+            yield return null;
         }
 
+        // Ensure exact final rotation
+        doorLeft.localRotation = targetLeft;
+        doorRight.localRotation = targetRight;
     }
 }

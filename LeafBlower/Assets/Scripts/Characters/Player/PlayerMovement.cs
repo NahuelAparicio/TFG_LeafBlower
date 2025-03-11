@@ -42,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 LastMoveDirection { get => _lastMoveDirection; set { _lastMoveDirection = value; } }
     public float MoveSpeed { get => _moveSpeed; set { _moveSpeed = value; } }
 
+    private float _hoverTime = 0f;
+    public float hoverSmooth;
+    public float hoverYTarget;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -83,11 +87,12 @@ public class PlayerMovement : MonoBehaviour
         if (IsHovering())
         {
             Hover();
+            _hoverTime = Mathf.Clamp01(_hoverTime + Time.deltaTime / hoverSmooth); 
+            _player.BlowerController.Aspirer.UpdateTargetToAimPosition(_hoverTime, hoverYTarget);
             return;
         }
         else
         {
-            //Hola, soy Bryan, he añadido este if para que en el momento en el que el jugador está cayendo la gravedad pase a ser la gravedad de caída (más alta)
             if (_player.Rigidbody.velocity.y < 0)
             {
                 _gravityHandler.SetFallingGravity();
@@ -196,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (onStartHovering)
         {
+            _hoverTime = 0;
             _player.Rigidbody.velocity = new Vector3(_player.Rigidbody.velocity.x, 0, _player.Rigidbody.velocity.z);
             _player.BlowerController.StaminaHandler.StartConsumingStamina();
             _player.BlowerController.blowVFX.SetActive(true);

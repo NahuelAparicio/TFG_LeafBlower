@@ -33,7 +33,7 @@ public class AspirerForce : BaseLeafBlower
     public float distance = 1f;
     protected override void Update()
     {
-        if(!attachableObject.IsAttached)
+        if(!attachableObject.IsAttached && !_blower.Player.Movement.IsHovering())
         {
             ResetTargetToAimPosition();
             return;
@@ -50,7 +50,7 @@ public class AspirerForce : BaseLeafBlower
                 float normalizedTime = Mathf.Clamp01(effectiveTime / _maxTimeToShoot);
 
                // _blower.Hud.UpdateShootBarForce(effectiveTime, _maxTimeToShoot);
-                UpdateTargetToAimPosition(normalizedTime);
+                UpdateTargetToAimPosition(normalizedTime, maxOffsetYTargetToAim);
             }
 
             attachableObject.trajectory.DrawTrajectory(_blower.FirePoint, attachableObject.Rigidbody, GetShootForce());
@@ -75,11 +75,10 @@ public class AspirerForce : BaseLeafBlower
     private float GetShootForce() => Mathf.Lerp(_blower.Stats.ShootForce, _blower.Stats.ShootForce + addedForceOnMaxPressed, GetNormalizedTime());
     public bool IsNormalShoot() => _timePressed < _shootDelayThreshold;
 
-    private void UpdateTargetToAimPosition(float normalizedTime)
+    public void UpdateTargetToAimPosition(float normalizedTime, float targetYPos)
     {
-        Vector3 targetPosition = targetToAimDefaultPos + new Vector3(0, maxOffsetYTargetToAim * normalizedTime, 0);
+        Vector3 targetPosition = targetToAimDefaultPos + new Vector3(0, targetYPos * normalizedTime, 0);
         targetToaim.localPosition = targetPosition;
-
     }
 
     private void ResetTargetToAimPosition()

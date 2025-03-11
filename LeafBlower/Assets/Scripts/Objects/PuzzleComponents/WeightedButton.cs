@@ -46,8 +46,7 @@ public class WeightedButton : MonoBehaviour
     private void SetButtonBehavior()
     {
         if(_isActive && _activeObjects.Count <= 0)
-        {
-            
+        {            
             _activable.UndoAction();
             pressObject.transform.localPosition = Vector3.zero;
             _isActive = false;
