@@ -15,8 +15,16 @@ public class BaseLeafBlower : MonoBehaviour
     {
         _blower = transform.parent.GetComponent<BlowerController>();
     }
+
+
+    private void PlayerEvents_onDetachObject()
+    {
+        CheckForNulls();
+    }
+
     protected virtual void Start()
     {
+        GameEventManager.Instance.playerEvents.onDetachObject += PlayerEvents_onDetachObject;
 
     }
     protected virtual void Update()
@@ -147,6 +155,12 @@ public class BaseLeafBlower : MonoBehaviour
     public void CheckForNulls()
     {
         _objects.RemoveWhere(obj => obj == null || !obj.isActiveAndEnabled);
+    }
+
+    private void OnDestroy()
+    {
+        GameEventManager.Instance.playerEvents.onDetachObject -= PlayerEvents_onDetachObject;
+
     }
 
 }

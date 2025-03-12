@@ -7,12 +7,16 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     [SerializeField] private List<DialogueEntry> _dialogueTexts = new List<DialogueEntry>();
 
+    [SerializeField] private List<ListWrapper> _dialogues = new List<ListWrapper>();
+
     private DialogueController _dialogueController;
     private bool _isTalking = false;
     private Collider _collider;
     private PlayerInteractable _interactable;
     public bool IsTalking => _isTalking;
 
+    private int _dialogueIndex = 0;
+    public bool enableDialogueAdd = false;
     private void Awake()
     {
         _isTalking = false;
@@ -25,7 +29,8 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         if(_dialogueController)
         {
-            _dialogueController.StartDialogue(_dialogueTexts, typingType);
+            //_dialogueTexts
+            _dialogueController.StartDialogue(_dialogues[_dialogueIndex].dialogues, typingType);
             OnDisableCollider();
             _isTalking = true;
         }
@@ -53,6 +58,24 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         _collider.enabled = false;
         _interactable.RemoveInteractable(gameObject);   
+    }
+
+    public void AddNewDialogue()
+    {
+        if(enableDialogueAdd)
+        {
+            _dialogueIndex++;
+        }
+    }
+
+    public void EnableDialogueAdd()
+    {
+        enableDialogueAdd = true;
+    }
+
+    public void DisableDialogueAdd()
+    {
+        enableDialogueAdd = false;
     }
 
     public void SetInteractableParent(PlayerInteractable parent) => _interactable = parent;

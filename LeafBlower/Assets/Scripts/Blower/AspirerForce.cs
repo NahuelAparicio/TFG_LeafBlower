@@ -29,6 +29,7 @@ public class AspirerForce : BaseLeafBlower
     }
 
 
+
     public float radiusSphere = 1f;
     public float distance = 1f;
     protected override void Update()
@@ -167,6 +168,5 @@ public class AspirerForce : BaseLeafBlower
             GameEventManager.Instance.playerEvents.DetachObject();
         }
     }
-
 
 }
