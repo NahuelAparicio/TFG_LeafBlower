@@ -113,10 +113,11 @@ public class DialogueController : MonoBehaviour
         _actions.Dialogue.Enable();
         _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
     }
-
+    private float _nextInteractTime = 0f;
+    private float _interactCooldown = 0.2f; // Cooldown time
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
-        if (_currentDialogue.Count <= 0) return;
+        if (_currentDialogue.Count <= 0 || Time.time < _nextInteractTime) return;
         if (_indexDialogue < _currentDialogue.Count)
         {
             _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
@@ -130,6 +131,8 @@ public class DialogueController : MonoBehaviour
             GameEventManager.Instance.cameraEvents.ResetZoom();
             HideDialogueBox();
         }
+        _nextInteractTime = Time.time + _interactCooldown;
+
     }
 
     private void PlayDialogueSound()

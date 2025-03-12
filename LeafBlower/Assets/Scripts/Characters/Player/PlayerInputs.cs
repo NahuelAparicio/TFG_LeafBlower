@@ -56,11 +56,15 @@ public class PlayerInputs : MonoBehaviour
 
         _player.Movement.DisableMovement();
     }
+
+
+
     private void Interact_performed(InputAction.CallbackContext context)
     {
         if (!_player.Interactable.canInteract || _player.IsTalking) return;
         
         _player.Interactable.InteractPerformed();
+
     }
 
     private void Jump_performed(InputAction.CallbackContext context)

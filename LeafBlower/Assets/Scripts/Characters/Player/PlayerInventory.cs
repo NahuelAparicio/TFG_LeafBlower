@@ -38,7 +38,6 @@ public class PlayerInventory : MonoBehaviour
     private void CollectCoin(int num)
     {
         _coins += num;
-        //_text.text = "MONEDAS: " + _coins;
         _text.text =""+_coins; //Bryan: He cambiado esto para que se adapte al nuevo HUD segun el concept
     }
 
@@ -94,7 +93,8 @@ public class PlayerInventory : MonoBehaviour
 
     private void LoadData()
     {
-        _coins = PlayerPrefs.GetInt("Gold");  
+        _coins = PlayerPrefs.GetInt("Gold");
+        _text.text = "" + _coins;
     }
 
   

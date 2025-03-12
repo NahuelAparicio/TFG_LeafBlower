@@ -23,6 +23,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         _collider = GetComponent<Collider>();
         _dialogueController = FindObjectOfType<DialogueController>();
         _dialogueController.DialogueEnded += OnDialogueEnded;
+        LoadData();
     }
 
     private void ShowDialogue()
@@ -64,6 +65,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         if(enableDialogueAdd)
         {
+            if (_dialogues.Count -1 == _dialogueIndex) return;
             _dialogueIndex++;
         }
     }
@@ -83,5 +85,20 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private void OnDestroy()
     {
         _dialogueController.DialogueEnded -= OnDialogueEnded;
+    }
+    private void OnDisable()
+    {
+        SaveData(); 
+    }
+    private void SaveData()
+    {
+        string key = "IndexDialogue_" + gameObject.name; // Unique key per NPC
+        PlayerPrefs.SetInt(key, _dialogueIndex);
+    }
+
+    private void LoadData()
+    {
+        string key = "IndexDialogue_" + gameObject.name; // Retrieve the correct key
+        _dialogueIndex = PlayerPrefs.GetInt(key, 0); // Default to 0 if not found
     }
 }
