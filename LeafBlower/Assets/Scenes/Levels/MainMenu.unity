@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d426e4b77f30c8846b6ef11d1b9626b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasStartedNewGame: 0
 --- !u!1 &752469174
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,8 +347,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   pause: {fileID: 0}
-  isMainMenu: 0
-  isPauseMenu: 0
+  settings: {fileID: 0}
+  currentState: 0
+  lastState: 0
 --- !u!1 &1700788167
 GameObject:
   m_ObjectHideFlags: 0
