@@ -11,12 +11,14 @@ public class FadeImage : MonoBehaviour
 
     public void OnFadeIn()
     {
+        if (!gameObject.activeInHierarchy) return;
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(FadeImageAlpha(0f, 1f));
     }
 
     public void OnFadeOut()
     {
+        if (!gameObject.activeInHierarchy) return;
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(FadeImageAlpha(1f, 0f));
     }
