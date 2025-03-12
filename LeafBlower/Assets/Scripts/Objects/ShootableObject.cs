@@ -144,5 +144,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
         _timerToFreeze = 0;
         UnFreeze();
     }
-
+    private void OnDestroy()
+    {
+        GameEventManager.Instance.playerEvents.DetachObject();
+    }
 }

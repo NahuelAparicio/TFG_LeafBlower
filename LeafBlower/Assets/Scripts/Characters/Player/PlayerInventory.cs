@@ -66,7 +66,7 @@ public class PlayerInventory : MonoBehaviour
 
         objectSaved.GetComponent<ShootableObject>().canBeSaved = false;
 
-        if (_player.BlowerController.IsAspirating())
+        if (_player.BlowerController.IsAspirating() && _player.CheckCollisions.IsGrounded)
         {
             _player.BlowerController.Aspirer.attachableObject.Attach(objectSaved.GetComponent<Rigidbody>(), objectSaved.transform.position, _player.BlowerController.FirePoint);
         }

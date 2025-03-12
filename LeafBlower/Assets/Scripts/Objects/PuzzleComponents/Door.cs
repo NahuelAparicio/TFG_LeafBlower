@@ -17,6 +17,8 @@ public class Door : IActivable
     {
         originalRotationLeft = doorLeft.localRotation;
         originalRotationRight = doorRight.localRotation;
+        targetRotationLeft = Quaternion.identity;
+        targetRotationRight = Quaternion.identity;
     }
 
     public override void DoAction()
@@ -36,17 +38,21 @@ public class Door : IActivable
         Quaternion initialRotationLeft = doorLeft.localRotation;
         Quaternion initialRotationRight = doorRight.localRotation;
 
-        float t = 0f;
+        float duration = 1f / rotationSpeed; // Duración basada en la velocidad
+        float elapsedTime = 0f;
 
-        while (t < 1f)
+        while (elapsedTime < duration)
         {
-            t += Time.deltaTime * rotationSpeed;
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // Asegura un valor entre 0 y 1
+
             doorLeft.localRotation = Quaternion.Slerp(initialRotationLeft, targetLeft, t);
             doorRight.localRotation = Quaternion.Slerp(initialRotationRight, targetRight, t);
+
             yield return null;
         }
 
-        // Ensure exact final rotation
+        // Asegurar la rotación final exacta
         doorLeft.localRotation = targetLeft;
         doorRight.localRotation = targetRight;
     }

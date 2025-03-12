@@ -39,7 +39,6 @@ public class DialogueController : MonoBehaviour
     {
         if (messages == null || messages.Count == 0) return;
         GameEventManager.Instance.cameraEvents.Zoom(15);
-        //MusicManager.Instance.PlayDialogs();
         _dialogueHolder.SetActive(true);
 
         foreach (FadeImage fadeImg in _fade)

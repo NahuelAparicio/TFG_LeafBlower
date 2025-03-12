@@ -12,6 +12,7 @@ public class QuestPoint : MonoBehaviour
 
     private QuestIcon _questIcon;
 
+    public NPCDialogue dialogue;
     private void Awake()
     {
         _questId = _quest.id;
@@ -31,7 +32,32 @@ public class QuestPoint : MonoBehaviour
         }
         else if(_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
         {
+            dialogue.EnableDialogueAdd();
             GameEventManager.Instance.questEvents.FinishQuest(_questId);
+        }
+    }
+
+    public void EndQuest()
+    {
+        if(_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
+        {
+            dialogue.EnableDialogueAdd();
+            dialogue.AddNewDialogue();
+            GameEventManager.Instance.questEvents.FinishQuest(_questId);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!finishPoint) return;
+
+        if(other.CompareTag("Player"))
+        {
+            if (_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
+            {
+                dialogue.EnableDialogueAdd();
+                dialogue.AddNewDialogue();
+            }
         }
     }
 
