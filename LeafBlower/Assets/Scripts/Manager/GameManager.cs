@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using FMODUnity;
 using FMOD;
 using FMODUnityResonance;
+using FMOD.Studio;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
 
     public void LoadLevel(string levelName, GameObject _loaderCanvas, Image _progressBar)
     {
