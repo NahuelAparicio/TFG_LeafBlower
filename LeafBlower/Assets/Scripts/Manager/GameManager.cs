@@ -68,7 +68,9 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         UpdateState(Enums.GameState.Playing);
+        MusicManager.Instance.StopMenuMusic();
         MainMenu.Hide();
+
     }
     public void UpdateState(Enums.GameState state)
     {

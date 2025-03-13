@@ -77,6 +77,12 @@ public class MusicManager : MonoBehaviour
         menuMusicInstance = RuntimeManager.CreateInstance(Constants.MUSIC_MENU);
         menuMusicInstance.start();
     }
+
+    public void StopMenuMusic()
+    {
+        StopAllMusic();
+    }
+
     public void PlayDialogs()
     {
         if(IsDialogueMusicPlaying()) return;
@@ -119,6 +125,10 @@ public class MusicManager : MonoBehaviour
             menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             menuMusicInstance.release();
         }
+        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
     }
     private bool IsMusicPlaying()
     {
