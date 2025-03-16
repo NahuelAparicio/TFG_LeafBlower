@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using FMODUnity;
 using FMOD;
 using FMODUnityResonance;
+using FMOD.Studio;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject go = new GameObject("Game Manager");
                 go.AddComponent<GameManager>();
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
 
     public void LoadLevel(string levelName, GameObject _loaderCanvas, Image _progressBar)
     {
@@ -68,11 +70,13 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         UpdateState(Enums.GameState.Playing);
+        MusicManager.Instance.StopMenuMusic();
         MainMenu.Hide();
+
     }
     public void UpdateState(Enums.GameState state)
     {
-        if(_state == state)
+        if (_state == state)
         {
             return;
         }
