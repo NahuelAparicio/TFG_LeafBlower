@@ -5,8 +5,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 {
     public Enums.DialogueTypingType typingType;
 
-    [SerializeField] private List<DialogueEntry> _dialogueTexts = new List<DialogueEntry>();
-
     [SerializeField] private List<ListWrapper> _dialogues = new List<ListWrapper>();
 
     private DialogueController _dialogueController;
