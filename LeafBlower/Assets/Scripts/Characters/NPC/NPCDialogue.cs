@@ -17,6 +17,9 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private int _dialogueIndex = 0;
     public bool enableDialogueAdd = false;
+
+    private InteractUIManager _uiManager; // Donde esté el script que maneja la visibilidad de la interfaz de interacción
+
     private void Awake()
     {
         _isTalking = false;
@@ -24,13 +27,18 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         _dialogueController = FindObjectOfType<DialogueController>();
         _dialogueController.DialogueEnded += OnDialogueEnded;
         LoadData();
+
+        _uiManager = GetComponent<InteractUIManager>();
+        if (_uiManager == null)
+        {
+            Debug.LogError("No se encontró InteractUIManager en este GameObject.");
+        }
     }
 
     private void ShowDialogue()
     {
-        if(_dialogueController)
+        if (_dialogueController)
         {
-            //_dialogueTexts
             _dialogueController.StartDialogue(_dialogues[_dialogueIndex].dialogues, typingType);
             OnDisableCollider();
             _isTalking = true;
@@ -39,9 +47,11 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        if(!_isTalking)
+        if (!_isTalking)
         {
             ShowDialogue();
+            _uiManager.SaveVisibilityState();
+            _uiManager.HideAllIcons();
         }
     }
 
@@ -54,18 +64,20 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         _collider.enabled = true;
         _isTalking = false;
+        _uiManager.RestoreVisibilityState(); //aqui molaría hacer una animación de bounce por codigo
     }
+
     public void OnDisableCollider()
     {
         _collider.enabled = false;
-        _interactable.RemoveInteractable(gameObject);   
+        _interactable.RemoveInteractable(gameObject);
     }
 
     public void AddNewDialogue()
     {
-        if(enableDialogueAdd)
+        if (enableDialogueAdd)
         {
-            if (_dialogues.Count -1 == _dialogueIndex) return;
+            if (_dialogues.Count - 1 == _dialogueIndex) return;
             _dialogueIndex++;
         }
     }
@@ -86,19 +98,21 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         _dialogueController.DialogueEnded -= OnDialogueEnded;
     }
+
     private void OnDisable()
     {
-        SaveData(); 
+        SaveData();
     }
+
     private void SaveData()
     {
-        string key = "IndexDialogue_" + gameObject.name; // Unique key per NPC
+        string key = "IndexDialogue_" + gameObject.name; // Clave única para cada NPC
         PlayerPrefs.SetInt(key, _dialogueIndex);
     }
 
     private void LoadData()
     {
-        string key = "IndexDialogue_" + gameObject.name; // Retrieve the correct key
-        _dialogueIndex = PlayerPrefs.GetInt(key, 0); // Default to 0 if not found
+        string key = "IndexDialogue_" + gameObject.name; // Recupera la clave correcta
+        _dialogueIndex = PlayerPrefs.GetInt(key, 0); // Por defecto 0 si no se encuentra
     }
 }
