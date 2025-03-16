@@ -13,7 +13,7 @@ public class MusicManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject go = new GameObject("Music Manager");
                 go.AddComponent<MusicManager>();
@@ -77,9 +77,15 @@ public class MusicManager : MonoBehaviour
         menuMusicInstance = RuntimeManager.CreateInstance(Constants.MUSIC_MENU);
         menuMusicInstance.start();
     }
+
+    public void StopMenuMusic()
+    {
+        StopAllMusic();
+    }
+
     public void PlayDialogs()
     {
-        if(IsDialogueMusicPlaying()) return;
+        if (IsDialogueMusicPlaying()) return;
 
         StopAllMusic();
         dialogueMusicInstance = RuntimeManager.CreateInstance(Constants.MUSIC_DIALOGS);
@@ -88,7 +94,7 @@ public class MusicManager : MonoBehaviour
 
     public void PauseMusic(bool pause)
     {
-        if(inGameMusicInstance.isValid())
+        if (inGameMusicInstance.isValid())
         {
             inGameMusicInstance.setPaused(pause);
         }
@@ -104,7 +110,7 @@ public class MusicManager : MonoBehaviour
 
     public void StopAllMusic()
     {
-        if(inGameMusicInstance.isValid())
+        if (inGameMusicInstance.isValid())
         {
             inGameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             inGameMusicInstance.release();
@@ -119,6 +125,10 @@ public class MusicManager : MonoBehaviour
             menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             menuMusicInstance.release();
         }
+        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
     }
     private bool IsMusicPlaying()
     {
