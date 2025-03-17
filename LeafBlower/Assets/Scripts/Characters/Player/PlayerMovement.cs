@@ -211,7 +211,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _player.BlowerController.isHovering = false;
             _player.BlowerController.StaminaHandler.StopConsumingStamina();
-            _player.BlowerController.aspirarVFX.SetActive(false);
             _player.BlowerController.blowVFX.SetActive(false);
             _player.Sounds.StopEngineSound();
         }

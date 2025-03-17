@@ -103,7 +103,8 @@ public class PlayerInventory : MonoBehaviour
         {
             transform.position = new Vector3(PlayerPrefs.GetInt("PosX"), PlayerPrefs.GetInt("PosY"), PlayerPrefs.GetInt("PosZ"));
         }
-        _player.Stats.SetLevel(PlayerPrefs.GetInt("PlayerLevel"));
+        if(PlayerPrefs.HasKey("PlayerLevel"))
+            _player.Stats.SetLevel(PlayerPrefs.GetInt("PlayerLevel"));
     }
 
   

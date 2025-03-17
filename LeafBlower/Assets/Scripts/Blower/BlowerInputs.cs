@@ -24,7 +24,6 @@ public class BlowerInputs : MonoBehaviour
         if(!IsAspiringInputPressed() && !IsBlowingInputPressed() && !_blower.Player.Movement.IsHovering())
         {
             _blower.blowVFX.SetActive(false);
-            _blower.aspirarVFX.SetActive(false);
         }
     }
 
@@ -66,7 +65,7 @@ public class BlowerInputs : MonoBehaviour
 
         //_blower.Handler.StartConsumingStamina();
         if (IsBlowingInputPressed()) return;
-        _blower.aspirarVFX.SetActive(true);
+        _blower.blowVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
 
     }
@@ -75,7 +74,7 @@ public class BlowerInputs : MonoBehaviour
     {
         if (IsBlowingInputPressed()) return;
         _blower.StaminaHandler.StopConsumingStamina();
-        _blower.aspirarVFX.SetActive(false);
+        _blower.blowVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
 
     }

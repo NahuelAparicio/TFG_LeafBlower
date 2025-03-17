@@ -98,7 +98,6 @@ public class DialogueController : MonoBehaviour
     private void EndDialogue()
     {
         DialogueEnded?.Invoke();
-        //MusicManager.Instance.PlayExplorationMusic();
         _currentDialogue.Clear();
         _typeHandler.ResetTypingType();
         _typeHandler.ResetText();
