@@ -4,7 +4,7 @@ public class BringMango : QuestStep
     [SerializeField] private string nameObject;
     private void Start()
     {
-        string status = "Encuentra mi " + nameObject + ".";
+        string status = "Encuéntrame " + nameObject + ".";
         ChangeState("", status);
     }
     private void OnTriggerEnter(Collider other)

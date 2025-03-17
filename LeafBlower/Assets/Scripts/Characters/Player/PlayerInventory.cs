@@ -35,7 +35,7 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log(id + " Collected");
     }
 
-    private void CollectCoin(int num)
+    public void CollectCoin(int num)
     {
         _coins += num;
         _text.text =""+_coins; //Bryan: He cambiado esto para que se adapte al nuevo HUD segun el concept
@@ -104,7 +104,9 @@ public class PlayerInventory : MonoBehaviour
             transform.position = new Vector3(PlayerPrefs.GetInt("PosX"), PlayerPrefs.GetInt("PosY"), PlayerPrefs.GetInt("PosZ"));
         }
         if(PlayerPrefs.HasKey("PlayerLevel"))
+        {
             _player.Stats.SetLevel(PlayerPrefs.GetInt("PlayerLevel"));
+        }
     }
 
   
