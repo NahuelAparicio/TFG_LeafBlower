@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 2275321582452725418}
   - component: {fileID: 2141215392082711117}
   - component: {fileID: 3099744458868622328}
-  - component: {fileID: 6042504944101027165}
   - component: {fileID: 4385885329849014326}
-  - component: {fileID: 811438005201402323}
   - component: {fileID: -8137190019959916618}
   m_Layer: 3
   m_Name: Crate
@@ -36,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2275321582452725418
 MeshFilter:
@@ -107,33 +105,6 @@ MonoBehaviour:
   bakeKeys: []
   bakeValues: []
   enableOnStart: 0
---- !u!54 &6042504944101027165
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671235022437628919}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!65 &4385885329849014326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,22 +126,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1686654, y: 2.1686654, z: 2.1686654}
   m_Center: {x: -0.0000019669533, y: 0, z: 1.0850284}
---- !u!114 &811438005201402323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671235022437628919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729ad5c7d2eeea242a4c06aec59cacdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiImage: {fileID: 0}
-  weight: 3
-  _type: 0
-  timeToEnableFreeze: 0.1
 --- !u!114 &-8137190019959916618
 MonoBehaviour:
   m_ObjectHideFlags: 0

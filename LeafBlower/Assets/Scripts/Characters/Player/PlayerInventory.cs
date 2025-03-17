@@ -90,7 +90,7 @@ public class PlayerInventory : MonoBehaviour
     {
         PlayerPrefs.SetInt("Gold", _coins);
         PlayerPrefs.SetInt("PosX", (int)transform.position.x);
-        PlayerPrefs.SetInt("PosY", (int)transform.position.y);
+        PlayerPrefs.SetInt("PosY", (int)transform.position.y + 1);
         PlayerPrefs.SetInt("PosZ", (int)transform.position.z);
     }
 

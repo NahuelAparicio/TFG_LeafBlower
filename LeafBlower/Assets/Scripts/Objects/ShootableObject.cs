@@ -26,6 +26,8 @@ public class ShootableObject : Object, IAspirable, IAttacheable
 
     public bool isInTunel = false;
 
+    public bool isQuestObject = false;
+
     protected override void Awake()
     {
         base.Awake();

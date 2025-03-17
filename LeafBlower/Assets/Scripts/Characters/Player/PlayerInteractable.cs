@@ -28,11 +28,7 @@ public class PlayerInteractable : MonoBehaviour
                 InteractUIManager uiManager = other.GetComponentInChildren<InteractUIManager>();
                 if (uiManager != null)
                 {
-                    RawImage interactIcon = uiManager.GetIcon("interacticon"); // Obtener el icono
-                    if (interactIcon != null)
-                    {
-                        uiManager.SetIconVisibility(true, interactIcon);
-                    }
+                        uiManager.SetIconVisibility(true);
                 }
 
                 interactable.SetInteractableParent(this);
@@ -53,11 +49,7 @@ public class PlayerInteractable : MonoBehaviour
                 InteractUIManager uiManager = go.GetComponentInChildren<InteractUIManager>();
                 if (uiManager != null)
                 {
-                    RawImage interactIcon = uiManager.GetIcon("interacticon"); // Obtener el icono
-                    if (interactIcon != null)
-                    {
-                        uiManager.SetIconVisibility(false, interactIcon);
-                    }
+                        uiManager.SetIconVisibility(false);
                 }
                 _touchingInteractables.Clear();
             }

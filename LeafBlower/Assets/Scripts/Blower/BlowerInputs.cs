@@ -21,11 +21,10 @@ public class BlowerInputs : MonoBehaviour
 
     private void Update()
     {
-        if(!IsAspiringInputPressed() && !IsBlowingInputPressed())
+        if(!IsAspiringInputPressed() && !IsBlowingInputPressed() && !_blower.Player.Movement.IsHovering())
         {
             _blower.blowVFX.SetActive(false);
             _blower.aspirarVFX.SetActive(false);
-
         }
     }
 
@@ -92,7 +91,7 @@ public class BlowerInputs : MonoBehaviour
         else
         {
             if (_blower.Aspirer.ClosestObject.GetComponent<MovableObject>() != null) return;
-            if (!_blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().canBeSaved) return;
+            if (!_blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().canBeSaved || _blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().isQuestObject) return;
             _blower.Aspirer.AttachObjectOnSave();
             _blower.Player.Inventory.SaveObject(_blower.Aspirer.ClosestObject.gameObject, _blower.Aspirer.ClosestObject.uiImage);
             _blower.Aspirer.attachableObject.DetachOnSave();   

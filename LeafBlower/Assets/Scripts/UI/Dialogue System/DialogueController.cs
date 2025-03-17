@@ -114,7 +114,7 @@ public class DialogueController : MonoBehaviour
         _actions.Dialogue.NextDialogue.performed += NextDialogue_performed;
     }
     private float _nextInteractTime = 0f;
-    private float _interactCooldown = 0.2f; // Cooldown time
+    private float _interactCooldown = 0.25f; // Cooldown time
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
         if (_currentDialogue.Count <= 0 || Time.time < _nextInteractTime) return;

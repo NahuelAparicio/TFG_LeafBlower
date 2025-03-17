@@ -28,7 +28,7 @@ public class Object : MonoBehaviour
     {
         if(Time.frameCount % 70 == 0)
         {
-            if(transform.position.y <=  -45)
+            if(transform.position.y <=  -35)
             {
                 _rb.velocity = Vector3.zero;
                 _rb.angularVelocity = Vector3.zero;

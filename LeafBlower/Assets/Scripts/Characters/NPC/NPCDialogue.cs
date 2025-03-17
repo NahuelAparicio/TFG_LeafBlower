@@ -48,8 +48,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         if (!_isTalking)
         {
             ShowDialogue();
-            _uiManager.SaveVisibilityState();
-            _uiManager.HideAllIcons();
+            _uiManager.HideIcon();
         }
     }
 
@@ -62,13 +61,14 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         _collider.enabled = true;
         _isTalking = false;
-        _uiManager.RestoreVisibilityState(); //aqui molaria hacer una animación de bounce por codigo
+        _uiManager.SetIconVisibility(true); //aqui molaria hacer una animación de bounce por codigo
     }
 
     public void OnDisableCollider()
     {
         _collider.enabled = false;
         _interactable.RemoveInteractable(gameObject);
+
     }
 
     public void AddNewDialogue()
