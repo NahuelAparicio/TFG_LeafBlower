@@ -36,8 +36,8 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
-        if (!_player.CanMovePlayer()) return;
-        _player.Movement.isSprinting = !_player.Movement.isSprinting;
+        //if (!_player.CanMovePlayer()) return;
+        //_player.Movement.isSprinting = !_player.Movement.isSprinting;
     }
 
     private void Sprint_canceled(InputAction.CallbackContext context)

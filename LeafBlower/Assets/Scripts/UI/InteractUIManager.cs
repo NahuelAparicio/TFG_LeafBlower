@@ -12,7 +12,6 @@ public class InteractUIManager : MonoBehaviour
     //[SerializeField] private GameObject tick;
 
     // Diccionario para almacenar el estado (visible/oculto) de cada icono
-    private Dictionary<string, bool> savedVisibilityStates = new Dictionary<string, bool>();
 
     private void Awake()
     {
