@@ -19,6 +19,16 @@ public class BlowerInputs : MonoBehaviour
         _actions.Blower.RotateObject.performed += RotateObject_performed;
     }
 
+    private void Update()
+    {
+        if(!IsAspiringInputPressed() && !IsBlowingInputPressed())
+        {
+            _blower.blowVFX.SetActive(false);
+            _blower.aspirarVFX.SetActive(false);
+
+        }
+    }
+
     private void RotateObject_performed(InputAction.CallbackContext obj)
     {
         //if(_blower.Aspirer.attachableObject.IsAttached)

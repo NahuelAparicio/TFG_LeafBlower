@@ -24,13 +24,13 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         _collider = GetComponent<Collider>();
         _dialogueController = FindObjectOfType<DialogueController>();
         _dialogueController.DialogueEnded += OnDialogueEnded;
-        LoadData();
 
         _uiManager = GetComponent<InteractUIManager>();
         if (_uiManager == null)
         {
             Debug.LogError("No se encontró InteractUIManager en este GameObject.");
         }
+        LoadData();
     }
 
     private void ShowDialogue()
@@ -62,7 +62,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         _collider.enabled = true;
         _isTalking = false;
-        _uiManager.RestoreVisibilityState(); //aqui molaría hacer una animación de bounce por codigo
+        _uiManager.RestoreVisibilityState(); //aqui molaria hacer una animación de bounce por codigo
     }
 
     public void OnDisableCollider()

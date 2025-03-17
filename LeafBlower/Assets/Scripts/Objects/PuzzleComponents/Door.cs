@@ -13,24 +13,36 @@ public class Door : IActivable
     private Quaternion originalRotationRight;
     private Coroutine moveCoroutine;
 
+    public bool toZero = true;
+
+    public bool hasBeenActive = false;
+
+
     private void Start()
     {
+
         originalRotationLeft = doorLeft.localRotation;
         originalRotationRight = doorRight.localRotation;
-        targetRotationLeft = Quaternion.identity;
-        targetRotationRight = Quaternion.identity;
+        if(toZero)
+        {
+            targetRotationLeft = Quaternion.identity;
+            targetRotationRight = Quaternion.identity;
+        }
+        LoadData();
     }
 
     public override void DoAction()
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         moveCoroutine = StartCoroutine(MoveDoors(targetRotationLeft, targetRotationRight));
+        hasBeenActive = true;
     }
 
     public override void UndoAction()
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         moveCoroutine = StartCoroutine(MoveDoors(originalRotationLeft, originalRotationRight));
+        hasBeenActive = false;
     }
 
     private IEnumerator MoveDoors(Quaternion targetLeft, Quaternion targetRight)
@@ -55,5 +67,35 @@ public class Door : IActivable
         // Asegurar la rotación final exacta
         doorLeft.localRotation = targetLeft;
         doorRight.localRotation = targetRight;
+    }
+
+    private void OnDisable()
+    {
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        if(hasBeenActive)
+        {
+            PlayerPrefs.SetInt("Door_" + gameObject.name, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Door_" + gameObject.name, 0);
+
+        }
+    }
+
+    private void LoadData()
+    {
+        if(PlayerPrefs.GetInt("Door_" + gameObject.name) == 1)
+        {
+            DoAction();
+        }
+        else
+        {
+            UndoAction();
+        }
     }
 }

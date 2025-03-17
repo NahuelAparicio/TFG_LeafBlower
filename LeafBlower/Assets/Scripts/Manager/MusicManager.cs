@@ -38,6 +38,7 @@ public class MusicManager : MonoBehaviour
     [Range(0, 1)]
     public float SFXVolume = 1;
 
+    public bool isMakingFadeIn = false;
 
     private void Awake()
     {
@@ -53,12 +54,16 @@ public class MusicManager : MonoBehaviour
         _ambience = RuntimeManager.GetBus("bus:/Ambience");
     }
 
+
     private void Update()
     {
-        _master.setVolume(masterVolume);
-        _music.setVolume(musicVolume);
-        _sfx.setVolume(SFXVolume);
-        _ambience.setVolume(ambienceVolume);
+        if(!isMakingFadeIn)
+        {
+            _master.setVolume(masterVolume);
+            _music.setVolume(musicVolume);
+            _sfx.setVolume(SFXVolume);
+            _ambience.setVolume(ambienceVolume);
+        }
     }
 
     public void PlayExplorationMusic()

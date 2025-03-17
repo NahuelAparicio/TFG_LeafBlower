@@ -25,6 +25,11 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onQuestStepChange -= QuestStepStateChange;
 
         GameEventManager.Instance.playerEvents.onLevelUp -= PlayerLevelChange;
+
+        foreach (Quest quest in _questMap.Values)
+        {
+            SaveQuest(quest);
+        }
     }
 
     private void Start()
@@ -199,13 +204,6 @@ public class QuestController : MonoBehaviour
             Debug.LogError("Failed to load quest with" + e);
         }
         return quest;
-    }
-    private void OnApplicationQuit()
-    {
-        foreach (Quest quest in _questMap.Values)
-        {
-            SaveQuest(quest);
-        }
     }
 
 

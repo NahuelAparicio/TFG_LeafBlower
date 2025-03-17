@@ -13,6 +13,7 @@ public class QuestPoint : MonoBehaviour
     private QuestIcon _questIcon;
 
     public NPCDialogue dialogue;
+    public bool hasEndDialogue = false;
     private void Awake()
     {
         _questId = _quest.id;
@@ -50,11 +51,27 @@ public class QuestPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!finishPoint) return;
-
-        if(other.CompareTag("Player"))
+        if (hasEndDialogue) return;
+        if (other.CompareTag("Player"))
         {
             if (_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
             {
+                hasEndDialogue = true;
+                dialogue.EnableDialogueAdd();
+                dialogue.AddNewDialogue();
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!finishPoint) return;
+        if (hasEndDialogue) return;
+        if (other.CompareTag("Player"))
+        {
+            if (_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
+            {
+                hasEndDialogue = true;
                 dialogue.EnableDialogueAdd();
                 dialogue.AddNewDialogue();
             }

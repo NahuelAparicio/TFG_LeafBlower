@@ -89,12 +89,19 @@ public class PlayerInventory : MonoBehaviour
     private void SaveData()
     {
         PlayerPrefs.SetInt("Gold", _coins);
+        PlayerPrefs.SetInt("PosX", (int)transform.position.x);
+        PlayerPrefs.SetInt("PosY", (int)transform.position.y);
+        PlayerPrefs.SetInt("PosZ", (int)transform.position.z);
     }
 
     private void LoadData()
     {
         _coins = PlayerPrefs.GetInt("Gold");
         _text.text = "" + _coins;
+        if(PlayerPrefs.HasKey("PosX"))
+        {
+            transform.position = new Vector3(PlayerPrefs.GetInt("PosX"), PlayerPrefs.GetInt("PosY"), PlayerPrefs.GetInt("PosZ"));
+        }
     }
 
   

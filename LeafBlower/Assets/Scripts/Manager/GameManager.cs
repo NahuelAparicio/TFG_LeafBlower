@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         UpdateState(Enums.GameState.Playing);
-        MusicManager.Instance.StopMenuMusic();
         MainMenu.Hide();
 
     }
@@ -91,6 +90,7 @@ public class GameManager : MonoBehaviour
                 //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
+                MusicManager.Instance.StopMenuMusic();
                 //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
