@@ -92,6 +92,7 @@ public class PlayerInventory : MonoBehaviour
         PlayerPrefs.SetInt("PosX", (int)transform.position.x);
         PlayerPrefs.SetInt("PosY", (int)transform.position.y + 1);
         PlayerPrefs.SetInt("PosZ", (int)transform.position.z);
+        PlayerPrefs.SetInt("PlayerLevel", _player.Stats.Level);
     }
 
     private void LoadData()
@@ -102,6 +103,7 @@ public class PlayerInventory : MonoBehaviour
         {
             transform.position = new Vector3(PlayerPrefs.GetInt("PosX"), PlayerPrefs.GetInt("PosY"), PlayerPrefs.GetInt("PosZ"));
         }
+        _player.Stats.SetLevel(PlayerPrefs.GetInt("PlayerLevel"));
     }
 
   

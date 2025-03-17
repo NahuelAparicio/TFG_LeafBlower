@@ -29,4 +29,9 @@ public class PlayerStats : MonoBehaviour
         GameEventManager.Instance.playerEvents.PlayerLevelChange(_level);
     } 
 
+    public void SetLevel(int lvl)
+    {
+        _level = lvl;
+    }
+
 }

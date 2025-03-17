@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         _isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        LoadData();
     }
 
 
@@ -107,5 +108,26 @@ public class GameManager : MonoBehaviour
     {
         _isPaused = !_isPaused;
         Time.timeScale = _isPaused ? 0 : 1;
+    }
+
+    private void OnDisable()
+    {
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("HasStartedGame", hasStartedNewGame ? 1 : 0);
+    }
+
+    private void LoadData()
+    {
+        if(PlayerPrefs.HasKey("HasStartedGame"))
+        {
+            if (PlayerPrefs.HasKey("HasStartedGame"))
+            {
+                hasStartedNewGame = PlayerPrefs.GetInt("HasStartedGame") == 1;
+            }
+        }
     }
 }
