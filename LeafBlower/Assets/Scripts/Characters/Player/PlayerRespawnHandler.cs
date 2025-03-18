@@ -32,11 +32,11 @@ public class PlayerRespawnHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Respawner"))
+        if (other.CompareTag("Respawner"))
         {
             OnRespawn();
         }
-        if(other.CompareTag("SavePoint"))
+        if (other.CompareTag("SavePoint"))
         {
             if(positionToRespawn != other.transform.position)
                 positionToRespawn = other.transform.position;
@@ -49,4 +49,12 @@ public class PlayerRespawnHandler : MonoBehaviour
         _player.Rigidbody.angularVelocity = Vector3.zero;
         _player.transform.position = positionToRespawn;
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Respawner"))
+    //    {
+    //        OnRespawn();
+    //    }
+    //}
 }
