@@ -29,12 +29,19 @@ public class TransparentDetector : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, direction);
         RaycastHit[] hits = Physics.RaycastAll(ray, distance);
 
+        if (hits.Length == 0)
+        {
+            // No objects detected, restore previous state and exit early
+            RestoreTransparency(new HashSet<Renderer>());
+            return;
+        }
+
         HashSet<Renderer> newAffectedRenderers = new HashSet<Renderer>();
+        bool hasTransparentObjects = false;
 
         foreach (RaycastHit hit in hits)
         {
-            Renderer renderer = hit.collider.GetComponent<Renderer>();
-            if (renderer != null && renderer.gameObject.tag != "Player")
+            if (hit.collider.TryGetComponent(out Renderer renderer) && renderer.gameObject.tag != "Player")
             {
                 if (!originalMaterials.ContainsKey(renderer))
                 {
@@ -48,10 +55,15 @@ public class TransparentDetector : MonoBehaviour
                 }
 
                 newAffectedRenderers.Add(renderer);
+                hasTransparentObjects = true;
             }
         }
 
-        RestoreTransparency(newAffectedRenderers);
+        // If no new transparent objects were detected, avoid redundant calls
+        if (hasTransparentObjects)
+        {
+            RestoreTransparency(newAffectedRenderers);
+        }
     }
 
     private void RestoreTransparency(HashSet<Renderer> newAffectedRenderers)
