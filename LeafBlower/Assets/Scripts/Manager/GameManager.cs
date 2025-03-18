@@ -3,7 +3,10 @@ using System;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using FMODUnity;
+using FMOD;
+using FMODUnityResonance;
+using FMOD.Studio;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -12,7 +15,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject go = new GameObject("Game Manager");
                 go.AddComponent<GameManager>();
@@ -25,10 +28,12 @@ public class GameManager : MonoBehaviour
     private Enums.GameState _state = Enums.GameState.Playing;
     private bool _isPaused;
     public bool IsPaused => _isPaused;
+    public bool hasStartedNewGame = false;
+    public Enums.GameState State => _state;
 
     private void Awake()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
@@ -36,7 +41,9 @@ public class GameManager : MonoBehaviour
         _isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        LoadData();
     }
+
 
     public void LoadLevel(string levelName, GameObject _loaderCanvas, Image _progressBar)
     {
@@ -65,10 +72,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         UpdateState(Enums.GameState.Playing);
         MainMenu.Hide();
+
     }
     public void UpdateState(Enums.GameState state)
     {
-        if(_state == state)
+        if (_state == state)
         {
             return;
         }
@@ -79,11 +87,11 @@ public class GameManager : MonoBehaviour
         {
             case Enums.GameState.Menu:
                 MusicManager.Instance.PlayMenuMusic();
-                //MainMenu.Show();
+                MainMenu.Show();
                 //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
-                MusicManager.Instance.PlayExplorationMusic();
+                MusicManager.Instance.StopMenuMusic();
                 //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
@@ -100,5 +108,26 @@ public class GameManager : MonoBehaviour
     {
         _isPaused = !_isPaused;
         Time.timeScale = _isPaused ? 0 : 1;
+    }
+
+    private void OnDisable()
+    {
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("HasStartedGame", hasStartedNewGame ? 1 : 0);
+    }
+
+    private void LoadData()
+    {
+        if(PlayerPrefs.HasKey("HasStartedGame"))
+        {
+            if (PlayerPrefs.HasKey("HasStartedGame"))
+            {
+                hasStartedNewGame = PlayerPrefs.GetInt("HasStartedGame") == 1;
+            }
+        }
     }
 }

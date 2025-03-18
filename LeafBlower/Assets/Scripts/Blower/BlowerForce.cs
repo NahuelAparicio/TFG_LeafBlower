@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class BlowerForce : BaseLeafBlower
 {
-    protected override void OnTriggerStay(Collider other)
+    protected override void HandleBlow()
     {
-        var blowable = other.GetComponent<IBlowable>();
+        base.HandleBlow();
 
-        if (!_blower.IsBlowing() || blowable == null || _blower.Aspirer.IsObjectAttached) return;
+        if (_closestObject == null) return;
 
-        Vector3 forceDir = _blower.DirectionFromFirePointNormalized(other.gameObject.transform.position) * CalculateForceByDistance(other.gameObject);
-        blowable.OnBlowableInteracts(forceDir, other.ClosestPointOnBounds(transform.position));
-    }
+        MovableObject movableObject = _closestObject.GetComponent<MovableObject>();
+        ShootableObject shootableObject = _closestObject.GetComponent<ShootableObject>();
 
-    private float CalculateForceByDistance(GameObject go)
-    {
-        float distance = Vector3.Distance(_blower.FirePoint.position, go.transform.position);
-        return _blower.Stats.BlowForce / Mathf.Max(1, distance);
+        if( movableObject == null && shootableObject == null ) return;
+
+        if(movableObject)
+        {
+            movableObject.OnBlowableInteracts(GetBlowForceDir(movableObject), movableObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+        }
+
+
     }
 }

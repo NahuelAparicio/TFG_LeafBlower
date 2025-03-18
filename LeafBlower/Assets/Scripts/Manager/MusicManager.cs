@@ -1,6 +1,6 @@
 using FMODUnity;
 using UnityEngine;
-
+using FMOD.Studio;
 // -- Singleton managing music, It can be called in any script for play music or whatever related with music
 public class MusicManager : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class MusicManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject go = new GameObject("Music Manager");
                 go.AddComponent<MusicManager>();
@@ -23,6 +23,23 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    Bus _master;
+    Bus _music;
+    Bus _sfx;
+    Bus _ambience;
+
+    [Header("Volume")]
+    [Range(0, 1)]
+    public float masterVolume = 1;
+    [Range(0, 1)]
+    public float musicVolume = 1;
+    [Range(0, 1)]
+    public float ambienceVolume = 1;
+    [Range(0, 1)]
+    public float SFXVolume = 1;
+
+    public bool isMakingFadeIn = false;
+
     private void Awake()
     {
         if (_instance == null)
@@ -30,9 +47,22 @@ public class MusicManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
+
+        _master = RuntimeManager.GetBus("bus:/");
+        _music = RuntimeManager.GetBus("bus:/Music");
+        _sfx = RuntimeManager.GetBus("bus:/Sfx");
+        _ambience = RuntimeManager.GetBus("bus:/Ambience");
+    }
+
+
+    private void Update()
+    {
+        if(!isMakingFadeIn)
         {
-            Destroy(gameObject);
+            _master.setVolume(masterVolume);
+            _music.setVolume(musicVolume);
+            _sfx.setVolume(SFXVolume);
+            _ambience.setVolume(ambienceVolume);
         }
     }
 
@@ -52,9 +82,15 @@ public class MusicManager : MonoBehaviour
         menuMusicInstance = RuntimeManager.CreateInstance(Constants.MUSIC_MENU);
         menuMusicInstance.start();
     }
+
+    public void StopMenuMusic()
+    {
+        StopAllMusic();
+    }
+
     public void PlayDialogs()
     {
-        if(IsDialogueMusicPlaying()) return;
+        if (IsDialogueMusicPlaying()) return;
 
         StopAllMusic();
         dialogueMusicInstance = RuntimeManager.CreateInstance(Constants.MUSIC_DIALOGS);
@@ -63,7 +99,7 @@ public class MusicManager : MonoBehaviour
 
     public void PauseMusic(bool pause)
     {
-        if(inGameMusicInstance.isValid())
+        if (inGameMusicInstance.isValid())
         {
             inGameMusicInstance.setPaused(pause);
         }
@@ -79,7 +115,7 @@ public class MusicManager : MonoBehaviour
 
     public void StopAllMusic()
     {
-        if(inGameMusicInstance.isValid())
+        if (inGameMusicInstance.isValid())
         {
             inGameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             inGameMusicInstance.release();
@@ -94,6 +130,10 @@ public class MusicManager : MonoBehaviour
             menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             menuMusicInstance.release();
         }
+        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+
     }
     private bool IsMusicPlaying()
     {

@@ -213,6 +213,17 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""17ec675e-2ae0-44b0-b038-086c9f23d0f2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f80b1292-7bbe-4af7-8df1-97e8325babe5"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -246,6 +257,17 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""acff3fc8-ef89-4539-85ef-22d8940498ba"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""eaa63405-df82-450e-a736-df93af6d9147"",
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
@@ -273,6 +295,17 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
+                    ""action"": ""Hover"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee5bf5ae-d1c0-4de4-8743-2a1762d0476e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Hover"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -365,6 +398,105 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cheats"",
+            ""id"": ""3e6504f3-e704-4cee-a3aa-3440f6e34eee"",
+            ""actions"": [
+                {
+                    ""name"": ""LowWeight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9dc7561-4912-48e9-b174-0354ed23061f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MediumWeight"",
+                    ""type"": ""Button"",
+                    ""id"": ""383c1cd4-9d6b-4f30-96d8-e7c02c0988f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyWeight"",
+                    ""type"": ""Button"",
+                    ""id"": ""70a59e1a-167c-43f0-a378-ebbe24fca800"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuperHeavyWeight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e68e2dc9-c705-4099-9ae4-c095d70bc0f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""01abde6b-138f-42a0-95ff-3e3f118feb1c"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""LowWeight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7843707-2e0c-490e-b471-61489128bd57"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LowWeight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4753c637-04b4-43cd-9099-e13cc408f1de"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""MediumWeight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f756fe31-b619-4bb1-8ccf-7fbf9928e814"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""HeavyWeight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15280e84-fd37-4b3e-acee-7b6b81c42773"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SuperHeavyWeight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -409,6 +541,12 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextDialogue = m_Dialogue.FindAction("NextDialogue", throwIfNotFound: true);
+        // Cheats
+        m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
+        m_Cheats_LowWeight = m_Cheats.FindAction("LowWeight", throwIfNotFound: true);
+        m_Cheats_MediumWeight = m_Cheats.FindAction("MediumWeight", throwIfNotFound: true);
+        m_Cheats_HeavyWeight = m_Cheats.FindAction("HeavyWeight", throwIfNotFound: true);
+        m_Cheats_SuperHeavyWeight = m_Cheats.FindAction("SuperHeavyWeight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -668,6 +806,76 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         }
     }
     public DialogueActions @Dialogue => new DialogueActions(this);
+
+    // Cheats
+    private readonly InputActionMap m_Cheats;
+    private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
+    private readonly InputAction m_Cheats_LowWeight;
+    private readonly InputAction m_Cheats_MediumWeight;
+    private readonly InputAction m_Cheats_HeavyWeight;
+    private readonly InputAction m_Cheats_SuperHeavyWeight;
+    public struct CheatsActions
+    {
+        private @PlayerInputsActions m_Wrapper;
+        public CheatsActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LowWeight => m_Wrapper.m_Cheats_LowWeight;
+        public InputAction @MediumWeight => m_Wrapper.m_Cheats_MediumWeight;
+        public InputAction @HeavyWeight => m_Wrapper.m_Cheats_HeavyWeight;
+        public InputAction @SuperHeavyWeight => m_Wrapper.m_Cheats_SuperHeavyWeight;
+        public InputActionMap Get() { return m_Wrapper.m_Cheats; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheatsActions set) { return set.Get(); }
+        public void AddCallbacks(ICheatsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CheatsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Add(instance);
+            @LowWeight.started += instance.OnLowWeight;
+            @LowWeight.performed += instance.OnLowWeight;
+            @LowWeight.canceled += instance.OnLowWeight;
+            @MediumWeight.started += instance.OnMediumWeight;
+            @MediumWeight.performed += instance.OnMediumWeight;
+            @MediumWeight.canceled += instance.OnMediumWeight;
+            @HeavyWeight.started += instance.OnHeavyWeight;
+            @HeavyWeight.performed += instance.OnHeavyWeight;
+            @HeavyWeight.canceled += instance.OnHeavyWeight;
+            @SuperHeavyWeight.started += instance.OnSuperHeavyWeight;
+            @SuperHeavyWeight.performed += instance.OnSuperHeavyWeight;
+            @SuperHeavyWeight.canceled += instance.OnSuperHeavyWeight;
+        }
+
+        private void UnregisterCallbacks(ICheatsActions instance)
+        {
+            @LowWeight.started -= instance.OnLowWeight;
+            @LowWeight.performed -= instance.OnLowWeight;
+            @LowWeight.canceled -= instance.OnLowWeight;
+            @MediumWeight.started -= instance.OnMediumWeight;
+            @MediumWeight.performed -= instance.OnMediumWeight;
+            @MediumWeight.canceled -= instance.OnMediumWeight;
+            @HeavyWeight.started -= instance.OnHeavyWeight;
+            @HeavyWeight.performed -= instance.OnHeavyWeight;
+            @HeavyWeight.canceled -= instance.OnHeavyWeight;
+            @SuperHeavyWeight.started -= instance.OnSuperHeavyWeight;
+            @SuperHeavyWeight.performed -= instance.OnSuperHeavyWeight;
+            @SuperHeavyWeight.canceled -= instance.OnSuperHeavyWeight;
+        }
+
+        public void RemoveCallbacks(ICheatsActions instance)
+        {
+            if (m_Wrapper.m_CheatsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICheatsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CheatsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CheatsActions @Cheats => new CheatsActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -705,5 +913,12 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     public interface IDialogueActions
     {
         void OnNextDialogue(InputAction.CallbackContext context);
+    }
+    public interface ICheatsActions
+    {
+        void OnLowWeight(InputAction.CallbackContext context);
+        void OnMediumWeight(InputAction.CallbackContext context);
+        void OnHeavyWeight(InputAction.CallbackContext context);
+        void OnSuperHeavyWeight(InputAction.CallbackContext context);
     }
 }

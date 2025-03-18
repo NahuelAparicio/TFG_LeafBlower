@@ -69,7 +69,6 @@ public class StaminaHandler : MonoBehaviour
         if (_currentStamina <= 0)
         {
             DisableLeafBlower();
-            _blower.aspirarVFX.SetActive(false);
             _blower.blowVFX.SetActive(false);
             _blower.Player.Sounds.StopEngineSound();
             _blower.isHovering = false;

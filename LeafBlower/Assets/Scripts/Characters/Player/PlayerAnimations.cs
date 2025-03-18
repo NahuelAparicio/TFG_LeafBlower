@@ -23,7 +23,7 @@ public class PlayerAnimations : MonoBehaviour
 
     internal void HandleMovingAnimations()
     {
-        if(_player.Inputs.IsMovingJoystick())
+        if(_player.Inputs.IsMovingLeftJoystick())
         {
             float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
             if(_player.Movement.isSprinting)
@@ -58,7 +58,7 @@ public class PlayerAnimations : MonoBehaviour
     internal void HandleIdleAnimations()
     {
         //If there is more than one idle animation, Second Blend Tree
-        if(!_player.Inputs.IsMovingJoystick())
+        if(!_player.Inputs.IsMovingLeftJoystick())
         {
             float currentValue = _animator.GetFloat(Constants.ANIM_VAR_JOYDIR);
 

@@ -4,6 +4,9 @@
 		<property name="name">
 			<value>Master Bus</value>
 		</property>
+		<relationship name="automators">
+			<destination>{62d86d94-31cd-43de-9d8a-e5fd9e591110}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{4d78d8bc-28b8-4082-8819-e90f9dff1220}</destination>
 		</relationship>
@@ -13,6 +16,11 @@
 		<relationship name="mixer">
 			<destination>{33dbc664-c9ea-42f4-bcc0-0e2a8e2cac75}</destination>
 		</relationship>
+	</object>
+	<object class="Automator" id="{62d86d94-31cd-43de-9d8a-e5fd9e591110}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
 	</object>
 	<object class="MixerBusEffectChain" id="{4d78d8bc-28b8-4082-8819-e90f9dff1220}">
 		<relationship name="effects">

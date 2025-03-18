@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using FMODUnity;
 
 public class BlowerInputs : MonoBehaviour
 {
@@ -20,10 +19,18 @@ public class BlowerInputs : MonoBehaviour
         _actions.Blower.RotateObject.performed += RotateObject_performed;
     }
 
+    private void Update()
+    {
+        if(!IsAspiringInputPressed() && !IsBlowingInputPressed() && !_blower.Player.Movement.IsHovering())
+        {
+            _blower.blowVFX.SetActive(false);
+        }
+    }
+
     private void RotateObject_performed(InputAction.CallbackContext obj)
     {
-        if(_blower.Aspirer.IsObjectAttached)
-            _blower.Aspirer.AttachedObject.Item2.OnRotate(_blower.FirePoint.forward);
+        //if(_blower.Aspirer.attachableObject.IsAttached)
+        //    _blower.Aspirer.attachableObject.Shootable.OnRotate(_blower.FirePoint.forward);
     }
 
     public bool IsBlowingInputPressed() => _actions.Blower.Blow.IsPressed();
@@ -31,7 +38,13 @@ public class BlowerInputs : MonoBehaviour
 
     private void Blow_performed(InputAction.CallbackContext context)
     {
+        if (_blower.Player.IsTalking) return;
+
         //_blower.Handler.StartConsumingStamina();
+        if (_blower.Aspirer.attachableObject.IsAttached)
+        {
+            _blower.Aspirer.wasShootPressed = true;
+        }
         if (IsAspiringInputPressed()) return;
         _blower.blowVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
@@ -41,16 +54,18 @@ public class BlowerInputs : MonoBehaviour
     private void Blow_canceled(InputAction.CallbackContext context)
     {
         if (_blower.isHovering || IsAspiringInputPressed()) return;
-        _blower.Handler.StopConsumingStamina();
+        _blower.StaminaHandler.StopConsumingStamina();
         _blower.blowVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
     }
 
     private void Aspire_performed(InputAction.CallbackContext context)
     {
+        if (_blower.Player.IsTalking) return;
+
         //_blower.Handler.StartConsumingStamina();
         if (IsBlowingInputPressed()) return;
-        _blower.aspirarVFX.SetActive(true);
+        _blower.blowVFX.SetActive(true);
         _blower.Player.Sounds.PlayEngineSound();
 
     }
@@ -58,23 +73,29 @@ public class BlowerInputs : MonoBehaviour
     private void Aspire_canceled(InputAction.CallbackContext context)
     {
         if (IsBlowingInputPressed()) return;
-        _blower.Handler.StopConsumingStamina();
-        _blower.aspirarVFX.SetActive(false);
+        _blower.StaminaHandler.StopConsumingStamina();
+        _blower.blowVFX.SetActive(false);
         _blower.Player.Sounds.StopEngineSound();
 
     }
     private void SaveObject_performed(InputAction.CallbackContext context)
     {
-        if (!_blower.Aspirer.IsObjectAttached && !_blower.Player.Inventory.IsObjectSaved()) return;
-        if(_blower.Player.Inventory.IsObjectSaved())
+        if (_blower.Player.IsTalking) return;
+        if (_blower.Aspirer.ClosestObject == null && !_blower.Player.Inventory.IsObjectSaved()) return;        
+
+        if (_blower.Player.Inventory.IsObjectSaved())
         {
             _blower.Player.Inventory.RemoveObject();
         }
         else
         {
-            _blower.Player.Inventory.SaveObject(_blower.Aspirer.AttachedObject.Item1.gameObject, _blower.Aspirer.AttachedObject.Item1.gameObject.GetComponent<Object>().uiImage);
-            _blower.Aspirer.SaveObject();   
+            if (_blower.Aspirer.ClosestObject.GetComponent<MovableObject>() != null) return;
+            if (!_blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().canBeSaved || _blower.Aspirer.ClosestObject.GetComponent<ShootableObject>().isQuestObject) return;
+            _blower.Aspirer.AttachObjectOnSave();
+            _blower.Player.Inventory.SaveObject(_blower.Aspirer.ClosestObject.gameObject, _blower.Aspirer.ClosestObject.uiImage);
+            _blower.Aspirer.attachableObject.DetachOnSave();   
         }
+
     }
 
     private void OnDestroy()

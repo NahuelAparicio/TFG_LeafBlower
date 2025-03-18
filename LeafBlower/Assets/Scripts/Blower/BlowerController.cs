@@ -5,7 +5,7 @@ public class BlowerController : MonoBehaviour
     #region Variables
     private BlowerInputs _inputs;
     private BlowerStats _stats;
-    private StaminaHandler _handler;
+    private StaminaHandler _staminaHandler;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private PlayerController _player;
     [SerializeField] private BlowerForce _blower;
@@ -14,7 +14,7 @@ public class BlowerController : MonoBehaviour
 
     public bool canUseLeafBlower;
     public bool isHovering;
-    public GameObject aspirarVFX, blowVFX; //TEMPORAL
+    public GameObject blowVFX; //TEMPORAL
 
     #endregion
     #region Properties
@@ -25,17 +25,16 @@ public class BlowerController : MonoBehaviour
     public AspirerForce Aspirer => _aspirer;
     public Transform FirePoint => _firePoint;
     public BlowerHUD Hud => _hud;
-    public StaminaHandler Handler => _handler;
+    public StaminaHandler StaminaHandler => _staminaHandler;
     #endregion
 
     private void Awake()
     {
-        _handler = GetComponent<StaminaHandler>();
+        _staminaHandler = GetComponent<StaminaHandler>();
         _inputs = GetComponent<BlowerInputs>();
         _stats = GetComponent<BlowerStats>();
         _hud = GetComponent<BlowerHUD>();
         isHovering = false;
-        aspirarVFX.SetActive(false);
         blowVFX.SetActive(false);
     }
 
@@ -46,10 +45,10 @@ public class BlowerController : MonoBehaviour
     public bool IsAspirating() => CanUseLeafBlower() && _inputs.IsAspiringInputPressed() && !_inputs.IsBlowingInputPressed() && !isHovering;
 
     //Returns if the whole machine (Leaf Blower) can be used
-    public bool CanUseLeafBlower() => _handler.HasStamina() && canUseLeafBlower;
+    public bool CanUseLeafBlower() => _staminaHandler.HasStamina() && canUseLeafBlower;
 
     //Returns if the object attached is being shoot
-    public bool IsShooting() => _aspirer.IsObjectAttached && _inputs.IsBlowingInputPressed();
+    public bool IsShooting() => _aspirer.attachableObject.IsAttached && _inputs.IsBlowingInputPressed();
 
     public Vector3 GetPlayerDirection() => _player.Inputs.GetMoveDirection();
 

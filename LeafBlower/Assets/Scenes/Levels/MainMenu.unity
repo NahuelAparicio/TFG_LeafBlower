@@ -210,7 +210,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306187006
 GameObject:
@@ -242,7 +242,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &306187008
 MonoBehaviour:
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d426e4b77f30c8846b6ef11d1b9626b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasStartedNewGame: 0
 --- !u!1 &752469174
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &752469176
 MonoBehaviour:
@@ -330,7 +331,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &940821011
 MonoBehaviour:
@@ -346,6 +347,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   pause: {fileID: 0}
+  settings: {fileID: 0}
+  currentState: 0
+  lastState: 0
 --- !u!1 &1700788167
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +466,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1979379259
 GameObject:

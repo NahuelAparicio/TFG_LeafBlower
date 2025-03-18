@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class MenuManager : MonoBehaviour
 
     public MainMenu menu;
     public PauseMenu pause;
+    public SettingsMenu settings;
+
+    public Enums.MenuState currentState;
+    public Enums.MenuState lastState;
+
     public static MenuManager Instance
     {
         get
@@ -29,10 +36,47 @@ public class MenuManager : MonoBehaviour
         LoadResources();
     }
 
+    private void Update()
+    {
+        switch (currentState)
+        {
+            case Enums.MenuState.MainMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    menu.OnRetarget();
+                }
+                break;
+            case Enums.MenuState.SettingsMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    settings.OnRetarget();
+                }
+                break;
+            case Enums.MenuState.PauseMenu:
+                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    pause.OnRetarget();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ChangeMenuState(Enums.MenuState newState)
+    {
+        if (currentState == newState) return;
+        lastState = currentState;
+        currentState = newState;
+    }
     private void LoadResources()
     {
         menu = Resources.Load<MainMenu>("Menus/MainMenu");
         pause = Resources.Load<PauseMenu>("Menus/PauseMenu");
+        settings = Resources.Load<SettingsMenu>("Menus/SettingsMenu");
     }
 
     public void CreateInstance<T>() where T : Menu
@@ -43,6 +87,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenMenu(Menu instance)
     {
+        menuStack = new Stack<Menu>(menuStack.Where(menu => menu != null));
         if (menuStack.Count > 0)
         {
             if (instance.disableMenuUnderneath)
