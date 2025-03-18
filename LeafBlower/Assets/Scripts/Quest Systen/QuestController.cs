@@ -12,10 +12,6 @@ public class QuestController : MonoBehaviour
     public GameObject questText;
     public RectTransform questTextTarget;
 
-    private void Awake()
-    {
-        _questMap = CreateQuestMap();
-    }
  
     private void OnDisable()
     {
@@ -34,7 +30,7 @@ public class QuestController : MonoBehaviour
 
     private void Start()
     {
-
+        _questMap = CreateQuestMap();
         GameEventManager.Instance.questEvents.onStartQuest += StartQuest;
         GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
         GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
