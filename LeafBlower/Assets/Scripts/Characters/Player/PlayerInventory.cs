@@ -15,6 +15,7 @@ public class PlayerInventory : MonoBehaviour
 
     //TEMPORAL
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private PlayerRespawnHandler _respawner;
 
     private void Awake()
     {
@@ -89,9 +90,9 @@ public class PlayerInventory : MonoBehaviour
     private void SaveData()
     {
         PlayerPrefs.SetInt("Gold", _coins);
-        PlayerPrefs.SetInt("PosX", (int)transform.position.x);
-        PlayerPrefs.SetInt("PosY", (int)transform.position.y + 1);
-        PlayerPrefs.SetInt("PosZ", (int)transform.position.z);
+        PlayerPrefs.SetInt("PosX", (int)_respawner.PositionToRespawn.x);
+        PlayerPrefs.SetInt("PosY", (int)_respawner.PositionToRespawn.y + 1);
+        PlayerPrefs.SetInt("PosZ", (int)_respawner.PositionToRespawn.z);
         PlayerPrefs.SetInt("PlayerLevel", _player.Stats.Level);
     }
 

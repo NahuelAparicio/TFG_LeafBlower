@@ -193,6 +193,7 @@ public class QuestController : MonoBehaviour
                 string serializedData = PlayerPrefs.GetString(questInfo.id); 
                 QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
                 quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
+                GameEventManager.Instance.questEvents.QuestStateChange(quest);
             }
             else
             {

@@ -8,6 +8,8 @@ public class PlayerRespawnHandler : MonoBehaviour
 
     [SerializeField] private Vector3 positionToRespawn;
 
+    public Vector3 PositionToRespawn => positionToRespawn;
+
     private void Awake()
     {
         _player = transform.parent.GetComponent<PlayerController>();

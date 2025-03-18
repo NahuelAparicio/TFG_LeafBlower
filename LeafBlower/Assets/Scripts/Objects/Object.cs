@@ -40,10 +40,6 @@ public class Object : MonoBehaviour
                     return;
                 }
 
-                if(gameObject.transform.parent.name == "Player")
-                {
-                    gameObject.transform.parent.position = _spawnPosition;
-                }
             }
         }
     }
