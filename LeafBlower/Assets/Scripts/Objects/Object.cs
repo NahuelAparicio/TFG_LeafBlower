@@ -26,6 +26,7 @@ public class Object : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (_rb.velocity.magnitude < 0.15f) return;
         if(Time.frameCount % 70 == 0)
         {
             if(transform.position.y <=  -35)
