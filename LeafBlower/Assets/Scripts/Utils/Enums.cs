@@ -15,9 +15,9 @@ public class Enums
     public enum VolumeType { Master, Music, Sfx, Ambience }
     public enum CharacterNames
     {
-        None = 0,
-        Kayan,
-        Noseque
+        Gnomo = 0,
+        Broki,
+        Penny
     }
 
     public enum MenuState { MainMenu, SettingsMenu, PauseMenu}
