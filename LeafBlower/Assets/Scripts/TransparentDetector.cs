@@ -9,7 +9,12 @@ public class TransparentDetector : MonoBehaviour
 
     private List<Renderer> affectedRenderers = new List<Renderer>();
     private Dictionary<Renderer, Material[]> originalMaterials = new Dictionary<Renderer, Material[]>();
+    private Camera _mainCamera;
 
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
 
     void Update()
     {
@@ -18,7 +23,7 @@ public class TransparentDetector : MonoBehaviour
 
     private void DetectObjects()
     {
-        Vector3 direction = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - Camera.main.transform.position;
+        Vector3 direction = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - _mainCamera.transform.position;
         float distance = direction.magnitude;
 
         Ray ray = new Ray(Camera.main.transform.position, direction);

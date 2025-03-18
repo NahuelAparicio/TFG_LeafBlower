@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isInteracting, isStuned;
     public CapsuleCollider playerCollider;
     private bool _isTalking;
+    private Camera _mainCamera;
     #endregion
 
     #region Propierties
@@ -36,11 +37,13 @@ public class PlayerController : MonoBehaviour
     public Collider Collider => _collider;
     public Rigidbody Rigidbody => _rb;
     public bool IsTalking => _isTalking;
+    public Camera MainCamera => _mainCamera;
     #endregion
 
     private void Awake()
     {
         isStuned = false;
+        _mainCamera = Camera.main;
         _movement = GetComponent<PlayerMovement>();
         _stats = GetComponent<PlayerStats>();
         _inputs = GetComponent<PlayerInputs>();

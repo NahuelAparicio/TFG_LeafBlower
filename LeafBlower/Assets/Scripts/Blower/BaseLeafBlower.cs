@@ -43,7 +43,9 @@ public class BaseLeafBlower : MonoBehaviour
 
     protected virtual void OnTriggerStay(Collider other)
     {
+        
         UpdateClosestMovable();
+        if (!_blower.Inputs.IsBlowingInputPressed() && !_blower.Inputs.IsAspiringInputPressed()) return;
 
         if(_blower.IsBlowing() && !_blower.Aspirer.attachableObject.IsAttached)
         {
