@@ -6,6 +6,7 @@ public class Cheats : MonoBehaviour
     private PlayerInputsActions _actions;
 
     public GameObject low, medium, heavy, superHeavy;
+    public bool activeCheats = false;
 
     private void Awake()
     {
@@ -18,24 +19,45 @@ public class Cheats : MonoBehaviour
         _actions.Cheats.SuperHeavyWeight.performed += SuperHeavyWeight_performed;
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.M))
+        {
+            activeCheats = true;
+        }
+    }
+
     private void SuperHeavyWeight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        GameObject go = Instantiate(superHeavy, GetSpawnPos(), Quaternion.identity);
+        if(activeCheats)
+        {
+            GameObject go = Instantiate(superHeavy, GetSpawnPos(), Quaternion.identity);
+        }
     }
 
     private void HeavyWeight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        GameObject go = Instantiate(heavy, GetSpawnPos(), Quaternion.identity);
+        if (activeCheats)
+        {
+            GameObject go = Instantiate(heavy, GetSpawnPos(), Quaternion.identity);
+
+        }
     }
 
     private void MediumWeight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        GameObject go = Instantiate(medium, GetSpawnPos(), Quaternion.identity);
+        if(activeCheats)
+        {
+            GameObject go = Instantiate(medium, GetSpawnPos(), Quaternion.identity);
+        }
     }
 
     private void LowWeight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        GameObject go = Instantiate(low, GetSpawnPos(), Quaternion.identity);
+        if (activeCheats)
+        {
+            GameObject go = Instantiate(low, GetSpawnPos(), Quaternion.identity);
+        }
     }
 
     private Vector3 GetSpawnPos() => transform.position + _player.Movement.MoveDirection.normalized * 2;
