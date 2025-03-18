@@ -14,7 +14,7 @@ public class Object : MonoBehaviour
     protected bool _isFreezed = false;
 
     public Rigidbody Rigidbody => _rb;
-
+    public bool isMovable = false;
     protected virtual void Awake()
     {
         _spawnPosition = transform.position;
@@ -103,13 +103,26 @@ public class Object : MonoBehaviour
 
     public virtual void FreezeRotation()
     {
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        _isFreezed = true;
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public virtual void UnFreeze()
     {
         if (!_isFreezed) return;
-        _isFreezed = false;
-        _rb.constraints = RigidbodyConstraints.None;
+
+        if(isMovable)
+        {
+            _isFreezed = false;
+            _rb.constraints = RigidbodyConstraints.None;
+            _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            _isFreezed = false;
+            _rb.constraints = RigidbodyConstraints.None;
+        }
+
     }
 }
