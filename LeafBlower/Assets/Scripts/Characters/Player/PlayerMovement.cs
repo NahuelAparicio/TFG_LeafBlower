@@ -291,8 +291,8 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection.y = GetDirectionNormalized().y;
         return _moveDirection * _moveSpeed;
     }
-    private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetMoveDirection().x;
-    private Vector3 GetRotationDirectionNormalized() => Utils.GetCameraForwardNormalized(Camera.main) * _player.Inputs.GetAimMoveDirection().y + Utils.GetCameraRightNormalized(Camera.main) * _player.Inputs.GetAimMoveDirection().x;
+    private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(_player.MainCamera) * _player.Inputs.GetMoveDirection().y + Utils.GetCameraRightNormalized(_player.MainCamera) * _player.Inputs.GetMoveDirection().x;
+    private Vector3 GetRotationDirectionNormalized() => Utils.GetCameraForwardNormalized(_player.MainCamera) * _player.Inputs.GetAimMoveDirection().y + Utils.GetCameraRightNormalized(_player.MainCamera) * _player.Inputs.GetAimMoveDirection().x;
     private Vector3 GetSlopeMoveDirection(Vector3 _direction) => Vector3.ProjectOnPlane(_direction, slopeHit.normal).normalized;
     //private Vector3 GetForwardSlopeDirection() => Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
 

@@ -9,16 +9,18 @@ public class TransparentObject : MonoBehaviour
     private Material _material;
     private Transform _player;
     private bool _isTransparent = false;
+    private Camera _mainCamera;
     private void Awake()
     {
+        _mainCamera = Camera.main;
         _player = FindObjectOfType<PlayerController>().transform;
         _material = GetComponent<Renderer>().material;
     }
 
     private void Update()
     {
-        var dir = _player.position - Camera.main.transform.position;
-        var ray = new Ray(Camera.main.transform.position, dir);
+        var dir = _player.position - _mainCamera.transform.position;
+        var ray = new Ray(_mainCamera.transform.position, dir);
 
         RaycastHit hit;
 
@@ -54,7 +56,7 @@ public class TransparentObject : MonoBehaviour
 
     private void SetPlayerPos()
     {
-        var view = Camera.main.WorldToViewportPoint(_player.position);
+        var view = _mainCamera.WorldToViewportPoint(_player.position);
         _material.SetVector(PosID, view);
     }
 }

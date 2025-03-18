@@ -39,47 +39,36 @@ public class ShootableObject : Object, IAspirable, IAttacheable
     {
         base.Update();
 
-        if(!canBeSaved)
+        if (!canBeSaved && CheckAndResetTimer(ref _timerSave, timeToRestoreSave)) canBeSaved = true;
+        if (!canBeAttached && CheckAndResetTimer(ref _timerToReAttach, timeToRestoreAttach)) canBeAttached = true;
+        if (_hasBeenShoot && CheckAndResetTimer(ref _currentTime, timeToEnableAspirating)) _hasBeenShoot = false;
+        if (!_isAttached && !_hasBeenShoot && _rb.velocity.sqrMagnitude < 0.0025f && _rb.angularVelocity.sqrMagnitude < 0.0001f)
         {
-            _timerSave += Time.deltaTime;
-            if(_timerSave >= timeToRestoreSave)
-            {
-                canBeSaved = true;
-                _timerSave = 0f;
-            }
-        }
-
-        if(!canBeAttached) 
-        { 
-            _timerToReAttach += Time.deltaTime;
-            if(_timerToReAttach >= timeToRestoreAttach)
-            {
-                canBeAttached = true;
-                _timerToReAttach = 0f;
-            }
-        }
-
-
-        if(_hasBeenShoot)
-        {
-            _currentTime += Time.deltaTime;
-            if(_currentTime >= timeToEnableAspirating)
-            {
-                _hasBeenShoot = false;
-                _currentTime = 0f;
-            }
-        }
-
-        if (!_isAttached && !_hasBeenShoot && _rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _timerToFreeze >= timeToFreeze)
-        {
-            if (_isFreezed) return;
-            FreezeConstraints();
-        }
-        else
-        {
-            _timerToFreeze += Time.deltaTime;
+            if (!_isFreezed && _timerToFreeze >= timeToFreeze) FreezeConstraints();
+            else _timerToFreeze += Time.deltaTime;
         }
     }
+
+    private bool CheckAndResetTimer(ref float timer, float limit)
+    {
+        timer += Time.deltaTime;
+        if (timer >= limit)
+        {
+            timer = 0f;
+            return true;
+        }
+        return false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_isAttached && !_hasBeenShoot && _rb.velocity.sqrMagnitude < 0.0025f && _rb.angularVelocity.sqrMagnitude < 0.0001f)
+        {
+            if (!_isFreezed && _timerToFreeze >= timeToFreeze) FreezeConstraints();
+            else _timerToFreeze += Time.fixedDeltaTime;
+        }
+    }
+
     private void LateUpdate()
     {
         if (_isAttached)
