@@ -24,6 +24,9 @@ public class PlayerInputs : MonoBehaviour
         _inputs.Player.Jump.canceled += Jump_canceled;
     }
 
+    public bool IsBlowing() => _inputs.Player.Blow.IsPressed();
+    public bool IsAspiring() => _inputs.Player.Aspire.IsPressed();
+
     private void Sprint_performed(InputAction.CallbackContext context)
     {
         _isSprinting = !_isSprinting;

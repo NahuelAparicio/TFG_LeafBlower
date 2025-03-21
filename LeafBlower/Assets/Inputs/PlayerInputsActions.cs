@@ -80,6 +80,24 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Blow"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd8f7832-4547-4aba-8b5a-ea0cb57b9b50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aspire"",
+                    ""type"": ""Button"",
+                    ""id"": ""34a8e486-c4bc-44ec-909d-74700bc86d36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +274,28 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""LookAt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01bea3bc-1ea8-430d-b130-b7020ae0e7d1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Blow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a94ce1d-3050-4e1a-9762-22370189901b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Aspire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -481,6 +521,8 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Blow = m_Player.FindAction("Blow", throwIfNotFound: true);
+        m_Player_Aspire = m_Player.FindAction("Aspire", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextDialogue = m_Dialogue.FindAction("NextDialogue", throwIfNotFound: true);
@@ -561,6 +603,8 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Blow;
+    private readonly InputAction m_Player_Aspire;
     public struct PlayerActions
     {
         private @PlayerInputsActions m_Wrapper;
@@ -571,6 +615,8 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Blow => m_Wrapper.m_Player_Blow;
+        public InputAction @Aspire => m_Wrapper.m_Player_Aspire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -598,6 +644,12 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Blow.started += instance.OnBlow;
+            @Blow.performed += instance.OnBlow;
+            @Blow.canceled += instance.OnBlow;
+            @Aspire.started += instance.OnAspire;
+            @Aspire.performed += instance.OnAspire;
+            @Aspire.canceled += instance.OnAspire;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -620,6 +672,12 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Blow.started -= instance.OnBlow;
+            @Blow.performed -= instance.OnBlow;
+            @Blow.canceled -= instance.OnBlow;
+            @Aspire.started -= instance.OnAspire;
+            @Aspire.performed -= instance.OnAspire;
+            @Aspire.canceled -= instance.OnAspire;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -833,6 +891,8 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnBlow(InputAction.CallbackContext context);
+        void OnAspire(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {
