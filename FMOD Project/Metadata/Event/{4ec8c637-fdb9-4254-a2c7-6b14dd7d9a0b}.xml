@@ -5,7 +5,7 @@
 			<value>Ball</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{cde661fa-7d9d-45fa-8d64-ae3c61295db6}</destination>
@@ -57,7 +57,14 @@
 			<destination>{a2d4de00-2fda-4797-b030-80847884e384}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{2bde5f35-dad0-4d41-8ce1-dfe987bdbd5b}" />
+	<object class="EventAutomatableProperties" id="{2bde5f35-dad0-4d41-8ce1-dfe987bdbd5b}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>35</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{b06abb0c-a62c-4f80-a669-58fc3c848cd1}" />
 	<object class="GroupTrack" id="{132502b8-9193-4973-8e2d-7b9498b0c473}">
 		<relationship name="modules">
@@ -164,6 +171,7 @@
 	<object class="MixerBusEffectChain" id="{62240ec0-e229-46a3-b32b-30fa6bf4c195}">
 		<relationship name="effects">
 			<destination>{f8b3d43a-2b00-4f90-b7a2-45114e060d5c}</destination>
+			<destination>{5c424632-dc0f-4a3b-be9b-2ec7adf72fa0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6cdfd875-01da-4ecc-a203-697494c3476d}" />
@@ -199,6 +207,20 @@
 	</object>
 	<object class="MixerBusPanner" id="{d2b15476-e6ae-425f-8f6d-870891c6c077}" />
 	<object class="MixerBusFader" id="{f8b3d43a-2b00-4f90-b7a2-45114e060d5c}" />
+	<object class="SpatialiserEffect" id="{5c424632-dc0f-4a3b-be9b-2ec7adf72fa0}">
+		<property name="distanceRolloffType">
+			<value>3</value>
+		</property>
+		<property name="minimumDistance">
+			<value>5</value>
+		</property>
+		<property name="maximumDistance">
+			<value>25</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{a6710d41-5373-48e2-a6a3-ffdf075f8550}" />
 	<object class="ThreeEQEffect" id="{59fca537-3738-43c5-8d10-75ffd593d76b}">
 		<property name="midGain">
