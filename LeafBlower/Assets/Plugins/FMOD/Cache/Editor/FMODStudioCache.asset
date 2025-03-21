@@ -680,6 +680,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 240
+--- !u!114 &-6575365275997928089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Vehicles/Engine 2
+  m_EditorClassIdentifier: 
+  Path: event:/Vehicles/Engine 2
+  Guid:
+    Data1: -2028789186
+    Data2: 1261706127
+    Data3: 1873595298
+    Data4: 1441266475
+  Banks:
+  - {fileID: -5136323178273318611}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4896313321656168956}
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 0
 --- !u!114 &-6518488272483777126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,10 +1264,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638781088943843320
+  lastModified: 638781226305716991
   FileSizes:
   - Name: Desktop
-    Value: 2682976
+    Value: 2687008
   Exists: 1
 --- !u!114 &-4960040424708834997
 MonoBehaviour:
@@ -1580,7 +1608,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638781169607158995
+  lastModified: 638781224015727825
   FileSizes:
   - Name: Desktop
     Value: 2566
@@ -2127,7 +2155,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 19059
+  Length: 25679
 --- !u!114 &-1903647881206366654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2565,10 +2593,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638781205179965628
+  lastModified: 638781224015628092
   FileSizes:
   - Name: Desktop
-    Value: 3752960
+    Value: 3753856
   Exists: 1
 --- !u!114 &-372045856654255638
 MonoBehaviour:
@@ -2718,6 +2746,7 @@ MonoBehaviour:
   - {fileID: 4592131617556511877}
   - {fileID: -4185596518836713957}
   - {fileID: -1952443755753070738}
+  - {fileID: -6575365275997928089}
   EditorParameters:
   - {fileID: 4033091072054533080}
   - {fileID: 1744641768993282439}
@@ -2728,7 +2757,7 @@ MonoBehaviour:
   - {fileID: -4187394644658486721}
   StringsBanks:
   - {fileID: 5887196483816184636}
-  cacheTime: 638781205179965628
+  cacheTime: 638781226305716991
   cacheVersion: 131618
 --- !u!114 &111827735277207414
 MonoBehaviour:
@@ -4342,6 +4371,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 394
+--- !u!114 &4896313321656168956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine 2/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  StudioPath: 
+  Min: 0
+  Max: 2000
+  Default: 0
+  ID:
+    data1: 3286542694
+    data2: 1185893617
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5041162123023412428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4650,10 +4703,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638781169607168971
+  lastModified: 638781224015737798
   FileSizes:
   - Name: Desktop
-    Value: 3136
+    Value: 3180
   Exists: 1
 --- !u!114 &5933264461599147282
 MonoBehaviour:

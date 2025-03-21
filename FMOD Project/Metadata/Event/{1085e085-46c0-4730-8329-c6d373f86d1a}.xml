@@ -104,7 +104,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{26e5fc54-8d0b-42a6-86d1-bb1cae443e67}">
 		<property name="volume">
-			<value>5</value>
+			<value>-5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{a7d9f6e1-f450-44f7-a1a4-99d3d761a17c}</destination>
@@ -202,6 +202,7 @@
 		<relationship name="effects">
 			<destination>{22cfcbf6-d2c4-4654-8204-60528cf76fdc}</destination>
 			<destination>{dc891198-836d-4460-a29e-a92b8128dc34}</destination>
+			<destination>{c07e0cfa-84b0-4bfe-80fe-b51951bda3c8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e366be48-dde4-470e-a372-ee54fa782d2b}">
@@ -292,6 +293,14 @@
 			<value>1.5</value>
 		</property>
 	</object>
+	<object class="FlangerEffect" id="{c07e0cfa-84b0-4bfe-80fe-b51951bda3c8}">
+		<property name="rate">
+			<value>7</value>
+		</property>
+		<property name="mix">
+			<value>46</value>
+		</property>
+	</object>
 	<object class="AutomationCurve" id="{81cd2ff9-e94c-438f-99fa-bb38c05f0b97}">
 		<relationship name="parameter">
 			<destination>{8b3987ce-5950-4c43-810f-22ba08f2cb5c}</destination>
@@ -339,25 +348,25 @@
 			<value>10</value>
 		</property>
 		<property name="frequencyA">
-			<value>6088.83105</value>
+			<value>10876.3604</value>
 		</property>
 		<property name="frequencyB">
-			<value>3270.302</value>
+			<value>137.360825</value>
 		</property>
 		<property name="frequencyD">
 			<value>225.849808</value>
 		</property>
 		<property name="frequencyE">
-			<value>2828.78833</value>
+			<value>2603.80005</value>
 		</property>
 		<property name="qualityA">
-			<value>0.974517226</value>
+			<value>1.91082752</value>
 		</property>
 		<property name="qualityE">
 			<value>0.623275876</value>
 		</property>
 		<property name="gainB">
-			<value>0.517240763</value>
+			<value>30</value>
 		</property>
 		<property name="gainD">
 			<value>6.20689631</value>
@@ -365,13 +374,13 @@
 	</object>
 	<object class="FlangerEffect" id="{7720ca53-4b7b-474c-91cf-2f566652fd71}">
 		<property name="rate">
-			<value>2.4000001</value>
+			<value>20</value>
 		</property>
 		<property name="delay">
-			<value>0.25</value>
+			<value>0.449999988</value>
 		</property>
 		<property name="mix">
-			<value>100</value>
+			<value>61</value>
 		</property>
 	</object>
 	<object class="CompressorEffect" id="{9d471a1a-3ba4-4230-9637-ea5e7306f4ae}">
@@ -385,10 +394,7 @@
 			<value>0.100000001</value>
 		</property>
 		<property name="releaseTime">
-			<value>24</value>
-		</property>
-		<property name="gain">
-			<value>4</value>
+			<value>64</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{91427392-aa01-425f-b55b-dd652c1f0450}">
