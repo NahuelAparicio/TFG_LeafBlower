@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8905952917741639562}
-  - component: {fileID: 6760752682078759383}
+  - component: {fileID: 9109663276184260205}
   m_Layer: 3
   m_Name: Door_Prefab
   m_TagString: IsWall
@@ -31,9 +31,9 @@ Transform:
   m_Children:
   - {fileID: 4886283027316099190}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6760752682078759383
+--- !u!114 &9109663276184260205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6325516645002903765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b06b6944d5244374aa45155a3132cf7f, type: 3}
+  m_Script: {fileID: 11500000, guid: e4e5cc2652662ca468960cd7c784a7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLeft: {fileID: 0}
-  doorRight: {fileID: 0}
-  rotationSpeed: 0
+  doorLeft: {fileID: 8562776087156819940}
+  doorRight: {fileID: 43738410124672099}
+  rotationSpeed: 5
+  targetRotationLeft: {x: 0, y: 0, z: 0, w: 0}
+  targetRotationRight: {x: 0, y: 0, z: 0, w: 0}
+  toZero: 1
+  hasBeenActive: 0
 --- !u!1 &6920137509381444229
 GameObject:
   m_ObjectHideFlags: 0

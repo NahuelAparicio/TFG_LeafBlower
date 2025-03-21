@@ -25,7 +25,6 @@ public class DialogueController : MonoBehaviour
 
     public FadeImage[] _fadeUI;
     public FadeTextMeshPro[] _textsUI;
-    public GameObject minimapa;
 
     private void Awake()
     {
@@ -57,7 +56,6 @@ public class DialogueController : MonoBehaviour
         {
             fadeTxt.OnFadeOut();
         }
-        minimapa.SetActive(false);
         _typeHandler.SetTypingType(t);
 
         _currentDialogue.Clear();
@@ -90,7 +88,6 @@ public class DialogueController : MonoBehaviour
         {
                 fadeTxt.OnFadeIn();
         }
-            minimapa.SetActive(true);
 
         Invoke(nameof(EndDialogue), _fade[0].fadeDuration);
     }
