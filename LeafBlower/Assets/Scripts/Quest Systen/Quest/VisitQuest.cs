@@ -19,7 +19,7 @@ public class VisitQuest : QuestStep
             string status = "The " + nameToVisit + " has been visited.";
             ChangeState("", status);
             FinishQuestStep();
-            GameEventManager.Instance.collectingEvents.CollectCoin(goldReward);
+            GameEventManager.Instance.collectingEvents.InvokeCollectCollectionable(Enums.CollectionableType.Coin, goldReward);
         }
     }
 

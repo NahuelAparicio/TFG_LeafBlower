@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private float _antiBump;
 
+    public float lastGroundedTime;
     public bool isJumping = false;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         if (_characterController.isGrounded && !isJumping)
         {
             _velocity.y = -_antiBump;
+            lastGroundedTime = Time.time;
         }
         Vector3 _move = GetDirectionNormalized();
         _move.y = 0;

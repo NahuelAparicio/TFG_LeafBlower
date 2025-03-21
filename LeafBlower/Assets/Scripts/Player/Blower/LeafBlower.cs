@@ -1,28 +1,100 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LeafBlower : MonoBehaviour
 {
     private PlayerController _player;
+    [SerializeField] private Transform _firePoint;
+
+    private HashSet<IMovable> _aspiringObjects = new();
+
+    public MovableObject _attachedObject;
+
+    public bool ObjectAttached => _attachedObject != null;
 
     private void Awake()
     {
         _player = transform.parent.parent.GetComponent<PlayerController>();
     }
 
+    private void Start()
+    {
+        GameEventManager.Instance.playerEvents.OnAttach += OnAttach;
+        GameEventManager.Instance.playerEvents.OnDestroy += OnDestroyObject;
+    }
+
+    private void OnDestroyObject(IMovable obj)
+    {
+        _aspiringObjects.Remove(obj);
+    }
+
+    private void OnAttach(MovableObject obj)
+    {
+        _player.Inputs.SetIsAspiring(false);
+        obj.transform.SetParent(transform);
+        _attachedObject = obj;
+        _aspiringObjects.Clear();
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (!_player.Inputs.IsBlowing() && !_player.Inputs.IsAspiring()) return;
+        if (!other.TryGetComponent(out IMovable movable)) return;
 
-        var movable = other.GetComponent<IMovable>();
-
-        if(_player.Inputs.IsBlowing())
+        if(ObjectAttached)
         {
-            movable.OnBlow();
+            if (_player.Inputs.IsBlowing())
+            {
+                BlowAttachedObject();
+            }
+            else if (_player.Inputs.IsAspiring())
+            {
+
+                DetachObject();
+            }
+            return;
         }
 
-        if(_player.Inputs.IsAspiring())
+        //Si object not attached
+
+
+        if (_player.Inputs.IsAspiring())
         {
-            movable.OnAspire();
+            if (_aspiringObjects.Add(movable))
+            {
+                movable.StartAspiring(_firePoint, other.ClosestPoint(_firePoint.position));
+            }
+        }
+        else if(_aspiringObjects.Remove(movable))
+        {
+            movable.StopAspiring();
+        }
+
+        if (_player.Inputs.IsBlowing())
+        {
+            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
+        }
+    }
+
+    private void DetachObject()
+    {
+        _attachedObject.transform.SetParent(null);
+
+        _attachedObject?.StopAspiring();
+        _attachedObject = null;
+    }
+
+    private void BlowAttachedObject()
+    {
+        _attachedObject.transform.SetParent(null);
+        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.BlowerForce.Value);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out IMovable movable) && _aspiringObjects.Remove(movable))
+        {
+            movable.StopAspiring();
         }
     }
 }

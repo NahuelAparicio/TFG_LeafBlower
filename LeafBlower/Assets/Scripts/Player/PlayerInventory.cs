@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -13,18 +15,23 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        GameEventManager.Instance.collectingEvents.onCollectCoin += CollectCoin;
-        GameEventManager.Instance.collectingEvents.onCollectColectionable += CollectColectionable;
+        GameEventManager.Instance.collectingEvents.OnCollectColectionable += CollectColectionable;
     }
 
-    private void CollectColectionable(string id)
+    private void CollectColectionable(Enums.CollectionableType type, int amount)
     {
-        Debug.Log(id + " Collected");
+        switch (type)
+        {
+            case Enums.CollectionableType.Coin:
+                _coins += amount;
+                _controller.Hud.UpdateCoinsText(_coins);
+                break;
+            case Enums.CollectionableType.Jordan:
+                Debug.Log("Collected Jordans " + amount);
+                break;
+            default:
+                break;
+        }
     }
 
-    public void CollectCoin(int num)
-    {
-        _coins += num;
-        _controller.Hud.UpdateCoinsText(_coins);
-    }
 }

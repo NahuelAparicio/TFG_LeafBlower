@@ -7,7 +7,6 @@ public class Enums
     public enum QuestState { RequirementNotMet, CanStart, InProgress, CanFinish, Finished }
     #endregion
 
-    public enum Movements { Dash, Jump, Hover, GroundMovement, AirMovement }
     public enum NPCMovements { InPlace, MoveAround, MoveSequence }
     public enum ModifierType { Flat, PercentualToBase }
     public enum BlowType { RealisticBlow, DirectionalBlow }
@@ -22,5 +21,8 @@ public class Enums
 
     public enum MenuState { MainMenu, SettingsMenu, PauseMenu}
 
-    public enum ObjectWeight {Leaf = 0, Low , Medium, Heavy, SuperHeavy, MegaHeavy }
+    public enum ObjectType { Colectionable, Leaf, Object }
+
+    public enum CollectionableType { None, Coin, Jordan }
+
 }

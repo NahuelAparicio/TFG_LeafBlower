@@ -1,6 +1,8 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class PlayerInputs : MonoBehaviour
     private bool _isSprinting;
 
     public bool IsSprinting => _isSprinting;
+
+    private float _jumpPressTime = -1f;
+    [SerializeField] private float _jumpBufferTime = 0.125f;
 
     private void Awake()
     {
@@ -22,10 +27,41 @@ public class PlayerInputs : MonoBehaviour
         _inputs.Player.Pause.performed += Pause_performed;
         _inputs.Player.Jump.performed += Jump_performed;
         _inputs.Player.Jump.canceled += Jump_canceled;
+        _inputs.Player.Blow.performed += Blow_performed;
+        _inputs.Player.Blow.canceled += Blow_canceled;
+        _inputs.Player.Aspire.performed += Aspire_performed;
+        _inputs.Player.Aspire.canceled += Aspire_canceled;
+    }
+    private void Aspire_performed(InputAction.CallbackContext obj)
+    {
+        _isAspiring = true;
+    }
+    private void Aspire_canceled(InputAction.CallbackContext obj)
+    {
+        _isAspiring = true;
     }
 
-    public bool IsBlowing() => _inputs.Player.Blow.IsPressed();
-    public bool IsAspiring() => _inputs.Player.Aspire.IsPressed();
+    private void Blow_performed(InputAction.CallbackContext obj)
+    {
+        _isBlowing = true;
+    }
+
+    private void Blow_canceled(InputAction.CallbackContext obj)
+    {
+        _isBlowing = false;
+    }
+
+    public void SetIsBlowing(bool b) => _isBlowing = b;
+    public void SetIsAspiring(bool b) => _isAspiring = b;
+
+
+    private bool _isBlowing;
+    private bool _isAspiring;
+
+    public bool IsBlowing() => _isBlowing;
+    public bool IsAspiring() => _isAspiring;
+    //public bool IsBlowing() => _inputs.Player.Blow.IsPressed();
+    //public bool IsAspiring() => _inputs.Player.Aspire.IsPressed();
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
@@ -44,8 +80,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        _controller.Movement.Jump();
-        _controller.Movement.isJumping = true;
+        _jumpPressTime = Time.time;
+        //_controller.Movement.Jump();
+
+        if (Time.time - _controller.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
+        {
+            _controller.Movement.Jump();
+            _controller.Movement.isJumping = true;
+        }
 
     }
     private void Jump_canceled(InputAction.CallbackContext context)

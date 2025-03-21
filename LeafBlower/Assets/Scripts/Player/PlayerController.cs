@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
     private PlayerHUD _hud;
     private PlayerInventory _inventory;
     private DialogueController _dialogueController;
+    private PlayerStats _stats;
 
 
     internal Camera _mainCamera;
     public bool isTalking;
     [SerializeField] private PlayerInteractable _interactable;
 
+    public PlayerStats Stats => _stats;
     public PlayerHUD Hud => _hud;
     public PlayerInventory Inventory => _inventory;
     public PlayerInputs Inputs => _inputs;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _stats = GetComponent<PlayerStats>();
         _hud = GetComponent<PlayerHUD>();
         _inventory = GetComponent<PlayerInventory>();
         _dialogueController = FindObjectOfType<DialogueController>();
