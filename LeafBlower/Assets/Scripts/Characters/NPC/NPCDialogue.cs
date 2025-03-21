@@ -26,10 +26,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         _dialogueController.DialogueEnded += OnDialogueEnded;
 
         _uiManager = GetComponent<InteractUIManager>();
-        if (_uiManager == null)
-        {
-            Debug.LogError("No se encontró InteractUIManager en este GameObject.");
-        }
         LoadData();
     }
 

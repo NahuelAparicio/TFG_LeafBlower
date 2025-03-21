@@ -42,7 +42,7 @@ public class PlayerInputs : MonoBehaviour
 
     //public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
     public Vector2 GetMoveDirection() => _moveDir; // Left Stick -- WASD
-    public Vector2 GetAimMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse (?)
+    public Vector2 GetAimMoveDirection() => Vector2.zero; // Right Stick -- Mouse (?)
     private Vector2 _moveDir;
     public bool IsMovingLeftJoystick() => GetMoveDirection().magnitude > 0.05f;
     public bool IsMovingRightJoystick() => GetAimMoveDirection().magnitude > 0.05f;

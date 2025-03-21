@@ -28,7 +28,7 @@ public class PlayerInteractable : MonoBehaviour
                 InteractUIManager uiManager = other.GetComponentInChildren<InteractUIManager>();
                 if (uiManager != null)
                 {
-                        uiManager.SetIconVisibility(true);
+                    uiManager.SetIconVisibility(true);
                 }
 
                 interactable.SetInteractableParent(this);
@@ -58,7 +58,9 @@ public class PlayerInteractable : MonoBehaviour
                 _touchingInteractables.Remove(go);
             }
         }
-    }private void OnTriggerExit(Collider other)
+    }
+    
+    private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
@@ -72,6 +74,7 @@ public class PlayerInteractable : MonoBehaviour
     // On Interact Button Performed checks interaction posibilities and intercts if it's possible
     public void InteractPerformed()
     {
+        if (!canInteract) return;
 
         List<GameObject> interactablesCopy = new List<GameObject>(_touchingInteractables);
 
