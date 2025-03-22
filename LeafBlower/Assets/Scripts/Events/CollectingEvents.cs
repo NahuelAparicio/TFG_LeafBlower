@@ -2,17 +2,9 @@ using System;
 
 public class CollectingEvents
 {
-    public event Action<int> onCollectCoin;
-    public event Action<string> onCollectColectionable;
+    public event Action<Enums.CollectionableType, int> OnCollectColectionable;
 
-    public void CollectCoin(int coin)
-    {
-        onCollectCoin?.Invoke(coin);
-    }
 
-    public void CollectCollectionable(string name)
-    {
-        onCollectColectionable?.Invoke(name);
-    }
+    public void InvokeCollectCollectionable(Enums.CollectionableType type, int amount) => OnCollectColectionable?.Invoke(type, amount);
 
 }

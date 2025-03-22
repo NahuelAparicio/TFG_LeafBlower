@@ -126,7 +126,7 @@ public class QuestController : MonoBehaviour
     }
     private void ClaimRewards(Quest quest)
     {
-        GameEventManager.Instance.collectingEvents.CollectCoin(quest.info.goldReward);
+        GameEventManager.Instance.collectingEvents.InvokeCollectCollectionable(Enums.CollectionableType.Coin, quest.info.goldReward);
     }
 
     private void ChangeQuestState(string id, Enums.QuestState state)

@@ -4,16 +4,16 @@ public class CollectSauce : QuestStep
 
     private void Start()
     {
-        GameEventManager.Instance.collectingEvents.onCollectColectionable += CollectingEvents_onCollectColectionable;
+        //GameEventManager.Instance.collectingEvents.OnCollectColectionable += CollectingEvents_onCollectColectionable;
     }
 
-    private void CollectingEvents_onCollectColectionable(string id)
-    {
-        if(id == "HotSauce")
-        {
-            FinishQuestStep();
-        }
-    }
+    //private void CollectingEvents_onCollectColectionable(string id)
+    //{
+    //    if(id == "HotSauce")
+    //    {
+    //        FinishQuestStep();
+    //    }
+    //}
 
     protected override void SetQuestStepState(string state)
     {
@@ -22,7 +22,7 @@ public class CollectSauce : QuestStep
 
     private void OnDisable()
     {
-        GameEventManager.Instance.collectingEvents.onCollectColectionable -= CollectingEvents_onCollectColectionable;
+        //GameEventManager.Instance.collectingEvents.OnCollectColectionable -= CollectingEvents_onCollectColectionable;
     }
 
 }

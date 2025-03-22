@@ -37,18 +37,18 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""LookAt"",
+                    ""type"": ""Value"",
+                    ""id"": ""8b190aaf-8134-489a-9964-ef60523b4476"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""dd813cab-efa6-4ec3-9726-9aff51e26479"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""2e940d4a-3f97-482f-98bb-778a47cd8fde"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -64,18 +64,9 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""9efc3e55-a61e-4edc-9729-a596808dcb51"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Hover"",
-                    ""type"": ""Button"",
-                    ""id"": ""87517ea4-ce5e-4fe3-af4c-a34ef0797c6e"",
+                    ""id"": ""2e940d4a-3f97-482f-98bb-778a47cd8fde"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -91,13 +82,22 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""BlowerMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""23d49c6a-cd23-4fdf-9dee-4bc968e40a38"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""Blow"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd8f7832-4547-4aba-8b5a-ea0cb57b9b50"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aspire"",
+                    ""type"": ""Button"",
+                    ""id"": ""34a8e486-c4bc-44ec-909d-74700bc86d36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -191,17 +191,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""952fb27a-32a8-43b9-b6cb-10f1de974ab6"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""BlowerMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""988e9aa9-716d-4fb3-8452-f20ef24e6509"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -268,45 +257,84 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""eaa63405-df82-450e-a736-df93af6d9147"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""id"": ""381ed783-f432-405b-9925-02d170bb888e"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""LookAt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5b03ae6-7db3-4a22-aef3-a1f1735e6e94"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Dash"",
+                    ""action"": ""LookAt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dbedce08-c641-43f5-a2e0-0b851489fe7b"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""01bea3bc-1ea8-430d-b130-b7020ae0e7d1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Dash"",
+                    ""action"": ""Blow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7138afd-3791-4987-b97d-f37e31718875"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""0a94ce1d-3050-4e1a-9762-22370189901b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Hover"",
+                    ""action"": ""Aspire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""5a0cd4fb-b27f-4cd3-b954-9e46ed9d85ae"",
+            ""actions"": [
+                {
+                    ""name"": ""NextDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""becb2fba-74bc-471c-a5ab-2417a30b0abc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a1a65f2f-d458-4a19-a5b6-b8f80d3341e0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""NextDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ee5bf5ae-d1c0-4de4-8743-2a1762d0476e"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""6c3875cd-b563-4154-be55-96633de59232"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Hover"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -355,45 +383,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""CameraLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Dialogue"",
-            ""id"": ""5a0cd4fb-b27f-4cd3-b954-9e46ed9d85ae"",
-            ""actions"": [
-                {
-                    ""name"": ""NextDialogue"",
-                    ""type"": ""Button"",
-                    ""id"": ""becb2fba-74bc-471c-a5ab-2417a30b0abc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""a1a65f2f-d458-4a19-a5b6-b8f80d3341e0"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""NextDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6c3875cd-b563-4154-be55-96633de59232"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""NextDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -527,20 +516,20 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_Hover = m_Player.FindAction("Hover", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-        m_Player_BlowerMove = m_Player.FindAction("BlowerMove", throwIfNotFound: true);
+        m_Player_Blow = m_Player.FindAction("Blow", throwIfNotFound: true);
+        m_Player_Aspire = m_Player.FindAction("Aspire", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_NextDialogue = m_Dialogue.FindAction("NextDialogue", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_CameraLeft = m_Camera.FindAction("CameraLeft", throwIfNotFound: true);
         m_Camera_CameraRight = m_Camera.FindAction("CameraRight", throwIfNotFound: true);
-        // Dialogue
-        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
-        m_Dialogue_NextDialogue = m_Dialogue.FindAction("NextDialogue", throwIfNotFound: true);
         // Cheats
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_LowWeight = m_Cheats.FindAction("LowWeight", throwIfNotFound: true);
@@ -609,25 +598,25 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_LookAt;
     private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_Hover;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Pause;
-    private readonly InputAction m_Player_BlowerMove;
+    private readonly InputAction m_Player_Blow;
+    private readonly InputAction m_Player_Aspire;
     public struct PlayerActions
     {
         private @PlayerInputsActions m_Wrapper;
         public PlayerActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @Hover => m_Wrapper.m_Player_Hover;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
-        public InputAction @BlowerMove => m_Wrapper.m_Player_BlowerMove;
+        public InputAction @Blow => m_Wrapper.m_Player_Blow;
+        public InputAction @Aspire => m_Wrapper.m_Player_Aspire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -640,27 +629,27 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @LookAt.started += instance.OnLookAt;
+            @LookAt.performed += instance.OnLookAt;
+            @LookAt.canceled += instance.OnLookAt;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
-            @Hover.started += instance.OnHover;
-            @Hover.performed += instance.OnHover;
-            @Hover.canceled += instance.OnHover;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @BlowerMove.started += instance.OnBlowerMove;
-            @BlowerMove.performed += instance.OnBlowerMove;
-            @BlowerMove.canceled += instance.OnBlowerMove;
+            @Blow.started += instance.OnBlow;
+            @Blow.performed += instance.OnBlow;
+            @Blow.canceled += instance.OnBlow;
+            @Aspire.started += instance.OnAspire;
+            @Aspire.performed += instance.OnAspire;
+            @Aspire.canceled += instance.OnAspire;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -668,27 +657,27 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @LookAt.started -= instance.OnLookAt;
+            @LookAt.performed -= instance.OnLookAt;
+            @LookAt.canceled -= instance.OnLookAt;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
-            @Hover.started -= instance.OnHover;
-            @Hover.performed -= instance.OnHover;
-            @Hover.canceled -= instance.OnHover;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @BlowerMove.started -= instance.OnBlowerMove;
-            @BlowerMove.performed -= instance.OnBlowerMove;
-            @BlowerMove.canceled -= instance.OnBlowerMove;
+            @Blow.started -= instance.OnBlow;
+            @Blow.performed -= instance.OnBlow;
+            @Blow.canceled -= instance.OnBlow;
+            @Aspire.started -= instance.OnAspire;
+            @Aspire.performed -= instance.OnAspire;
+            @Aspire.canceled -= instance.OnAspire;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -706,6 +695,52 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+    private readonly InputAction m_Dialogue_NextDialogue;
+    public struct DialogueActions
+    {
+        private @PlayerInputsActions m_Wrapper;
+        public DialogueActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextDialogue => m_Wrapper.m_Dialogue_NextDialogue;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void AddCallbacks(IDialogueActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
+            @NextDialogue.started += instance.OnNextDialogue;
+            @NextDialogue.performed += instance.OnNextDialogue;
+            @NextDialogue.canceled += instance.OnNextDialogue;
+        }
+
+        private void UnregisterCallbacks(IDialogueActions instance)
+        {
+            @NextDialogue.started -= instance.OnNextDialogue;
+            @NextDialogue.performed -= instance.OnNextDialogue;
+            @NextDialogue.canceled -= instance.OnNextDialogue;
+        }
+
+        public void RemoveCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
 
     // Camera
     private readonly InputActionMap m_Camera;
@@ -760,52 +795,6 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
-
-    // Dialogue
-    private readonly InputActionMap m_Dialogue;
-    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
-    private readonly InputAction m_Dialogue_NextDialogue;
-    public struct DialogueActions
-    {
-        private @PlayerInputsActions m_Wrapper;
-        public DialogueActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @NextDialogue => m_Wrapper.m_Dialogue_NextDialogue;
-        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
-        public void AddCallbacks(IDialogueActions instance)
-        {
-            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
-            @NextDialogue.started += instance.OnNextDialogue;
-            @NextDialogue.performed += instance.OnNextDialogue;
-            @NextDialogue.canceled += instance.OnNextDialogue;
-        }
-
-        private void UnregisterCallbacks(IDialogueActions instance)
-        {
-            @NextDialogue.started -= instance.OnNextDialogue;
-            @NextDialogue.performed -= instance.OnNextDialogue;
-            @NextDialogue.canceled -= instance.OnNextDialogue;
-        }
-
-        public void RemoveCallbacks(IDialogueActions instance)
-        {
-            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IDialogueActions instance)
-        {
-            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public DialogueActions @Dialogue => new DialogueActions(this);
 
     // Cheats
     private readonly InputActionMap m_Cheats;
@@ -897,22 +886,22 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnLookAt(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
-        void OnHover(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnBlowerMove(InputAction.CallbackContext context);
+        void OnBlow(InputAction.CallbackContext context);
+        void OnAspire(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnNextDialogue(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
         void OnCameraLeft(InputAction.CallbackContext context);
         void OnCameraRight(InputAction.CallbackContext context);
-    }
-    public interface IDialogueActions
-    {
-        void OnNextDialogue(InputAction.CallbackContext context);
     }
     public interface ICheatsActions
     {

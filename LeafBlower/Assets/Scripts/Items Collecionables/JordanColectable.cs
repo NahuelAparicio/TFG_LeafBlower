@@ -3,7 +3,7 @@ public class JordanColectable : ItemColectable
 {
     protected override void OnCollect()
     {
-        GameEventManager.Instance.collectingEvents.CollectCollectionable(data.id);
+        //GameEventManager.Instance.collectingEvents.InvokeCollectCollectionable(data.id);
         base.OnCollect();
     }
 }
