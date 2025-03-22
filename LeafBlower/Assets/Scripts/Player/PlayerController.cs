@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private PlayerInventory _inventory;
     private DialogueController _dialogueController;
     private PlayerStats _stats;
-
-
     internal Camera _mainCamera;
     public bool isTalking;
+
+    [SerializeField] private LeafBlower _leafBlower;
     [SerializeField] private PlayerInteractable _interactable;
 
+
+    public LeafBlower LeafBlower => _leafBlower;
     public PlayerStats Stats => _stats;
     public PlayerHUD Hud => _hud;
     public PlayerInventory Inventory => _inventory;

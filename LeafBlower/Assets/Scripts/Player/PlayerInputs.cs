@@ -27,41 +27,30 @@ public class PlayerInputs : MonoBehaviour
         _inputs.Player.Pause.performed += Pause_performed;
         _inputs.Player.Jump.performed += Jump_performed;
         _inputs.Player.Jump.canceled += Jump_canceled;
-        _inputs.Player.Blow.performed += Blow_performed;
-        _inputs.Player.Blow.canceled += Blow_canceled;
         _inputs.Player.Aspire.performed += Aspire_performed;
         _inputs.Player.Aspire.canceled += Aspire_canceled;
     }
     private void Aspire_performed(InputAction.CallbackContext obj)
     {
-        _isAspiring = true;
+        if(_controller.LeafBlower.ObjectAttached)
+        {
+            _aspiredPerformed = true;
+        }
     }
     private void Aspire_canceled(InputAction.CallbackContext obj)
     {
-        _isAspiring = true;
+        _aspiredPerformed = false;
     }
 
-    private void Blow_performed(InputAction.CallbackContext obj)
-    {
-        _isBlowing = true;
-    }
-
-    private void Blow_canceled(InputAction.CallbackContext obj)
-    {
-        _isBlowing = false;
-    }
-
-    public void SetIsBlowing(bool b) => _isBlowing = b;
-    public void SetIsAspiring(bool b) => _isAspiring = b;
+    public void SetIsAspiring(bool b) => _aspiredPerformed = b;
 
 
-    private bool _isBlowing;
-    private bool _isAspiring;
+    private bool _aspiredPerformed;
 
-    public bool IsBlowing() => _isBlowing;
-    public bool IsAspiring() => _isAspiring;
-    //public bool IsBlowing() => _inputs.Player.Blow.IsPressed();
-    //public bool IsAspiring() => _inputs.Player.Aspire.IsPressed();
+    public bool IsBlowing() => _inputs.Player.Blow.IsPressed();
+    public bool IsAspiring() => _inputs.Player.Aspire.IsPressed();
+
+    public bool IsAspirePressed() => _aspiredPerformed;
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {

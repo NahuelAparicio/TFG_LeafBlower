@@ -6,28 +6,45 @@ public class MovableObject : MonoBehaviour, IMovable
     [SerializeField] private Enums.BlowType _type;
     [SerializeField] private float _aspirationSpeed;
     [SerializeField] private float _localScaleSpeed;
+    [SerializeField] private GameObject _objectToScale;
+    [SerializeField] private float _timeToReEnableAspire = 0.5f;
+    [SerializeField][Range(0,1)] private float percentageToScale;
+    public bool canBeAspired = true;
+    public GameObject colliderObject;
+
 
     private Rigidbody _rb;
     private Transform _target;
     private bool _isBeingAspired;
-
-    public Enums.BlowType Type => _type;
-
     private Vector3 _originalScale;
     private Vector3 _targetScale;
-
     private Vector3 _offsetToTarget;
-    [SerializeField] private GameObject _objectToScale;
+    private float _currentTime = 0f;
+
+    public Rigidbody RigidBody => _rb;
+    public Enums.BlowType Type => _type;
+
+
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _originalScale = _objectToScale.transform.localScale;
-        _targetScale = _originalScale * 0.2f;
+        _targetScale = _originalScale * percentageToScale;
     }
 
     private void Update()
     {
+        if(!canBeAspired)
+        {
+            _currentTime += Time.deltaTime;
+            if(_currentTime >= _timeToReEnableAspire)
+            {
+                canBeAspired = true;
+                _currentTime = 0f;
+            }
+            return;
+        }
         if (!_isBeingAspired) return;
 
         Vector3 _targetPosition = _target.position + _offsetToTarget;
@@ -60,9 +77,7 @@ public class MovableObject : MonoBehaviour, IMovable
                 default:
                     break;
             }
-
         }
-
     }
 
     public void StartAspiring(Transform target, Vector3 closestPoint)
@@ -79,6 +94,7 @@ public class MovableObject : MonoBehaviour, IMovable
 
     public void StopAspiring()
     {
+        canBeAspired = false;
         _isBeingAspired = false;
         _target = null;
         _rb.useGravity = true;
@@ -108,8 +124,15 @@ public class MovableObject : MonoBehaviour, IMovable
 
     public void Shoot(Vector3 force)
     {
+        canBeAspired = false;
         _rb.useGravity = true;
         _rb.AddForce(force, ForceMode.Impulse);
+    }
+
+    public void ChangeLayer(LayerMask layer)
+    {
+        gameObject.layer = layer;
+        colliderObject.layer = layer;
     }
 
 

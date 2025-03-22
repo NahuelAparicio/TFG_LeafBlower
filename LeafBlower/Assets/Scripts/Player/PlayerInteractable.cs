@@ -9,7 +9,7 @@ public class PlayerInteractable : MonoBehaviour
 
     private void Update()
     {
-        if(_touchingInteractables.Count <= 0)
+        if (_touchingInteractables.Count <= 0)
         {
             canInteract = false;
         }
@@ -49,7 +49,7 @@ public class PlayerInteractable : MonoBehaviour
                 InteractUIManager uiManager = go.GetComponentInChildren<InteractUIManager>();
                 if (uiManager != null)
                 {
-                        uiManager.SetIconVisibility(false);
+                    uiManager.SetIconVisibility(false);
                 }
                 _touchingInteractables.Clear();
             }
@@ -59,10 +59,10 @@ public class PlayerInteractable : MonoBehaviour
             }
         }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             canInteract = false;
             RemoveInteractable(other.gameObject);
@@ -80,7 +80,7 @@ public class PlayerInteractable : MonoBehaviour
 
         foreach (var interactable in interactablesCopy)
         {
-            if(interactable != null)
+            if (interactable != null)
             {
                 var interaction = interactable.GetComponent<IInteractable>();
                 if (interaction == null) return;

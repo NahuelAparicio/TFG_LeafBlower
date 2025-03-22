@@ -13,6 +13,7 @@ public class LeafBlower : MonoBehaviour
 
     public bool ObjectAttached => _attachedObject != null;
 
+
     private void Awake()
     {
         _player = transform.parent.parent.GetComponent<PlayerController>();
@@ -31,10 +32,21 @@ public class LeafBlower : MonoBehaviour
 
     private void OnAttach(MovableObject obj)
     {
+
         _player.Inputs.SetIsAspiring(false);
+
+        obj.RigidBody.isKinematic = true;
+
+        foreach (var aspired in _aspiringObjects)
+        {
+            aspired.StopAspiring();
+        }
+
+        _aspiringObjects.Clear();
+
         obj.transform.SetParent(transform);
         _attachedObject = obj;
-        _aspiringObjects.Clear();
+        _attachedObject.ChangeLayer(12);
     }
 
     private void OnTriggerStay(Collider other)
@@ -47,9 +59,8 @@ public class LeafBlower : MonoBehaviour
             {
                 BlowAttachedObject();
             }
-            else if (_player.Inputs.IsAspiring())
+            else if (_player.Inputs.IsAspirePressed())
             {
-
                 DetachObject();
             }
             return;
@@ -78,16 +89,23 @@ public class LeafBlower : MonoBehaviour
 
     private void DetachObject()
     {
-        _attachedObject.transform.SetParent(null);
-
+        Detach();
         _attachedObject?.StopAspiring();
         _attachedObject = null;
     }
 
     private void BlowAttachedObject()
     {
-        _attachedObject.transform.SetParent(null);
+        Detach();
         _attachedObject?.Shoot(_firePoint.forward * _player.Stats.BlowerForce.Value);
+        _attachedObject = null;
+    }
+
+    private void Detach()
+    {
+        _attachedObject.ChangeLayer(7);
+        _attachedObject.RigidBody.isKinematic = false;
+        _attachedObject.transform.SetParent(null);
     }
 
     private void OnTriggerExit(Collider other)

@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6963137018241539492}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &429100818327238472
 Rigidbody:
@@ -97,6 +97,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 0}
   _type: 0
+  _aspirationSpeed: 0
+  _localScaleSpeed: 0
+  _objectToScale: {fileID: 0}
+  _timeToReEnableAspire: 0.5
+  canBeAspired: 1
+  colliderObject: {fileID: 5579544501776270450}
 --- !u!1 &5579544501776270450
 GameObject:
   m_ObjectHideFlags: 0
