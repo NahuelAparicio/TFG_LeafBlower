@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 429100818327238472}
   - component: {fileID: 590357195426274707}
   - component: {fileID: 6881423115129263357}
+  - component: {fileID: 6025136229378336201}
   m_Layer: 7
   m_Name: Object
   m_TagString: Untagged
@@ -101,8 +102,22 @@ MonoBehaviour:
   _localScaleSpeed: 0
   _objectToScale: {fileID: 0}
   _timeToReEnableAspire: 0.5
-  canBeAspired: 1
+  percentageToScale: 0
   colliderObject: {fileID: 5579544501776270450}
+--- !u!114 &6025136229378336201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120880373905731247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9810a38bfda25904eb147288a453c929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materials: []
+  _matTransparency: 0
 --- !u!1 &5579544501776270450
 GameObject:
   m_ObjectHideFlags: 0

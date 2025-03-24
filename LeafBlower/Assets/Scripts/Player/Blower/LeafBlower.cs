@@ -32,14 +32,16 @@ public class LeafBlower : MonoBehaviour
 
     private void OnAttach(MovableObject obj)
     {
-
         _player.Inputs.SetIsAspiring(false);
 
         obj.RigidBody.isKinematic = true;
 
         foreach (var aspired in _aspiringObjects)
         {
-            aspired.StopAspiring();
+            if(!aspired.IsCollectable())
+            {
+                aspired.StopAspiring();
+            }
         }
 
         _aspiringObjects.Clear();
@@ -47,6 +49,7 @@ public class LeafBlower : MonoBehaviour
         obj.transform.SetParent(transform);
         _attachedObject = obj;
         _attachedObject.ChangeLayer(12);
+        _attachedObject.Transparency.EnableTransparency();
     }
 
     private void OnTriggerStay(Collider other)
@@ -67,23 +70,28 @@ public class LeafBlower : MonoBehaviour
         }
 
         //Si object not attached
-
+        if (!movable.CanBeAspired()) return;
 
         if (_player.Inputs.IsAspiring())
         {
             if (_aspiringObjects.Add(movable))
             {
-                movable.StartAspiring(_firePoint, other.ClosestPoint(_firePoint.position));
+                //movable.StartAspiring(_firePoint, other.ClosestPoint(_firePoint.position));
+                movable.StartAspiring(_firePoint, _firePoint);
             }
         }
         else if(_aspiringObjects.Remove(movable))
         {
-            movable.StopAspiring();
+            if(!movable.IsCollectable())
+            {
+                movable.StopAspiring();
+            }
         }
 
         if (_player.Inputs.IsBlowing())
         {
-            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
+            //movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
+            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.transform.position);
         }
     }
 
@@ -106,6 +114,7 @@ public class LeafBlower : MonoBehaviour
         _attachedObject.ChangeLayer(7);
         _attachedObject.RigidBody.isKinematic = false;
         _attachedObject.transform.SetParent(null);
+        _attachedObject.Transparency.DisableTransparency();
     }
 
     private void OnTriggerExit(Collider other)

@@ -69,8 +69,9 @@ public class PlayerInputs : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.IsPaused) return;
+
         _jumpPressTime = Time.time;
-        //_controller.Movement.Jump();
 
         if (Time.time - _controller.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
         {
@@ -82,7 +83,6 @@ public class PlayerInputs : MonoBehaviour
     private void Jump_canceled(InputAction.CallbackContext context)
     {
         _controller.Movement.isJumping = false;
-
     }
 
     private void Pause_performed(InputAction.CallbackContext context)
