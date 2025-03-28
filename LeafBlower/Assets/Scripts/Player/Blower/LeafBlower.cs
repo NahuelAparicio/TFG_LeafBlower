@@ -97,8 +97,8 @@ public class LeafBlower : MonoBehaviour
 
         if (_player.Inputs.IsBlowing())
         {
-            //movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
-            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.transform.position);
+            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
+            //movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.transform.position);
         }
     }
 
@@ -112,7 +112,7 @@ public class LeafBlower : MonoBehaviour
     private void BlowAttachedObject()
     {
         Detach();
-        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.BlowerForce.Value);
+        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.ShootForce.Value);
         _attachedObject = null;
     }
 

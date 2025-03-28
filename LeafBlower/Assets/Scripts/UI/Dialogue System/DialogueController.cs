@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using FMODUnity;
-using FMOD.Studio;
 
 public class DialogueController : MonoBehaviour
 {
@@ -39,35 +38,19 @@ public class DialogueController : MonoBehaviour
         if (messages == null || messages.Count == 0) return;
         GameEventManager.Instance.cameraEvents.Zoom(15);
         _dialogueHolder.SetActive(true);
-
-        foreach (FadeImage fadeImg in _fade)
-        {
-            fadeImg.OnFadeIn();
-        }
-        foreach (FadeTextMeshPro fadeTxt in _texts)
-        {
-            fadeTxt.OnFadeIn();
-        }
-        foreach (FadeImage fadeImg in _fadeUI)
-        {
-            fadeImg.OnFadeOut();
-        }
-        foreach (FadeTextMeshPro fadeTxt in _textsUI)
-        {
-            fadeTxt.OnFadeOut();
-        }
+        //StartFadeOut();
         _typeHandler.SetTypingType(t);
 
         _currentDialogue.Clear();
         _currentDialogue.AddRange(messages);
 
-        _icon.sprite = _characterIcons[(int)messages[_indexDialogue].character];
+        //_icon.sprite = _characterIcons[(int)messages[_indexDialogue].character];
         _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
 
         DialogueStarted?.Invoke();
     }
 
-    private void HideDialogueBox()
+    private void StartFadeIn()
     {
         foreach (FadeImage fadeImg in _fade)
         {
@@ -86,8 +69,33 @@ public class DialogueController : MonoBehaviour
         }
         foreach (FadeTextMeshPro fadeTxt in _textsUI)
         {
-                fadeTxt.OnFadeIn();
+            fadeTxt.OnFadeIn();
         }
+    }
+
+    private void StartFadeOut()
+    {
+        foreach (FadeImage fadeImg in _fade)
+        {
+            fadeImg.OnFadeIn();
+        }
+        foreach (FadeTextMeshPro fadeTxt in _texts)
+        {
+            fadeTxt.OnFadeIn();
+        }
+        foreach (FadeImage fadeImg in _fadeUI)
+        {
+            fadeImg.OnFadeOut();
+        }
+        foreach (FadeTextMeshPro fadeTxt in _textsUI)
+        {
+            fadeTxt.OnFadeOut();
+        }
+    }
+
+    private void HideDialogueBox()
+    {
+        //StartFadeIn();
 
         Invoke(nameof(EndDialogue), _fade[0].fadeDuration);
     }

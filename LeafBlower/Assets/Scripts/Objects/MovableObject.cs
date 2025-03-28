@@ -119,7 +119,7 @@ public class MovableObject : MonoBehaviour, IMovable
 
             case Enums.BlowType.DirectionalBlow:
                 force.y = 0;
-                _rb.AddForce(force, ForceMode.Impulse); 
+                _rb.AddForce(force, ForceMode.Force); 
                 break;
 
             default:
