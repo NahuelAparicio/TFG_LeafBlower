@@ -60,7 +60,7 @@ public class TypingHandler : MonoBehaviour
         foreach (char letter in _currentMessage)
         {
             _dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
         _isDialoguePrinted = true;
     }

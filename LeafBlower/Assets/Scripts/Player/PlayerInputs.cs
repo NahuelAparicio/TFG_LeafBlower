@@ -2,12 +2,11 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerInputs : MonoBehaviour
 {
     private PlayerInputsActions _inputs;
-    private PlayerController _controller;
+    private PlayerController _player;
 
     private bool _isSprinting;
 
@@ -18,7 +17,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Awake()
     {
-        _controller = GetComponent<PlayerController>();
+        _player = GetComponent<PlayerController>();
         _inputs = new PlayerInputsActions();
         _inputs.Player.Enable();
 
@@ -29,10 +28,19 @@ public class PlayerInputs : MonoBehaviour
         _inputs.Player.Jump.canceled += Jump_canceled;
         _inputs.Player.Aspire.performed += Aspire_performed;
         _inputs.Player.Aspire.canceled += Aspire_canceled;
+        _inputs.Player.ResetRotation.performed += ResetRotation_performed;
     }
+
+    private void ResetRotation_performed(InputAction.CallbackContext obj)
+    {
+        if (!_player.LeafBlower.IsObjectAttached) return;
+
+        _player.LeafBlower.ObjectAttached.ResetObjectRotation();
+    }
+
     private void Aspire_performed(InputAction.CallbackContext obj)
     {
-        if(_controller.LeafBlower.ObjectAttached)
+        if(_player.LeafBlower.IsObjectAttached)
         {
             _aspiredPerformed = true;
         }
@@ -62,9 +70,9 @@ public class PlayerInputs : MonoBehaviour
 
     private void Interact_performed(InputAction.CallbackContext context)
     {
-        if (_controller.isTalking) return;
+        if (_player.isTalking) return;
 
-        _controller.Interactable.InteractPerformed();
+        _player.Interactable.InteractPerformed();
     }
 
     private void Jump_performed(InputAction.CallbackContext context)
@@ -73,16 +81,16 @@ public class PlayerInputs : MonoBehaviour
 
         _jumpPressTime = Time.time;
 
-        if (Time.time - _controller.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
+        if (Time.time - _player.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
         {
-            _controller.Movement.Jump();
-            _controller.Movement.isJumping = true;
+            _player.Movement.Jump();
+            _player.Movement.isJumping = true;
         }
 
     }
     private void Jump_canceled(InputAction.CallbackContext context)
     {
-        _controller.Movement.isJumping = false;
+        _player.Movement.isJumping = false;
     }
 
     private void Pause_performed(InputAction.CallbackContext context)

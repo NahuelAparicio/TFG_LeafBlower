@@ -98,6 +98,15 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetRotation"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5ecaf85-fdd5-406c-bdaf-276b180fbb60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -296,6 +305,17 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Aspire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d981551d-51d3-4aa7-baa2-ce5bad05577c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ResetRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -523,6 +543,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Blow = m_Player.FindAction("Blow", throwIfNotFound: true);
         m_Player_Aspire = m_Player.FindAction("Aspire", throwIfNotFound: true);
+        m_Player_ResetRotation = m_Player.FindAction("ResetRotation", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_NextDialogue = m_Dialogue.FindAction("NextDialogue", throwIfNotFound: true);
@@ -605,6 +626,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Blow;
     private readonly InputAction m_Player_Aspire;
+    private readonly InputAction m_Player_ResetRotation;
     public struct PlayerActions
     {
         private @PlayerInputsActions m_Wrapper;
@@ -617,6 +639,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Blow => m_Wrapper.m_Player_Blow;
         public InputAction @Aspire => m_Wrapper.m_Player_Aspire;
+        public InputAction @ResetRotation => m_Wrapper.m_Player_ResetRotation;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -650,6 +673,9 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Aspire.started += instance.OnAspire;
             @Aspire.performed += instance.OnAspire;
             @Aspire.canceled += instance.OnAspire;
+            @ResetRotation.started += instance.OnResetRotation;
+            @ResetRotation.performed += instance.OnResetRotation;
+            @ResetRotation.canceled += instance.OnResetRotation;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -678,6 +704,9 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Aspire.started -= instance.OnAspire;
             @Aspire.performed -= instance.OnAspire;
             @Aspire.canceled -= instance.OnAspire;
+            @ResetRotation.started -= instance.OnResetRotation;
+            @ResetRotation.performed -= instance.OnResetRotation;
+            @ResetRotation.canceled -= instance.OnResetRotation;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -893,6 +922,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnBlow(InputAction.CallbackContext context);
         void OnAspire(InputAction.CallbackContext context);
+        void OnResetRotation(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {

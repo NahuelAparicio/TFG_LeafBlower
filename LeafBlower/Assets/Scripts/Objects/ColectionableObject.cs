@@ -1,0 +1,29 @@
+﻿using UnityEngine;
+public class ColectionableObject : MovableObject
+{
+    [SerializeField] private float _localScaleSpeed;
+    [SerializeField] private GameObject _objectToScale;
+    [SerializeField][Range(0, 1)] private float percentageToScale;
+
+    private Vector3 _originalScale;
+    private Vector3 _targetScale;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _originalScale = _objectToScale.transform.localScale;
+        _targetScale = _originalScale * percentageToScale;
+    }
+
+    protected override void UpdateCustom()
+    {
+        _objectToScale.transform.localScale = Vector3.MoveTowards(_objectToScale.transform.localScale, _targetScale, _localScaleSpeed * Time.deltaTime);
+    }
+
+    protected override void OnArriveToAttacher()
+    {
+        GameEventManager.Instance.collectingEvents.InvokeCollectCollectionable(_data.GetCollectionableType(), _data.GetAmount());
+        GameEventManager.Instance.playerEvents.InvokeDestroy(this);
+        Destroy(gameObject);
+    }
+}

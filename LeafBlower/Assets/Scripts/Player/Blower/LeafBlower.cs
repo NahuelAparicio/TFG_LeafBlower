@@ -6,14 +6,14 @@ public class LeafBlower : MonoBehaviour
 {
     private PlayerController _player;
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private GameObject vfxAspiration;
+
 
     private HashSet<IMovable> _aspiringObjects = new();
+    private NormalObject _attachedObject;
 
-    public MovableObject _attachedObject;
-
-    public bool ObjectAttached => _attachedObject != null;
-
-    public GameObject vfxAspiration;
+    public bool IsObjectAttached => _attachedObject != null;
+    public NormalObject ObjectAttached => _attachedObject;
 
 
     private void Awake()
@@ -28,12 +28,25 @@ public class LeafBlower : MonoBehaviour
         GameEventManager.Instance.playerEvents.OnDestroy += OnDestroyObject;
     }
 
+    private void Update()
+    {
+        // -- TEMPORAL
+        if(_player.Inputs.IsAspiring())
+        {
+            vfxAspiration.SetActive(true);
+        }
+        else
+        {
+            vfxAspiration.SetActive(false);
+        }
+    }
+
     private void OnDestroyObject(IMovable obj)
     {
         _aspiringObjects.Remove(obj);
     }
 
-    private void OnAttach(MovableObject obj)
+    private void OnAttach(NormalObject obj)
     {
         _player.Inputs.SetIsAspiring(false);
 
@@ -59,7 +72,7 @@ public class LeafBlower : MonoBehaviour
     {
         if (!other.TryGetComponent(out IMovable movable)) return;
 
-        if(ObjectAttached)
+        if(IsObjectAttached)
         {
             if (_player.Inputs.IsBlowing())
             {
@@ -77,7 +90,6 @@ public class LeafBlower : MonoBehaviour
 
         if (_player.Inputs.IsAspiring())
         {
-            vfxAspiration.SetActive(true);
 
             if (_aspiringObjects.Add(movable))
             {
@@ -87,7 +99,6 @@ public class LeafBlower : MonoBehaviour
         }
         else if(_aspiringObjects.Remove(movable))
         {
-            vfxAspiration.SetActive(false);
 
             if (!movable.IsCollectable())
             {
@@ -97,7 +108,7 @@ public class LeafBlower : MonoBehaviour
 
         if (_player.Inputs.IsBlowing())
         {
-            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.ClosestPoint(_firePoint.position));
+            movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce, other.ClosestPoint(_firePoint.position));
             //movable.OnBlow(_firePoint.forward * _player.Stats.BlowerForce.Value, other.transform.position);
         }
     }
@@ -112,7 +123,7 @@ public class LeafBlower : MonoBehaviour
     private void BlowAttachedObject()
     {
         Detach();
-        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.ShootForce.Value);
+        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.ShootForce);
         _attachedObject = null;
     }
 

@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public float BlowerForce => _blowerForce.Value;
 
     [SerializeField] private Stat _shootForce;
-    public Stat ShootForce => _shootForce;
+    public float ShootForce => _shootForce.Value;
 
     public void AddLevel()
     {
