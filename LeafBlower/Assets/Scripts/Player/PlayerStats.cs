@@ -6,8 +6,10 @@ public class PlayerStats : MonoBehaviour
     public int Level => _level;
 
     [SerializeField] private Stat _blowerForce;
-    public Stat BlowerForce => _blowerForce;
+    public float BlowerForce => _blowerForce.Value;
 
+    [SerializeField] private Stat _shootForce;
+    public float ShootForce => _shootForce.Value;
     public void AddLevel()
     {
         _level++;
