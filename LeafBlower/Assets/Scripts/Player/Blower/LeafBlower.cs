@@ -13,10 +13,13 @@ public class LeafBlower : MonoBehaviour
 
     public bool ObjectAttached => _attachedObject != null;
 
+    public GameObject vfxAspiration;
+
 
     private void Awake()
     {
         _player = transform.parent.parent.GetComponent<PlayerController>();
+        vfxAspiration.SetActive(false);
     }
 
     private void Start()
@@ -74,6 +77,8 @@ public class LeafBlower : MonoBehaviour
 
         if (_player.Inputs.IsAspiring())
         {
+            vfxAspiration.SetActive(true);
+
             if (_aspiringObjects.Add(movable))
             {
                 //movable.StartAspiring(_firePoint, other.ClosestPoint(_firePoint.position));
@@ -82,7 +87,9 @@ public class LeafBlower : MonoBehaviour
         }
         else if(_aspiringObjects.Remove(movable))
         {
-            if(!movable.IsCollectable())
+            vfxAspiration.SetActive(false);
+
+            if (!movable.IsCollectable())
             {
                 movable.StopAspiring();
             }
