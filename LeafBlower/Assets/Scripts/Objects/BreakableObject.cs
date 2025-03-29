@@ -52,7 +52,10 @@ public class BreakableObject : NormalObject
         isBroken = true;
         foreach (Rigidbody rigidbody in rigidbodies)
         {
-            rigidbody.AddExplosionForce(_force, _explosionPos.position, _radius, 0.5f, ForceMode.Impulse);
+            if(rigidbody != null)
+            {
+                rigidbody.AddExplosionForce(_force, _explosionPos.position, _radius, 0.5f, ForceMode.Impulse);
+            }
         }
     }
 }
