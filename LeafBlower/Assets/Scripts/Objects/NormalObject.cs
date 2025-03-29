@@ -20,7 +20,7 @@ public class NormalObject : MovableObject
     {
         GameEventManager.Instance.playerEvents.InvokeAttach(this);
     }
-    public void Shoot(Vector3 force)
+    public virtual void Shoot(Vector3 force)
     {
         _canBeAspired = false;
         _rb.useGravity = true;
