@@ -57,5 +57,8 @@ public class BreakableObject : NormalObject
                 rigidbody.AddExplosionForce(_force, _explosionPos.position, _radius, 0.5f, ForceMode.Impulse);
             }
         }
+        //Invoke(nameof(DestroyObject), 2.5f);
     }
+
+    private void DestroyObject() => Destroy(gameObject);
 }

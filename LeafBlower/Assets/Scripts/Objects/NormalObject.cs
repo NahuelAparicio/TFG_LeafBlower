@@ -26,6 +26,17 @@ public class NormalObject : MovableObject
         _rb.useGravity = true;
         _rb.AddForce(force, ForceMode.Impulse);
     }
+    public override void StartAspiring(Transform target, Transform firePoint)
+    {
+        base.StartAspiring(target, firePoint);
+        ChangeLayer(12);
+    }
+
+    public override void StopAspiring()
+    {
+        base.StopAspiring();
+        ChangeLayer(7);
+    }
 
     public void ChangeLayer(LayerMask layer)
     {
