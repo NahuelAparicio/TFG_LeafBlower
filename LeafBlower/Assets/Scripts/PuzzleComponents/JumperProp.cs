@@ -7,9 +7,7 @@ public class JumperProp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerMovement>().AddExternalForce(GetDirection(other.transform.position) * jumpForce);
+            other.GetComponent<PlayerMovement>().AddExternalJumpForce(jumpForce);
         }
     }
-
-    private Vector3 GetDirection(Vector3 pos) => Vector3.up;
 }

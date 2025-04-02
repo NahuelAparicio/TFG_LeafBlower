@@ -58,7 +58,7 @@ public class NormalObject : MovableObject
     }
     public void ResetObjectRotation()
     {
-        if (transform.rotation == _originalRotation) return;
-        transform.rotation = Quaternion.identity;
+        if (transform.localRotation == _originalRotation) return;
+        transform.localRotation = Quaternion.identity;
     }
 }

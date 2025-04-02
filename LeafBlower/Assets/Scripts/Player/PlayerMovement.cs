@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private float _antiBump;
     [SerializeField] private float _speedExternalForceToZero = 10f;
-    private Vector3 _externalForce;
-    private bool _applyExternalForce = false;
 
     public float lastGroundedTime;
     public bool isJumping = false;
@@ -45,24 +43,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _velocity.y += _gravity * Time.deltaTime;
-        if(_applyExternalForce)
-        {
-            _velocity += _externalForce;
-            _applyExternalForce = false;
-        }
 
         _characterController.Move(_velocity * Time.deltaTime);
-
-        if(_externalForce != Vector3.zero)
-        {
-            _externalForce = Vector3.Lerp(_externalForce, Vector3.zero, Time.deltaTime * _speedExternalForceToZero);
-        }
     }
 
-    public void AddExternalForce(Vector3 addVelocity)
+    public void AddExternalJumpForce(float speed)
     {
-        _applyExternalForce = true;
-        _externalForce += addVelocity;
+        _velocity.y = 0;
+        _velocity.y += Mathf.Sqrt(speed * -2.0f * _gravity);
     }
 
     public void Jump()
