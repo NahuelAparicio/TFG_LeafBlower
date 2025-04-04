@@ -6,7 +6,6 @@ public class QuestController : MonoBehaviour
 {
     [SerializeField] private bool _loadQuestState = true;
 
-    private int _currentPlayerLevel = 1;
     private Dictionary<string, Quest> _questMap = new Dictionary<string, Quest>();
 
     public GameObject questText;
@@ -20,7 +19,6 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onFinishQuest -= FinishQuest;
         GameEventManager.Instance.questEvents.onQuestStepChange -= QuestStepStateChange;
 
-        GameEventManager.Instance.playerEvents.onLevelUp -= PlayerLevelChange;
 
         foreach (Quest quest in _questMap.Values)
         {
@@ -35,7 +33,6 @@ public class QuestController : MonoBehaviour
         GameEventManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
         GameEventManager.Instance.questEvents.onFinishQuest += FinishQuest;
         GameEventManager.Instance.questEvents.onQuestStepChange += QuestStepStateChange;
-        GameEventManager.Instance.playerEvents.onLevelUp += PlayerLevelChange;
 
         foreach (Quest quest in _questMap.Values)
         {
@@ -59,16 +56,10 @@ public class QuestController : MonoBehaviour
         }
     }
 
-    private void PlayerLevelChange(int level) => _currentPlayerLevel = level;
 
     private bool CheckRequirements(Quest quest)
     {
         bool meetsRequirement = true;
-
-        if(_currentPlayerLevel < quest.info.levelRequired)
-        {
-            meetsRequirement = false;
-        }
 
         foreach (QuestInfoSO prerequisitsData in quest.info.questPreequisits)
         {

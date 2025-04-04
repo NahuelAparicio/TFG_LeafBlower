@@ -11,10 +11,13 @@ public class BringMango : QuestStep
     {
         if(other.CompareTag(nameObject))
         {
-            string status = "El " + nameObject + " ha sido entregado.";
-            ChangeState("", status);
-            Destroy(other.gameObject.transform.parent.gameObject);
-            FinishQuestStep();
+            if(other.GetComponent<NormalObject>().HasBeenShoot)
+            {
+                string status = "El " + nameObject + " ha sido entregado.";
+                ChangeState("", status);
+                Destroy(other.gameObject.transform.parent.gameObject);
+                FinishQuestStep();
+            }
         }
     }
     protected override void SetQuestStepState(string state)

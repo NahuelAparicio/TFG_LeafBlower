@@ -7,6 +7,8 @@ public class NormalObject : MovableObject
     public ObjectTransparencyHandler Transparency => _transparency;
     private float _currentTime = 0f;
     [SerializeField] protected float _timeToReEnableAspire = 0.5f;
+    protected bool _hasBeenShoot;
+    public bool HasBeenShoot => _hasBeenShoot;
 
     protected override void Awake()
     {
@@ -25,6 +27,7 @@ public class NormalObject : MovableObject
         _canBeAspired = false;
         _rb.useGravity = true;
         _rb.AddForce(force, ForceMode.Impulse);
+        _hasBeenShoot = true;
     }
     public override void StartAspiring(Transform target, Transform firePoint)
     {

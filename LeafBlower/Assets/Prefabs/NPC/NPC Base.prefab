@@ -183,7 +183,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3168844229611061159}
-  - {fileID: 1285430570604872620}
   - {fileID: 9076301970121596487}
   m_Father: {fileID: 3445826952722826781}
   m_RootOrder: -1
@@ -292,7 +291,7 @@ Transform:
   - {fileID: 4766022184961896060}
   - {fileID: 6039059066206537579}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -178.903, z: 0}
 --- !u!114 &3377005886601769016
 MonoBehaviour:
@@ -357,6 +356,7 @@ GameObject:
   - component: {fileID: 9076301970121596487}
   - component: {fileID: 5849705771262831408}
   - component: {fileID: 8749256018248813503}
+  - component: {fileID: 590031549323885913}
   m_Layer: 0
   m_Name: interactIcon
   m_TagString: Untagged
@@ -419,6 +419,22 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &590031549323885913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428470558252827302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27256894b6937c64983c5bd94bbb7535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrabMainCameraOnStart: 1
+  NestObject: 0
+  OffsetDirection: {x: 0, y: 0, z: -1}
+  Up: {x: 0, y: 1, z: 0}
 --- !u!1 &7860802742730674261
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,17 +460,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7860802742730674261}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.428}
+  m_LocalRotation: {x: 0.000000029802322, y: 0.000000029802322, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6039059066206537579}
+  m_Father: {fileID: 3168844229611061159}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.005, y: -0.655}
+  m_AnchoredPosition: {x: -0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3125616504021213366
@@ -503,6 +519,7 @@ GameObject:
   - component: {fileID: 3168844229611061159}
   - component: {fileID: 4794262232095621292}
   - component: {fileID: 2780680529038999569}
+  - component: {fileID: 7400414879603077387}
   m_Layer: 0
   m_Name: speechBubble
   m_TagString: Untagged
@@ -521,7 +538,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0.428}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1285430570604872620}
   m_Father: {fileID: 6039059066206537579}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -565,6 +583,22 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7400414879603077387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156272968699522492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27256894b6937c64983c5bd94bbb7535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrabMainCameraOnStart: 1
+  NestObject: 0
+  OffsetDirection: {x: 0, y: 0, z: -1}
+  Up: {x: 0, y: 1, z: 0}
 --- !u!1001 &1260460112528852974
 PrefabInstance:
   m_ObjectHideFlags: 0
