@@ -123,7 +123,7 @@ public class LeafBlower : MonoBehaviour
     private void BlowAttachedObject()
     {
         Detach();
-        _attachedObject?.Shoot(_firePoint.forward * _player.Stats.ShootForce);
+        _attachedObject?.Shoot(_player.MainCamera.transform.forward * _player.Stats.ShootForce);
         _attachedObject = null;
     }
 
