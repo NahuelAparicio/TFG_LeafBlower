@@ -6,12 +6,12 @@ public class BasketMade : QuestStep
 
     private void Start()
     {
-        GameEventManager.Instance.triggerEvents.onTriggerBasket += OnBasketMade;
+        GameEventManager.Instance.triggerEvents.onTriggerBall += OnBasketMade;
     }
 
     private void OnDisable()
     {
-        GameEventManager.Instance.triggerEvents.onTriggerBasket -= OnBasketMade;
+        GameEventManager.Instance.triggerEvents.onTriggerBall -= OnBasketMade;
     }
 
     private void OnBasketMade(string id)

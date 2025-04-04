@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class BreakableObject : NormalObject
 {
     public UnityEvent OnBreak;
-    private bool _hasBeenShoot;
     [SerializeField] private List<Rigidbody> rigidbodies = new List<Rigidbody>();
     [SerializeField] private float _force;
     [SerializeField] private Transform _explosionPos;
@@ -30,12 +29,6 @@ public class BreakableObject : NormalObject
         if (isBroken) return;
 
         base.OnBlow(force, point);
-    }
-
-    public override void Shoot(Vector3 force)
-    {
-        _hasBeenShoot = true;
-        base.Shoot(force);
     }
 
     private void OnTriggerEnter(Collider other)
