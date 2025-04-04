@@ -7,7 +7,10 @@ public class HandleBallTrigger : MonoBehaviour
     {
         if(other.CompareTag("Ball"))
         {
-            HandleTriggerEnter();
+            if(other.GetComponent<NormalObject>().HasBeenShoot)
+            {
+                HandleTriggerEnter();
+            }
         }
     }
 
