@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 3120880373905731247, guid: 61ea7adaeafe1df4198f18436f7fe145,
         type: 3}
       propertyPath: m_Name
-      value: Jordan
+      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 8457154270265558243, guid: 61ea7adaeafe1df4198f18436f7fe145,
         type: 3}
@@ -272,8 +272,49 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1031665394582137821}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 61ea7adaeafe1df4198f18436f7fe145,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -238326914984931984}
   m_SourcePrefab: {fileID: 100100000, guid: 61ea7adaeafe1df4198f18436f7fe145, type: 3}
+--- !u!1 &7269265033956896126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 61ea7adaeafe1df4198f18436f7fe145,
+    type: 3}
+  m_PrefabInstance: {fileID: 5741533320291320785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-238326914984931984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269265033956896126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1935478601
+      Data2: 1183508561
+      Data3: 294821820
+      Data4: -1842516754
+    Path: event:/Interactables/Coin/Coin_Collision
+  Event: 
+  PlayEvent: 7
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &7832117305501909428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 61ea7adaeafe1df4198f18436f7fe145,

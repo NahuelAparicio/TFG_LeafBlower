@@ -5,7 +5,7 @@
 			<value>Barrel</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{db1a9422-801a-4515-b1fc-e35ff41e9fd5}</destination>
@@ -56,7 +56,7 @@
 			<destination>{803d00fb-d9bc-46fb-b514-b5932093e6a4}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{0ea6fb9d-5677-4540-b74c-edf60b326746}</destination>
+			<destination>{a2d4de00-2fda-4797-b030-80847884e384}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{9dd193b7-f44c-40fc-9a5f-0e1a41407d34}" />
@@ -262,6 +262,7 @@
 			<destination>{002a80c0-867f-4418-8104-e19085fe8ce8}</destination>
 			<destination>{41da8ea1-b21e-4d49-9ce3-b8f44972b406}</destination>
 			<destination>{b9e556c3-3912-4e02-834d-15b3ce30056e}</destination>
+			<destination>{b20ce591-c3e4-4fa5-9f56-880257c6d8c1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5cce5988-b132-4264-b3ba-e24749946665}" />
@@ -381,6 +382,20 @@
 		</property>
 		<property name="lowShelfGain">
 			<value>-8.5</value>
+		</property>
+	</object>
+	<object class="SpatialiserEffect" id="{b20ce591-c3e4-4fa5-9f56-880257c6d8c1}">
+		<property name="distanceRolloffType">
+			<value>3</value>
+		</property>
+		<property name="minimumDistance">
+			<value>5</value>
+		</property>
+		<property name="maximumDistance">
+			<value>25</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{013a962c-b3db-415a-8396-259160bbd3a1}">

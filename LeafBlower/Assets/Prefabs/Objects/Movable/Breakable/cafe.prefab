@@ -316,7 +316,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1433953756016552747}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1770148849549341513}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!1 &1824680212423425431 stripped
 GameObject:
@@ -324,6 +328,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 718083404726543956}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2501957569966737659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 718083404726543956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1770148849549341513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501957569966737659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 857548349
+      Data2: 1252719168
+      Data3: 2115151023
+      Data4: 636266118
+    Path: event:/Interactables/Glass/Glass
+  Event: 
+  PlayEvent: 7
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &2860651964684925869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3333849836998188537, guid: c7f12be1adfa60549964d5469aef9fa8,
@@ -348,7 +389,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 718083404726543956}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2501957569966737659}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70a860434767cfb48a9473a8994571e0, type: 3}

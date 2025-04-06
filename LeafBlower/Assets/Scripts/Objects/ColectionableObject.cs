@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using FMODUnity; 
 public class ColectionableObject : MovableObject
 {
     [SerializeField] private float _localScaleSpeed;
@@ -22,6 +23,7 @@ public class ColectionableObject : MovableObject
 
     protected override void OnArriveToAttacher()
     {
+        RuntimeManager.PlayOneShot("event:/Interactables/Coin/Coin_Collected", transform.position);
         GameEventManager.Instance.collectingEvents.InvokeCollectCollectionable(_data.GetCollectionableType(), _data.GetAmount());
         GameEventManager.Instance.playerEvents.InvokeDestroy(this);
         Destroy(gameObject);

@@ -848,7 +848,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1784987323203997477}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4751920307185422187}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -862,6 +866,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5532960529847952109}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7459823981914983490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5532960529847952109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4751920307185422187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459823981914983490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 825136551
+      Data2: 1224695630
+      Data3: 1449260426
+      Data4: 120957697
+    Path: event:/Interactables/Brick/Brick
+  Event: 
+  PlayEvent: 7
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &7771272544094735202
 PrefabInstance:
   m_ObjectHideFlags: 0
