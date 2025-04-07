@@ -165,7 +165,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5041720655861639573}
+      addedObject: {fileID: 8164925955706283093}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &2764576186319911774 stripped
 Transform:
@@ -179,7 +179,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 379142906880145723}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5041720655861639573
+--- !u!114 &8164925955706283093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,28 +188,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 3318418851884996500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: efc833724411ded488762056cafa8599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
+  impactThreshold: 20
+  crackEvent:
     Guid:
       Data1: -1390127862
       Data2: 1298507857
       Data3: 2128676282
       Data4: -1595680738
     Path: event:/Interactables/Can/Spray
-  Event: 
-  PlayEvent: 7
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  hitEvent:
+    Guid:
+      Data1: 1254717892
+      Data2: 1247632000
+      Data3: -95563601
+      Data4: 420573388
+    Path: event:/Interactables/Can/Can_Hit
 --- !u!1001 &7026112565371360309
 PrefabInstance:
   m_ObjectHideFlags: 0

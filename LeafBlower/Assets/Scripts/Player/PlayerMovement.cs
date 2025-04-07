@@ -1,19 +1,27 @@
 using FMODUnity;
 using UnityEngine;
+
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController _characterController;
     private PlayerController _firstPersonController;
     private Vector3 _velocity;
+
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _sprintSpeed;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _gravity;
     [SerializeField] private float _antiBump;
     [SerializeField] private float _speedExternalForceToZero = 10f;
-    [SerializeField] private float _footstepCooldown = 0.5f; // Tiempo de espera entre pasos
-    private float _lastFootstepTime; // Para rastrear el último momento en que se reprodujo un paso
-    private bool _wasGrounded; // Para detectar cuando el personaje toca el suelo nuevamente
+    [SerializeField] private float _footstepCooldown = 0.5f;
+    [SerializeField] private float _minMovementForStep = 0.01f;
+
+    private float _lastFootstepTime;
+    private float _lastLandSoundTime; // Nueva variable
+    private const float _landSoundCooldown = 0.2f; // Mínimo tiempo entre sonidos de caída
+
+    private bool _wasGrounded;
+    private Vector3 _previousPosition;
 
     public float lastGroundedTime;
     public bool isJumping = false;
@@ -23,20 +31,26 @@ public class PlayerMovement : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _firstPersonController = GetComponent<PlayerController>();
         _lastFootstepTime = 0f;
+        _lastLandSoundTime = -_landSoundCooldown; // Para permitir que suene en la primera caída
         _wasGrounded = false;
+        _previousPosition = transform.position;
     }
 
     public void HandleAllMovement()
     {
         bool isGrounded = _characterController.isGrounded;
 
-        // Si acaba de tocar el suelo después de estar en el aire
+        // Detectar aterrizaje con cooldown
         if (isGrounded && !_wasGrounded)
         {
-            _lastFootstepTime = 0f; // Reiniciamos el contador de pasos
+            if (Time.time >= _lastLandSoundTime + _landSoundCooldown)
+            {
+                RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
+                _lastLandSoundTime = Time.time;
+            }
         }
 
-        _wasGrounded = isGrounded; // Actualizamos el estado anterior
+        _wasGrounded = isGrounded;
 
         if (isGrounded && !isJumping)
         {
@@ -49,29 +63,30 @@ public class PlayerMovement : MonoBehaviour
         float speed = _firstPersonController.Inputs.IsSprinting ? _sprintSpeed : _moveSpeed;
         _characterController.Move(_move * Time.deltaTime * speed);
 
-        // Solo reproducimos sonidos de pasos si estamos en el suelo
         if (_move != Vector3.zero && isGrounded)
         {
-            // Comprueba si ha pasado suficiente tiempo desde el último paso
-            if (Time.time >= _lastFootstepTime + _footstepCooldown)
+            float movedDistance = Vector3.Distance(transform.position, _previousPosition);
+
+            if (movedDistance > _minMovementForStep)
             {
-                RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
-                _lastFootstepTime = Time.time; // Actualiza el tiempo del último paso
+                if (Time.time >= _lastFootstepTime + _footstepCooldown)
+                {
+                    RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
+                    _lastFootstepTime = Time.time;
+                }
             }
 
             gameObject.transform.forward = _move;
         }
-        else if (!isGrounded)
+        else if (!isGrounded && _move != Vector3.zero)
         {
-            // Si no está en contacto con el suelo, mantenemos la orientación pero no reproducimos sonidos
-            if (_move != Vector3.zero)
-            {
-                gameObject.transform.forward = _move;
-            }
+            gameObject.transform.forward = _move;
         }
 
         _velocity.y += _gravity * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
+
+        _previousPosition = transform.position;
     }
 
     public void AddExternalJumpForce(float speed)
@@ -88,5 +103,7 @@ public class PlayerMovement : MonoBehaviour
         _velocity.y += Mathf.Sqrt(_jumpSpeed * -2.0f * _gravity);
     }
 
-    private Vector3 GetDirectionNormalized() => Utils.GetCameraForwardNormalized(_firstPersonController.MainCamera) * _firstPersonController.Inputs.GetPlayerMovement().y + Utils.GetCameraRightNormalized(_firstPersonController.MainCamera) * _firstPersonController.Inputs.GetPlayerMovement().x;
+    private Vector3 GetDirectionNormalized() =>
+        Utils.GetCameraForwardNormalized(_firstPersonController.MainCamera) * _firstPersonController.Inputs.GetPlayerMovement().y +
+        Utils.GetCameraRightNormalized(_firstPersonController.MainCamera) * _firstPersonController.Inputs.GetPlayerMovement().x;
 }

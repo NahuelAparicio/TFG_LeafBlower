@@ -310,7 +310,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9041458883131942796}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1750593365246136089}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -324,6 +328,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5532960529847952109}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7459823981914983490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5532960529847952109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1750593365246136089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459823981914983490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crackEvent:
+    Guid:
+      Data1: 526999872
+      Data2: 1249180233
+      Data3: -612631668
+      Data4: -1806990532
+    Path: event:/Interactables/Vase/Vase_Crack
+  pieceEvent:
+    Guid:
+      Data1: -217956009
+      Data2: 1252839018
+      Data3: -918995053
+      Data4: 1639143254
+    Path: event:/Interactables/Vase/Vase_Piece
+  impactThreshold: 20
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1001 &8859441995246747751
 PrefabInstance:
   m_ObjectHideFlags: 0

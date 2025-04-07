@@ -728,7 +728,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -1496281713519947754}
+      addedObject: {fileID: -422798321400841766}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -748,7 +748,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5532960529847952109}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1496281713519947754
+--- !u!114 &-422798321400841766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -757,25 +757,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7459823981914983490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
+  crackEvent:
     Guid:
       Data1: 1998434887
       Data2: 1153562455
       Data3: 1873980068
       Data4: -1664834658
     Path: event:/Interactables/Hamburguer/Hamburguer
-  Event: 
-  PlayEvent: 7
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  pieceEvent:
+    Guid:
+      Data1: -196946877
+      Data2: 1212738297
+      Data3: -1334642505
+      Data4: -1853312888
+    Path: event:/Interactables/Hamburguer/Hamburguer_Hit
+  impactThreshold: 5
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
