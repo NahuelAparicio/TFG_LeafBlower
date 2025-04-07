@@ -853,6 +853,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4751920307185422187}
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6575602595312240041}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -903,6 +907,35 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &-6575602595312240041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459823981914983490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crackEvent:
+    Guid:
+      Data1: 825136551
+      Data2: 1224695630
+      Data3: 1449260426
+      Data4: 120957697
+    Path: event:/Interactables/Brick/Brick
+  pieceEvent:
+    Guid:
+      Data1: 1168059809
+      Data2: 1112230008
+      Data3: -937507162
+      Data4: -1233414776
+    Path: event:/Interactables/Brick/Brick_Hit
+  impactThreshold: 5
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1001 &7771272544094735202
 PrefabInstance:
   m_ObjectHideFlags: 0

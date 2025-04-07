@@ -158,6 +158,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7155387237399262091}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6559479671553202142}
     - targetCorrespondingSourceObject: {fileID: 9072649003180832780, guid: 37fc061c609166d44ab71d322d4ce12b,
         type: 3}
       insertIndex: -1
@@ -190,6 +194,43 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.24
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8323114165855345035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6399118186967988004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6559479671553202142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323114165855345035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -27830342
+      Data2: 1316085766
+      Data3: -2028977782
+      Data4: 1783917112
+    Path: event:/Interactables/Ball/Basket_Ball
+  Event: 
+  PlayEvent: 7
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 35
 --- !u!4 &8922051999040468289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,
