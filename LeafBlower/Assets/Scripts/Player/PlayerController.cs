@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInventory _inventory;
     private DialogueController _dialogueController;
     private PlayerStats _stats;
+    private PlayerStamina _stamina;
     internal Camera _mainCamera;
     public bool isTalking;
 
@@ -24,9 +25,11 @@ public class PlayerController : MonoBehaviour
     public PlayerInteractable Interactable => _interactable;
     public PlayerMovement Movement => _movement;
     public Camera MainCamera => _mainCamera;
+    public PlayerStamina Stamina => _stamina;
 
     private void Awake()
     {
+        _stamina = GetComponent<PlayerStamina>();
         _stats = GetComponent<PlayerStats>();
         _hud = GetComponent<PlayerHUD>();
         _inventory = GetComponent<PlayerInventory>();

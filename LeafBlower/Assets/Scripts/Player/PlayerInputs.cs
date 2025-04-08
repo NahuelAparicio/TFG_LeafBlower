@@ -8,9 +8,7 @@ public class PlayerInputs : MonoBehaviour
     private PlayerInputsActions _inputs;
     private PlayerController _player;
 
-    private bool _isSprinting;
-
-    public bool IsSprinting => _isSprinting;
+    public bool isSprinting;
 
     private float _jumpPressTime = -1f;
     [SerializeField] private float _jumpBufferTime = 0.125f;
@@ -62,7 +60,15 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
-        _isSprinting = !_isSprinting;
+        isSprinting = !isSprinting;
+        if(isSprinting)
+        {
+            _player.Stamina.StartConsumingStamina();
+        }
+        else
+        {
+            _player.Stamina.StopConsumingStamina();
+        }
     }
 
     public Vector2 GetPlayerMovement() => _inputs.Player.Move.ReadValue<Vector2>();

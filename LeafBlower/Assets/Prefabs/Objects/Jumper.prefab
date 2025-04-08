@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6162648206465754465}
   - component: {fileID: 3918010180610563944}
   - component: {fileID: 1507177335003542299}
+  - component: {fileID: 2047677949437671621}
   m_Layer: 0
   m_Name: Torus (4)
   m_TagString: Untagged
@@ -11585,7 +11586,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1753
+  m_VersionIndex: 1759
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -11674,45 +11675,13 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4131183668113674190}
   m_Mesh: {fileID: 0}
---- !u!1 &4496955556470575186
-GameObject:
+--- !u!64 &2047677949437671621
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7439641885338887075}
-  - component: {fileID: 3436151254049219224}
-  m_Layer: 0
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7439641885338887075
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496955556470575186}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8419564105892435964}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3436151254049219224
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496955556470575186}
+  m_GameObject: {fileID: 4131183668113674190}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -11724,9 +11693,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3336366, y: 0.88846356, z: 1.276838}
-  m_Center: {x: -0.00087469816, y: 0.20438519, z: 0.030233681}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &5656691653495113850
 GameObject:
   m_ObjectHideFlags: 0
@@ -23312,7 +23282,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1753
+  m_VersionIndex: 1759
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -23434,7 +23404,6 @@ Transform:
   m_Children:
   - {fileID: 5155963846048788751}
   - {fileID: 3651392792784611579}
-  - {fileID: 7439641885338887075}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23470,8 +23439,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0762042, y: 0.3226459, z: 1.1492406}
-  m_Center: {x: -0.0099028945, y: 0.6706846, z: 0.011592925}
+  m_Size: {x: 1.8253622, y: 1.7944758, z: 1.8317394}
+  m_Center: {x: -0.049737453, y: 0.5629113, z: 0.050448418}
 --- !u!54 &7197802857893203026
 Rigidbody:
   m_ObjectHideFlags: 0
