@@ -1,15 +1,18 @@
 ﻿using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
+using FMODUnity;
 
 public class BreakableObject : NormalObject
 {
     public UnityEvent OnBreak;
-    [SerializeField] private List<Rigidbody> rigidbodies = new List<Rigidbody>();
+    public List<Rigidbody> rigidbodies = new List<Rigidbody>();
     [SerializeField] private float _force;
     [SerializeField] private Transform _explosionPos;
     [SerializeField] private float _radius;
     private bool isBroken = false;
+
+    [SerializeField] private EventReference _breakableSound;
 
     public override void StartAspiring(Transform target, Transform firePoint)
     {
@@ -37,10 +40,11 @@ public class BreakableObject : NormalObject
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+        RuntimeManager.PlayOneShot(_breakableSound, transform.position);
         OnBreak?.Invoke();
     }
 
-    public void ActivateBreak()
+    public virtual void ActivateBreak()
     {
         isBroken = true;
         foreach (Rigidbody rigidbody in rigidbodies)
