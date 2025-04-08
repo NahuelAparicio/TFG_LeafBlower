@@ -256,7 +256,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1767360386349888696}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8732417412955248522}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &6120346478778974025 stripped
 Transform:
@@ -264,3 +268,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8642572207509732652}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6683075266440614787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8642572207509732652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8732417412955248522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6683075266440614787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1291282912
+      Data2: 1307032350
+      Data3: -184041568
+      Data4: -1603243913
+    Path: event:/Interactables/Traffic/Traffic_Cone
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5

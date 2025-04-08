@@ -172,7 +172,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9208269894506775436}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1960625507711164004}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &4790079600007891236 stripped
 Transform:
@@ -180,6 +184,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7018450002418191169}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5343823588700612078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7018450002418191169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1960625507711164004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343823588700612078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 682337720
+      Data2: 1224569722
+      Data3: -1573965647
+      Data4: 1259991338
+    Path: event:/Interactables/Wood/Wood_Chair
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1001 &8665173979494704231
 PrefabInstance:
   m_ObjectHideFlags: 0
