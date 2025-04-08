@@ -188,8 +188,66 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2634064520544723387}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8549644810473488063}
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8326460648718210625}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
+--- !u!1 &3636044524210414167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1817847935249108216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8549644810473488063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636044524210414167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crackEvent:
+    Guid:
+      Data1: -1870300672
+      Data2: 1254717962
+      Data3: 2053388445
+      Data4: -15877761
+    Path: event:/Interactables/Trash/Trash_Bag_Death
+  pieceEvent:
+    Guid:
+      Data1: -398468790
+      Data2: 1339966632
+      Data3: 350482854
+      Data4: -857166306
+    Path: event:/Interactables/Trash/Trash_Bag
+  impactThreshold: 10
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
+--- !u!114 &8326460648718210625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636044524210414167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c7ba656c8dcf4e89e3f44c374c79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEventPath: event:/Ambient/Trash
+  triggerRadius: 5
+  player: {fileID: 0}
 --- !u!4 &4189763838316007069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,

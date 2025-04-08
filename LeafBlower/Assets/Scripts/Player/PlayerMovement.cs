@@ -91,9 +91,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddExternalJumpForce(float speed)
     {
-        RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press", transform.position);
         _velocity.y = 0;
         _velocity.y += Mathf.Sqrt(speed * -2.0f * _gravity);
+        if (!_characterController.isGrounded)
+        {
+            RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press", transform.position);
+        }
     }
 
     public void Jump()
