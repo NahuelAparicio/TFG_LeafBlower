@@ -24,7 +24,14 @@ public class PlayerStamina : StaminaHandler
     {
         if (CurrentStamina > 0)
         {
-            ModifyStamina(-staminaConsumedOverTime, consumeRate);
+            if(_player.Movement.isHovering)
+            {
+                ModifyStamina(-staminaConsumeHovering, consumeRate);
+            }
+            else if(_player.Inputs.isSprinting)
+            {
+                ModifyStamina(-staminaConsumeSprinting, consumeRate);
+            }
         }
 
         if (CurrentStamina <= 0)

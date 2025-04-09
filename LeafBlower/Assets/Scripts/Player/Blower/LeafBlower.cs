@@ -25,7 +25,7 @@ public class LeafBlower : MonoBehaviour
 
     private void Awake()
     {
-        _player = transform.parent.parent.GetComponent<PlayerController>();
+        _player = transform.parent.parent.parent.GetComponent<PlayerController>();
         vfxAspiration.SetActive(false);
     }
 

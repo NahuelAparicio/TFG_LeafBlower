@@ -7,12 +7,13 @@ public class StaminaHandler : MonoBehaviour
     protected float _recoveryTimer = 0f;
 
     [Header("Stamina Stadistics:")]
-    public float staminaConsumedOverTime = 0.1f;
-    public float consumeRate = 0.1f;
+    public float staminaConsumeHovering = 0.1f;
+    public float staminaConsumeSprinting = 0.1f;
+
 
     public float staminaRecoverOverTime = 0.1f;
+    public float consumeRate = 0.1f;
     public float recoveryRate = 0.1f;
-
     public float timeToStartRecovering = 1f;
 
     public bool isConsumingStamina = false;
@@ -37,11 +38,6 @@ public class StaminaHandler : MonoBehaviour
         {
             HandleStaminaRecover();
         }
-
-        //if ((_currentStamina / MaxStamina) >= 0.15f)
-        //{
-        //    EnableLeafBlower();
-        //}
     }
 
     protected virtual void HandleStaminaRecover()
@@ -66,7 +62,7 @@ public class StaminaHandler : MonoBehaviour
     {
         if (_currentStamina > 0)
         {
-            ModifyStamina(-staminaConsumedOverTime, consumeRate);
+            ModifyStamina(-staminaConsumeHovering, consumeRate);
         }
 
         if (_currentStamina <= 0)

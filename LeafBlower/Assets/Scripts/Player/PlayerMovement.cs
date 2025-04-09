@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private float _hoverGravityMultiplier;
     [SerializeField] private float _antiBump;
-    [SerializeField] private float _speedExternalForceToZero = 10f;
     [SerializeField] private float _footstepCooldown = 0.5f;
     [SerializeField] private float _minMovementForStep = 0.01f;
 
@@ -40,10 +39,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _player = GetComponent<PlayerController>();
-        _lastFootstepTime = 0f;
-        _lastLandSoundTime = -_landSoundCooldown;
-        _wasGrounded = false;
         _previousPosition = transform.position;
+        _lastLandSoundTime = -_landSoundCooldown;
 
         _hoverSoundInstance = RuntimeManager.CreateInstance(hoverEventPath);
         RuntimeManager.AttachInstanceToGameObject(_hoverSoundInstance, transform, GetComponent<Rigidbody>());
@@ -51,64 +48,82 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleAllMovement()
     {
+        Vector3 currentPosition = transform.position;
+        float currentTime = Time.time;
         bool isGrounded = _characterController.isGrounded;
 
-        if (isGrounded && !_wasGrounded)
-        {
-            if (Time.time >= _lastLandSoundTime + _landSoundCooldown)
-            {
-                RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
-                _lastLandSoundTime = Time.time;
-            }
+        HandleLanding(isGrounded, currentTime);
+        HandleGroundState(isGrounded, currentTime);
+        HandleMovement(isGrounded, currentPosition, currentTime);
+        HandleHoverAndGravity(isGrounded, currentTime);
 
-            // Reset hover state and sound on landing
-            isHovering = false;
-            currentHoverRPM = 0f;
-            _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
-            _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-
+        _characterController.Move(_velocity * Time.deltaTime);
+        _previousPosition = currentPosition;
         _wasGrounded = isGrounded;
+    }
 
+    private void HandleLanding(bool isGrounded, float currentTime)
+    {
+        if (isGrounded && !_wasGrounded && currentTime >= _lastLandSoundTime + _landSoundCooldown)
+        {
+            RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
+            _lastLandSoundTime = currentTime;
+
+            if (isHovering)
+            {
+                isHovering = false;
+                currentHoverRPM = 0f;
+                _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+                _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
+        }
+    }
+
+    private void HandleGroundState(bool isGrounded, float currentTime)
+    {
         if (isGrounded && !isJumping)
         {
             _velocity.y = -_antiBump;
-            lastGroundedTime = Time.time;
+            lastGroundedTime = currentTime;
         }
+    }
 
-        Vector3 _move = GetDirectionNormalized();
-        _move.y = 0;
+    private void HandleMovement(bool isGrounded, Vector3 currentPosition, float currentTime)
+    {
+        Vector3 moveDir = GetDirectionNormalized();
+        moveDir.y = 0f;
+
         float speed = _player.Inputs.isSprinting ? _sprintSpeed : _moveSpeed;
-        _characterController.Move(_move * Time.deltaTime * speed);
+        _characterController.Move(moveDir * Time.deltaTime * speed);
 
-        if (_move != Vector3.zero && isGrounded)
+        if (moveDir != Vector3.zero)
         {
-            float movedDistance = Vector3.Distance(transform.position, _previousPosition);
+            transform.forward = moveDir;
 
-            if (movedDistance > _minMovementForStep && Time.time >= _lastFootstepTime + _footstepCooldown)
+            if (isGrounded)
             {
-                RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
-                _lastFootstepTime = Time.time;
+                float movedDistance = Vector3.Distance(currentPosition, _previousPosition);
+
+                if (movedDistance > _minMovementForStep && currentTime >= _lastFootstepTime + _footstepCooldown)
+                {
+                    RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
+                    _lastFootstepTime = currentTime;
+                }
             }
-
-            gameObject.transform.forward = _move;
         }
-        else if (!isGrounded && _move != Vector3.zero)
-        {
-            gameObject.transform.forward = _move;
-        }
+    }
 
+    private void HandleHoverAndGravity(bool isGrounded, float currentTime)
+    {
         if (!isGrounded)
         {
-            if (isJumping && _player.Stamina.HasStamina())
+            if (_player.Inputs.ShouldHover() && _player.Stamina.HasStamina())
             {
                 _player.Stamina.StartConsumingStamina();
-
                 _velocity.y = Mathf.Lerp(_velocity.y, 0f, Time.deltaTime * _hoverStabilizeSpeed);
                 isHovering = true;
 
-                if (_hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
-                    state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                if (!IsHoverSoundPlaying())
                 {
                     _hoverSoundInstance.start();
                 }
@@ -124,26 +139,26 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.y += _gravity * gravityMultiplier * Time.deltaTime;
 
                 isHovering = false;
-
                 currentHoverRPM = Mathf.Lerp(currentHoverRPM, 0f, Time.deltaTime * hoverRPMFadeSpeed);
                 _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
 
-                if (currentHoverRPM <= 10f &&
-                    _hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
-                    state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                if (currentHoverRPM <= 10f && IsHoverSoundPlaying())
                 {
                     _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 }
             }
         }
+    }
 
-        _characterController.Move(_velocity * Time.deltaTime);
-        _previousPosition = transform.position;
+    private bool IsHoverSoundPlaying()
+    {
+        _hoverSoundInstance.getPlaybackState(out var state);
+        return state == FMOD.Studio.PLAYBACK_STATE.PLAYING;
     }
 
     public void AddExternalJumpForce(float speed)
     {
-        _velocity.y = Mathf.Sqrt(speed * -2.0f * _gravity);
+        _velocity.y = Mathf.Sqrt(speed * -2f * _gravity);
         isJumping = true;
         StartCoroutine(DelayedGroundCheck());
     }
@@ -151,7 +166,6 @@ public class PlayerMovement : MonoBehaviour
     private System.Collections.IEnumerator DelayedGroundCheck()
     {
         yield return new WaitForSeconds(0.05f);
-
         if (!_characterController.isGrounded)
         {
             RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press", transform.position);
@@ -161,13 +175,16 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         if (!_characterController.isGrounded) return;
+
         RuntimeManager.PlayOneShot("event:/Character/Jump/Jump_Concrete", transform.position);
-        _velocity.y += Mathf.Sqrt(_jumpSpeed * -2.0f * _gravity);
+        _velocity.y = Mathf.Sqrt(_jumpSpeed * -2f * _gravity);
     }
 
-    private Vector3 GetDirectionNormalized() =>
-        Utils.GetCameraForwardNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().y +
-        Utils.GetCameraRightNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().x;
+    private Vector3 GetDirectionNormalized()
+    {
+        return Utils.GetCameraForwardNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().y +
+               Utils.GetCameraRightNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().x;
+    }
 
     private void OnDestroy()
     {

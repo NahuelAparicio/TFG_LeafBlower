@@ -13,6 +13,10 @@ public class PlayerInputs : MonoBehaviour
     private float _jumpPressTime = -1f;
     [SerializeField] private float _jumpBufferTime = 0.125f;
 
+    private bool _jumpHeld = false;
+    private float _jumpHoldStartTime;
+    [SerializeField] private float _hoverActivationTime = 0.5f;
+
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -60,7 +64,10 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
+        if (_player.Movement.isHovering) return;
+
         isSprinting = !isSprinting;
+
         if(isSprinting)
         {
             _player.Stamina.StartConsumingStamina();
@@ -86,6 +93,8 @@ public class PlayerInputs : MonoBehaviour
         if (GameManager.Instance.IsPaused) return;
 
         _jumpPressTime = Time.time;
+        _jumpHeld = true;
+        _jumpHoldStartTime = Time.time;
 
         if (Time.time - _player.Movement.lastGroundedTime <= _jumpBufferTime && Time.time - _jumpPressTime <= _jumpBufferTime)
         {
@@ -96,12 +105,18 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Jump_canceled(InputAction.CallbackContext context)
     {
+        _jumpHeld = false;
         _player.Movement.isJumping = false;
     }
 
     private void Pause_performed(InputAction.CallbackContext context)
     {
         GameManager.Instance.UpdateState(Enums.GameState.PauseMenu);
+    }
+
+    public bool ShouldHover()
+    {
+        return _jumpHeld && (Time.time - _jumpHoldStartTime >= _hoverActivationTime);
     }
 
     private void OnDestroy()

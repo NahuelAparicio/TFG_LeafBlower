@@ -674,22 +674,22 @@ PrefabInstance:
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.07727
+      value: 5.601288
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2010002
+      value: 0.223
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -125.56546
+      value: 6.619
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
@@ -731,6 +731,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ladrillo
       objectReference: {fileID: 0}
+    - target: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4731622213038237766, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_IsActive
@@ -746,6 +751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: offsetDistance
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Path
+      value: event:/Interactables/Brick/Brick
       objectReference: {fileID: 0}
     - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
@@ -792,6 +802,26 @@ PrefabInstance:
       propertyPath: rigidbodies.Array.data[7]
       value: 
       objectReference: {fileID: 5701702227015068746}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data1
+      value: 825136551
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data2
+      value: 1224695630
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data3
+      value: 1449260426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data4
+      value: 120957697
+      objectReference: {fileID: 0}
     - target: {fileID: 6025136229378336201, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: _matTransparency
@@ -853,10 +883,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4751920307185422187}
-    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6575602595312240041}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -907,35 +933,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &-6575602595312240041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7459823981914983490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crackEvent:
-    Guid:
-      Data1: 825136551
-      Data2: 1224695630
-      Data3: 1449260426
-      Data4: 120957697
-    Path: event:/Interactables/Brick/Brick
-  pieceEvent:
-    Guid:
-      Data1: 1168059809
-      Data2: 1112230008
-      Data3: -937507162
-      Data4: -1233414776
-    Path: event:/Interactables/Brick/Brick_Hit
-  impactThreshold: 5
-  minTimeBetweenSounds: 0.1
-  maxSimultaneousSounds: 5
 --- !u!1001 &7771272544094735202
 PrefabInstance:
   m_ObjectHideFlags: 0

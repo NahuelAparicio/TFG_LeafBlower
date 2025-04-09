@@ -146,22 +146,22 @@ PrefabInstance:
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -26.22
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.2310002
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -126.16
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
@@ -171,17 +171,17 @@ PrefabInstance:
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2530815268509778533, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
@@ -214,6 +214,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ac8b0b18763c8194d9e1858ee19f1fb1,
         type: 2}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Path
+      value: event:/Interactables/Vase/Vase_Crack
+      objectReference: {fileID: 0}
     - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: rigidbodies.Array.size
@@ -254,6 +259,26 @@ PrefabInstance:
       propertyPath: rigidbodies.Array.data[6]
       value: 
       objectReference: {fileID: 5508708932666590142}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data1
+      value: 526999872
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data2
+      value: 1249180233
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data3
+      value: -612631668
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877473033035170367, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      propertyPath: _breakableSound.Guid.Data4
+      value: -1806990532
+      objectReference: {fileID: 0}
     - target: {fileID: 6025136229378336201, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       propertyPath: _matTransparency
@@ -310,11 +335,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9041458883131942796}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1750593365246136089}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -328,41 +349,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5532960529847952109}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7459823981914983490 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
-    type: 3}
-  m_PrefabInstance: {fileID: 5532960529847952109}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1750593365246136089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7459823981914983490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crackEvent:
-    Guid:
-      Data1: 526999872
-      Data2: 1249180233
-      Data3: -612631668
-      Data4: -1806990532
-    Path: event:/Interactables/Vase/Vase_Crack
-  pieceEvent:
-    Guid:
-      Data1: -217956009
-      Data2: 1252839018
-      Data3: -918995053
-      Data4: 1639143254
-    Path: event:/Interactables/Vase/Vase_Piece
-  impactThreshold: 20
-  minTimeBetweenSounds: 0.1
-  maxSimultaneousSounds: 5
 --- !u!1001 &8859441995246747751
 PrefabInstance:
   m_ObjectHideFlags: 0
