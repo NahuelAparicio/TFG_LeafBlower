@@ -122,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 _player.Stamina.StartConsumingStamina();
                 _velocity.y = Mathf.Lerp(_velocity.y, 0f, Time.deltaTime * _hoverStabilizeSpeed);
                 isHovering = true;
+                _player.Inputs.isSprinting = false;
 
                 if (!IsHoverSoundPlaying())
                 {

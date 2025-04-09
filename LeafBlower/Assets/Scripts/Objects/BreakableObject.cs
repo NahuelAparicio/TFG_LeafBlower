@@ -38,6 +38,7 @@ public class BreakableObject : NormalObject
     {
         if (!_hasBeenShoot) return;
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
+        if (isBroken) return;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         RuntimeManager.PlayOneShot(_breakableSound, transform.position);
