@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _minMovementForStep = 0.01f;
 
     private float _lastFootstepTime;
-    private float _lastLandSoundTime; // Nueva variable
-    private const float _landSoundCooldown = 0.2f; // Mínimo tiempo entre sonidos de caída
+    private float _lastLandSoundTime;
+    private const float _landSoundCooldown = 0.2f;
 
     private bool _wasGrounded;
     private Vector3 _previousPosition;
@@ -29,21 +29,30 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping = false;
     public bool isHovering = false;
 
+    // FMOD hover sound
+    private FMOD.Studio.EventInstance _hoverSoundInstance;
+    [SerializeField] private string hoverEventPath = "event:/Tools/Hover";
+    [SerializeField] private string hoverParameter = "RPM";
+    [SerializeField] private float hoverRPMFadeSpeed = 3f;
+    private float currentHoverRPM = 0f;
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
         _player = GetComponent<PlayerController>();
         _lastFootstepTime = 0f;
-        _lastLandSoundTime = -_landSoundCooldown; // Para permitir que suene en la primera caída
+        _lastLandSoundTime = -_landSoundCooldown;
         _wasGrounded = false;
         _previousPosition = transform.position;
+
+        _hoverSoundInstance = RuntimeManager.CreateInstance(hoverEventPath);
+        RuntimeManager.AttachInstanceToGameObject(_hoverSoundInstance, transform, GetComponent<Rigidbody>());
     }
 
     public void HandleAllMovement()
     {
         bool isGrounded = _characterController.isGrounded;
 
-        // Detectar aterrizaje con cooldown
         if (isGrounded && !_wasGrounded)
         {
             if (Time.time >= _lastLandSoundTime + _landSoundCooldown)
@@ -51,6 +60,12 @@ public class PlayerMovement : MonoBehaviour
                 RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
                 _lastLandSoundTime = Time.time;
             }
+
+            // Reset hover state and sound on landing
+            isHovering = false;
+            currentHoverRPM = 0f;
+            _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+            _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         _wasGrounded = isGrounded;
@@ -70,13 +85,10 @@ public class PlayerMovement : MonoBehaviour
         {
             float movedDistance = Vector3.Distance(transform.position, _previousPosition);
 
-            if (movedDistance > _minMovementForStep)
+            if (movedDistance > _minMovementForStep && Time.time >= _lastFootstepTime + _footstepCooldown)
             {
-                if (Time.time >= _lastFootstepTime + _footstepCooldown)
-                {
-                    RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
-                    _lastFootstepTime = Time.time;
-                }
+                RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
+                _lastFootstepTime = Time.time;
             }
 
             gameObject.transform.forward = _move;
@@ -85,16 +97,24 @@ public class PlayerMovement : MonoBehaviour
         {
             gameObject.transform.forward = _move;
         }
+
         if (!isGrounded)
         {
             if (isJumping && _player.Stamina.HasStamina())
             {
                 _player.Stamina.StartConsumingStamina();
 
-                // Hover real: mantén vertical estable
                 _velocity.y = Mathf.Lerp(_velocity.y, 0f, Time.deltaTime * _hoverStabilizeSpeed);
-
                 isHovering = true;
+
+                if (_hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
+                    state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                {
+                    _hoverSoundInstance.start();
+                }
+
+                currentHoverRPM = Mathf.Lerp(currentHoverRPM, 2000f, Time.deltaTime * hoverRPMFadeSpeed);
+                _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
             }
             else
             {
@@ -104,21 +124,38 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.y += _gravity * gravityMultiplier * Time.deltaTime;
 
                 isHovering = false;
+
+                currentHoverRPM = Mathf.Lerp(currentHoverRPM, 0f, Time.deltaTime * hoverRPMFadeSpeed);
+                _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+
+                if (currentHoverRPM <= 10f &&
+                    _hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
+                    state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                {
+                    _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                }
             }
         }
 
-
         _characterController.Move(_velocity * Time.deltaTime);
-
         _previousPosition = transform.position;
     }
 
     public void AddExternalJumpForce(float speed)
     {
-        if (_characterController.isGrounded) return;
+        _velocity.y = Mathf.Sqrt(speed * -2.0f * _gravity);
+        isJumping = true;
+        StartCoroutine(DelayedGroundCheck());
+    }
 
-        _velocity.y = 0;
-        _velocity.y += Mathf.Sqrt(speed * -2.0f * _gravity);
+    private System.Collections.IEnumerator DelayedGroundCheck()
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        if (!_characterController.isGrounded)
+        {
+            RuntimeManager.PlayOneShot("event:/Interactables/Platform/Platform_Press", transform.position);
+        }
     }
 
     public void Jump()
@@ -131,4 +168,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetDirectionNormalized() =>
         Utils.GetCameraForwardNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().y +
         Utils.GetCameraRightNormalized(_player.MainCamera) * _player.Inputs.GetPlayerMovement().x;
+
+    private void OnDestroy()
+    {
+        _hoverSoundInstance.release();
+    }
 }

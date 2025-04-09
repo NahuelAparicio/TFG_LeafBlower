@@ -21,12 +21,17 @@ public class FootballQuestStep : QuestStep
         {
             _goalsDone++;
             UpdateState();
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Interactables/Ball/Ball_Celebration", transform.position);
         }
+
         if (_goalsDone >= goalToMake)
         {
             FinishQuestStep();
         }
     }
+
+
 
     private void UpdateState()
     {

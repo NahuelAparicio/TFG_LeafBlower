@@ -163,7 +163,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4996461743590191069}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8228301032034026043}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &1353285742769800590 stripped
 Transform:
@@ -171,6 +175,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3591784690698946539}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1916014526154647876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3591784690698946539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8228301032034026043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916014526154647876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1264045247
+      Data2: 1129747360
+      Data3: 2032276890
+      Data4: 1462185731
+    Path: event:/Interactables/Metal/Metal_BBQ
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1 &5489908932730765287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9072649003180832780, guid: 37fc061c609166d44ab71d322d4ce12b,
