@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping = false;
     public bool isHovering = false;
 
-    // ?? FMOD hover sound
+    // FMOD hover sound
     private FMOD.Studio.EventInstance _hoverSoundInstance;
     [SerializeField] private string hoverEventPath = "event:/Tools/Hover";
     [SerializeField] private string hoverParameter = "RPM";
@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
         _wasGrounded = false;
         _previousPosition = transform.position;
 
-        // Crear instancia FMOD hover
         _hoverSoundInstance = RuntimeManager.CreateInstance(hoverEventPath);
         RuntimeManager.AttachInstanceToGameObject(_hoverSoundInstance, transform, GetComponent<Rigidbody>());
     }
@@ -61,6 +60,12 @@ public class PlayerMovement : MonoBehaviour
                 RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
                 _lastLandSoundTime = Time.time;
             }
+
+            // Reset hover state and sound on landing
+            isHovering = false;
+            currentHoverRPM = 0f;
+            _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+            _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         _wasGrounded = isGrounded;
@@ -102,14 +107,12 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.y = Mathf.Lerp(_velocity.y, 0f, Time.deltaTime * _hoverStabilizeSpeed);
                 isHovering = true;
 
-                // ?? Activar sonido hover
                 if (_hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
                     state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
                     _hoverSoundInstance.start();
                 }
 
-                // ?? Subir parámetro RPM hacia 2000
                 currentHoverRPM = Mathf.Lerp(currentHoverRPM, 2000f, Time.deltaTime * hoverRPMFadeSpeed);
                 _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
             }
@@ -122,11 +125,12 @@ public class PlayerMovement : MonoBehaviour
 
                 isHovering = false;
 
-                // ?? Bajar parámetro RPM hacia 0 y apagar sonido si se aproxima
                 currentHoverRPM = Mathf.Lerp(currentHoverRPM, 0f, Time.deltaTime * hoverRPMFadeSpeed);
                 _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
 
-                if (currentHoverRPM <= 10f)
+                if (currentHoverRPM <= 10f &&
+                    _hoverSoundInstance.getPlaybackState(out var state) == FMOD.RESULT.OK &&
+                    state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
                     _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 }

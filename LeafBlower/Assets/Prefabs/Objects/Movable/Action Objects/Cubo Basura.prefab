@@ -161,11 +161,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8904130461046614252}
-    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4236231629729972679}
+      addedObject: {fileID: 8691027210160566001}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!1 &1549683426433036736 stripped
 GameObject:
@@ -173,7 +169,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4525568933167259503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8904130461046614252
+--- !u!114 &8691027210160566001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,41 +178,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549683426433036736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
+  m_Script: {fileID: 11500000, guid: fac212ca0cc5f844bb15ce86a61b6cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crackEvent:
     Guid:
-      Data1: -1934823735
-      Data2: 1227209782
-      Data3: -1603598938
-      Data4: -1347100025
-    Path: event:/Interactables/Trash/Trash_Container_Death
+      Data1: -1870300672
+      Data2: 1254717962
+      Data3: 2053388445
+      Data4: -15877761
+    Path: event:/Interactables/Trash/Trash_Bag_Death
   pieceEvent:
     Guid:
-      Data1: 813822602
-      Data2: 1212352867
-      Data3: -1286883433
-      Data4: -491149193
-    Path: event:/Interactables/Trash/Trash_Container
+      Data1: -398468790
+      Data2: 1339966632
+      Data3: 350482854
+      Data4: -857166306
+    Path: event:/Interactables/Trash/Trash_Bag
+  ambientEvent:
+    Guid:
+      Data1: 39014783
+      Data2: 1313589143
+      Data3: -1498277985
+      Data4: -375998318
+    Path: event:/Ambient/Trash
   impactThreshold: 5
   minTimeBetweenSounds: 0.1
   maxSimultaneousSounds: 5
---- !u!114 &4236231629729972679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549683426433036736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35c7ba656c8dcf4e89e3f44c374c79c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fmodEventPath: event:/Ambient/Trash
-  triggerRadius: 10
-  player: {fileID: 0}
+  ambientRadius: 5
 --- !u!4 &2148586339855195402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,
