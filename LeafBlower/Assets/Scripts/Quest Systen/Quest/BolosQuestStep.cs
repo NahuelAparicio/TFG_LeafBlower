@@ -57,6 +57,7 @@ public class BolosQuestStep : QuestStep
     private void CheckBolosStatus()
     {
         _currentTime = 0;
+
         foreach (Transform boloTransform in bolosTransforms)
         {
             if (IsBoloFallen(boloTransform))
@@ -68,16 +69,19 @@ public class BolosQuestStep : QuestStep
 
         if (_bolosDone == bolosTransforms.Count)
         {
+            // ?? Reproducir sonido solo si se derribaron todos los bolos
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Interactables/Ball/Bowl_Celebration", transform.position);
             FinishQuestStep();
         }
         else
         {
-            if(_bolosDone > 0)
+            if (_bolosDone > 0)
             {
-                ResetBolos(); // Reiniciar bolos
+                ResetBolos();
             }
         }
     }
+
 
     private void ResetBolos()
     {

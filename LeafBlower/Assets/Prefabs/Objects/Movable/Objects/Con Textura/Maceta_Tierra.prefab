@@ -186,7 +186,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8912247271952796328}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4581285954881242393}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &5829615092257834271 stripped
 Transform:
@@ -194,6 +198,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8356911904800753530}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6392348621379103189 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8356911904800753530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4581285954881242393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392348621379103189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 892380107
+      Data2: 1275567550
+      Data3: 1682940303
+      Data4: 1464794898
+    Path: event:/Interactables/Ceramic/Ceramic_Pot_Filled
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1001 &8945293253013253443
 PrefabInstance:
   m_ObjectHideFlags: 0

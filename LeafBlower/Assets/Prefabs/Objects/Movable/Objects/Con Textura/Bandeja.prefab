@@ -172,7 +172,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3785110126201691249}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7568916229119377740}
   m_SourcePrefab: {fileID: 100100000, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
 --- !u!4 &2764576186319911774 stripped
 Transform:
@@ -180,6 +184,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 379142906880145723}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3318418851884996500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 379142906880145723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7568916229119377740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318418851884996500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1067881664
+      Data2: 1088211596
+      Data3: 700307348
+      Data4: -462354435
+    Path: event:/Interactables/Food/Tray_Food/Tray_Food
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!1001 &3678826163423230874
 PrefabInstance:
   m_ObjectHideFlags: 0

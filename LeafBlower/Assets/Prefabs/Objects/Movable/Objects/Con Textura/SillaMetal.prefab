@@ -152,6 +152,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7846793877956068447}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1953398884753163203}
     - targetCorrespondingSourceObject: {fileID: 9072649003180832780, guid: 37fc061c609166d44ab71d322d4ce12b,
         type: 3}
       insertIndex: -1
@@ -184,6 +188,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.4121168, z: 0.39038306}
   m_Center: {x: 0, y: 0.20605859, z: 0.2535947}
+--- !u!1 &8323114165855345035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6399118186967988004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1953398884753163203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323114165855345035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cd28fdc8dd33245a2c32f41605ad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 564862506
+      Data2: 1109292594
+      Data3: -1362759269
+      Data4: 947558146
+    Path: event:/Interactables/Metal/Metal_Chair
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
 --- !u!4 &8922051999040468289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,
