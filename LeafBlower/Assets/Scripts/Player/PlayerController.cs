@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     public Camera MainCamera => _mainCamera;
     public PlayerStamina Stamina => _stamina;
 
+    public bool jordanUnlocked = false;
+    public bool hoverUnlocked = false;
+
     private void Awake()
     {
         _stamina = GetComponent<PlayerStamina>();

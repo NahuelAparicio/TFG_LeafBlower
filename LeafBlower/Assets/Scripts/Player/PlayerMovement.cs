@@ -184,7 +184,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (!_characterController.isGrounded) return;
 
         RuntimeManager.PlayOneShot("event:/Character/Jump/Jump_Concrete", transform.position);
         _velocity.y = Mathf.Sqrt(_jumpSpeed * -2f * _gravity);

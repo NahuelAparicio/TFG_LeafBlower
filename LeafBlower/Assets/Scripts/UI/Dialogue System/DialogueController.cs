@@ -122,19 +122,30 @@ public class DialogueController : MonoBehaviour
     private void NextDialogue_performed(InputAction.CallbackContext context)
     {
         if (_currentDialogue.Count <= 0 || Time.time < _nextInteractTime) return;
-        if (_indexDialogue < _currentDialogue.Count)
+
+        if (!_typeHandler.IsDialoguePrinted)
         {
-            _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
-            _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
-            _currentDialogue[_indexDialogue].Invoke();
-            PlayDialogueSound();
-            _indexDialogue++;
+            //Complete if not finished
+            _typeHandler.FinishTypingImmediately();
         }
         else
         {
-            GameEventManager.Instance.cameraEvents.ResetZoom();
-            HideDialogueBox();
+            // if finished nxt
+            if (_indexDialogue < _currentDialogue.Count)
+            {
+                _icon.sprite = _characterIcons[(int)_currentDialogue[_indexDialogue].character];
+                _typeHandler.ShowMessage(_currentDialogue[_indexDialogue].text);
+                _currentDialogue[_indexDialogue].Invoke();
+                PlayDialogueSound();
+                _indexDialogue++;
+            }
+            else
+            {
+                GameEventManager.Instance.cameraEvents.ResetZoom();
+                HideDialogueBox();
+            }
         }
+
         _nextInteractTime = Time.time + _interactCooldown;
 
     }

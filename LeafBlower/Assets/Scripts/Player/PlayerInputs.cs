@@ -64,6 +64,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Sprint_performed(InputAction.CallbackContext context)
     {
+        if (!_player.jordanUnlocked) return;
         if (_player.Movement.isHovering) return;
 
         isSprinting = !isSprinting;
@@ -111,11 +112,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void Pause_performed(InputAction.CallbackContext context)
     {
+        if(GameManager.Instance.IsPaused) return;
         GameManager.Instance.UpdateState(Enums.GameState.PauseMenu);
     }
 
     public bool ShouldHover()
     {
+        if (!_player.hoverUnlocked) return false;
+
         return _jumpHeld && (Time.time - _jumpHoldStartTime >= _hoverActivationTime);
     }
 
