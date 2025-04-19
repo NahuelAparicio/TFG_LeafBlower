@@ -60,6 +60,13 @@ public class PlayerMovement : MonoBehaviour
         _characterController.Move(_velocity * Time.deltaTime);
         _previousPosition = currentPosition;
         _wasGrounded = isGrounded;
+
+        // Asegura que el RPM se ponga a 0 si estás en el suelo
+        if (isGrounded)
+        {
+            currentHoverRPM = 0f;
+            _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+        }
     }
 
     private void HandleLanding(bool isGrounded, float currentTime)
@@ -69,11 +76,13 @@ public class PlayerMovement : MonoBehaviour
             RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
             _lastLandSoundTime = currentTime;
 
-            if (isHovering)
+            // Asegúrate de detener completamente el sonido del hover
+            isHovering = false;
+            currentHoverRPM = 0f;
+            _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
+
+            if (IsHoverSoundPlaying())
             {
-                isHovering = false;
-                currentHoverRPM = 0f;
-                _hoverSoundInstance.setParameterByName(hoverParameter, currentHoverRPM);
                 _hoverSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
         }
