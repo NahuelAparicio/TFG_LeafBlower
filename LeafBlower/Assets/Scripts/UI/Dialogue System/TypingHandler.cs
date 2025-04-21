@@ -14,6 +14,10 @@ public class TypingHandler : MonoBehaviour
 
     public bool IsDialoguePrinted => _isDialoguePrinted;
 
+    private Coroutine _typingCoroutine;
+
+    public float timeBetweenLetters;
+
     private void Awake()
     {
         _dialogue = GetComponent<DialogueController>();
@@ -44,27 +48,51 @@ public class TypingHandler : MonoBehaviour
     //It will show the dialogues in screen i guess
     private void ShowMessageNoEffect()
     {
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+            _typingCoroutine = null;
+        }
+
         _dialogueText.text = _currentMessage;
         _isDialoguePrinted = true;
     }
 
     private void ShowMessageTypeMachine()
     {
-        StartCoroutine(TypeMachineMessage());
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+        }
+
+        _typingCoroutine = StartCoroutine(TypeMachineMessage());
     }
 
     private IEnumerator TypeMachineMessage()
     {
         _isDialoguePrinted = false;
         _dialogueText.text = "";
+
         foreach (char letter in _currentMessage)
         {
             _dialogueText.text += letter;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(timeBetweenLetters); //TIME BETWEEN LETTERS
         }
+
+        _isDialoguePrinted = true;
+        _typingCoroutine = null; 
+    }
+    public void FinishTypingImmediately()
+    {
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+            _typingCoroutine = null;
+        }
+
+        _dialogueText.text = _currentMessage;
         _isDialoguePrinted = true;
     }
-
     public void SetTypingType(Enums.DialogueTypingType type) 
     {
         if (_typingType == type) return;
