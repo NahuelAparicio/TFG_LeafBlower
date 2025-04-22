@@ -3,10 +3,7 @@ using System;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using FMODUnity;
-using FMOD;
-using FMODUnityResonance;
-using FMOD.Studio;
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -30,6 +27,10 @@ public class GameManager : MonoBehaviour
     public bool IsPaused => _isPaused;
     public bool hasStartedNewGame = false;
     public Enums.GameState State => _state;
+
+    // -- Player Sensibility
+    [Range(1, 10)] public float sensX = 5f;
+    [Range(1, 10)] public float sensY = 5f;
 
     private void Awake()
     {
@@ -88,11 +89,9 @@ public class GameManager : MonoBehaviour
             case Enums.GameState.Menu:
                 MusicManager.Instance.PlayMenuMusic();
                 MainMenu.Show();
-                //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
                 MusicManager.Instance.StopMenuMusic();
-                //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
                 PauseMenu.Show();
