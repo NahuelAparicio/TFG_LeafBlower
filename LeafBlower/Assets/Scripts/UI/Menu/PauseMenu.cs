@@ -43,6 +43,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
 
     public void OnQuitPressed()
     {
+        GameManager.Instance.LockCursor();
         GameManager.Instance.UpdateState(Enums.GameState.Playing);
         GameManager.Instance.PauseGameHandler();
         Hide();

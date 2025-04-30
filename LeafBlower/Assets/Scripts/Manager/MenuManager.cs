@@ -38,32 +38,32 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        switch (currentState)
-        {
-            case Enums.MenuState.MainMenu:
-                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    menu.OnRetarget();
-                }
-                break;
-            case Enums.MenuState.SettingsMenu:
-                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    settings.OnRetarget();
-                }
-                break;
-            case Enums.MenuState.PauseMenu:
-                if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    pause.OnRetarget();
-                }
-                break;
-            default:
-                break;
-        }
+        //switch (currentState)
+        //{
+        //    case Enums.MenuState.MainMenu:
+        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+        //        {
+        //            EventSystem.current.SetSelectedGameObject(null);
+        //            menu.OnRetarget();
+        //        }
+        //        break;
+        //    case Enums.MenuState.SettingsMenu:
+        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+        //        {
+        //            EventSystem.current.SetSelectedGameObject(null);
+        //            settings.OnRetarget();
+        //        }
+        //        break;
+        //    case Enums.MenuState.PauseMenu:
+        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+        //        {
+        //            EventSystem.current.SetSelectedGameObject(null);
+        //            pause.OnRetarget();
+        //        }
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     public void ChangeMenuState(Enums.MenuState newState)
