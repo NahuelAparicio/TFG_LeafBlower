@@ -4,9 +4,8 @@ using UnityEngine.EventSystems;
 public class Shop : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject _shopCanvas;
-    [SerializeField]private GameObject _jordanView, _hoverView;
-    public GameObject jordanSelected, hoverSelected, returnSelected;
-    public int jordanValue, hoverValue;
+    [SerializeField]private GameObject _jordanView, _hoverView, _gnomoView;
+    public int jordanValue, hoverValue, gnomoValue;
 
 
     private PlayerController _player;
@@ -21,16 +20,6 @@ public class Shop : MonoBehaviour, IInteractable
         _shopCanvas.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(_isMenuOpen)
-        {
-            if(EventSystem.current.firstSelectedGameObject == null)
-            {
-                //EventSystem.current.SetSelectedGameObject(firstSelected);
-            }
-        }
-    }
 
     public void OnInteract()
     {
@@ -38,7 +27,7 @@ public class Shop : MonoBehaviour, IInteractable
         GameManager.Instance.PauseGameHandler();
         _isMenuOpen = true;
         _shopCanvas.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(returnSelected);
+        GameManager.Instance.UnlockCursor();
     }
 
     public void BuyJordans()
@@ -47,14 +36,6 @@ public class Shop : MonoBehaviour, IInteractable
         _player.Inventory.RemoveCoins(jordanValue);
         _player.jordanUnlocked = true;
         Destroy(_jordanView);
-        if(hoverSelected != null)
-        {
-            EventSystem.current.SetSelectedGameObject(hoverSelected);
-        }
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(returnSelected);
-        }
     }
 
     public void BuyHover()
@@ -64,14 +45,14 @@ public class Shop : MonoBehaviour, IInteractable
         _player.hoverUnlocked = true;
 
         Destroy(_hoverView);
-        if (jordanSelected != null)
-        {
-            EventSystem.current.SetSelectedGameObject(jordanSelected);
-        }
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(returnSelected);
-        }
+    }
+
+    public void BuyGnomo()
+    {
+        if (_player.Inventory.Coins < gnomoValue) return;
+        _player.Inventory.RemoveCoins(gnomoValue);
+
+        Destroy(_gnomoView);
     }
 
     public void SetInteractableParent(PlayerInteractable parent) => _interactable = parent;
@@ -90,6 +71,7 @@ public class Shop : MonoBehaviour, IInteractable
     public void HideMenu()
     {
         GameManager.Instance.PauseGameHandler();
+        GameManager.Instance.LockCursor();
         Invoke(nameof(OnEnableCollider), 0.5f);
         _shopCanvas.SetActive(false);
     }
