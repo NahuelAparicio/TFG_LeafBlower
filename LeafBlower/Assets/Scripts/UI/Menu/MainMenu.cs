@@ -28,11 +28,13 @@ public class MainMenu : BaseMenu<MainMenu>
         // AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
         GameManager.Instance.hasStartedNewGame = true;
         ResetData();
+        GameManager.Instance.LockCursor();
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
 
     public void OnContinuePressed()
     {
+        GameManager.Instance.LockCursor();
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
 

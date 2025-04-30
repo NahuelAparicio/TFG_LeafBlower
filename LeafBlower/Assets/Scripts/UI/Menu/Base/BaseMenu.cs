@@ -12,6 +12,7 @@ public abstract class BaseMenu<T> : Menu<T> where T: BaseMenu<T>
         base.Awake();
         _eventSystem = EventSystem.current;
         _firstSelected = firstSelectedInspector;
+        GameManager.Instance.UnlockCursor();
     }
 
     protected void OnEnable()

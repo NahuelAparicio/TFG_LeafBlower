@@ -79,6 +79,8 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     public override void OnBackPressed()
     {
         Hide();
+        
+
         if (GameManager.Instance.State == Enums.GameState.Playing || GameManager.Instance.State == Enums.GameState.PauseMenu)
         {
             PauseMenu.Show();

@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
     public Enums.GameState State => _state;
 
     // -- Player Sensibility
-    [Range(1, 10)] public float sensX = 5f;
-    [Range(1, 10)] public float sensY = 5f;
+    [Range(0.1f, 15)] public float sensX = 5f;
+    [Range(0.1f, 15)] public float sensY = 5f;
 
     private void Awake()
     {
@@ -40,8 +40,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         _isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         LoadData();
     }
 
@@ -112,6 +110,17 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         SaveData();
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void SaveData()
