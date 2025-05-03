@@ -5,7 +5,7 @@
 			<value>Land_Concrete</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{27830ae5-6bb5-4e61-9082-598a1114c380}</destination>
@@ -107,7 +107,7 @@
 	<object class="MixerBusPanner" id="{d9307be9-20ba-4ee4-b18a-b4bfceb7bab7}" />
 	<object class="MultiSound" id="{89e26a5e-1ea2-47a8-9e4f-41a0d22f2d90}">
 		<property name="length">
-			<value>0.14999999999999999</value>
+			<value>0.294921875</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{a1aec9f7-63fb-4209-afbd-bbe8bd862d00}</destination>
@@ -147,7 +147,7 @@
 	</object>
 	<object class="MultiSound" id="{2b7fed96-d4c0-4fcc-9da6-764adedae2f3}">
 		<property name="length">
-			<value>0.14999999999999999</value>
+			<value>0.294921875</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{02de60f4-0839-455f-a586-522f748773f9}</destination>
@@ -188,11 +188,14 @@
 	<object class="MixerBusEffectChain" id="{09b55903-f513-4e05-b76f-1de020e79e76}">
 		<relationship name="effects">
 			<destination>{3224df24-5b32-4875-bfa0-4088c5118868}</destination>
-			<destination>{160e16b9-7828-4ba8-ac76-285f54c893a2}</destination>
 			<destination>{3807998c-87b5-4ee6-b4a9-81762ba6000f}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{6807b48c-52e4-4692-9faa-4c5555aec614}" />
+	<object class="MixerBusPanner" id="{6807b48c-52e4-4692-9faa-4c5555aec614}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{da00818f-37f5-4f3b-bdda-d13c778a57c2}" />
 	<object class="FadeCurve" id="{a1aec9f7-63fb-4209-afbd-bbe8bd862d00}">
 		<relationship name="startPoint">
@@ -360,7 +363,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{ce261f29-5425-4f2c-843c-43a0af946003}" />
 	<object class="MixerBusFader" id="{3224df24-5b32-4875-bfa0-4088c5118868}" />
-	<object class="SpatialiserEffect" id="{160e16b9-7828-4ba8-ac76-285f54c893a2}" />
 	<object class="ThreeEQEffect" id="{3807998c-87b5-4ee6-b4a9-81762ba6000f}">
 		<property name="lowGain">
 			<value>-2</value>
@@ -393,7 +395,7 @@
 	</object>
 	<object class="AutomationPoint" id="{2b5d603c-c9d5-4a69-a39f-877a0376779b}">
 		<property name="position">
-			<value>0.010000000000000071</value>
+			<value>0.15492187500000007</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -404,7 +406,7 @@
 	</object>
 	<object class="AutomationPoint" id="{a9615c57-93bc-4a25-b565-4264d74b11d2}">
 		<property name="position">
-			<value>0.15000000000000002</value>
+			<value>0.294921875</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -432,7 +434,7 @@
 	</object>
 	<object class="AutomationPoint" id="{8ddc8812-47b2-48c8-9cac-d6ce56503872}">
 		<property name="position">
-			<value>0.015000000000000069</value>
+			<value>0.15992187500000007</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -443,7 +445,7 @@
 	</object>
 	<object class="AutomationPoint" id="{33ce8a97-b1a6-4619-a7a0-d1dd6226410d}">
 		<property name="position">
-			<value>0.15000000000000002</value>
+			<value>0.294921875</value>
 		</property>
 		<property name="value">
 			<value>0</value>

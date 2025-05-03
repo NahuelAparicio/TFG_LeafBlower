@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3251512558900231531}
   - component: {fileID: 8101441209575101995}
   - component: {fileID: 6292152550272050203}
+  - component: {fileID: 895276747488179716}
   m_Layer: 0
   m_Name: SmokeParticle
   m_TagString: Untagged
@@ -4828,3 +4829,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &895276747488179716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030817199716631832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c7ba656c8dcf4e89e3f44c374c79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEventPath: event:/Ambient/Extractor/Smoke
+  triggerRadius: 17
+  player: {fileID: 0}

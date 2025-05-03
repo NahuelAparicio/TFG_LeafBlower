@@ -13,6 +13,16 @@ public class FMODTriggerRadius : MonoBehaviour
 
     private void Start()
     {
+        // Buscar automáticamente al jugador si no se ha asignado
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                player = playerObj.transform;
+            else
+                Debug.LogWarning("FMODTriggerRadius: No se encontró un objeto con la etiqueta 'Player'.");
+        }
+
         eventInstance = RuntimeManager.CreateInstance(fmodEventPath);
         RuntimeManager.AttachInstanceToGameObject(eventInstance, transform, GetComponent<Rigidbody>());
     }
