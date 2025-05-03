@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4469858936480089121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3750089200819270375}
+  m_Layer: 7
+  m_Name: InstantiatePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3750089200819270375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469858936480089121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.792, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2148586339855195402}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1764663201144598268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -284,6 +315,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.0928905
       objectReference: {fileID: 0}
+    - target: {fileID: 9072649003180832780, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6025136229378336201, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
     - {fileID: 5509192726086217948, guid: 37fc061c609166d44ab71d322d4ce12b, type: 3}
@@ -293,6 +329,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2303572146369071383}
+    - targetCorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3750089200819270375}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: 37fc061c609166d44ab71d322d4ce12b,
         type: 3}
@@ -375,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7269265033956896126, guid: 8e81166977297084abe11b1e864ace54, type: 3}
   _quantity: 1
+  pointToInstantiate: {fileID: 3750089200819270375}
 --- !u!4 &2148586339855195402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2530815268509778533, guid: 37fc061c609166d44ab71d322d4ce12b,

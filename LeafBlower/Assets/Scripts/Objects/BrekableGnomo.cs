@@ -37,8 +37,8 @@ public class BrekableGnomo : NormalObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_hasBeenShoot) return;
-        if (other.gameObject.layer != LayerMask.NameToLayer("WallTuto")) return;
+     if (!_hasBeenShoot) return;
+        if (!other.gameObject.CompareTag("WallTuto")) return;
         if (isBroken) return;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;

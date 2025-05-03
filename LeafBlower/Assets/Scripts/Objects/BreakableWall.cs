@@ -16,6 +16,8 @@ public class BreakableWall : MonoBehaviour
 
     [SerializeField] private string _tagToCompare;
 
+    public float timeToDestroy;
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag(_tagToCompare))
@@ -34,7 +36,7 @@ public class BreakableWall : MonoBehaviour
                 rigidbody.AddExplosionForce(_force, _explosionPos.position, _radius, 0.5f, ForceMode.Impulse);
             }
         }
-        Invoke(nameof(DestroyObject), 2.5f);
+        Invoke(nameof(DestroyObject), timeToDestroy);
     }
 
     private void DestroyObject() => Destroy(gameObject);

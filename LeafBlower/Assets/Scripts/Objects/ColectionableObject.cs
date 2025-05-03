@@ -9,11 +9,21 @@ public class ColectionableObject : MovableObject
     private Vector3 _originalScale;
     private Vector3 _targetScale;
 
+    public float rotationSpeed;
+
     protected override void Awake()
     {
         base.Awake();
         _originalScale = _objectToScale.transform.localScale;
         _targetScale = _originalScale * percentageToScale;
+    }
+    protected override void Update()
+    {
+        base.Update();
+        transform.Rotate(0f, (rotationSpeed * 10) * Time.deltaTime, 0f);
+    }
+    public override void OnBlow(Vector3 force, Vector3 point)
+    {
     }
 
     protected override void UpdateCustom()
