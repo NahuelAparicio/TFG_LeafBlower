@@ -7,7 +7,7 @@ using FMOD.Studio;
 
 public class LeafBlower : MonoBehaviour
 {
-    private PlayerController _player;
+    public PlayerController _player;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject vfxAspiration;
 
@@ -25,7 +25,6 @@ public class LeafBlower : MonoBehaviour
 
     private void Awake()
     {
-        _player = transform.parent.parent.parent.GetComponent<PlayerController>();
         vfxAspiration.SetActive(false);
     }
 

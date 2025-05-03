@@ -2,20 +2,61 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    private NPCMovement _movement;
-    [SerializeField] private NPCDialogue _dialogue;
 
-    public NPCMovement Movement => _movement;
-    public NPCDialogue Dialogue => _dialogue;
+    public Animator animController;
 
-    private void Awake()
-    {
-        _movement = GetComponent<NPCMovement>();
-    }
+    bool startRun = false;
+
+    public GameObject[] objectsToFollow;
+
+    public float speedToFollow;
+    private int _currentTargetIndex = 0;
+    private Transform _currentTarget;
 
     void Update()
     {
-        
+        if (!startRun || objectsToFollow.Length == 0) return;
+
+        if (_currentTarget == null && _currentTargetIndex < objectsToFollow.Length)
+        {
+            _currentTarget = objectsToFollow[_currentTargetIndex].transform;
+        }
+
+        if (_currentTarget != null)
+        {
+            Vector3 direction = (_currentTarget.position - transform.position);
+            direction.y = 0; 
+            Vector3 moveDir = direction.normalized;
+
+            transform.position += moveDir * speedToFollow * Time.deltaTime;
+
+            // Orientarse hacia el punto
+            if (moveDir != Vector3.zero)
+                transform.forward = moveDir;
+
+            if (direction.magnitude < 0.2f)
+            {
+                _currentTargetIndex++;
+                _currentTarget = _currentTargetIndex < objectsToFollow.Length
+                    ? objectsToFollow[_currentTargetIndex].transform
+                    : null;
+
+                if (_currentTarget == null)
+                {
+                    animController.SetBool("Run", false);
+                    startRun = false;
+                    Destroy(gameObject);
+                }
+            }
+        }
+    }
+
+    public void StartRun()
+    {
+        animController.SetBool("Run", true);
+        startRun = true;
+        _currentTargetIndex = 0;
+        _currentTarget = null;
     }
 
     //Shows a singles text message, if its to long it will be divided in differen "dialogue boxes"
