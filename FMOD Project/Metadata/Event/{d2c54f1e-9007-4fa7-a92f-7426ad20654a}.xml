@@ -5,7 +5,7 @@
 			<value>Jump_Concrete</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{74becfdb-172a-4418-a869-13e97642c9d9}</destination>
@@ -188,11 +188,14 @@
 	<object class="MixerBusEffectChain" id="{34f67872-11a1-4655-9ad2-4bdd8071da82}">
 		<relationship name="effects">
 			<destination>{863e8104-b410-4538-8c70-b8bf9bcafb9c}</destination>
-			<destination>{da7e7b4e-a1d0-4392-9e48-bd2ffc65d4f3}</destination>
 			<destination>{7f838a67-41df-4922-bd16-3b6995a75f3c}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{8a02f8ec-64d3-4c26-afa6-df8efb32904c}" />
+	<object class="MixerBusPanner" id="{8a02f8ec-64d3-4c26-afa6-df8efb32904c}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{871506ca-a635-4b6a-9203-b29121266554}" />
 	<object class="FadeCurve" id="{2907db19-5f96-42c2-b7aa-969128cdf5ee}">
 		<relationship name="startPoint">
@@ -357,7 +360,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{fc2a5321-b5c4-4714-b33c-8034be609695}" />
 	<object class="MixerBusFader" id="{863e8104-b410-4538-8c70-b8bf9bcafb9c}" />
-	<object class="SpatialiserEffect" id="{da7e7b4e-a1d0-4392-9e48-bd2ffc65d4f3}" />
 	<object class="ThreeEQEffect" id="{7f838a67-41df-4922-bd16-3b6995a75f3c}">
 		<property name="lowGain">
 			<value>4</value>

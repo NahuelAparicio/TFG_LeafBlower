@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private float _hoverGravityMultiplier;
     [SerializeField] private float _antiBump;
-    [SerializeField] private float _footstepCooldown = 0.5f;
+    [SerializeField] private float _footstepCooldown = 0.3f;
     [SerializeField] private float _minMovementForStep = 0.01f;
 
     private float _lastFootstepTime;

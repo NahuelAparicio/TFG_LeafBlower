@@ -95,6 +95,12 @@
 		<property name="length">
 			<value>1.0710204081632653</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{d5f5c0ea-bea9-4be8-9ac2-4d2f378ce816}</destination>
+		</relationship>
+		<relationship name="fadeOutCurve">
+			<destination>{33de8df7-8e9a-4b7c-afa8-619e7599c028}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{4c91852d-5ae5-475e-bd75-7d809545335e}</destination>
 			<destination>{4217ba24-858b-49c5-b04e-6083b51815ba}</destination>
@@ -124,12 +130,34 @@
 	</object>
 	<object class="MixerBusPanner" id="{4bd8a03c-c54c-4f9c-a68a-463b48d84390}" />
 	<object class="MixerBusFader" id="{e775f98c-f121-4758-9020-2bb6ccd6392e}" />
+	<object class="FadeCurve" id="{d5f5c0ea-bea9-4be8-9ac2-4d2f378ce816}">
+		<relationship name="startPoint">
+			<destination>{c8a03463-bf21-49b2-8814-4f30cbf15182}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{ca50236e-2631-46d4-8086-870b51767ae8}</destination>
+		</relationship>
+	</object>
+	<object class="FadeCurve" id="{33de8df7-8e9a-4b7c-afa8-619e7599c028}">
+		<relationship name="startPoint">
+			<destination>{46ea02df-d304-4fb0-9ba3-1324ef71f98b}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{bffc4837-0a7f-455d-9b29-91bf6c030d9d}</destination>
+		</relationship>
+	</object>
 	<object class="SingleSound" id="{4c91852d-5ae5-475e-bd75-7d809545335e}">
+		<property name="startOffset">
+			<value>15.5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{318cd0ee-4034-4448-9eea-e322a6c0a7bb}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{4217ba24-858b-49c5-b04e-6083b51815ba}">
+		<property name="startOffset">
+			<value>9.5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{b41c5c28-9373-4b0f-8a79-feaa20ef9783}</destination>
 		</relationship>
@@ -142,16 +170,25 @@
 	<object class="MixerBusPanner" id="{9ace1621-d729-4c31-a1cd-7f17db467176}" />
 	<object class="MixerBusFader" id="{4a09f079-3f5d-4f42-aed6-76c2e3e7be78}" />
 	<object class="MultibandEqEffect" id="{b6e8d365-7ff8-4bf2-b842-82ebca3f59f1}">
+		<property name="filterTypeB">
+			<value>6</value>
+		</property>
 		<property name="frequencyA">
-			<value>5266.79639</value>
+			<value>2888.00977</value>
+		</property>
+		<property name="frequencyB">
+			<value>528.136292</value>
 		</property>
 		<property name="qualityA">
-			<value>2.10344815</value>
+			<value>1.46496558</value>
+		</property>
+		<property name="qualityB">
+			<value>1.3757931</value>
 		</property>
 	</object>
 	<object class="FlangerEffect" id="{df1af386-b2f1-4dca-bb93-f532dad8f50b}">
 		<property name="rate">
-			<value>0.479999989</value>
+			<value>3.10000014</value>
 		</property>
 		<property name="mix">
 			<value>100</value>
@@ -163,6 +200,44 @@
 		</property>
 		<property name="wetLevel">
 			<value>-13</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{c8a03463-bf21-49b2-8814-4f30cbf15182}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-1.00000048</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{ca50236e-2631-46d4-8086-870b51767ae8}">
+		<property name="position">
+			<value>0.051309615964612545</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{46ea02df-d304-4fb0-9ba3-1324ef71f98b}">
+		<property name="position">
+			<value>0.5625</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>0.25471893</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{bffc4837-0a7f-455d-9b29-91bf6c030d9d}">
+		<property name="position">
+			<value>1.0710204081632653</value>
+		</property>
+		<property name="value">
+			<value>0</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{0ca541ad-0f1a-4c70-a903-3ff3386bcad1}" />

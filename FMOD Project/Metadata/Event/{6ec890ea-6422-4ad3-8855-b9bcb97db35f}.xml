@@ -170,8 +170,8 @@
 	<object class="MixerBusEffectChain" id="{b84d4b07-1f60-407c-8b49-bef71b38510c}">
 		<relationship name="effects">
 			<destination>{3412f60d-4cec-4567-9ce9-619cd86e5bab}</destination>
-			<destination>{5d5df2e2-233f-4237-b078-5427798cb147}</destination>
 			<destination>{52bab03f-c2ec-453e-8227-b6ff9518001e}</destination>
+			<destination>{092ce1b3-e553-4763-b1bc-79b6f0977c83}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{654efc8b-1889-4f09-bfdb-970a6a7df884}" />
@@ -224,12 +224,23 @@
 	</object>
 	<object class="MixerBusPanner" id="{2ec7a5a9-a89f-4832-9a39-792d78e27591}" />
 	<object class="MixerBusFader" id="{3412f60d-4cec-4567-9ce9-619cd86e5bab}" />
-	<object class="MultibandEqEffect" id="{5d5df2e2-233f-4237-b078-5427798cb147}">
+	<object class="CompressorEffect" id="{52bab03f-c2ec-453e-8227-b6ff9518001e}">
+		<property name="threshold">
+			<value>-18</value>
+		</property>
+		<property name="ratio">
+			<value>2.20000005</value>
+		</property>
+		<property name="attackTime">
+			<value>0.200000003</value>
+		</property>
+		<property name="gain">
+			<value>-7.5</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{092ce1b3-e553-4763-b1bc-79b6f0977c83}">
 		<property name="filterTypeB">
 			<value>8</value>
-		</property>
-		<property name="filterTypeC">
-			<value>11</value>
 		</property>
 		<property name="filterTypeD">
 			<value>9</value>
@@ -238,45 +249,34 @@
 			<value>8</value>
 		</property>
 		<property name="frequencyA">
-			<value>7186.53516</value>
+			<value>19029.8379</value>
 		</property>
 		<property name="frequencyB">
-			<value>49.7680855</value>
+			<value>73.7762909</value>
 		</property>
 		<property name="frequencyC">
-			<value>16123.1338</value>
+			<value>11336.5264</value>
 		</property>
 		<property name="frequencyD">
-			<value>56.355999</value>
+			<value>80.151123</value>
 		</property>
 		<property name="frequencyE">
-			<value>2713.96362</value>
+			<value>4281.18994</value>
 		</property>
 		<property name="qualityA">
-			<value>2.20689631</value>
+			<value>1.77706897</value>
 		</property>
 		<property name="qualityC">
-			<value>0.620000005</value>
+			<value>2.62068963</value>
 		</property>
 		<property name="gainB">
-			<value>4.13792992</value>
+			<value>2.06896663</value>
 		</property>
 		<property name="gainD">
-			<value>-29.4827595</value>
+			<value>-0.517240524</value>
 		</property>
 		<property name="gainE">
-			<value>-10.8620682</value>
-		</property>
-	</object>
-	<object class="CompressorEffect" id="{52bab03f-c2ec-453e-8227-b6ff9518001e}">
-		<property name="threshold">
-			<value>-26</value>
-		</property>
-		<property name="ratio">
-			<value>2.20000005</value>
-		</property>
-		<property name="attackTime">
-			<value>0.200000003</value>
+			<value>-1.55172348</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{ec20db53-7b3e-4608-8d18-7fd76a94eab3}">

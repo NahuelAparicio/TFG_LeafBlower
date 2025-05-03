@@ -5,7 +5,7 @@
 			<value>FootSteps_Metal</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8e9dee22-a82c-48b6-aa97-4798ad9014fa}</destination>
@@ -397,11 +397,14 @@
 	<object class="MixerBusEffectChain" id="{6e844d84-61ca-4c75-a172-82004af3fe76}">
 		<relationship name="effects">
 			<destination>{334b520e-441e-49e9-a0ee-0c4dbe2073d3}</destination>
-			<destination>{e069c9e6-2ea7-4ce3-9cf2-cd5a2de033af}</destination>
 			<destination>{a8064c71-3d42-4844-bff2-d9f0072f4574}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{1f8d1603-8ffe-4726-9059-6492e97fefa9}" />
+	<object class="MixerBusPanner" id="{1f8d1603-8ffe-4726-9059-6492e97fefa9}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{37e47f20-eebe-4080-8401-af5b4fcf98cb}" />
 	<object class="RandomizerModulator" id="{c000a248-0e86-40f0-8579-1913ed4fba56}">
 		<property name="nameOfPropertyBeingModulated">
@@ -667,7 +670,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{6113d727-7339-4452-b1ac-3d52dabd4be2}" />
 	<object class="MixerBusFader" id="{334b520e-441e-49e9-a0ee-0c4dbe2073d3}" />
-	<object class="SpatialiserEffect" id="{e069c9e6-2ea7-4ce3-9cf2-cd5a2de033af}" />
 	<object class="ThreeEQEffect" id="{a8064c71-3d42-4844-bff2-d9f0072f4574}">
 		<property name="lowGain">
 			<value>-9.5</value>
