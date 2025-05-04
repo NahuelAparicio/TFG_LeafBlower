@@ -23,9 +23,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 305
 --- !u!114 &-9132563733111680870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,20 +36,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
+  m_Name: "parameter:/Bush/MEN\xDA PAUSA"
   m_EditorClassIdentifier: 
-  Name: 
+  Name: "MEN\xDA PAUSA"
   StudioPath: 
   Min: 0
-  Max: 0
+  Max: 1
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
   Labels: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &-9033084424921179298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Dialogs.bank
   Name: Dialogs
   StudioPath: bank:/Dialogs
-  lastModified: 638820033060001334
+  lastModified: 638819950708937879
   FileSizes:
   - Name: Desktop
     Value: 79808
@@ -243,7 +243,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-8437003008260739928
+--- !u!114 &-8423663113393945657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
+  m_Name: parameter:/FAVELAS B/STINGER
   m_EditorClassIdentifier: 
   Name: 
   StudioPath: 
@@ -433,35 +433,13 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
---- !u!114 &-7458350883335011939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BOLERA/STINGER
-  m_EditorClassIdentifier: 
-  Name: STINGER
-  StudioPath: 
-  Min: 0
-  Max: 2
-  Default: 0
-  ID:
-    data1: 3466010860
-    data2: 3875693726
-  Type: 1
-  IsGlobal: 0
-  Labels: []
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - INTRO
+  - Parte B
   Exists: 1
 --- !u!114 &-7405388604394169404
 MonoBehaviour:
@@ -485,11 +463,12 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-7333824793460582508
+  Parameters:
+  - {fileID: 9072313050036461436}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 32881
+--- !u!114 &-7397273301406384326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -499,19 +478,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: "parameter:/SKATE PARK/MEN\xDA PAUSA"
+  m_Name: parameter:/CINE/Cambio 3
   m_EditorClassIdentifier: 
-  Name: "MEN\xDA PAUSA"
+  Name: Cambio 3
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2725167186
-    data2: 3024914632
-  Type: 1
+    data1: 315740962
+    data2: 4017562287
+  Type: 2
   IsGlobal: 1
-  Labels: []
+  Labels:
+  - Parte C
+  - Parte D
   Exists: 1
 --- !u!114 &-7327215766947367045
 MonoBehaviour:
@@ -615,11 +596,11 @@ MonoBehaviour:
   Banks: []
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
 --- !u!114 &-6824443647782372001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,9 +624,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 614
 --- !u!114 &-6771486725990368660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,9 +725,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 240
 --- !u!114 &-6460110262461000221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,12 +740,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: 
-  Name: 
-  StudioPath: 
-  lastModified: 0
-  FileSizes: []
-  Exists: 0
+  Path: ../FMOD Project/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638772380264913812
+  FileSizes:
+  - Name: Desktop
+    Value: 3094
+  Exists: 1
 --- !u!114 &-6412380185241671507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +903,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &-6166850022356624050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +957,39 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1625
+--- !u!114 &-6128032971553679629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CINE
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CINE
+  Guid:
+    Data1: 1180194813
+    Data2: 1318594252
+    Data3: -344574791
+    Data4: -1407863693
+  Banks:
+  - {fileID: 5133930992805694135}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5914285112823193322}
+  - {fileID: 470748967580247492}
+  - {fileID: -4504211744947612936}
+  - {fileID: -7397273301406384326}
+  - {fileID: -616494868865517952}
+  - {fileID: -4768757223049515424}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 494166
 --- !u!114 &-6123051668229939472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,9 +1140,35 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 300
+--- !u!114 &-5914285112823193322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CINE/Cambio 1
+  m_EditorClassIdentifier: 
+  Name: Cambio 1
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - INTRO
+  - Parte B
+  Exists: 1
 --- !u!114 &-5833755188882609574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,10 +1547,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638820033070350645
+  lastModified: 638819950789504019
   FileSizes:
   - Name: Desktop
-    Value: 2832096
+    Value: 2832192
   Exists: 1
 --- !u!114 &-4969372407008040833
 MonoBehaviour:
@@ -1638,27 +1680,7 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &-4721792011597034798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/CINE.bank
-  m_EditorClassIdentifier: 
-  Path: ../FMOD Project/Build/Desktop/CINE.bank
-  Name: CINE
-  StudioPath: bank:/Music/CINE
-  lastModified: 638820033059919353
-  FileSizes:
-  - Name: Desktop
-    Value: 49127072
-  Exists: 1
---- !u!114 &-4684132572660760380
+--- !u!114 &-4768757223049515424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1668,22 +1690,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CINE/Cambio 3
+  m_Name: parameter:/CINE/Voces On.Off
   m_EditorClassIdentifier: 
-  Name: Cambio 3
+  Name: Voces On.Off
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 315740962
-    data2: 4017562287
-  Type: 2
-  IsGlobal: 1
-  Labels:
-  - Parte C
-  - Parte D
+    data1: 893922531
+    data2: 1309821937
+  Type: 1
+  IsGlobal: 0
+  Labels: []
   Exists: 1
+--- !u!114 &-4765858388334650328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/FAVELAS
+  m_EditorClassIdentifier: 
+  Path: event:/Music/FAVELAS
+  Guid:
+    Data1: -130664455
+    Data2: 1123199813
+    Data3: 861238462
+    Data4: -27728611
+  Banks:
+  - {fileID: 1154707616997554111}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3876394526122242595}
+  - {fileID: 551190333218567167}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 370138
 --- !u!114 &-4675922745515145374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1830,10 +1879,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-4459216446718567452
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 150
+--- !u!114 &-4504211744947612936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1843,21 +1892,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
+  m_Name: "parameter:/CINE/MEN\xDA PAUSA"
   m_EditorClassIdentifier: 
-  Name: 
+  Name: "MEN\xDA PAUSA"
   StudioPath: 
   Min: 0
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
   Labels: []
-  Exists: 0
---- !u!114 &-4449850269917389656
+  Exists: 1
+--- !u!114 &-4459216446718567452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1998,7 +2047,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638819868671353730
+  lastModified: 638819950742816450
   FileSizes:
   - Name: Desktop
     Value: 2910
@@ -2021,12 +2070,38 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - INTRO
+  - Parte B
+  Exists: 1
+--- !u!114 &-3876394526122242595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/FAVELAS/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
   Labels: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &-3825749814278395948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,6 +2230,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6674
+--- !u!114 &-3646838851309803357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SKATE PARK.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD Project/Build/Desktop/SKATE PARK.bank
+  Name: SKATE PARK
+  StudioPath: bank:/Music/SKATE PARK
+  lastModified: 638819951551828348
+  FileSizes:
+  - Name: Desktop
+    Value: 18952608
+  Exists: 1
 --- !u!114 &-3591420529686110603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,35 +2621,13 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
---- !u!114 &-2397340056999954970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: "parameter:/Antenna/MEN\xDA PAUSA"
-  m_EditorClassIdentifier: 
-  Name: "MEN\xDA PAUSA"
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2725167186
-    data2: 3024914632
-  Type: 1
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
   IsGlobal: 1
-  Labels: []
+  Labels:
+  - INTRO
+  - Parte B
   Exists: 1
 --- !u!114 &-2280357564004134889
 MonoBehaviour:
@@ -2912,8 +2985,8 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MaxDistance: 50
+  Length: 12636
 --- !u!114 &-1679464258584804900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3098,30 +3171,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-1053169427200980303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  StudioPath: 
-  Min: 0
-  Max: 0
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
 --- !u!114 &-1005776824816096682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3281,7 +3330,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 638819732330000000
+  lastModified: 638819950789593913
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -3309,7 +3358,31 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 0
+  Exists: 1
+--- !u!114 &-616494868865517952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CINE/STINGER
+  m_EditorClassIdentifier: 
+  Name: STINGER
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3466010860
+    data2: 3875693726
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-463034001306113758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3337,6 +3410,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2375
+--- !u!114 &-416452308491626278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FAVELAS B.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD Project/Build/Desktop/FAVELAS B.bank
+  Name: FAVELAS B
+  StudioPath: bank:/Music/FAVELAS B
+  lastModified: 638819993495123558
+  FileSizes:
+  - Name: Desktop
+    Value: 37515488
+  Exists: 1
 --- !u!114 &-415301133874645240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3352,10 +3445,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638820022580363879
+  lastModified: 638819950705026457
   FileSizes:
   - Name: Desktop
-    Value: 8874240
+    Value: 7123328
   Exists: 1
 --- !u!114 &-372045856654255638
 MonoBehaviour:
@@ -3428,6 +3521,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1625
+--- !u!114 &-258024352828696171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/SKATE PARK
+  m_EditorClassIdentifier: 
+  Path: event:/Music/SKATE PARK
+  Guid:
+    Data1: -480621039
+    Data2: 1080916466
+    Data3: 658757521
+    Data4: 878007324
+  Banks:
+  - {fileID: -3646838851309803357}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5591462117551311363}
+  - {fileID: 578392080665001764}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 265513
 --- !u!114 &-158769226364428568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3526,12 +3648,12 @@ MonoBehaviour:
   - {fileID: 7918310462717635885}
   - {fileID: -5136323178273318611}
   - {fileID: -677330049201064434}
-  - {fileID: 4723622767671252589}
-  - {fileID: -4721792011597034798}
-  - {fileID: 5361456111621061483}
-  - {fileID: -5465492801348217198}
-  - {fileID: -2093687230765259771}
-  - {fileID: -7949765790503407285}
+  - {fileID: 1993103045821353722}
+  - {fileID: 5133930992805694135}
+  - {fileID: -416452308491626278}
+  - {fileID: 1154707616997554111}
+  - {fileID: 6363877744413180708}
+  - {fileID: -3646838851309803357}
   EditorEvents:
   - {fileID: -5528598938805726133}
   - {fileID: -6279265964437223715}
@@ -3612,16 +3734,12 @@ MonoBehaviour:
   - {fileID: -2839023762123715764}
   - {fileID: 5510949910317076568}
   - {fileID: 309001048849545400}
-  - {fileID: -2959962695502687211}
-  - {fileID: 8002461193562633864}
-  - {fileID: -5505848285189714746}
-  - {fileID: 8096819041223019342}
-  - {fileID: 9086735657225878352}
-  - {fileID: 8521411783735245793}
-  - {fileID: 3841395066355255731}
-  - {fileID: 1557932207688597397}
-  - {fileID: -1086514109928509526}
-  - {fileID: 410477481947517258}
+  - {fileID: 3045510859187245014}
+  - {fileID: 6538155281062313365}
+  - {fileID: -258024352828696171}
+  - {fileID: -6128032971553679629}
+  - {fileID: 4606562503621804015}
+  - {fileID: -4765858388334650328}
   EditorParameters:
   - {fileID: 4033091072054533080}
   - {fileID: 1744641768993282439}
@@ -3633,7 +3751,7 @@ MonoBehaviour:
   - {fileID: -4187394644658486721}
   StringsBanks:
   - {fileID: 5887196483816184636}
-  cacheTime: 638820033070350645
+  cacheTime: 638820006638108795
   cacheVersion: 131618
 --- !u!114 &8187343644158902
 MonoBehaviour:
@@ -3858,10 +3976,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 638820022581012156
+  lastModified: 638819950742448795
   FileSizes:
   - Name: Desktop
-    Value: 10379168
+    Value: 8323264
   Exists: 1
 --- !u!114 &360655886286856635
 MonoBehaviour:
@@ -3994,8 +4112,58 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MaxDistance: 50
+  Length: 22846
+--- !u!114 &470748967580247492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CINE/Cambio 2
+  m_EditorClassIdentifier: 
+  Name: Cambio 2
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2158268340
+    data2: 2872316524
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Parte B
+  - Parte C
+  Exists: 1
+--- !u!114 &551190333218567167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/FAVELAS/STINGER
+  m_EditorClassIdentifier: 
+  Name: STINGER
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3466010860
+    data2: 3875693726
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &558746721375487648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4019,9 +4187,33 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 305
+--- !u!114 &578392080665001764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/SKATE PARK/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &665726164737593892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4161,31 +4353,7 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 0
---- !u!114 &849730092702172385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  StudioPath: 
-  Min: 0
-  Max: 0
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
+  Exists: 1
 --- !u!114 &969440183327767889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4196,20 +4364,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
+  m_Name: parameter:/TRACK 04/STINGER
   m_EditorClassIdentifier: 
-  Name: 
+  Name: STINGER
   StudioPath: 
   Min: 0
-  Max: 0
+  Max: 2
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
+    data1: 3466010860
+    data2: 3875693726
+  Type: 1
   IsGlobal: 0
   Labels: []
-  Exists: 0
+  Exists: 1
+--- !u!114 &1154707616997554111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FAVELAS.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD Project/Build/Desktop/FAVELAS.bank
+  Name: FAVELAS
+  StudioPath: bank:/Music/FAVELAS
+  lastModified: 638819993496766567
+  FileSizes:
+  - Name: Desktop
+    Value: 37521472
+  Exists: 1
 --- !u!114 &1279242902560101984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4375,13 +4563,39 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
+    data1: 2158268340
+    data2: 2872316524
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Parte B
+  - Parte C
+  Exists: 1
+--- !u!114 &1740521334387814147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/BOLERA/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
   Labels: []
-  Exists: 0
---- !u!114 &1557932207688597397
+  Exists: 1
+--- !u!114 &1743644170790851559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4487,6 +4701,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12636
+--- !u!114 &1993103045821353722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BOLERA.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD Project/Build/Desktop/BOLERA.bank
+  Name: BOLERA
+  StudioPath: bank:/Music/BOLERA
+  lastModified: 638819993491567332
+  FileSizes:
+  - Name: Desktop
+    Value: 32877024
+  Exists: 1
 --- !u!114 &2019513791895918584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4879,12 +5113,43 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - INTRO
+  - Parte B
+  Exists: 1
+--- !u!114 &3045510859187245014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/BOLERA
+  m_EditorClassIdentifier: 
+  Path: event:/Music/BOLERA
+  Guid:
+    Data1: 1313886663
+    Data2: 1335334993
+    Data3: 1327537808
+    Data4: -859145163
+  Banks:
+  - {fileID: 1993103045821353722}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1740521334387814147}
+  - {fileID: 5820304281511339460}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 308396
 --- !u!114 &3059619502331453011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4974,12 +5239,14 @@ MonoBehaviour:
   Max: 0
   Default: 0
   ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
+    data1: 151483362
+    data2: 2175670852
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - INTRO
+  - Parte B
+  Exists: 1
 --- !u!114 &3200911705980903585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5063,10 +5330,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638820033059979187
+  lastModified: 638819950707870994
   FileSizes:
   - Name: Desktop
-    Value: 476224
+    Value: 476128
   Exists: 1
 --- !u!114 &3491443049730831746
 MonoBehaviour:
@@ -5620,7 +5887,36 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 0
+  Exists: 1
+--- !u!114 &4606562503621804015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/FAVELAS B
+  m_EditorClassIdentifier: 
+  Path: event:/Music/FAVELAS B
+  Guid:
+    Data1: 1706304569
+    Data2: 1137631555
+    Data3: -983686986
+    Data4: -650953115
+  Banks:
+  - {fileID: -416452308491626278}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8423663113393945657}
+  - {fileID: 5923783764659871448}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 273185
 --- !u!114 &4627823868942466745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5692,26 +5988,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 305
---- !u!114 &4723622767671252589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/BOLERA.bank
-  m_EditorClassIdentifier: 
-  Path: ../FMOD Project/Build/Desktop/BOLERA.bank
-  Name: BOLERA
-  StudioPath: bank:/Music/BOLERA
-  lastModified: 638820033055714048
-  FileSizes:
-  - Name: Desktop
-    Value: 32877312
-  Exists: 1
 --- !u!114 &4800637921916976077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5870,7 +6146,7 @@ MonoBehaviour:
   - INTRO
   - Parte B
   Exists: 1
---- !u!114 &5133133183569744005
+--- !u!114 &5133930992805694135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5879,21 +6155,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/CINE.bank
   m_EditorClassIdentifier: 
-  Name: 
-  StudioPath: 
-  Min: 0
-  Max: 0
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
+  Path: ../FMOD Project/Build/Desktop/CINE.bank
+  Name: CINE
+  StudioPath: bank:/Music/CINE
+  lastModified: 638820006638108795
+  FileSizes:
+  - Name: Desktop
+    Value: 49127552
+  Exists: 1
 --- !u!114 &5225135304054450031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6143,9 +6415,33 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 781
+--- !u!114 &5591462117551311363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SKATE PARK/Voces On.Off
+  m_EditorClassIdentifier: 
+  Name: Voces On.Off
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 893922531
+    data2: 1309821937
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5712487772878998660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6173,6 +6469,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 294
+--- !u!114 &5820304281511339460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BOLERA/STINGER
+  m_EditorClassIdentifier: 
+  Name: STINGER
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3466010860
+    data2: 3875693726
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5844377562220088102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6215,10 +6535,34 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638820022581022464
+  lastModified: 638819950742829756
   FileSizes:
   - Name: Desktop
-    Value: 6184
+    Value: 5950
+  Exists: 1
+--- !u!114 &5923783764659871448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/FAVELAS B/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
+  Labels: []
   Exists: 1
 --- !u!114 &5933264461599147282
 MonoBehaviour:
@@ -6294,30 +6638,6 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 0
---- !u!114 &6013116990811530404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/SKATE PARK/Voces On.Off
-  m_EditorClassIdentifier: 
-  Name: Voces On.Off
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 893922531
-    data2: 1309821937
-  Type: 1
   IsGlobal: 0
   Labels: []
   Exists: 1
@@ -6398,6 +6718,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 480
+--- !u!114 &6363877744413180708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MAIN THEME (SHORT).bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD Project/Build/Desktop/MAIN THEME (SHORT).bank
+  Name: MAIN THEME (SHORT)
+  StudioPath: bank:/Music/MAIN THEME (SHORT)
+  lastModified: 638819993497517750
+  FileSizes:
+  - Name: Desktop
+    Value: 12592128
+  Exists: 1
 --- !u!114 &6371683500982420126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6495,9 +6835,9 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 150
 --- !u!114 &6521917180963895448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6551,6 +6891,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1071
+--- !u!114 &6538155281062313365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MAIN THEME (SHORT)
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MAIN THEME (SHORT)
+  Guid:
+    Data1: -1400703361
+    Data2: 1157983211
+    Data3: -277235535
+    Data4: 830905282
+  Banks:
+  - {fileID: 6363877744413180708}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 32881
 --- !u!114 &6551736087009055197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6809,8 +7176,8 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 0
-  MaxDistance: 0
-  Length: 0
+  MaxDistance: 50
+  Length: 12636
 --- !u!114 &7368218611145447239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7109,7 +7476,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638819732330000000
+  lastModified: 638819950742873974
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -7376,35 +7743,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2185
---- !u!114 &8521411783735245793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/SKATE PARK
-  m_EditorClassIdentifier: 
-  Path: event:/Music/SKATE PARK
-  Guid:
-    Data1: -480621039
-    Data2: 1080916466
-    Data3: 658757521
-    Data4: 878007324
-  Banks:
-  - {fileID: -7949765790503407285}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 6013116990811530404}
-  - {fileID: -7333824793460582508}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 265513
 --- !u!114 &8522609898953403313
 MonoBehaviour:
   m_ObjectHideFlags: 0
