@@ -18,13 +18,18 @@ public class BreakableWall : MonoBehaviour
 
     public float timeToDestroy;
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag(_tagToCompare))
+        if (other.gameObject.CompareTag(_tagToCompare))
         {
             RuntimeManager.PlayOneShot(_breakableSound, transform.position);
             OnBreak?.Invoke();
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 
     public virtual void ActivateBreak()

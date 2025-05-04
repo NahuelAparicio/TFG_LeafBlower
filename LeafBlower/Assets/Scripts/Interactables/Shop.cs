@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour, IInteractable
 {
+    public GameObject instantiationPoint;
+    public GameObject gnomo;
     [SerializeField] private GameObject _shopCanvas;
     [SerializeField]private GameObject _jordanView, _hoverView, _gnomoView;
     public int jordanValue, hoverValue, gnomoValue;
@@ -51,6 +53,8 @@ public class Shop : MonoBehaviour, IInteractable
     {
         if (_player.Inventory.Coins < gnomoValue) return;
         _player.Inventory.RemoveCoins(gnomoValue);
+
+        Instantiate(gnomo,instantiationPoint.transform.position,Quaternion.identity);
 
         Destroy(_gnomoView);
     }
