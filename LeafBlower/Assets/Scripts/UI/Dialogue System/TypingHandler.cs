@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using FMODUnity; // Asegúrate de tener esta línea
 
 public class TypingHandler : MonoBehaviour
 {
@@ -44,8 +45,6 @@ public class TypingHandler : MonoBehaviour
         }
     }
 
-    //Given a list of messages (dialogues in order)
-    //It will show the dialogues in screen i guess
     private void ShowMessageNoEffect()
     {
         if (_typingCoroutine != null)
@@ -76,12 +75,19 @@ public class TypingHandler : MonoBehaviour
         foreach (char letter in _currentMessage)
         {
             _dialogueText.text += letter;
-            yield return new WaitForSeconds(timeBetweenLetters); //TIME BETWEEN LETTERS
+
+            if (!char.IsWhiteSpace(letter))
+            {
+                RuntimeManager.PlayOneShot("event:/UI/Typing");
+            }
+
+            yield return new WaitForSeconds(timeBetweenLetters);
         }
 
         _isDialoguePrinted = true;
-        _typingCoroutine = null; 
+        _typingCoroutine = null;
     }
+
     public void FinishTypingImmediately()
     {
         if (_typingCoroutine != null)
@@ -93,12 +99,14 @@ public class TypingHandler : MonoBehaviour
         _dialogueText.text = _currentMessage;
         _isDialoguePrinted = true;
     }
-    public void SetTypingType(Enums.DialogueTypingType type) 
+
+    public void SetTypingType(Enums.DialogueTypingType type)
     {
         if (_typingType == type) return;
 
-        _typingType = type; 
+        _typingType = type;
     }
+
     public void ResetTypingType() => _typingType = Enums.DialogueTypingType.NoEffect;
     public void ResetText() => _dialogueText.text = "";
 }

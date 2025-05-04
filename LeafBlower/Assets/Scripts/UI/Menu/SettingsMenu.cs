@@ -1,5 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using FMODUnity;
 
 public class SettingsMenu : BaseMenu<SettingsMenu>
 {
@@ -10,6 +12,11 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
 
     public GameObject music, settings, menu;
 
+    private EventSystem _eventSystem;
+    private Slider musicSlider;
+    private float lastSliderValue;
+    private const float sliderThreshold = 0.01f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +26,26 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         menu.SetActive(true);
         settings.SetActive(false);
         music.SetActive(false);
+
+        // 🔍 Buscar el slider dentro del panel de música
+        if (music != null)
+        {
+            musicSlider = music.GetComponentInChildren<Slider>(true);
+            if (musicSlider != null)
+            {
+                lastSliderValue = musicSlider.value;
+                musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
+            }
+        }
+    }
+
+    private void OnMusicSliderChanged(float value)
+    {
+        if (Mathf.Abs(value - lastSliderValue) >= sliderThreshold)
+        {
+            RuntimeManager.PlayOneShot("event:/UI/Selector");
+            lastSliderValue = value;
+        }
     }
 
     public EventSystem GetEventSystem()
@@ -29,24 +56,26 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         }
         return _eventSystem;
     }
+
     public void OnRetarget()
     {
-        if(!isMusic && !isSettings)
+        if (!isMusic && !isSettings)
         {
             GetEventSystem().SetSelectedGameObject(_firstSelected);
             return;
         }
-        if(isMusic)
+        if (isMusic)
         {
             GetEventSystem().SetSelectedGameObject(firstSelectedMusic);
             return;
         }
-        if(isSettings)
+        if (isSettings)
         {
             GetEventSystem().SetSelectedGameObject(firstSelectedSettings);
             return;
         }
     }
+
     public void BackToMenuSettings()
     {
         isSettings = false;
@@ -56,6 +85,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         menu.SetActive(true);
         OnRetarget();
     }
+
     public void OnOptionsPressed()
     {
         isSettings = true;
@@ -63,7 +93,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         settings.SetActive(true);
         menu.SetActive(false);
         OnRetarget();
-
     }
 
     public void OnMusicPressed()
@@ -73,13 +102,11 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         music.SetActive(true);
         menu.SetActive(false);
         OnRetarget();
-
     }
 
     public override void OnBackPressed()
     {
         Hide();
-        
 
         if (GameManager.Instance.State == Enums.GameState.Playing || GameManager.Instance.State == Enums.GameState.PauseMenu)
         {
@@ -90,5 +117,13 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         //    MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
         //    MainMenu.Show();
         //}
+    }
+
+    private void OnDestroy()
+    {
+        if (musicSlider != null)
+        {
+            musicSlider.onValueChanged.RemoveListener(OnMusicSliderChanged);
+        }
     }
 }
