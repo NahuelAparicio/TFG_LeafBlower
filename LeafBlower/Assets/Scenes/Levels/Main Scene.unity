@@ -39371,6 +39371,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1065002299}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1066526504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3519118825491495485, guid: da54b75317084e04a8bf2559d3f99eea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1554885065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1070516376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4030582478100629419, guid: a515ebe25f1fa0e4ebd0ac6b873a69b5,
@@ -58032,6 +58038,10 @@ PrefabInstance:
     - {fileID: 2416740175049701975, guid: da54b75317084e04a8bf2559d3f99eea, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3519118825491495485, guid: da54b75317084e04a8bf2559d3f99eea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1554885077}
     - targetCorrespondingSourceObject: {fileID: 1812198954942624945, guid: da54b75317084e04a8bf2559d3f99eea,
         type: 3}
       insertIndex: -1
@@ -58093,18 +58103,54 @@ MonoBehaviour:
       text: "\xA1\xA1\xA1\xA1\xA1 ME HAS ROTO EL GNOMO !!!!!"
       onDialogueEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1554885077}
+            m_TargetAssemblyTypeName: FMODMultiEventPlayer, Assembly-CSharp
+            m_MethodName: PlayEvent
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 1
     - character: 2
       text: "\xBF\xBF\xBF C\xD3MO HAS SIDO CAPAZ ???"
       onDialogueEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1554885077}
+            m_TargetAssemblyTypeName: FMODMultiEventPlayer, Assembly-CSharp
+            m_MethodName: PlayEvent
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 2
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
     - character: 2
       text: "YA PUEDES ESTAR COMPRANDOME OTRO O TE LAS VER\xC1S CONMIGO... \xA1BUSCAME
         CUANDO LO TENGAS Y DATE PRISA O IR\xC9 A POR TI!"
       onDialogueEvent:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1554885077}
+            m_TargetAssemblyTypeName: FMODMultiEventPlayer, Assembly-CSharp
+            m_MethodName: PlayEvent
+            m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 3
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
   eventOnEnd:
     m_PersistentCalls:
       m_Calls:
@@ -58120,18 +58166,67 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1554885077}
+        m_TargetAssemblyTypeName: FMODMultiEventPlayer, Assembly-CSharp
+        m_MethodName: PlayEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1554885073 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3377005886601769016, guid: da54b75317084e04a8bf2559d3f99eea,
     type: 3}
   m_PrefabInstance: {fileID: 1554885065}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1066526504}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c1b63c8c022dba4198747aca72f09ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1554885077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066526504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5188bf5379c8cb46baf1bb6b5afaba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - Guid:
+      Data1: 867344576
+      Data2: 1325123390
+      Data3: 770225333
+      Data4: 466126096
+    Path: event:/Dialogs/Emotions/Angry
+  - Guid:
+      Data1: 640108158
+      Data2: 1164334337
+      Data3: 2006064018
+      Data4: -230824870
+    Path: event:/Dialogs/Run/RunGnomoRoto
+  - Guid:
+      Data1: -520796447
+      Data2: 1198364222
+      Data3: -1574958414
+      Data4: -1175957675
+    Path: event:/Dialogs/Emotions/Angry 2
+  - Guid:
+      Data1: -123613884
+      Data2: 1085275396
+      Data3: -215476844
+      Data4: -1540703907
+    Path: event:/Dialogs/Emotions/Angry 3
 --- !u!43 &1557821877
 Mesh:
   m_ObjectHideFlags: 0

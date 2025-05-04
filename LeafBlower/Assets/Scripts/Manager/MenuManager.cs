@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using FMODUnity;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,20 +16,22 @@ public class MenuManager : MonoBehaviour
     public Enums.MenuState currentState;
     public Enums.MenuState lastState;
 
+    private GameObject lastSelected; // 🔊 Para detectar cambios de selección
+
     public static MenuManager Instance
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject go = new GameObject("Menu Manager");
                 go.AddComponent<MenuManager>();
                 DontDestroyOnLoad(go);
             }
-
             return _instance;
         }
     }
+
     private void Awake()
     {
         _instance = this;
@@ -38,32 +41,17 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        //switch (currentState)
-        //{
-        //    case Enums.MenuState.MainMenu:
-        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-        //        {
-        //            EventSystem.current.SetSelectedGameObject(null);
-        //            menu.OnRetarget();
-        //        }
-        //        break;
-        //    case Enums.MenuState.SettingsMenu:
-        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-        //        {
-        //            EventSystem.current.SetSelectedGameObject(null);
-        //            settings.OnRetarget();
-        //        }
-        //        break;
-        //    case Enums.MenuState.PauseMenu:
-        //        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-        //        {
-        //            EventSystem.current.SetSelectedGameObject(null);
-        //            pause.OnRetarget();
-        //        }
-        //        break;
-        //    default:
-        //        break;
-        //}
+        GameObject currentSelected = EventSystem.current?.currentSelectedGameObject;
+
+        // 🔊 Detecta cambio de selección y reproduce el sonido
+        if (currentSelected != null && currentSelected != lastSelected)
+        {
+            RuntimeManager.PlayOneShot("event:/UI/Selector");
+            lastSelected = currentSelected;
+        }
+
+        // Aquí puedes reactivar botones si están deseleccionados (opcional)
+        // switch (currentState) { ... }
     }
 
     public void ChangeMenuState(Enums.MenuState newState)
@@ -72,6 +60,7 @@ public class MenuManager : MonoBehaviour
         lastState = currentState;
         currentState = newState;
     }
+
     private void LoadResources()
     {
         menu = Resources.Load<MainMenu>("Menus/MainMenu");
@@ -101,17 +90,17 @@ public class MenuManager : MonoBehaviour
                     }
                 }
             }
+
             var topCanvas = instance.GetComponent<Canvas>();
             var previousCanvas = menuStack.Peek().GetComponent<Canvas>();
             topCanvas.sortingOrder = previousCanvas.sortingOrder + 1;
         }
+
         menuStack.Push(instance);
     }
 
     private T GetPrefab<T>() where T : Menu
     {
-        // Get prefab dynamically, based on public fields set from Unity
-        // You can use private fields with SerializeField attribute too
         var fields = this.GetType().GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
         foreach (var field in fields)
         {
@@ -128,11 +117,11 @@ public class MenuManager : MonoBehaviour
     {
         if (menuStack.Count == 0)
         {
-            Debug.LogErrorFormat(menu, "{0} cannot be closed bc menu stack is empty", menu.GetType());
+            Debug.LogErrorFormat(menu, "{0} cannot be closed because menu stack is empty", menu.GetType());
         }
         if (menuStack.Peek() != menu)
         {
-            Debug.LogErrorFormat(menu, "{0} cannot be closed because it is not on top of stack", menu.GetType());
+            Debug.LogErrorFormat(menu, "{0} cannot be closed because it is not on top of the stack", menu.GetType());
             return;
         }
         CloseTopMenu();
@@ -156,7 +145,6 @@ public class MenuManager : MonoBehaviour
             instance.gameObject.SetActive(false);
         }
 
-        // Re active top menu
         foreach (var menu in menuStack)
         {
             menu.gameObject.SetActive(true);

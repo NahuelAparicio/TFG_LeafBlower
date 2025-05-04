@@ -5,7 +5,7 @@
 			<value>UnAttach</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{bcc54c04-c9e5-469f-8925-fdb445adade3}</destination>
@@ -229,7 +229,11 @@
 			<destination>{f9e8d1a4-d08c-4472-97ff-54dab7a323d0}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{b929428e-6c8a-45ad-9edc-a644475c317d}" />
+	<object class="MixerBusPanner" id="{b929428e-6c8a-45ad-9edc-a644475c317d}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{96310913-277e-4e78-91d8-68aa858145a6}" />
 	<object class="RandomizerModulator" id="{d3308bc3-9ea2-4dad-8e7e-10a37127f15f}">
 		<property name="nameOfPropertyBeingModulated">

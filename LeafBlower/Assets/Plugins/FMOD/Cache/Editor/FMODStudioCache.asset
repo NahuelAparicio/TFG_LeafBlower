@@ -51,6 +51,30 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-9132563733111680870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/Bush/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-9033084424921179298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,11 +117,40 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Dialogs.bank
   Name: Dialogs
   StudioPath: bank:/Dialogs
-  lastModified: 638795782324470567
+  lastModified: 638819488754234719
   FileSizes:
   - Name: Desktop
-    Value: 111840
+    Value: 79808
   Exists: 1
+--- !u!114 &-8981916667337139654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient/Bush_NoBugs
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient/Bush_NoBugs
+  Guid:
+    Data1: -338025401
+    Data2: 1085499299
+    Data3: 1766057147
+    Data4: -841366425
+  Banks:
+  - {fileID: -415301133874645240}
+  - {fileID: 359506116711928841}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -915375109369045269}
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 31955
 --- !u!114 &-8854448732494010440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1074,33 @@ MonoBehaviour:
   - Parte B
   - Parte C
   Exists: 1
+--- !u!114 &-6166850022356624050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Emotions/Angry 2
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Emotions/Angry 2
+  Guid:
+    Data1: -520796447
+    Data2: 1198364222
+    Data3: -1574958414
+    Data4: -1175957675
+  Banks:
+  - {fileID: -9023669691744314935}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1001
 --- !u!114 &-6145517862517987535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,7 +1579,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Vehicles.bank
   Name: Vehicles
   StudioPath: bank:/Vehicles
-  lastModified: 638806787480024955
+  lastModified: 638819446198998309
   FileSizes:
   - Name: Desktop
     Value: 2832096
@@ -1894,7 +1974,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638809565368494758
+  lastModified: 638819502107524689
   FileSizes:
   - Name: Desktop
     Value: 2764
@@ -2113,6 +2193,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 0
+--- !u!114 &-3530957762766824195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Emotions/Angry 3
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Emotions/Angry 3
+  Guid:
+    Data1: -123613884
+    Data2: 1085275396
+    Data3: -215476844
+    Data4: -1540703907
+  Banks:
+  - {fileID: -9023669691744314935}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 898
 --- !u!114 &-3383289904559119528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2621,6 +2728,7 @@ MonoBehaviour:
     Data3: -205832037
     Data4: -134305216
   Banks:
+  - {fileID: -415301133874645240}
   - {fileID: 359506116711928841}
   IsStream: 1
   Is3D: 1
@@ -2781,6 +2889,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-1309401073749587460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Typing
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Typing
+  Guid:
+    Data1: 579188272
+    Data2: 1276952259
+    Data3: -371209283
+    Data4: 1220337690
+  Banks:
+  - {fileID: 359506116711928841}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4343
 --- !u!114 &-1272182610712531308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2902,6 +3037,30 @@ MonoBehaviour:
   - Name: Desktop
     Value: 494
   Exists: 0
+--- !u!114 &-915375109369045269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: "parameter:/Bush_NoBugs/MEN\xDA PAUSA"
+  m_EditorClassIdentifier: 
+  Name: "MEN\xDA PAUSA"
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2725167186
+    data2: 3024914632
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-910902663002462681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,7 +3180,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Weapons.bank
   Name: Weapons
   StudioPath: bank:/Weapons
-  lastModified: 638778149107223870
+  lastModified: 638781088943873239
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -3092,10 +3251,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638819164872158808
+  lastModified: 638819467164334217
   FileSizes:
   - Name: Desktop
-    Value: 5734048
+    Value: 7123264
   Exists: 1
 --- !u!114 &-372045856654255638
 MonoBehaviour:
@@ -3238,7 +3397,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/MUSIC TRACK 01 - 02.bank
   Name: MUSIC TRACK 01 - 02
   StudioPath: bank:/MUSIC TRACK 01 - 02
-  lastModified: 638779225008191931
+  lastModified: 638781088939872103
   FileSizes:
   - Name: Desktop
     Value: 88086880
@@ -3305,7 +3464,6 @@ MonoBehaviour:
   - {fileID: 6215688146061560797}
   - {fileID: -8188680999999447657}
   - {fileID: 3829874020787803268}
-  - {fileID: 6370796516568660685}
   - {fileID: 4519700509972494008}
   - {fileID: -720270624573322320}
   - {fileID: -5809096515347767684}
@@ -3371,6 +3529,14 @@ MonoBehaviour:
   - {fileID: 7242690010501949163}
   - {fileID: 9007282874733264707}
   - {fileID: 6551736087009055197}
+  - {fileID: 6521917180963895448}
+  - {fileID: -8981916667337139654}
+  - {fileID: 2111065467112288124}
+  - {fileID: 3973723614912587086}
+  - {fileID: 7509801801341296490}
+  - {fileID: -3530957762766824195}
+  - {fileID: -6166850022356624050}
+  - {fileID: -1309401073749587460}
   EditorParameters:
   - {fileID: 4033091072054533080}
   - {fileID: 1744641768993282439}
@@ -3382,7 +3548,7 @@ MonoBehaviour:
   - {fileID: -4187394644658486721}
   StringsBanks:
   - {fileID: 5887196483816184636}
-  cacheTime: 638819164872721626
+  cacheTime: 638819502107534661
   cacheVersion: 131618
 --- !u!114 &111827735277207414
 MonoBehaviour:
@@ -3567,10 +3733,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 638819164872709991
+  lastModified: 638819502107315249
   FileSizes:
   - Name: Desktop
-    Value: 8099104
+    Value: 8323136
   Exists: 1
 --- !u!114 &360655886286856635
 MonoBehaviour:
@@ -4192,6 +4358,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2303
+--- !u!114 &2111065467112288124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Selector
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Selector
+  Guid:
+    Data1: -671679313
+    Data2: 1128351984
+    Data3: 341752213
+    Data4: 2062891436
+  Banks:
+  - {fileID: 359506116711928841}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &2146913101065835945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4742,7 +4935,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638819164872218650
+  lastModified: 638819104672111156
   FileSizes:
   - Name: Desktop
     Value: 476224
@@ -4919,6 +5112,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 55
+--- !u!114 &3973723614912587086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Run/RunGnomoRoto
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Run/RunGnomoRoto
+  Guid:
+    Data1: 640108158
+    Data2: 1164334337
+    Data3: 2006064018
+    Data4: -230824870
+  Banks:
+  - {fileID: -9023669691744314935}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6674
 --- !u!114 &4004981354667837831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5396,6 +5616,7 @@ MonoBehaviour:
     Data3: -1498277985
     Data4: -375998318
   Banks:
+  - {fileID: -415301133874645240}
   - {fileID: 359506116711928841}
   IsStream: 1
   Is3D: 1
@@ -5766,10 +5987,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638819164872721626
+  lastModified: 638819502107534661
   FileSizes:
   - Name: Desktop
-    Value: 5446
+    Value: 5758
   Exists: 1
 --- !u!114 &5933264461599147282
 MonoBehaviour:
@@ -5970,38 +6191,11 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/MUSIC MAIN THEME.bank
   Name: MUSIC MAIN THEME
   StudioPath: bank:/MUSIC MAIN THEME
-  lastModified: 638779224994127609
+  lastModified: 638781088935196924
   FileSizes:
   - Name: Desktop
     Value: 21336352
   Exists: 1
---- !u!114 &6370796516568660685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Dialogs/Menu_Open
-  m_EditorClassIdentifier: 
-  Path: event:/Dialogs/Menu_Open
-  Guid:
-    Data1: 1868576475
-    Data2: 1265519386
-    Data3: 1177032869
-    Data4: -1930048566
-  Banks:
-  - {fileID: -9023669691744314935}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 614
 --- !u!114 &6371683500982420126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6121,11 +6315,40 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/MUSIC TRACK 03 - 04.bank
   Name: MUSIC TRACK 03 - 04
   StudioPath: bank:/MUSIC TRACK 03 - 04
-  lastModified: 638779225015434255
+  lastModified: 638781088943454185
   FileSizes:
   - Name: Desktop
     Value: 78711552
   Exists: 1
+--- !u!114 &6521917180963895448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient/Bush
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient/Bush
+  Guid:
+    Data1: 522423812
+    Data2: 1171173127
+    Data3: -520939616
+    Data4: 1872680017
+  Banks:
+  - {fileID: -415301133874645240}
+  - {fileID: 359506116711928841}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -9132563733111680870}
+  MinDistance: 0
+  MaxDistance: 30
+  Length: 31955
 --- !u!114 &6528810575092739520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6502,6 +6725,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 54000
+--- !u!114 &7509801801341296490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogs/Emotions/Angry
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogs/Emotions/Angry
+  Guid:
+    Data1: 867344576
+    Data2: 1325123390
+    Data3: 770225333
+    Data4: 466126096
+  Banks:
+  - {fileID: -9023669691744314935}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1098
 --- !u!114 &7585809391792539540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6716,7 +6966,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638778149106309466
+  lastModified: 638781088943534011
   FileSizes:
   - Name: Desktop
     Value: 494
