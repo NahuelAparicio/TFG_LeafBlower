@@ -5,7 +5,7 @@
 			<value>Coin_Collected</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{3c192c73-cb51-4acd-b963-5c23428aded8}</destination>
@@ -522,6 +522,7 @@
 	<object class="MixerBusEffectChain" id="{0c8e2a48-73e9-483a-ac9e-e5e8fa4a34e0}">
 		<relationship name="effects">
 			<destination>{2da36234-01b1-4715-9b97-c1e33aed9983}</destination>
+			<destination>{3a2afea9-d3bf-43c9-bb77-39e4c295f296}</destination>
 			<destination>{5cbd02ab-c4c5-4324-aa49-4b302a19b7e4}</destination>
 		</relationship>
 	</object>
@@ -727,6 +728,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{493c5099-8cca-4623-bf31-85ebd2cd7949}" />
 	<object class="MixerBusFader" id="{2da36234-01b1-4715-9b97-c1e33aed9983}" />
+	<object class="SpatialiserEffect" id="{3a2afea9-d3bf-43c9-bb77-39e4c295f296}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>8</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="LimiterEffect" id="{5cbd02ab-c4c5-4324-aa49-4b302a19b7e4}">
 		<property name="boost">
 			<value>4.5999999</value>
