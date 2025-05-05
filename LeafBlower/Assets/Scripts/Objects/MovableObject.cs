@@ -65,6 +65,15 @@ public class MovableObject : MonoBehaviour, IMovable
         _canBeAspired = false;
         _isBeingAspired = false;
         _target = null;
+        if(_rb == null)
+        {
+            if(_rb.GetComponent<Rigidbody>())
+            {
+                _rb.GetComponent<Rigidbody>();
+            }
+            else
+            _rb = gameObject.AddComponent<Rigidbody>();
+        }
         _rb.useGravity = true;
     }
 

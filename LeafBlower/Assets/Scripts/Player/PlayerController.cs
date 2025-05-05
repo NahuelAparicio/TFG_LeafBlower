@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public bool jordanUnlocked = false;
     public bool hoverUnlocked = false;
 
+    public Animator animator;
+
     private void Awake()
     {
         _stamina = GetComponent<PlayerStamina>();

@@ -11,9 +11,14 @@ public class ObjectTransparencyHandler : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var mesh in _meshes)
+        if(_materials.Count != 0)
         {
-            _materials.AddRange(mesh.materials);
+            foreach (var mesh in _meshes)
+            {
+                if(mesh != null)
+                    _materials.AddRange(mesh.materials);
+            }
+
         }
     }
     public void EnableTransparency()
