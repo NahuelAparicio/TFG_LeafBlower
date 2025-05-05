@@ -9,9 +9,19 @@ public class PlayerSaveSystem : MonoBehaviour
         _controller = GetComponent<PlayerController>();
     }
 
+    private void Start()
+    {
+        LoadPlayerData();
+    }
+
+    private void OnDestroy()
+    {
+        SavePlayerData();
+    }
+
     public void SavePlayerData()
     {
-        //PlayerPrefs.SetInt("Gold", _controller.Inve);
+        PlayerPrefs.SetInt("Gold", _controller.Inventory.Coins);
         //PlayerPrefs.SetInt("PosX", (int)_respawner.PositionToRespawn.x);
         //PlayerPrefs.SetInt("PosY", (int)_respawner.PositionToRespawn.y + 1);
         //PlayerPrefs.SetInt("PosZ", (int)_respawner.PositionToRespawn.z);
@@ -20,7 +30,7 @@ public class PlayerSaveSystem : MonoBehaviour
 
     public void LoadPlayerData()
     {
-        //_coins = PlayerPrefs.GetInt("Gold");
+        _controller.Inventory.SetCoins(PlayerPrefs.GetInt("Gold"));
         //_text.text = "" + _coins;
         //if (PlayerPrefs.HasKey("PosX"))
         //{

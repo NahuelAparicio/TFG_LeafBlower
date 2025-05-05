@@ -18,6 +18,13 @@ public class PlayerInventory : MonoBehaviour
         GameEventManager.Instance.collectingEvents.OnCollectColectionable += CollectColectionable;
     }
 
+    public void SetCoins(int v)
+    {
+        _coins = v;
+        _controller.Hud.UpdateCoinsText(_coins);
+
+    }
+
     public void RemoveCoins(int v)
     {
         _coins -= v;

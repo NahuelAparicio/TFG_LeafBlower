@@ -12,8 +12,8 @@ public class BringObject : QuestStep
 
     private void Start()
     {
-        string status = "Traer " + nameObject + ".";
-        ChangeState("", status);
+        //string status = "Traer " + nameObject + ".";
+        //ChangeState("", status);
 
         // Iniciar evento de aparición
         fmodAppearInstance = RuntimeManager.CreateInstance(fmodEventPathAppear);
