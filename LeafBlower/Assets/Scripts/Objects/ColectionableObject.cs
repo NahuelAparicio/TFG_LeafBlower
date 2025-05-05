@@ -26,6 +26,21 @@ public class ColectionableObject : MovableObject
     {
     }
 
+    public override void StopAspiring()
+    {
+        _canBeAspired = false;
+        _isBeingAspired = true;
+        if (_rb == null)
+        {
+            if (_rb.GetComponent<Rigidbody>())
+            {
+                _rb.GetComponent<Rigidbody>();
+            }
+            else
+                _rb = gameObject.AddComponent<Rigidbody>();
+        }
+    }
+
     protected override void UpdateCustom()
     {
         _objectToScale.transform.localScale = Vector3.MoveTowards(_objectToScale.transform.localScale, _targetScale, _localScaleSpeed * Time.deltaTime);

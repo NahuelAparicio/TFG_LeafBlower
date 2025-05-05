@@ -8,8 +8,8 @@ public class MovableObject : MonoBehaviour, IMovable
 
     protected bool _canBeAspired = true;
     protected Rigidbody _rb;
-    private Transform _target;
-    private bool _isBeingAspired;
+    protected Transform _target;
+    protected bool _isBeingAspired;
 
     private Vector3 _offsetToTarget;
     public float offsetDistance = 0.5f;
