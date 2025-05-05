@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7307056808398217179}
   - component: {fileID: 8017610092547450406}
+  - component: {fileID: 7152102038020213672}
   m_Layer: 0
   m_Name: prop_ventiladorazotea
   m_TagString: Untagged
@@ -54,6 +55,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.0707893, y: 4.0031824, z: 2.6370728}
   m_Center: {x: 0.04459977, y: 3.1808233, z: -0.075838685}
+--- !u!114 &7152102038020213672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462219706550164323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c7ba656c8dcf4e89e3f44c374c79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmodEventPath: event:/Ambient/Air Conditionair/Air Conditionair
+  triggerRadius: 10
+  player: {fileID: 0}
 --- !u!1001 &8029266674367051450
 PrefabInstance:
   m_ObjectHideFlags: 0
