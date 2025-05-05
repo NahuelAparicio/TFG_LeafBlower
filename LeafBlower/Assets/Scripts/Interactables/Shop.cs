@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour, IInteractable
@@ -8,6 +9,8 @@ public class Shop : MonoBehaviour, IInteractable
     [SerializeField] private GameObject _shopCanvas;
     [SerializeField]private GameObject _jordanView, _hoverView, _gnomoView;
     public int jordanValue, hoverValue, gnomoValue;
+
+    [SerializeField] private TextMeshProUGUI textJordan, textHover, textGnomo;
 
 
     private PlayerController _player;
@@ -20,6 +23,10 @@ public class Shop : MonoBehaviour, IInteractable
         _player = FindObjectOfType<PlayerController>();
         _collider = GetComponent<Collider>();
         _shopCanvas.SetActive(false);
+
+        textJordan.text = ""+jordanValue;
+        textHover.text = "" + hoverValue;
+        textGnomo.text = "" + gnomoValue;
     }
 
 
@@ -54,9 +61,9 @@ public class Shop : MonoBehaviour, IInteractable
         if (_player.Inventory.Coins < gnomoValue) return;
         _player.Inventory.RemoveCoins(gnomoValue);
 
+        gnomoValue = 0;
+        textGnomo.text = ""+gnomoValue;
         Instantiate(gnomo,instantiationPoint.transform.position,Quaternion.identity);
-
-        Destroy(_gnomoView);
     }
 
     public void SetInteractableParent(PlayerInteractable parent) => _interactable = parent;

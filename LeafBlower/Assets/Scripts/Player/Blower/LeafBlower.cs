@@ -10,6 +10,7 @@ public class LeafBlower : MonoBehaviour
     public PlayerController _player;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private GameObject vfxAspiration;
+    [SerializeField] private GameObject vfxSOplar;
 
     private HashSet<IMovable> _aspiringObjects = new();
     private NormalObject _attachedObject;
@@ -26,6 +27,7 @@ public class LeafBlower : MonoBehaviour
     private void Awake()
     {
         vfxAspiration.SetActive(false);
+        vfxSOplar.SetActive(false);
     }
 
     private void Start()
@@ -52,11 +54,15 @@ public class LeafBlower : MonoBehaviour
             vfxAspiration.SetActive(true);
             _aspirationSound.start();
             StartCoroutine(UpdateRPM(_aspirationSound, 0f, 2000f, 0.5f));
+            if (!_player.animator.GetBool("IsAspiring"))
+                _player.animator.SetBool("IsAspiring", true);
         }
         else if (!isAspiring && _wasAspiring)
         {
             vfxAspiration.SetActive(false);
             _aspirationSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            if (_player.animator.GetBool("IsAspiring"))
+                _player.animator.SetBool("IsAspiring", false);
         }
 
         _wasAspiring = isAspiring;
@@ -67,11 +73,17 @@ public class LeafBlower : MonoBehaviour
         if (isBlowing && !_wasBlowing)
         {
             _blowSound.start();
+            vfxSOplar.SetActive(true);
             StartCoroutine(UpdateRPM(_blowSound, 0f, 2000f, 0.5f));
+            if (!_player.animator.GetBool("IsBlowing"))
+                _player.animator.SetBool("IsBlowing", true);
         }
         else if (!isBlowing && _wasBlowing)
         {
+            vfxSOplar.SetActive(false);
             _blowSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            if (_player.animator.GetBool("IsBlowing"))
+                _player.animator.SetBool("IsBlowing", false);
         }
 
         _wasBlowing = isBlowing;
@@ -178,6 +190,7 @@ public class LeafBlower : MonoBehaviour
 
     private void BlowAttachedObject()
     {
+        _player.animator.SetTrigger("Shoot");
         Detach();
         _attachedObject?.Shoot(_player.MainCamera.transform.forward * _player.Stats.ShootForce);
         _attachedObject = null;

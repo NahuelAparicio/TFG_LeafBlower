@@ -107,6 +107,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDir != Vector3.zero)
         {
+            if(!_player.animator.GetBool("IsMoving"))
+                _player.animator.SetBool("IsMoving", true);
+
             transform.forward = moveDir;
 
             if (isGrounded)
@@ -119,6 +122,12 @@ public class PlayerMovement : MonoBehaviour
                     _lastFootstepTime = currentTime;
                 }
             }
+        }
+        else
+        {
+            if (_player.animator.GetBool("IsMoving"))
+                _player.animator.SetBool("IsMoving", false);
+
         }
     }
 
