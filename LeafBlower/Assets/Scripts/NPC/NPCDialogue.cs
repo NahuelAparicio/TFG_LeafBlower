@@ -48,7 +48,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         }
     }
 
-    private void OnDialogueEnded()
+    private void OnDialogueEnded(string end)
     {
         Invoke(nameof(OnEnableCollider), 2f);
     }

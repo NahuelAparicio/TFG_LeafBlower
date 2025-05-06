@@ -41,10 +41,11 @@ public class NPCDialogueOnEnter : MonoBehaviour
         }
     }
     public UnityEvent eventOnEnd;
-    private void OnDialogueEnded()
+    private void OnDialogueEnded(string end)
     {
         _isTalking = false;
-        eventOnEnd.Invoke();
+        if(gameObject.name == end)
+            eventOnEnd.Invoke();
     }
 
     public void AddNewDialogue()

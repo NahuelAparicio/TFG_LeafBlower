@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         isTalking = true;
     }
-    private void OnDialogueEnded()
+    private void OnDialogueEnded(string name)
     {
         isTalking = false;
     }

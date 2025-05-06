@@ -17,7 +17,7 @@ public class DialogueController : MonoBehaviour
 
     private PlayerInputsActions _actions;
     public event System.Action DialogueStarted;
-    public event System.Action DialogueEnded;
+    public event System.Action<string> DialogueEnded;
 
     public FadeImage[] _fade;
     public FadeTextMeshPro[] _texts;
@@ -62,7 +62,7 @@ public class DialogueController : MonoBehaviour
 
     private void EndDialogue()
     {
-        DialogueEnded?.Invoke();
+        DialogueEnded?.Invoke(gameObject.transform.parent.name);
         _currentDialogue.Clear();
         _typeHandler.ResetTypingType();
         _typeHandler.ResetText();

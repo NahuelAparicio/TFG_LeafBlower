@@ -15,6 +15,10 @@ public class LeafObject : MovableObject
             _newCourotine = StartCoroutine(DestroyAndInstantiateCoin());
         }
     }
+
+    public override void StartAspiring(Transform target, Transform firePoint)
+    {
+    }
     protected override void OnArriveToAttacher()
     {
         StopAspiring();

@@ -72,7 +72,10 @@ public class MovableObject : MonoBehaviour, IMovable
                 _rb.GetComponent<Rigidbody>();
             }
             else
-            _rb = gameObject.AddComponent<Rigidbody>();
+            {
+                _rb = gameObject.AddComponent<Rigidbody>();
+
+            }
         }
         _rb.useGravity = true;
     }
