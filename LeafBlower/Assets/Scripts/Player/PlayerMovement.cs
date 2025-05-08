@@ -91,6 +91,9 @@ public class PlayerMovement : MonoBehaviour
                     case "Concrete":
                         landEvent = "event:/Character/Land/Land_Concrete";
                         break;
+                    case "Wood":
+                        landEvent = "event:/Character/Land/Land_Wood";
+                        break;
                 }
             }
             RuntimeManager.PlayOneShot(landEvent, transform.position);
@@ -155,6 +158,9 @@ public class PlayerMovement : MonoBehaviour
                                 break;
                             case "Concrete":
                                 eventPath = "event:/Character/FootSteps/FootSteps_Concrete";
+                                break;
+                            case "Wood":
+                                eventPath = "event:/Character/FootSteps/FootSteps_Wood";
                                 break;
                         }
 
@@ -253,6 +259,9 @@ public class PlayerMovement : MonoBehaviour
                     break;
                 case "Concrete":
                     jumpEvent = "event:/Character/Jump/Jump_Concrete";
+                    break;
+                case "Wood":
+                    jumpEvent = "event:/Character/Jump/Jump_Wood";
                     break;
             }
         }

@@ -269,7 +269,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6300752657680886892}
+      addedObject: {fileID: -7407305294540589068}
+    - targetCorrespondingSourceObject: {fileID: 3120880373905731247, guid: c7f12be1adfa60549964d5469aef9fa8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4907117290107673577}
   m_SourcePrefab: {fileID: 100100000, guid: c7f12be1adfa60549964d5469aef9fa8, type: 3}
 --- !u!4 &228725622319399094 stripped
 Transform:
@@ -289,7 +293,36 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5532960529847952109}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6300752657680886892
+--- !u!114 &-7407305294540589068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7459823981914983490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f19eb45a26e364e9f426cae0554179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crackEvent:
+    Guid:
+      Data1: 1756101677
+      Data2: 1129156854
+      Data3: 2136740758
+      Data4: -740879677
+    Path: event:/Interactables/Food/Can/Can_Hit
+  pieceEvent:
+    Guid:
+      Data1: 1254717892
+      Data2: 1247632000
+      Data3: -95563601
+      Data4: 420573388
+    Path: event:/Interactables/Food/Can/Can_Crack
+  impactThreshold: 10
+  minTimeBetweenSounds: 0.1
+  maxSimultaneousSounds: 5
+--- !u!114 &-4907117290107673577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,10 +337,10 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1254717892
-      Data2: 1247632000
-      Data3: -95563601
-      Data4: 420573388
+      Data1: 1756101677
+      Data2: 1129156854
+      Data3: 2136740758
+      Data4: -740879677
     Path: event:/Interactables/Food/Can/Can_Hit
   Event: 
   PlayEvent: 7

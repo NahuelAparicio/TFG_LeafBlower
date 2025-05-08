@@ -634,6 +634,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 218
+--- !u!114 &-7300156297317529918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactables/Food/Can/Can_Crack
+  m_EditorClassIdentifier: 
+  Path: event:/Interactables/Food/Can/Can_Crack
+  Guid:
+    Data1: 1254717892
+    Data2: 1247632000
+    Data3: -95563601
+    Data4: 420573388
+  Banks:
+  - {fileID: 359506116711928841}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5010
 --- !u!114 &-7240609478857163111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2040,7 +2067,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 1000
-  Length: 242
+  Length: 294
 --- !u!114 &-4417359563166264398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2094,7 +2121,7 @@ MonoBehaviour:
   ID:
     data1: 2359864609
     data2: 314473533
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels:
   - Value A
@@ -2117,7 +2144,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638822592827231841
+  lastModified: 638823388370631722
   FileSizes:
   - Name: Desktop
     Value: 3072
@@ -2484,7 +2511,7 @@ MonoBehaviour:
   Name: Jump
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 4
   Default: 0
   ID:
     data1: 2314599646
@@ -2496,6 +2523,7 @@ MonoBehaviour:
   - Value B
   - Value C
   - Value D
+  - Value E
   Exists: 1
 --- !u!114 &-3287917044036288204
 MonoBehaviour:
@@ -2566,7 +2594,7 @@ MonoBehaviour:
   Name: Parameter 1
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 4
   Default: 0
   ID:
     data1: 3995378415
@@ -2577,6 +2605,8 @@ MonoBehaviour:
   - Value A
   - Value B
   - Value C
+  - Value D
+  - Value E
   Exists: 1
 --- !u!114 &-2902946453384822823
 MonoBehaviour:
@@ -2788,6 +2818,60 @@ MonoBehaviour:
   - Name: Desktop
     Value: 9600736
   Exists: 1
+--- !u!114 &-2645838281541161829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/FootSteps/FootSteps_Wood
+  m_EditorClassIdentifier: 
+  Path: event:/Character/FootSteps/FootSteps_Wood
+  Guid:
+    Data1: 1973923453
+    Data2: 1275583175
+    Data3: -831716950
+    Data4: 1932936451
+  Banks:
+  - {fileID: 3393194810033643446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 305
+--- !u!114 &-2627712900170427661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Land/Land_Wood
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Land/Land_Wood
+  Guid:
+    Data1: 272996546
+    Data2: 1162104276
+    Data3: 1851266980
+    Data4: 938435013
+  Banks:
+  - {fileID: 3393194810033643446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 294
 --- !u!114 &-2518605719320731721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3846,7 +3930,7 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638822562271542247
+  lastModified: 638823376782423751
   FileSizes:
   - Name: Desktop
     Value: 9605856
@@ -4235,6 +4319,11 @@ MonoBehaviour:
   - {fileID: -4718226527090998185}
   - {fileID: 6521964449965445901}
   - {fileID: -4638206863075238851}
+  - {fileID: -2645838281541161829}
+  - {fileID: 682770822459777433}
+  - {fileID: -2627712900170427661}
+  - {fileID: 4768912976339965534}
+  - {fileID: -7300156297317529918}
   EditorParameters:
   - {fileID: 4033091072054533080}
   - {fileID: 1744641768993282439}
@@ -4247,7 +4336,7 @@ MonoBehaviour:
   - {fileID: -4187394644658486721}
   StringsBanks:
   - {fileID: 5887196483816184636}
-  cacheTime: 638822592827251797
+  cacheTime: 638823388370641938
   cacheVersion: 131618
 --- !u!114 &142869436123003377
 MonoBehaviour:
@@ -4318,10 +4407,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 638822562273444848
+  lastModified: 638823388370402371
   FileSizes:
   - Name: Desktop
-    Value: 11193088
+    Value: 11203040
   Exists: 1
 --- !u!114 &360655886286856635
 MonoBehaviour:
@@ -4578,6 +4667,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 0
+--- !u!114 &682770822459777433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Land/Land_Metal
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Land/Land_Metal
+  Guid:
+    Data1: 192764817
+    Data2: 1257986561
+    Data3: -63034199
+    Data4: -1862300702
+  Banks:
+  - {fileID: 3393194810033643446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 294
 --- !u!114 &792287836129827696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5315,7 +5431,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 1000
-  Length: 0
+  Length: 394
 --- !u!114 &2686151141556731583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5602,10 +5718,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Character.bank
   Name: Character
   StudioPath: bank:/Character
-  lastModified: 638822592826974971
+  lastModified: 638823380261043173
   FileSizes:
   - Name: Desktop
-    Value: 490976
+    Value: 387648
   Exists: 1
 --- !u!114 &3491443049730831746
 MonoBehaviour:
@@ -6109,6 +6225,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 1000
   Length: 305
+--- !u!114 &4768912976339965534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/Jump/Jump_Wood
+  m_EditorClassIdentifier: 
+  Path: event:/Character/Jump/Jump_Wood
+  Guid:
+    Data1: -1701101327
+    Data2: 1144641572
+    Data3: -987303255
+    Data4: -1375831100
+  Banks:
+  - {fileID: 3393194810033643446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 1000
+  Length: 480
 --- !u!114 &4769236035333796825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6475,10 +6618,10 @@ MonoBehaviour:
   Path: ../FMOD Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638822592827251797
+  lastModified: 638823388370641938
   FileSizes:
   - Name: Desktop
-    Value: 6812
+    Value: 6990
   Exists: 1
 --- !u!114 &5933493626959239213
 MonoBehaviour:
@@ -6767,7 +6910,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 1000
-  Length: 0
+  Length: 394
 --- !u!114 &6528810575092739520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7247,10 +7390,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Interactables/Food/Can/Can_Hit
   Guid:
-    Data1: 1254717892
-    Data2: 1247632000
-    Data3: -95563601
-    Data4: 420573388
+    Data1: 1756101677
+    Data2: 1129156854
+    Data3: 2136740758
+    Data4: -740879677
   Banks:
   - {fileID: 359506116711928841}
   IsStream: 0
@@ -7730,7 +7873,7 @@ MonoBehaviour:
   ID:
     data1: 2359864609
     data2: 314473533
-  Type: 0
+  Type: 1
   IsGlobal: 1
   Labels:
   - Value A
