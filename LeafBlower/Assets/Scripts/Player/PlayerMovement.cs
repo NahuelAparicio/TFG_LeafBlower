@@ -73,8 +73,32 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && !_wasGrounded && currentTime >= _lastLandSoundTime + _landSoundCooldown)
         {
-            RuntimeManager.PlayOneShot("event:/Character/Land/Land_Concrete", transform.position);
+            RaycastHit hit;
+            string landEvent = "event:/Character/Land/Land_Dirt"; // evento por defecto
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+            {
+                Debug.Log("Ground tag at land: " + hit.collider.tag);
+
+                switch (hit.collider.tag)
+                {
+                    case "Metal":
+                        landEvent = "event:/Character/Land/Land_Metal";
+                        break;
+                    case "Grass":
+                        landEvent = "event:/Character/Land/Land_Grass";
+                        break;
+                    case "Concrete":
+                        landEvent = "event:/Character/Land/Land_Concrete";
+                        break;
+                    case "Wood":
+                        landEvent = "event:/Character/Land/Land_Wood";
+                        break;
+                }
+            }
+            RuntimeManager.PlayOneShot(landEvent, transform.position);
             _lastLandSoundTime = currentTime;
+
 
             // Asegúrate de detener completamente el sonido del hover
             isHovering = false;
@@ -118,9 +142,33 @@ public class PlayerMovement : MonoBehaviour
 
                 if (movedDistance > _minMovementForStep && currentTime >= _lastFootstepTime + _footstepCooldown)
                 {
-                    RuntimeManager.PlayOneShot("event:/Character/FootSteps/FootSteps_Concrete", transform.position);
+                    if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.5f))
+                    {
+                        Debug.Log("Ground tag: " + hit.collider.tag);
+
+                        string eventPath = "event:/Character/FootSteps/FootSteps_Dirt"; // valor por defecto
+
+                        switch (hit.collider.tag)
+                        {
+                            case "Metal":
+                                eventPath = "event:/Character/FootSteps/FootSteps_Metal";
+                                break;
+                            case "Grass":
+                                eventPath = "event:/Character/FootSteps/FootSteps_Grass";
+                                break;
+                            case "Concrete":
+                                eventPath = "event:/Character/FootSteps/FootSteps_Concrete";
+                                break;
+                            case "Wood":
+                                eventPath = "event:/Character/FootSteps/FootSteps_Wood";
+                                break;
+                        }
+
+                        RuntimeManager.PlayOneShot(eventPath, transform.position);
+                    }
                     _lastFootstepTime = currentTime;
                 }
+
             }
         }
         else
@@ -194,8 +242,33 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
 
-        RuntimeManager.PlayOneShot("event:/Character/Jump/Jump_Concrete", transform.position);
+        RaycastHit hit;
+        string jumpEvent = "event:/Character/Jump/Jump_Dirt"; // predeterminado
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+        {
+            Debug.Log("Ground tag at jump: " + hit.collider.tag);
+
+            switch (hit.collider.tag)
+            {
+                case "Metal":
+                    jumpEvent = "event:/Character/Jump/Jump_Metal";
+                    break;
+                case "Grass":
+                    jumpEvent = "event:/Character/Jump/Jump_Grass";
+                    break;
+                case "Concrete":
+                    jumpEvent = "event:/Character/Jump/Jump_Concrete";
+                    break;
+                case "Wood":
+                    jumpEvent = "event:/Character/Jump/Jump_Wood";
+                    break;
+            }
+        }
+
+        RuntimeManager.PlayOneShot(jumpEvent, transform.position);
         _velocity.y = Mathf.Sqrt(_jumpSpeed * -2f * _gravity);
+
     }
 
     private Vector3 GetDirectionNormalized()
