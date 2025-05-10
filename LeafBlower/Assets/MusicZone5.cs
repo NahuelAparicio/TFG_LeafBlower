@@ -17,12 +17,13 @@ public class MusicZone5 : MonoBehaviour
     {
         zoneCollider = GetComponent<Collider>();
 
+        // Verificamos si el Player ya está dentro al iniciar
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null && zoneCollider.bounds.Contains(player.transform.position))
         {
             isPlayerInside = true;
             musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-            MusicZoneManager.PlayNewMusic(musicInstance);
+            musicInstance.start();
         }
     }
 
@@ -30,23 +31,27 @@ public class MusicZone5 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Si el Player entra, marcamos como dentro y verificamos si ya hay una instancia en ejecución
             isPlayerInside = true;
 
-            if (musicInstance.isValid())
+            // Si ya hay una instancia de música reproduciéndose, no creamos una nueva
+            if (!musicInstance.isValid())
+            {
+                // Si no existe una instancia válida, creamos una nueva
+                musicInstance = RuntimeManager.CreateInstance(musicEventPath);
+                musicInstance.start();
+            }
+            else
             {
                 PLAYBACK_STATE state;
                 musicInstance.getPlaybackState(out state);
                 if (state != PLAYBACK_STATE.PLAYING)
                 {
-                    MusicZoneManager.PlayNewMusic(musicInstance);
+                    musicInstance.start(); // Iniciamos la música si no está sonando
                 }
             }
-            else
-            {
-                musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-                MusicZoneManager.PlayNewMusic(musicInstance);
-            }
 
+            // Cancelamos cualquier espera para detener la música si el Player vuelve
             if (musicStopCoroutine != null)
             {
                 StopCoroutine(musicStopCoroutine);
@@ -59,7 +64,9 @@ public class MusicZone5 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Si el Player sale de la zona, marcamos como fuera y comenzamos la espera
             isPlayerInside = false;
+
             musicStopCoroutine = StartCoroutine(StopMusicAfterDelay(7f));
         }
     }
@@ -68,32 +75,31 @@ public class MusicZone5 : MonoBehaviour
     {
         float timer = 0f;
 
+        // Esperamos durante 'delay' segundos
         while (timer < delay)
         {
+            // Si el Player regresa antes de que pase el tiempo, cancelamos el proceso
             if (isPlayerInside)
             {
                 yield break;
             }
 
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime; // Usamos Time.unscaledDeltaTime para que no se vea afectado por la pausa
             yield return null;
         }
 
-        if (musicInstance.isValid())
-        {
-            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            musicInstance.release();
-            musicInstance.clearHandle();
-        }
+        // Si pasaron 'delay' segundos y el Player no ha vuelto, paramos la música
+        musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        musicInstance.release();
     }
 
     void OnDestroy()
     {
+        // Aseguramos de liberar la instancia de la música al destruir el objeto
         if (musicInstance.isValid())
         {
             musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             musicInstance.release();
-            musicInstance.clearHandle();
         }
     }
 }
