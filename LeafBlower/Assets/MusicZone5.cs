@@ -35,7 +35,13 @@ public class MusicZone5 : MonoBehaviour
             isPlayerInside = true;
 
             // Si ya hay una instancia de música reproduciéndose, no creamos una nueva
-            if (musicInstance.isValid())
+            if (!musicInstance.isValid())
+            {
+                // Si no existe una instancia válida, creamos una nueva
+                musicInstance = RuntimeManager.CreateInstance(musicEventPath);
+                musicInstance.start();
+            }
+            else
             {
                 PLAYBACK_STATE state;
                 musicInstance.getPlaybackState(out state);
@@ -43,12 +49,6 @@ public class MusicZone5 : MonoBehaviour
                 {
                     musicInstance.start(); // Iniciamos la música si no está sonando
                 }
-            }
-            else
-            {
-                // Si no existe una instancia válida, creamos una nueva
-                musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-                musicInstance.start();
             }
 
             // Cancelamos cualquier espera para detener la música si el Player vuelve
@@ -67,7 +67,7 @@ public class MusicZone5 : MonoBehaviour
             // Si el Player sale de la zona, marcamos como fuera y comenzamos la espera
             isPlayerInside = false;
 
-            musicStopCoroutine = StartCoroutine(StopMusicAfterDelay(15f));
+            musicStopCoroutine = StartCoroutine(StopMusicAfterDelay(7f));
         }
     }
 
@@ -84,11 +84,11 @@ public class MusicZone5 : MonoBehaviour
                 yield break;
             }
 
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime; // Usamos Time.unscaledDeltaTime para que no se vea afectado por la pausa
             yield return null;
         }
 
-        // Si pasaron 15 segundos y el Player no ha vuelto, paramos la música
+        // Si pasaron 'delay' segundos y el Player no ha vuelto, paramos la música
         musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         musicInstance.release();
     }
