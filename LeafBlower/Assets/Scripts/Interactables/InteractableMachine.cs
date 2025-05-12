@@ -7,6 +7,28 @@ public class InteractableMachine : MonoBehaviour,IInteractable
     private PlayerInteractable _interactable;
     [SerializeField]private Collider _collider;
     public GameObject instantiatedPrefab;
+
+    public GameObject InteractableIcon;
+
+    private void Awake()
+    {
+            InteractableIcon.SetActive(false);
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            InteractableIcon.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            InteractableIcon.SetActive(false);
+        }
+    }
     public void InstatiatePrefab()
     {
         if(instantiatedPrefab != null)

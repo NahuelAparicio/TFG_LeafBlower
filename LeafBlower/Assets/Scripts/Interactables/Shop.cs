@@ -18,6 +18,8 @@ public class Shop : MonoBehaviour, IInteractable
     private PlayerInteractable _interactable;
     private Collider _collider;
 
+    public GameObject interactionPoint;
+
     private void Awake()
     {
         _player = FindObjectOfType<PlayerController>();
@@ -27,6 +29,8 @@ public class Shop : MonoBehaviour, IInteractable
         textJordan.text = ""+jordanValue;
         textHover.text = "" + hoverValue;
         textGnomo.text = "" + gnomoValue;
+
+        interactionPoint.SetActive(false);
     }
 
 
@@ -78,7 +82,17 @@ public class Shop : MonoBehaviour, IInteractable
         _collider.enabled = false;
         _interactable.RemoveInteractable(gameObject);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            interactionPoint.SetActive(true);
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            interactionPoint.SetActive(false);
+    }
     public void HideMenu()
     {
         GameManager.Instance.PauseGameHandler();

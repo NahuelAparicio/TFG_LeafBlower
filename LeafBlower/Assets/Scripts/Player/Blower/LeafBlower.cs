@@ -144,6 +144,7 @@ public class LeafBlower : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.TryGetComponent(out IMovable movable)) return;
+        if (other == null) return;
 
         if (IsObjectAttached)
         {
