@@ -14,7 +14,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
         GameManager.Instance.PauseGameHandler();
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.PauseMenu);
 
-        // Activamos el parámetro global de FMOD al abrir el menú
+        // Activamos el parámetro global de FMOD al abrir el menú (la música se reduce)
         RuntimeManager.StudioSystem.setParameterByName("Pause", 1f);
     }
 
@@ -32,6 +32,19 @@ public class PauseMenu : BaseMenu<PauseMenu>
         return _eventSystem;
     }
 
+    // Al volver al juego, desactivamos el parámetro de pausa y continuamos la música.
+    public void OnResume()
+    {
+        // Pausar el juego
+        GameManager.Instance.PauseGameHandler();
+
+        // Desactivar el parámetro de pausa en FMOD (la música continúa)
+        RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
+
+        // Ocultar el menú de pausa
+        Hide();
+    }
+
     public void OnMainMenu()
     {
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
@@ -43,12 +56,6 @@ public class PauseMenu : BaseMenu<PauseMenu>
         RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
 
         SceneManager.LoadScene(0);
-    }
-
-    public void OnSettingsMenu()
-    {
-        MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
-        SettingsMenu.Show();
     }
 
     public void OnQuitPressed()

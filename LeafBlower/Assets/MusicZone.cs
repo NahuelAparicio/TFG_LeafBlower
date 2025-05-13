@@ -1,16 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using FMODUnity;
-using FMOD.Studio;
 
+[RequireComponent(typeof(Collider))]
 public class MusicZone : MonoBehaviour
 {
-    public EventReference musicEventPath;
-
-    private EventInstance musicInstance;
+    public EventReference musicEvent;
     private bool isPlayerInside = false;
-    private Coroutine musicStopCoroutine;
-
+    private Coroutine stopCoroutine;
     private Collider zoneCollider;
 
     void Start()
@@ -21,8 +18,7 @@ public class MusicZone : MonoBehaviour
         if (player != null && zoneCollider.bounds.Contains(player.transform.position))
         {
             isPlayerInside = true;
-            musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-            musicInstance.start();
+            PlayZoneMusic();
         }
     }
 
@@ -50,28 +46,13 @@ public class MusicZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInside = true;
-
-            if (musicInstance.isValid())
+            if (!isPlayerInside)
             {
-                PLAYBACK_STATE state;
-                musicInstance.getPlaybackState(out state);
-                if (state != PLAYBACK_STATE.PLAYING)
-                {
-                    musicInstance.start();
-                }
-            }
-            else
-            {
-                musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-                musicInstance.start();
+                isPlayerInside = true;
+                PlayZoneMusic();
             }
 
-            if (musicStopCoroutine != null)
-            {
-                StopCoroutine(musicStopCoroutine);
-                musicStopCoroutine = null;
-            }
+            CancelStopMusicCoroutine(); // <<--- Este método debe existir
         }
     }
 
@@ -80,8 +61,7 @@ public class MusicZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = false;
-
-            musicStopCoroutine = StartCoroutine(StopMusicAfterDelay(7f));
+            stopCoroutine = StartCoroutine(StopMusicAfterDelay(120f));
         }
     }
 
@@ -94,36 +74,31 @@ public class MusicZone : MonoBehaviour
             if (isPlayerInside)
                 yield break;
 
-            float pauseValue;
-            RuntimeManager.StudioSystem.getParameterByName("Pause", out pauseValue);
-
-            if (pauseValue == 1f)
-            {
-                yield return null;
-                continue;
-            }
-
             timer += Time.deltaTime;
             yield return null;
         }
 
-        if (musicInstance.isValid())
+        if (MusicZoneManager.Instance != null)
         {
-            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            musicInstance.release();
+            MusicZoneManager.Instance.StopMusicIfZoneMatches(this);
         }
     }
 
-    void OnDestroy()
+    // ✅ Este método debe estar aquí para evitar el error
+    public void CancelStopMusicCoroutine()
     {
-        float pauseValue = 0f;
-        RuntimeManager.StudioSystem.getParameterByName("Pause", out pauseValue);
-
-        // No destruir la música si estamos en pausa
-        if (musicInstance.isValid() && pauseValue != 1f)
+        if (stopCoroutine != null)
         {
-            musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            musicInstance.release();
+            StopCoroutine(stopCoroutine);
+            stopCoroutine = null;
+        }
+    }
+
+    private void PlayZoneMusic()
+    {
+        if (MusicZoneManager.Instance != null)
+        {
+            MusicZoneManager.Instance.PlayMusic(musicEvent, this);
         }
     }
 }
