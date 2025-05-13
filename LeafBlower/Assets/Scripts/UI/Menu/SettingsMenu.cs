@@ -8,7 +8,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     public bool isMusic;
     public bool isSettings;
 
-    public GameObject music, settings, menu;
+    public GameObject music,  menu;
 
     private Slider musicSlider;
     private float lastSliderValue;
@@ -21,8 +21,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         canvas.worldCamera = Camera.main;
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
         menu.SetActive(true);
-        settings.SetActive(false);
-        music.SetActive(false);
 
         // Buscar el slider dentro del panel de música
         if (music != null)
@@ -62,8 +60,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     {
         isSettings = false;
         isMusic = false;
-        settings.SetActive(false);
-        music.SetActive(false);
         menu.SetActive(true);
     }
 
@@ -71,16 +67,12 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
     {
         isSettings = true;
         isMusic = false;
-        settings.SetActive(true);
-        menu.SetActive(false);
     }
 
     public void OnMusicPressed()
     {
         isSettings = false;
         isMusic = true;
-        music.SetActive(true);
-        menu.SetActive(false);
     }
 
     public override void OnBackPressed()
