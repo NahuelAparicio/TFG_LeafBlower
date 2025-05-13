@@ -13,7 +13,7 @@ public class MainMenuMusicPlayer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("❌ MusicZoneManager.Instance no encontrado en escena.");
+            Debug.LogWarning(" MusicZoneManager.Instance no encontrado en escena.");
         }
     }
 }

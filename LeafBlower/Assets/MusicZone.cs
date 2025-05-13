@@ -41,7 +41,7 @@ public class MusicZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = false;
-            stopCoroutine = StartCoroutine(StopMusicAfterDelay(7f));
+            stopCoroutine = StartCoroutine(StopMusicAfterDelay(120f));
         }
     }
 
@@ -64,7 +64,7 @@ public class MusicZone : MonoBehaviour
         }
     }
 
-    // ✅ Este método debe estar aquí para evitar el error
+    // Este método debe estar aquí para evitar el error
     public void CancelStopMusicCoroutine()
     {
         if (stopCoroutine != null)

@@ -85,11 +85,9 @@ public class GameManager : MonoBehaviour
         switch (_state)
         {
             case Enums.GameState.Menu:
-                //MusicManager.Instance.PlayMenuMusic();
                 MainMenu.Show();
                 break;
             case Enums.GameState.Playing:
-                MusicManager.Instance.StopMenuMusic();
                 break;
             case Enums.GameState.PauseMenu:
                 PauseMenu.Show();

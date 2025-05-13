@@ -25,16 +25,18 @@ public class MainMenu : BaseMenu<MainMenu>
     }
     public void OnNewGamePressed()
     {
-        // AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
         GameManager.Instance.hasStartedNewGame = true;
         ResetData();
+        MusicManager.Instance.StopMenuMusic();
         GameManager.Instance.LockCursor();
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
 
     public void OnContinuePressed()
     {
+
         GameManager.Instance.LockCursor();
+        MusicManager.Instance.StopMenuMusic();
         GameManager.Instance.LoadLevel("Main Scene", loadingInspector, loadingFillAmountInspector);
     }
 
@@ -52,22 +54,16 @@ public class MainMenu : BaseMenu<MainMenu>
         PlayerPrefs.DeleteAll();
     }
 
-    public void OnRetarget()
-    {
-        GetEventSystem().SetSelectedGameObject(_firstSelected);
-    }
 
     public void OnSettingsPressed()
     {
 
-        //   AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
         SettingsMenu.Show();
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.SettingsMenu);
     }
 
     public override void OnBackPressed()
     {
-        //    AudioManager.Instance.PlayFx(Enums.Effects.ButtonClick);
         GameManager.Instance.UpdateState(Enums.GameState.Exit);
     }
 }

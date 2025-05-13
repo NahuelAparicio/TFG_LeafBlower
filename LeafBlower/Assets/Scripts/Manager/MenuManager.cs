@@ -43,15 +43,13 @@ public class MenuManager : MonoBehaviour
     {
         GameObject currentSelected = EventSystem.current?.currentSelectedGameObject;
 
-        // 🔊 Detecta cambio de selección y reproduce el sonido
+        //  Detecta cambio de selección y reproduce el sonido
         if (currentSelected != null && currentSelected != lastSelected)
         {
             RuntimeManager.PlayOneShot("event:/UI/Selector");
             lastSelected = currentSelected;
         }
 
-        // Aquí puedes reactivar botones si están deseleccionados (opcional)
-        // switch (currentState) { ... }
     }
 
     public void ChangeMenuState(Enums.MenuState newState)

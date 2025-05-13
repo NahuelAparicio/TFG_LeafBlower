@@ -12,7 +12,6 @@ public class MenuMusicController : MonoBehaviour
         if (MusicZoneManager.Instance != null)
         {
             MusicZoneManager.Instance.PlayMusic(menuMusicEvent);
-
         }
     }
 }

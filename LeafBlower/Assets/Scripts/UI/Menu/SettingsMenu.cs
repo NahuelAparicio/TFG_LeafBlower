@@ -7,12 +7,9 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
 {
     public bool isMusic;
     public bool isSettings;
-    public GameObject firstSelectedSettings;
-    public GameObject firstSelectedMusic;
 
     public GameObject music, settings, menu;
 
-    private EventSystem _eventSystem;
     private Slider musicSlider;
     private float lastSliderValue;
     private const float sliderThreshold = 0.01f;
@@ -27,7 +24,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         settings.SetActive(false);
         music.SetActive(false);
 
-        // 🔍 Buscar el slider dentro del panel de música
+        // Buscar el slider dentro del panel de música
         if (music != null)
         {
             musicSlider = music.GetComponentInChildren<Slider>(true);
@@ -59,21 +56,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
 
     public void OnRetarget()
     {
-        if (!isMusic && !isSettings)
-        {
-            GetEventSystem().SetSelectedGameObject(_firstSelected);
-            return;
-        }
-        if (isMusic)
-        {
-            GetEventSystem().SetSelectedGameObject(firstSelectedMusic);
-            return;
-        }
-        if (isSettings)
-        {
-            GetEventSystem().SetSelectedGameObject(firstSelectedSettings);
-            return;
-        }
     }
 
     public void BackToMenuSettings()
@@ -83,7 +65,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         settings.SetActive(false);
         music.SetActive(false);
         menu.SetActive(true);
-        OnRetarget();
     }
 
     public void OnOptionsPressed()
@@ -92,7 +73,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         isMusic = false;
         settings.SetActive(true);
         menu.SetActive(false);
-        OnRetarget();
     }
 
     public void OnMusicPressed()
@@ -101,7 +81,6 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         isMusic = true;
         music.SetActive(true);
         menu.SetActive(false);
-        OnRetarget();
     }
 
     public override void OnBackPressed()
@@ -112,11 +91,7 @@ public class SettingsMenu : BaseMenu<SettingsMenu>
         {
             PauseMenu.Show();
         }
-        //else
-        //{
-        //    MenuManager.Instance.ChangeMenuState(Enums.MenuState.MainMenu);
-        //    MainMenu.Show();
-        //}
+
     }
 
     private void OnDestroy()
