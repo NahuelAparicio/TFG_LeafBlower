@@ -22,26 +22,6 @@ public class MusicZone : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // Verifica si estamos dentro y la música no está sonando después de reanudar
-        if (isPlayerInside && musicInstance.isValid())
-        {
-            float pauseValue;
-            RuntimeManager.StudioSystem.getParameterByName("Pause", out pauseValue);
-
-            if (pauseValue == 0f) // Solo si ya no está en pausa
-            {
-                PLAYBACK_STATE state;
-                musicInstance.getPlaybackState(out state);
-                if (state != PLAYBACK_STATE.PLAYING && state != PLAYBACK_STATE.STARTING)
-                {
-                    musicInstance.start();
-                }
-            }
-        }
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -61,7 +41,7 @@ public class MusicZone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = false;
-            stopCoroutine = StartCoroutine(StopMusicAfterDelay(120f));
+            stopCoroutine = StartCoroutine(StopMusicAfterDelay(7f));
         }
     }
 

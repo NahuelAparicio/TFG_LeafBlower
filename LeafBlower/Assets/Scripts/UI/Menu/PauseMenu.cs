@@ -14,8 +14,9 @@ public class PauseMenu : BaseMenu<PauseMenu>
         GameManager.Instance.PauseGameHandler();
         MenuManager.Instance.ChangeMenuState(Enums.MenuState.PauseMenu);
 
-        // Activamos el parámetro global de FMOD al abrir el menú (la música se reduce)
-        RuntimeManager.StudioSystem.setParameterByName("Pause", 1f);
+
+    // Activamos el parámetro global de FMOD al abrir el menú (la música se reduce)
+    RuntimeManager.StudioSystem.setParameterByName("Pause", 1f);
     }
 
     public void OnRetarget()
@@ -70,4 +71,6 @@ public class PauseMenu : BaseMenu<PauseMenu>
         Hide();
         Destroy(gameObject); //This menu doesn't destroy itself
     }
+
+
 }
