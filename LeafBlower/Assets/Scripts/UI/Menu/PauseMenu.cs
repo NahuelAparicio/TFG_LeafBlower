@@ -39,7 +39,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
         GameManager.Instance.PauseGameHandler();
 
         // Desactivar el parámetro de pausa en FMOD (la música continúa)
-        //RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
+        RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
 
         // Ocultar el menú de pausa
         Hide();
@@ -53,7 +53,7 @@ public class PauseMenu : BaseMenu<PauseMenu>
         Hide();
 
         // Desactivamos el parámetro global de FMOD al salir al menú principal
-        //RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
+        RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
 
         SceneManager.LoadScene(0);
     }
