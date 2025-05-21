@@ -5,7 +5,7 @@
 			<value>River</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{cb85f585-aac8-4103-840c-9ecc2836b956}</destination>
@@ -56,10 +56,17 @@
 			<destination>{b41a4867-7bd8-4db1-b0c7-738066b10f75}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{0ea6fb9d-5677-4540-b74c-edf60b326746}</destination>
+			<destination>{7262de60-1b00-4995-badc-d184577463f1}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{101fe789-00be-4a9a-b054-c84b95e07ca4}" />
+	<object class="EventAutomatableProperties" id="{101fe789-00be-4a9a-b054-c84b95e07ca4}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>50</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{b4154eb8-97ad-41a6-994a-133c90f09906}" />
 	<object class="GroupTrack" id="{eafe6371-9c2c-4e81-8d76-a9144b6f1901}">
 		<relationship name="modules">
@@ -270,9 +277,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="length">
 			<value>2</value>
 		</property>
@@ -286,9 +290,6 @@
 	<object class="SingleSound" id="{16e5fa0b-40bd-411f-b5bc-1cb76dec4445}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>2</value>
@@ -307,9 +308,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>3.8087839323467314</value>
 		</property>
@@ -326,9 +324,6 @@
 	<object class="SingleSound" id="{2c9455ad-9a5f-4870-8007-4263636ba9df}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>6.125</value>
@@ -347,9 +342,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>7.9096832980972529</value>
 		</property>
@@ -366,9 +358,6 @@
 	<object class="SingleSound" id="{6abb974a-2015-460e-83cc-edf3ba8c8028}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>9.9096832980972529</value>
@@ -387,9 +376,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>11.654728541226216</value>
 		</property>
@@ -406,9 +392,6 @@
 	<object class="SingleSound" id="{d5bf94ae-098b-4101-924a-688547cf1555}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>13.654728541226216</value>
@@ -427,9 +410,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>16</value>
 		</property>
@@ -446,9 +426,6 @@
 	<object class="SingleSound" id="{131ff946-4e67-4b3b-8ebf-1156670e058a}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>18</value>
@@ -467,9 +444,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>19.808783932346735</value>
 		</property>
@@ -486,9 +460,6 @@
 	<object class="SingleSound" id="{0dc58b53-154f-4d23-a497-bbbc62e937c8}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>22.473609584214234</value>
@@ -507,9 +478,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>24.473609584214234</value>
 		</property>
@@ -526,9 +494,6 @@
 	<object class="SingleSound" id="{47c6386c-916c-41d5-bfc9-4eee8b3abddf}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>26.282393516560965</value>
@@ -547,9 +512,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>30.383292882311487</value>
 		</property>
@@ -567,9 +529,6 @@
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
 		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
-		</property>
 		<property name="start">
 			<value>32.383292882311487</value>
 		</property>
@@ -586,9 +545,6 @@
 	<object class="SingleSound" id="{920dbbcb-1272-4b06-aa64-e38b2bef2c0d}">
 		<property name="triggerProbabilityEnabled">
 			<value>true</value>
-		</property>
-		<property name="triggerProbability">
-			<value>19.5</value>
 		</property>
 		<property name="start">
 			<value>28.598609584214234</value>
@@ -687,6 +643,7 @@
 	<object class="MixerBusEffectChain" id="{b5a4e926-6d20-4cb5-845c-f93396f796e3}">
 		<relationship name="effects">
 			<destination>{183b4ae4-c7a3-4bd4-b392-f1e9f940a657}</destination>
+			<destination>{56d3bef1-32a3-4971-be05-5a64a87f4278}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{098e181b-f367-4f1a-b5a9-54ecb96c5d4d}" />
@@ -760,6 +717,7 @@
 	<object class="MixerBusEffectChain" id="{b3eb135b-4e7e-4522-b3d2-f07a87021abb}">
 		<relationship name="effects">
 			<destination>{d07953c7-3dd4-4821-bf1c-b975d06e7809}</destination>
+			<destination>{1654b525-bf68-4339-83df-6a1afa011c64}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{97494715-8610-4fcb-b5e2-c90514560ca4}" />
@@ -795,6 +753,26 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{183b4ae4-c7a3-4bd4-b392-f1e9f940a657}" />
+	<object class="SpatialiserEffect" id="{56d3bef1-32a3-4971-be05-5a64a87f4278}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="minimumDistance">
+			<value>15</value>
+		</property>
+		<property name="maximumDistance">
+			<value>500</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+		<property name="soundSize">
+			<value>3.4000001</value>
+		</property>
+		<property name="minimumExtent">
+			<value>28</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{2d8de70a-455d-49ad-b6eb-f06148f3da1b}">
 		<property name="position">
 			<value>0</value>
@@ -912,6 +890,26 @@
 	</object>
 	<object class="MixerBusFader" id="{7fea789a-29a0-4f5a-be68-685e84586059}" />
 	<object class="MixerBusFader" id="{d07953c7-3dd4-4821-bf1c-b975d06e7809}" />
+	<object class="SpatialiserEffect" id="{1654b525-bf68-4339-83df-6a1afa011c64}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="minimumDistance">
+			<value>0.600000024</value>
+		</property>
+		<property name="maximumDistance">
+			<value>100</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+		<property name="soundSize">
+			<value>3.4000001</value>
+		</property>
+		<property name="minimumExtent">
+			<value>28</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{c2439aac-7884-4a79-a804-116526a3f216}">
 		<property name="position">
 			<value>0</value>
@@ -956,7 +954,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-22.8571396</value>
+			<value>-18.4999981</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{a9c6fd50-d667-4531-b5a8-bced4978c17c}">
@@ -964,7 +962,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-10</value>
+			<value>-6.5</value>
 		</property>
 	</object>
 </objects>

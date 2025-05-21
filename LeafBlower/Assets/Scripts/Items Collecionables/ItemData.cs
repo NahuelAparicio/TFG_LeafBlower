@@ -8,9 +8,12 @@ public class ItemData : ScriptableObject
 
     public string itemName;
     public Sprite icon;
-    [TextArea] public string description;
+    [SerializeField] private Enums.ObjectType _type;
+    [SerializeField] private Enums.CollectionableType _collectionableType;
     [SerializeField] private int _amount;
 
+    public Enums.ObjectType GetItemType() => _type;
+    public Enums.CollectionableType GetCollectionableType() => _collectionableType;
     public int GetAmount() => _amount;
 
     private void OnValidate()

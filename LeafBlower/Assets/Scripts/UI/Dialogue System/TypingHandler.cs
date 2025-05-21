@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using FMODUnity; // Asegúrate de tener esta línea
 
 public class TypingHandler : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class TypingHandler : MonoBehaviour
     private string _currentMessage;
 
     public bool IsDialoguePrinted => _isDialoguePrinted;
+
+    private Coroutine _typingCoroutine;
+
+    public float timeBetweenLetters;
 
     private void Awake()
     {
@@ -40,37 +45,68 @@ public class TypingHandler : MonoBehaviour
         }
     }
 
-    //Given a list of messages (dialogues in order)
-    //It will show the dialogues in screen i guess
     private void ShowMessageNoEffect()
     {
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+            _typingCoroutine = null;
+        }
+
         _dialogueText.text = _currentMessage;
         _isDialoguePrinted = true;
     }
 
     private void ShowMessageTypeMachine()
     {
-        StartCoroutine(TypeMachineMessage());
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+        }
+
+        _typingCoroutine = StartCoroutine(TypeMachineMessage());
     }
 
     private IEnumerator TypeMachineMessage()
     {
         _isDialoguePrinted = false;
         _dialogueText.text = "";
+
         foreach (char letter in _currentMessage)
         {
             _dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+
+            if (!char.IsWhiteSpace(letter))
+            {
+                RuntimeManager.PlayOneShot("event:/UI/Typing");
+            }
+
+            yield return new WaitForSeconds(timeBetweenLetters);
         }
+
+        _isDialoguePrinted = true;
+        _typingCoroutine = null;
+    }
+
+    public void FinishTypingImmediately()
+    {
+        if (_typingCoroutine != null)
+        {
+            StopCoroutine(_typingCoroutine);
+            _typingCoroutine = null;
+        }
+
+        _dialogueText.text = _currentMessage;
         _isDialoguePrinted = true;
     }
 
-    public void SetTypingType(Enums.DialogueTypingType type) 
+    public void SetTypingType(Enums.DialogueTypingType type)
     {
         if (_typingType == type) return;
 
-        _typingType = type; 
+        _typingType = type;
     }
+
     public void ResetTypingType() => _typingType = Enums.DialogueTypingType.NoEffect;
     public void ResetText() => _dialogueText.text = "";
 }

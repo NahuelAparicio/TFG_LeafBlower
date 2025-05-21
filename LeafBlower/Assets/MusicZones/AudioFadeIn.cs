@@ -11,28 +11,28 @@ public class AudioFadeIn : MonoBehaviour
 
     void Awake()
     {
-        masterBus = RuntimeManager.GetBus("bus:/");
+        //masterBus = RuntimeManager.GetBus("bus:/");
 
-        masterBus.setVolume(0f);
-        MusicManager.Instance.isMakingFadeIn = true;
-        StartCoroutine(FadeInAudio());
+        //masterBus.setVolume(0f);
+        //MusicManager.Instance.isMakingFadeIn = true;
+        //StartCoroutine(FadeInAudio());
     }
 
-    IEnumerator FadeInAudio()
-    {
-        yield return new WaitForSeconds(delayBeforeFade);
+    //IEnumerator FadeInAudio()
+    //{
+    //    yield return new WaitForSeconds(delayBeforeFade);
 
-        float elapsedTime = 0f;
+    //    float elapsedTime = 0f;
 
-        while (elapsedTime < fadeDuration)
-        {
-            float volume = Mathf.Lerp(0f, MusicManager.Instance.masterVolume, elapsedTime / fadeDuration);
-            masterBus.setVolume(volume);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+    //    while (elapsedTime < fadeDuration)
+    //    {
+    //        float volume = Mathf.Lerp(0f, MusicManager.Instance.masterVolume, elapsedTime / fadeDuration);
+    //        masterBus.setVolume(volume);
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        MusicManager.Instance.isMakingFadeIn = false;
-        masterBus.setVolume(MusicManager.Instance.masterVolume); // Asegurar que llegue a 100%
-    }
+    //    MusicManager.Instance.isMakingFadeIn = false;
+    //    masterBus.setVolume(MusicManager.Instance.masterVolume); // Asegurar que llegue a 100%
+    //}
 }

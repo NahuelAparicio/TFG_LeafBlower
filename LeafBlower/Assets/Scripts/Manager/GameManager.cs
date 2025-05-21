@@ -3,10 +3,7 @@ using System;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using FMODUnity;
-using FMOD;
-using FMODUnityResonance;
-using FMOD.Studio;
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -31,6 +28,10 @@ public class GameManager : MonoBehaviour
     public bool hasStartedNewGame = false;
     public Enums.GameState State => _state;
 
+    // -- Player Sensibility
+    [Range(0.1f, 15)] public float sensX = 5f;
+    [Range(0.1f, 15)] public float sensY = 5f;
+
     private void Awake()
     {
         if (_instance == null)
@@ -39,8 +40,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         _isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         LoadData();
     }
 
@@ -86,13 +85,9 @@ public class GameManager : MonoBehaviour
         switch (_state)
         {
             case Enums.GameState.Menu:
-                MusicManager.Instance.PlayMenuMusic();
                 MainMenu.Show();
-                //LoadMenuScene ?
                 break;
             case Enums.GameState.Playing:
-                MusicManager.Instance.StopMenuMusic();
-                //PlaceHolder
                 break;
             case Enums.GameState.PauseMenu:
                 PauseMenu.Show();
@@ -113,6 +108,17 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         SaveData();
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void SaveData()

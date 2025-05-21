@@ -169,8 +169,8 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{cba79cad-bc79-4f6a-8799-dadf2a7ea314}">
 		<relationship name="effects">
-			<destination>{38b91d91-3107-455c-8ea4-694a3f2e8864}</destination>
 			<destination>{5936f073-7fd5-4aba-89af-26101205d972}</destination>
+			<destination>{38b91d91-3107-455c-8ea4-694a3f2e8864}</destination>
 			<destination>{39545edd-210b-4285-926d-719631c3ca55}</destination>
 		</relationship>
 	</object>
@@ -223,12 +223,10 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ed48e6d0-4ee7-4a12-9cc0-88e9b71416cf}" />
+	<object class="MixerBusFader" id="{5936f073-7fd5-4aba-89af-26101205d972}" />
 	<object class="MultibandEqEffect" id="{38b91d91-3107-455c-8ea4-694a3f2e8864}">
 		<property name="filterTypeB">
 			<value>8</value>
-		</property>
-		<property name="filterTypeC">
-			<value>11</value>
 		</property>
 		<property name="filterTypeD">
 			<value>9</value>
@@ -237,46 +235,48 @@
 			<value>8</value>
 		</property>
 		<property name="frequencyA">
-			<value>7186.53516</value>
+			<value>19029.8379</value>
 		</property>
 		<property name="frequencyB">
-			<value>49.7680855</value>
+			<value>73.7762909</value>
 		</property>
 		<property name="frequencyC">
-			<value>16123.1338</value>
+			<value>11336.5264</value>
 		</property>
 		<property name="frequencyD">
-			<value>56.355999</value>
+			<value>80.151123</value>
 		</property>
 		<property name="frequencyE">
-			<value>2713.96362</value>
+			<value>4281.18994</value>
 		</property>
 		<property name="qualityA">
-			<value>2.20689631</value>
+			<value>1.77706897</value>
 		</property>
 		<property name="qualityC">
-			<value>0.620000005</value>
+			<value>2.62068963</value>
 		</property>
 		<property name="gainB">
-			<value>4.13792992</value>
+			<value>2.06896663</value>
 		</property>
 		<property name="gainD">
-			<value>-29.4827595</value>
+			<value>-0.517240524</value>
 		</property>
 		<property name="gainE">
-			<value>-10.8620682</value>
+			<value>-1.55172348</value>
 		</property>
 	</object>
-	<object class="MixerBusFader" id="{5936f073-7fd5-4aba-89af-26101205d972}" />
 	<object class="CompressorEffect" id="{39545edd-210b-4285-926d-719631c3ca55}">
 		<property name="threshold">
-			<value>-26</value>
+			<value>-13.5</value>
 		</property>
 		<property name="ratio">
 			<value>2.20000005</value>
 		</property>
 		<property name="attackTime">
 			<value>0.200000003</value>
+		</property>
+		<property name="gain">
+			<value>-7.5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{85c936a2-9926-40ba-9ed5-b6b88b9b7519}">

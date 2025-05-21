@@ -1,4 +1,6 @@
+using FMODUnity;
 using UnityEngine;
+using FMODUnity;
 
 public class QuestPoint : MonoBehaviour
 {
@@ -40,13 +42,17 @@ public class QuestPoint : MonoBehaviour
 
     public void EndQuest()
     {
-        if(_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
+        if (_currentQuestState.Equals(Enums.QuestState.CanFinish) && finishPoint)
         {
             dialogue.EnableDialogueAdd();
             dialogue.AddNewDialogue();
             GameEventManager.Instance.questEvents.FinishQuest(_questId);
+
+            // Reproduce el sonido de recompensa de misión
+            RuntimeManager.PlayOneShot("event:/UI/Mision_Reward");
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

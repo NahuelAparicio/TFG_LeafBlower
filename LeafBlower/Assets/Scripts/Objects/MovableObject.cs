@@ -1,60 +1,93 @@
 using UnityEngine;
 
-public class MovableObject : Object, IBlowable, IAspirable
+public class MovableObject : MonoBehaviour, IMovable
 {
-    [SerializeField] private Enums.BlowType _type;
+    [SerializeField] protected ItemData _data;
+    [SerializeField] protected Enums.BlowType _type;
+    [SerializeField] protected float _aspirationSpeed;
+
+    protected bool _canBeAspired = true;
+    protected Rigidbody _rb;
+    protected Transform _target;
+    protected bool _isBeingAspired;
+
+    private Vector3 _offsetToTarget;
+    public float offsetDistance = 0.5f;
+
+
+    public Rigidbody RigidBody => _rb;
     public Enums.BlowType Type => _type;
 
-    private float _currentTime = 0f;
-    public float timeToEnableFreeze = 0.1f;
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
+        _rb = GetComponent<Rigidbody>();
     }
 
-    protected override void Update()
+    protected virtual void Update()
     {
-        base.Update();
-        if (_isFreezed) return;
-        _currentTime += Time.deltaTime;
-        if (_rb.velocity.magnitude < 0.05f && _rb.angularVelocity.magnitude < 0.01f && _type == Enums.BlowType.DirectionalBlow && _currentTime >= timeToEnableFreeze)
+        RenableAspiring();
+
+        if (!_isBeingAspired) return;
+
+        Vector3 _targetPosition = _target.position + _offsetToTarget;
+
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _aspirationSpeed * Time.deltaTime);
+
+        UpdateCustom();
+
+        if(Vector3.SqrMagnitude(transform.position - _targetPosition) < 0.0025f)
         {
-            FreezeConstraints();
+            _isBeingAspired = false;
+            _target = null;
+
+            OnArriveToAttacher();
         }
     }
+    protected virtual void RenableAspiring() { }
+    protected virtual void OnArriveToAttacher() {}
+    protected virtual void UpdateCustom() {}
 
-    public void OnBlowableInteracts(Vector3 force, Vector3 point)
+    public bool IsCollectable() => _data.GetItemType() == Enums.ObjectType.Colectionable;
+    public bool CanBeAspired() => _canBeAspired;
+
+    public virtual void StartAspiring(Transform target, Transform firePoint)
     {
-        UnFreeze();
-        _currentTime = 0;
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _rb.useGravity = false;
+        _target = target;
+        _offsetToTarget = firePoint.forward * offsetDistance;
+        _isBeingAspired = true;
+    }
+
+    public virtual void StopAspiring()
+    {
+        _canBeAspired = false;
+        _isBeingAspired = false;
+        _target = null;
+        if(_rb == null)
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+        _rb.useGravity = true;
+    }
+
+    public virtual void OnBlow(Vector3 force, Vector3 point)
+    {
         switch (_type)
         {
             case Enums.BlowType.RealisticBlow:
-                if(weight == Enums.ObjectWeight.Leaf)
-                {
-                    force.y += Mathf.Abs(force.magnitude) * 0.35f; 
-
-                    //AQUI BRYAN
-                }
-                force /= 2;
-                _rb.AddForceAtPosition(force, point); // Applies force in the nearest point between the object and the blower (More Realistic)
+                _rb.AddForceAtPosition(force, point); 
                 break;
+
             case Enums.BlowType.DirectionalBlow:
                 force.y = 0;
-                _rb.AddForce(force, ForceMode.Impulse); //Applies force in the center of the object to the direcion between shootPoint and object
+                _rb.AddForce(force, ForceMode.Force); 
                 break;
+
             default:
                 break;
         }
-    }
+    }    
 
-    public void OnAspiratableInteracts(Vector3 force)
-    {
-        UnFreeze();
-        _currentTime = 0;
-        if (weight == Enums.ObjectWeight.Leaf) force /= 2;
-        _rb.AddForce(force, ForceMode.Impulse);
-    }
-
-    public override bool CanBeMoved(int level) => (int)weight <= level + 1;
 }
